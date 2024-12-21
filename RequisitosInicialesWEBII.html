@@ -1,0 +1,72 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Proyecto en Grupo - Requisitos Iniciales</title>
+</head>
+<body class="papel" style="background-color:#F0F0C0;">
+<div class="bloque" style="font-family:arial;font-size:1.25em;text-align:justify;border:1.5mm solid #508050;margin:0.25em;padding:1em;">
+
+<div class="titulo titulo0" style="margin:5mm;font-size:2.0em;font-weight:bold;color:#4040F0">Comparador Precios</div>
+<div class="titulo titulo1" style="margin:5mm;font-size:2.0em;font-weight:bold">Proyecto en Grupo</div>
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Requisitos Iniciales.</div>
+
+<br/>
+&nbsp;&nbsp;&nbsp;Se desea diseñar una aplicación web para la <strong>Busqueda y Comparación de productos</strong>.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;La aplicación será un portal web en el que principalmente se podrán ver, buscar y comparar precios de productos, con la intención de encontrar las mejores ofertas y tiendas para la compra de estos.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrán realizar búsquedas por articulo mediante un sistema de filtros por calificaciones, categorias (clasificación por categorías), por etiquetas, por precios, etc, y el resultado se mostrará como una lista resumida de articulos (paginados si son muchos), que coincidan con el filtro de búsqueda seleccionado o introducido... 
+¡Eso sí! -siempre que sean visibles públicamente, es decir, que tengan activado el indicador de visibilidad. 
+
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrán realizar búsquedas por tienda mediante un sistema de filtros por calificaciones, categorias (clasificación por categorías), por etiquetas, etc, y el resultado se mostrará como una lista resumida de tiendas, que coincidan con el filtro de búsqueda seleccionado o introducido... 
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrán hacer búsquedas mediante un formulario simple donde cualquier palabra escrita será el origen de la búsqueda por los diversos datos de un articulo o tienda
+<br/>
+&nbsp;&nbsp;&nbsp;También se tendrá un formulario avanzado que permitirá hacer búsquedas más detalladas. Esta búsqueda debe permitirse por varios campos, algunos bastará con una parte del texto sin que la búsqueda sea exacta
+<br/>
+<br/>
+  
+  <li><strong>Registro:</strong> Existirá un registro de cara al público para que los invitados puedan introducir sus datos de acceso y crearse como usuarios del sistema, pero no podrán acceder hasta que no hayan confirmado su registro mediante una validación por correo electrónico y/o un administrador así lo considere.</li>
+  <br/>
+  <li><strong>Login:</strong> En el acceso de usuarios existirá un control de intentos fallidos el cual servirá para bloquear a los usuarios que fallan el acceso un número predeterminado de intentos durante un intervalo de tiempo prefijado. En una primera instancia se controlará en sesión el número de intentos fallidos (el límite se deberá configurar en la aplicación), y si se puede localizar al usuario en la base de datos, se tendrá el control con la fecha/hora del acceso y un contador de intentos fallidos. Cuando hay un acceso válido se almacenará la fecha/hora del momento y se establece el contador a cero y el de la sesión también. Cuando hay un acceso no válido, el contador de fallos en sesión se incrementa y si se localiza al usuario en la base de datos también se incrementa su contador y si es el primer fallo, se almacenará la fecha/hora del momento, pero si no lo es, se comprueba el número de intentos frente al límite de fallos predetermiado, el cual, si se supera, se bloquerá el acceso del usuario durante un intervalo de tiempo prefijado (configuración del sistema), el cual debe transcurrir antes de volver a permitir el acceso, para ello se calcula la diferencia de tiempo desde el primer acceso fallido hasta el momento del acceso actual y si se supera el intervalo configurado, se reinicia el contador a cero antes de seguir con el proceso de comprobación. De cada situación fallida se guardará un registro en un archivo de "Log" (o tabla en la base de datos) y se informará al usuario debidamente con los intentos pendientes antes de ser bloqueado o del tiempo restante antes de ser desbloqueado automáticamente.</li>  
+  <br/>
+  
+  <li><strong>Logout:</strong> Para acceder al cierre de sesión debe existir un usuario registrado que coincida con alguno guardado en la base de datos. Además, dicho usuario debe estar activo en sesión con respecto tanto al portal web como a la base de datos.</li>
+  <br/>
+  
+  <li><strong>Consultar Perfil:</strong>  Un usuario iniciado en sesión deben ser capaces de consultar su propio perfil donde podrá consultar su propia ficha de registro de usuario, tanto de los datos básicos de acceso (contraseña y cuenta de correo), los datos del perfil del usuario (identificación, localización, contacto, ...).
+    <ul>
+      <li><strong>Modificar perfil:</strong> Un usuario iniciado en sesión también podrá modificar los datos básicos de acceso y de perfil de usuario.
+      </li>
+
+      <li><strong>Solicitar Baja:</strong> El usuario tendrá la opción de poder solicitar la baja de su perfil enviando una incidencia al moderador o administrador del sitio con la solicitud. Este tipo de notas se gestionarán como cualquier aviso o incidencia del sistema, pero con un indicador de "baja".
+      </li>
+
+      <li><strong>Comunicar incidencia de perfil:</strong> El usuario tendrá la opción de poder enviar una nota (como una clase de alerta) al moderador o administrador del sitio para comentarle cualquier cuestión que le surja, Para ello el usuario debe tener en su perfil seleccionada la región a la que pertenece, al menos país y comunidad, opcionalmente la provincia. Este tipo de notas se gestionarán como cualquier aviso o incidencia del sistema, pero con un indicador de "nota" o "consulta".
+      </li>
+
+      <li><strong>Mantener preferencias de tiendas:</strong> Una sección donde el usuario puede navegar y manejar que parámetros de preferencias en búsqueda (etiquetas, categorías, palabras clave…) tiene guardados. También contará con la opción de añadir más de estos parámetros o eliminar alguno de los que se han guardado.
+      </li>
+
+      <li><strong>Gestionar favoritos del usuario:</strong> El usuario podrá tener una lista de favoritos de: tiendas, artículos, ofertas y precios.
+        Podrá asignar o desasignar el favorito o desde el sitio original en el que lo encontró, o desde su lista favortios. Evidentemente si el usuario escoge una tienda favorita, podrá visualizarla en sus "tiendas favoritas", pero no en sus "artículos favoritos", es decir, cada apartado tendrá su lista independiente.
+        <ul>
+        <li><strong> Consultar variaciones de precios:</strong> El usuario podrá ver la última variación del precio de cualquier artículo de su lista de favoritos, se le notificará en la parte donde se enseña el precio una forma similiar a la siguiente: 19,99 um -> 15,99 um. 
+        </li>  
+        </ul>
+      </li>
+
+      <li><strong> Gestionar valoraciones/comentarios del usuario:</strong> El usuario podrá hacer comentarios o valoraciones de los artículos o tiendas de los que haya comprado.
+        Además podrá consultar su historial de valoraciones y comentarios que haya hecho anteriormente en los artículos o tiendas.
+      </li>
+
+      <li><strong> Gestionar mensajes del usuario:</strong> El usuario podrá consultar sus notificaciones de incidencias de su perfil. Además podrá consultar incidencias reportadas de tiendas y artículos relativos a él. Las notificaciones se organizarán en "leídas" y "no leídas". También podrá borrar estas notificaciones si lo considera necesario.
+      </li>  
+
+   </ul>
+   </li>   
+      
+     
