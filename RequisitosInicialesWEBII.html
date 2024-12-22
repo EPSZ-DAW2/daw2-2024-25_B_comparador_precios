@@ -65,8 +65,180 @@
 
       <li><strong> Gestionar mensajes del usuario:</strong> El usuario podrá consultar sus notificaciones de incidencias de su perfil. Además podrá consultar incidencias reportadas de tiendas y artículos relativos a él. Las notificaciones se organizarán en "leídas" y "no leídas". También podrá borrar estas notificaciones si lo considera necesario.
       </li>  
-
    </ul>
-   </li>   
-      
-     
+   </li>
+
+   <li><strong>Navegación por las opciones de la web:</strong>
+    <ul>
+      <li><strong>Ver clasificaciones:</strong> Listar todas las clasificaciones que estén disponibles.  Mostrar las tiendas asociadas a una clasificación concreta, que será seleccionada por el usuario.
+      </li>
+      <li><strong>Ver categorías / subcategorías:</strong> Se mostrarán todas las categorías y subcategorías disponibles. Se listarán también los artículos que estén relacionados con una categoría o subcategorías específica.
+      </li>
+      <li><strong>Ver nube de etiquetas:</strong> Se muestra una representación visual de todas las etiquetas que estén disponibles. Mostrar todas las tiendas asociadas a una etiqueta seleccionada. Mostrar todos los artículos que tengan relación con la etiqueta seleccionada.
+      </li>
+      <li><strong>Búsquedas de tiendas:</strong> Realizar búsquedas de tiendas basadas en la clasificación, categorías, etiquetas, etc. Mostrar los resultados en forma de ficha resumida con la información básica de cada tienda. Habrá una opción de "Ver más" para una ficha detallada que mostrará información completa de la tienda seleccionada: imágenes asociadas, valoración media, comentarios, etc. Se tendrá acceso a las funcionalidades siguientes si el usuario ha iniciado sesión: valorar / comentar tienda, denunciar tienda, activar / desactivar seguimiento de tienda como favorita.
+      </li>
+      <li><strong>Búsquedas de artículos:</strong> Realizar búsquedas de artículos que se basarán en la clasificación de la tienda, categorías, etiquetas, etc. Mostrar los resultados en forma de ficha resumida con la información básica de cada artículo. Habrá una opción de "Ver más" para una ficha detallada que mostrará información completa del artículo seleccionado: imágenes asociadas, valoración media, comentarios de los usuarios, etc. Se tendrá acceso a las funcionalidades siguientes si el usuario ha iniciado sesión: valorar / comentar artículo, denunciar artículo, activar / desactivar seguimiento de artículo como favorito, visualizar los cambios en los precios de un artículo a lo largo del tiempo.
+      </li>
+      <li><strong>Búsquedas de ofertas:</strong> Realizar búsquedas de ofertas que se basarán en la clasificación de la tienda, categorías, etiquetas, fechas, regiones, etc. Mostrar los resultados en forma de ficha detallada con la información completa de cada oferta. Habrá una opción de "Ver más" para una ficha detallada que mostrará información completa de la oferta seleccionada: detalles de la tienda asociada, detalles del artículo en oferta, imágenes relacionadas, valoración media, comentarios relacionados con la oferta, etc. Se tendrá acceso a las funcionalidades siguientes si el usuario ha iniciado sesión: valorar / comentar oferta, denunciar oferta, activar / desactivar seguimiento de oferta como favorita.
+      </li>
+    </ul>
+  </li>
+
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Requisitos de Información.</div>   
+<br/>
+&nbsp;&nbsp;&nbsp;<strong>TIENDAS</strong>.
+<li><strong>Nombre:</strong> Nombre de la tienda</li>
+<li><strong>Descripcion:</strong> Descripcion de la tienda</li>
+<li><strong>Lugar:</strong> ubicacion de la tienda</li>
+<li><strong>Url:</strong> URL de la tienda</li>
+<li><strong>Dirección:</strong> Dirección de la tienda</li>
+<li><strong>Etiquetas:</strong> Etiquetas que tiene la tienda</li>
+<li><strong>Clasificación:</strong> Clasificacion de la tienda</li>
+<li><strong>Región:</strong> URL de la tienda</li>
+<li><strong>Imagen:</strong> Imagén de la tienda</li>
+<li><strong>telefono:</strong> telefono de la tienda</li>
+<li><strong>Valoraciones:</strong> valoraciones de la tienda</li>
+<li><strong>Votos:</strong> Votos de la tienda</li>
+<li><strong>Visible:</strong> Si la tienda es visible al publico</li>
+<li><strong>Cerrada:</strong> Si la tienda esta abierta o no</li>
+<li><strong>Denuncias:</strong> Denuncias de la tienda
+   <ul>fecha y hora de la primera denuncia</ul>
+   <ul>motivo de la denuncia</ul> 
+</li>
+<li><strong>Bloqueo:</strong> Estado de la tienda
+  <ul>fecha y hora del bloqueo</ul>
+  <ul>motivo del bloqueo</ul> 
+</li>
+<li><strong>Comentarios:</strong> Comentarios de la tienda</li>
+<li><strong>Comentarios cerrados:</strong> Si la tienda admite comentarios</li>
+<li><strong>Usuario creador:</strong> Datos del usuario creador de la tabla</li>
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>ARTÍCULOS</strong>.
+<li><strong>Nombre:</strong> Nombre del artículo</li>
+<li><strong>Categoría:</strong> Categoría a la que pertenece el artículo</li>
+<li><strong>Etiquetas:</strong> Clave foránea al id de la etiqueta del artículo (si la tiene)</li>
+<li><strong>Imagen principal:</strong> Ruta de la imagen del artículo</li>
+<li><strong>Visible:</strong> Indica si el artículo está visible a los clientes de la tienda</li>
+<li><strong>Cerrado:</strong> Indica si hay disponibilidad del artículo</li>
+<li><strong>Marcado:</strong> Puede tener dos valores: común o particular, en función de a quién vaya dirigido el artículo</li>
+
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>CLASIFICACIONES</strong>.
+<li><strong>Nombre:</strong> Nombre de la clasificación</li>
+<li><strong>Descripción:</strong> Descripción de la clasificación</li>
+<li><strong>Icono:</strong> Ruta de la imagen de la clasifación, si la tiene</li>
+
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>CATEGORÍAS</strong>.
+<li><strong>Nombre:</strong> Nombre de la categoría</li>
+<li><strong>Descripción:</strong> Descripción de la categoría</li>
+<li><strong>Icono:</strong> Ruta de la imagen de la categoría, si la tiene</li>
+
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>ETIQUETAS</strong>.
+<li><strong>Nombre:</strong> Nombre de la etiqueta</li>
+<li><strong>Descripción:</strong> Descripción de la etiqueta</li>
+
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>REGIONES</strong>.
+<li><strong>Clase:</strong> Tipo de región. entre continente, país, estado o provincia</li>
+<li><strong>Nombre:</strong> Nombre de la región</li>
+
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>COMENTARIOS</strong>.
+<li><strong>Tienda:</strong> Información de la tienda sobre la que se ha hecho el comentario</li>
+<li><strong>Artículo:</strong> Información del artículo sobre el que se ha hecho el comentario (o cero si se se ha hecho de la tienda)</li>
+<li><strong>Valoración:</strong> Puntuación que ha dejado el cliente</li>
+<li><strong>Texto:</strong> Contenido del comentario</li>
+<li><strong>Cerrado:</strong> Indica si el comentario no admite respuestas</li>
+<li><strong>Denuncias:</strong> Número de denuncias del comentario</li>
+<li><strong>Fecha/hora primera denuncia:</strong> Fecha y hora en la que se realizó la primera denuncia</li>
+<li><strong>Motivo denuncia:</strong> Motivo por el cual se produjo la primera denuncia</li>
+<li><strong>Bloqueado:</strong> Indica si el comentario es visible por el resto de usuarios</li>
+<ul>Fecha/hora bloqueo</ul>
+<ul>motivo bloqueo</ul>
+</li>
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>CONFIGURACIONES</strong>.
+<li><strong>Clave:</strong> Clave de la configuración</li>
+<li><strong>Valor:</strong> Valor de la configuración</li>
+<br>
+
+&nbsp;&nbsp;&nbsp;<strong>OFERTAS</strong>.
+<li><strong>Articulo ofertado:</strong> Datos del articulo de oferta</li>
+<li><strong>Tienda:</strong> Tienda donde esta la oferta</li>
+<li><strong>Texto:</strong> Información sobre la oferta</li>
+<li><strong>Inicio:</strong> Fecha de inicio de la oferta</li>
+<li><strong>Final:</strong> Fecha de finalizacion de la oferta</li>
+<li><strong>Precio oferta:</strong> Precio de la oferta</li>
+<li><strong>Precio original:</strong> Precio original del producto</li>
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>MODERADORES</strong>.
+<li><strong>Usuario:</strong> Nombre de usuario del moderador</li>
+<li><strong>NIF/CIF:</strong> identificador fiscal del moderador</li>
+<li><strong>Nombre:</strong> nombre del moderador</li>
+<li><strong>Apellidos:</strong> Apellidos del moderador</li>
+<li><strong>razon social:</strong> en caso de ser una empresa se recoge su razon social</li>
+<li><strong>Region:</strong> Region del moderador</li>
+<li><strong>Tiendas:</strong> Tiendas que modera</li>
+<br/>
+
+&nbsp;&nbsp;&nbsp;<strong>USUARIOS REGISTRADOS</strong>.
+<li><strong>mail:</strong> correo del usuario</li>
+<li><strong>contraseña:</strong> contraseña cifrada del usuario</li>
+<li><strong>usuario:</strong> nombre de usuario</li>
+<li><strong>telefono:</strong> telefono del usuario</li>
+<li><strong>fecha nacimiento:</strong> fecha de nacimiento del usuario</li>
+<li><strong>fecha y hora de login:</strong> fecha y hora del acceso</li>
+<li><strong>intentos fallidos:</strong> numero de intentos fallidos de login</li>
+<li><strong>bloqueado:</strong> si el usuario ha sido bloqueado del sistema
+  <ul>fecha y hora del bloqueo</ul>
+  <ul>motivo del bloqueo</ul></li>
+<br/>
+
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Tipos de usuarios con sus acciones</div>
+
+<p>
+  En este sistema de comparación de precios, existen usuarios que tienen diferentes roles que determinan los privilegios y responsabilidades sobre las operaciones que pueden realizar. Entre estos roles se encuentran los Moderadores, Administradores y Superadministradores, cada uno con capacidades específicas para mantener y gestionar el portal de manera eficiente.
+</p>
+
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Usuario Moderador</div>
+<ul>
+  <li><strong>Consultar, Modificar y Solicitar Baja del perfil como moderador:</strong> Los moderadores pueden gestionar su propio perfil, incluyendo su información personal y región asignada.</li>
+  <li><strong>Mantener/Revisar tiendas:</strong> Supervisan las tiendas dentro de las regiones que tienen asignadas, verificando que los datos sean correctos y que cumplan con las políticas de la plataforma.</li>
+  <li><strong>Mantener/Revisar artículos y precios:</strong> Los moderadores revisan los artículos asociados a las tiendas en sus regiones. Pueden verificar que los precios sean consistentes y asegurarse de que no haya irregularidades en la información mostrada.</li>
+  <li><strong>Mantener/Revisar comentarios:</strong> Gestionan comentarios y valoraciones de los usuarios para garantizar que cumplan con las normas de la plataforma.</li>
+  <li><strong>Mantener/Revisar usuarios:</strong> Los moderadores revisan los perfiles de los usuarios dentro de sus regiones y gestionan las incidencias relacionadas con estos perfiles.</li>
+  <li><strong>Gestionar incidencias:</strong> Supervisan y responden a las incidencias reportadas dentro de sus regiones, asegurándose de que se resuelvan de manera eficiente.</li>
+</ul>
+
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Usuarios Administrador</div>
+<ul>
+  <li><strong>Mantener/Revisar Usuarios:</strong> Los administradores tienen acceso completo para gestionar todos los usuarios de la plataforma, incluyendo la asignación de roles y la resolución de problemas asociados con los perfiles.</li>
+  <li><strong>Mantener Moderadores:</strong> Administran los moderadores asignándoles regiones y asegurándose de que estas estén adecuadamente cubiertas.</li>
+  <li><strong>Mantener/Revisar Clasificaciones, Categorías y Etiquetas:</strong> Los administradores son responsables de mantener una organización clara y eficiente de los datos a través de clasificaciones y etiquetas, lo que facilita las búsquedas y el uso del sistema.</li>
+  <li><strong>Mantener/Revisar tiendas:</strong> Supervisan todas las tiendas registradas, verificando que cumplan con los estándares de calidad y que sus datos sean precisos.</li>
+  <li><strong>Mantener/Revisar artículos:</strong> Tienen la capacidad de gestionar artículos a nivel global, asegurando que toda la información sea coherente y actualizada.</li>
+  <li><strong>Mantenimiento de la configuración de la aplicación:</strong> Ajustan las configuraciones generales del sistema, como parámetros de seguridad, visibilidad y rendimiento.</li>
+  <li><strong>Mantenimiento/Revisión de procesos:</strong> Los administradores llevan a cabo tareas críticas como la limpieza de datos históricos, la creación de copias de seguridad y la actualización de precios</li>
+</ul>
+
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Usuarios Superadministrador</div>
+<ul>
+  <li><strong>Todas las opciones posibles de la aplicación:</strong> Tienen acceso completo a todas las funcionalidades del sistema, permitiéndoles realizar cualquier tarea necesaria.</li>
+  <li><strong>Activar perfiles o roles:</strong> Pueden trabajar en nombre de otro usuario para realizar ajustes o resolver problemas administrativos con facilidad.</li>
+</ul>
+
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Diseño y Estilos</div>
+<p>
+  El diseño y los estilos de la página serán una parte esencial del sistema. La interfaz estará desarrollada con un enfoque en la usabilidad, asegurando que todas las funcionalidades sean accesibles de manera intuitiva. Se emplearán elementos visuales modernos, colores atractivos y un diseño responsive para que los usuarios puedan disfrutar de una experiencia óptima tanto en dispositivos de escritorio como en móviles.
+</p>
