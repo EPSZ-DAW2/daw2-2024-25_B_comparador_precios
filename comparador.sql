@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-12-2024 a las 13:31:47
+-- Tiempo de generación: 26-12-2024 a las 23:24:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,8 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
-CREATE DATABASE IF NOT EXISTS comparador;
-USE comparador;
+-- Base de datos: `comparador`
 --
 
 -- --------------------------------------------------------
@@ -215,9 +214,7 @@ CREATE TABLE `moderador` (
   `direccion` text DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
-  `razon_social` varchar(255) DEFAULT NULL,
-  `regiones_mod_id` int(11) NOT NULL,
-  `tiendas_mod_id` int(11) NOT NULL
+  `razon_social` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -258,7 +255,6 @@ CREATE TABLE `regiones` (
 --
 
 CREATE TABLE `regiones_moderador` (
-  `id` int(11) NOT NULL,
   `mod_id` int(11) NOT NULL,
   `region_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -363,7 +359,6 @@ CREATE TABLE `tiendas_etiquetas` (
 --
 
 CREATE TABLE `tiendas_moderador` (
-  `id` int(11) NOT NULL,
   `mod_id` int(11) NOT NULL,
   `tienda_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -494,9 +489,7 @@ ALTER TABLE `historico_precios`
 --
 ALTER TABLE `moderador`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_moderador_region` (`region_id`),
-  ADD KEY `fk_moderador_regiones_mod` (`regiones_mod_id`),
-  ADD KEY `fk_moderador_tiendas_mod` (`tiendas_mod_id`);
+  ADD KEY `fk_moderador_region` (`region_id`);
 
 --
 -- Indices de la tabla `ofertas`
@@ -518,7 +511,7 @@ ALTER TABLE `regiones`
 -- Indices de la tabla `regiones_moderador`
 --
 ALTER TABLE `regiones_moderador`
-  ADD PRIMARY KEY (`id`,`mod_id`,`region_id`),
+  ADD PRIMARY KEY (`mod_id`,`region_id`),
   ADD KEY `fk_regiones_moderador_mod` (`mod_id`),
   ADD KEY `fk_regiones_moderador_region` (`region_id`);
 
@@ -571,7 +564,7 @@ ALTER TABLE `tiendas_etiquetas`
 -- Indices de la tabla `tiendas_moderador`
 --
 ALTER TABLE `tiendas_moderador`
-  ADD PRIMARY KEY (`id`,`mod_id`,`tienda_id`),
+  ADD PRIMARY KEY (`mod_id`,`tienda_id`),
   ADD KEY `fk_tiendas_moderador_mod` (`mod_id`),
   ADD KEY `fk_tiendas_moderador_tienda` (`tienda_id`);
 
@@ -653,12 +646,6 @@ ALTER TABLE `regiones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `regiones_moderador`
---
-ALTER TABLE `regiones_moderador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `registros`
 --
 ALTER TABLE `registros`
@@ -680,12 +667,6 @@ ALTER TABLE `seguimientos`
 -- AUTO_INCREMENT de la tabla `tiendas`
 --
 ALTER TABLE `tiendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tiendas_moderador`
---
-ALTER TABLE `tiendas_moderador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -768,9 +749,7 @@ ALTER TABLE `historico_precios`
 -- Filtros para la tabla `moderador`
 --
 ALTER TABLE `moderador`
-  ADD CONSTRAINT `fk_moderador_region` FOREIGN KEY (`region_id`) REFERENCES `regiones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_moderador_regiones_mod` FOREIGN KEY (`regiones_mod_id`) REFERENCES `regiones_moderador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_moderador_tiendas_mod` FOREIGN KEY (`tiendas_mod_id`) REFERENCES `tiendas_moderador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_moderador_region` FOREIGN KEY (`region_id`) REFERENCES `regiones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `ofertas`
