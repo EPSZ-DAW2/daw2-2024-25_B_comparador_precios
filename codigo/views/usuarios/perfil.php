@@ -25,4 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::a('Editar Perfil', ['usuarios/update-profile'], ['class' => 'btn btn-primary']) ?>
 <br>
 <?= Html::a('Seguimientos', ['seguimientos/seguimientos'], ['class' => 'btn btn-primary']) ?>
+<br>
+<?= Html::a('Tus Comentarios', ['comentarios/comentarios-usuario'], ['class' => 'btn btn-primary']) ?>
 

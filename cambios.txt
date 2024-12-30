@@ -1,0 +1,41 @@
+Gestion del perfil de usuario (Marcos Diez y Victor Gonzalo)
+Cambios dia 1:
+
+Añadido el modelo y el CRUD de usuarios
+
+Añadido las funciones de identifyInterface  en el modelo Usuarios (findByUsername, getPassword...)
+
+Añadido las acciones de visualizar y modificar perfil en el UsuariosController (queda arreglar los parametros que te deja modificar)
+
+Añadidos parámetros del acceso de sesión en código\config\params.php
+
+Cambio SiteController en la acción login y añadir el modelo Usuario con use app\models\Usuario; 
+
+Añadidas funciones de inicio de sesión y bloqueo en el modelo Usuario
+
+Cambios dia 2: 
+
+Añadido el modelo y el crud de Tienda y Articulo
+
+Añadido el modelo de seguimiento
+
+Añadida pagina donde el usuario puede consultar sus elementos en seguimeinto (no hay forma de seguir algo a traves de la página aun) 
+
+Cambios dia 3 (Marcos): 29/14/2024
+Cambio en el modelo Usuario, en rules coge la fecha y hora de registro, y el estado de registro confirmado como pendiente.
+
+En el login ahora comprueba si la cuenta ha sido verificada, sino, no deja entrar.
+
+Un usuario sólo se puede verificar si un moderador o administrador modifica su campo "Registro Confirmado" de 0 a 1.
+
+Cuando se cambia a 1, el usuario puede loggear.
+
+Cambios para que funcione el sistema de bloqueos al fallar los intentos. Al fallar 5 veces ahora se bloquea a ese usuario por 15 minutos y el sistema informa tanto de los intentos para bloquearse como del tiempo restante de bloqueo si ya estña bloqueado, también se ha añadido el motivo de bloqueo por superación de intentos máximos
+
+Cambios dia 4 (Alejandra): 29/12/2024
+Creado el modelo y controlador de TiendaArticulo.
+Implementados getters auxiliares en el modelo tienda y en el controlador de tienda las funciones para sumar una valoración, un voto, activar y desactivar la tienda, abrirla y cerrarla según las denuncias (y se guardan los datos relativos) que se obtienen por una vista nueva a través de una función y una función para el mantenimiento de artículos y su vista asociada (pendiente de revisar algunos campos) 
+
+Cambios dia 5 (Victor Gonzalo) 30/12/2024   
+Creado el modelo y controlador de Comentario
+Implementado una vista y funcion donde el usuario puede ver sus propios comentarios en su perfil (queda posible implentacio de un enlace a laseccion de comentarios de la que provienen)
