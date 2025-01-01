@@ -245,7 +245,7 @@ CREATE TABLE `regiones` (
   `id` int(11) NOT NULL,
   `clase` enum('C','P','E','PR') NOT NULL COMMENT 'Continente, Pais, Estado, Provincia',
   `nombre` varchar(255) NOT NULL,
-  `region_padre_id` int(11) DEFAULT 0
+  `region_padre_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
