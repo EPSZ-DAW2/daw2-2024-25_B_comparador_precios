@@ -46,4 +46,4 @@ Añadido el modelo de las regiones.
 Todavía no se han implementado los países y estados así que quedan cosas por cambiar en las regiones, también habrá que hacer que se vean en el perfil cuando esté acabada esa parte, y se usarán también para las incidencias a moderadores.
 
 Cambios dia 6 (Alejandra)
-Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar datos 
+Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar datos, creados modelo y controlador de etiquetas, categorias e historico, en el controlador de tienda las funciones para crear un articulo y modificarlo (teniendo en cuenta casos, como en crear si el articulo ya existe o no o si es particular o comun)

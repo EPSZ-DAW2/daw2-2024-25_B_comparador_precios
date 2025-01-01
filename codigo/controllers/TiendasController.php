@@ -343,20 +343,30 @@ public function actionEliminarArticulo($Tienda_id, $Articulo_id)
         throw new NotFoundHttpException('El artículo no existe en esta tienda.');
     }
 
+    $historico = new Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
 
-    $historico = new Historico::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+    if(!$historico){
+        throw new NotFoundHttpException('El artículo no tiene historico de precios para esta tienda.');
+    }
+
+
+
+
+
+
+
 
 
 
 
     // Verifica si el artículo tiene histórico de precios
-    if ($ArticuloTienda->tieneHistoricoPrecios()) {
+    if ($historico) {
         $ArticuloTienda->visible = 0; // Oculta el artículo
         $message = 'Artículo ocultado con éxito.';
     } else {
         // Verifica si el artículo es común
         $Articulo = Articulo::findOne($Articulo_id);
-        if ($Articulo->es_comun) {
+        if ($Articulo->tipo_marcado == 'comun') {
             // Desvincula el artículo común de la tienda
             $ArticuloTienda->delete();
             $message = 'Artículo desvinculado con éxito.';
@@ -364,6 +374,7 @@ public function actionEliminarArticulo($Tienda_id, $Articulo_id)
             // Elimina el artículo particular de la tienda
             $ArticuloTienda->delete();
             $Articulo->delete();
+            $Articulo->save();
             $message = 'Artículo eliminado con éxito.';
         }
     }
