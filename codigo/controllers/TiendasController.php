@@ -343,22 +343,11 @@ public function actionEliminarArticulo($Tienda_id, $Articulo_id)
         throw new NotFoundHttpException('El artículo no existe en esta tienda.');
     }
 
-    $historico = new Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
+    $historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
 
     if(!$historico){
         throw new NotFoundHttpException('El artículo no tiene historico de precios para esta tienda.');
     }
-
-
-
-
-
-
-
-
-
-
-
     // Verifica si el artículo tiene histórico de precios
     if ($historico) {
         $ArticuloTienda->visible = 0; // Oculta el artículo
