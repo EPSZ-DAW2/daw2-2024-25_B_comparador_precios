@@ -7,6 +7,7 @@ use app\models\Articulo;
 use app\models\Categorias;
 use app\models\Etiquetas;
 use app\models\ArticulosTienda;
+use app\models\Historico;
 use app\models\TiendasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -227,9 +228,16 @@ public function actionCrearArticulo($Tienda_id, $DatosArticulos)
     if ($comun) {
         // Si el artículo común existe, crea una relación con la tienda
         $ArticuloTienda = new ArticulosTienda();
+        $historico = new Historico();
         $ArticuloTienda->tienda_id = $Tienda_id;
         $ArticuloTienda->articulo_id = $comun->id;
         $ArticuloTienda->precio = $DatosArticulos['precio'];
+        $historico->tienda_id = $Tienda_id;
+        $historico->articulo_id = $comun->id;
+        $historico->precio = $DatosArticulos['precio'];
+        $historico->fecha = date('Y-m-d H:i:s');
+        $historico->save();
+        
     } else {
         // Si el artículo no existe, crea un nuevo artículo específico para la tienda
         $Articulo = new Articulo();
@@ -242,12 +250,21 @@ public function actionCrearArticulo($Tienda_id, $DatosArticulos)
         $Articulo->cerrado = 0;
         $Articulo->tipo_marcado = 'particular'; // Es un artículo particular de la tienda
         $Articulo->registro_id = Yii::$app->user->id;
+        
 
         if ($Articulo->save()) {
             $ArticuloTienda = new ArticulosTienda();
+            $historico = new Historico();
             $ArticuloTienda->tienda_id = $Tienda_id;
             $ArticuloTienda->articulo_id = $Articulo->id;
             $ArticuloTienda->precio = $DatosArticulos['precio'];
+            $Articulo->Articulo_tienda_id= $ArticuloTienda->id;
+            $historico->tienda_id = $Tienda_id;
+            $historico->articulo_id = $Articulo->id;
+            $historico->precio = $DatosArticulos['precio'];
+            $historico->fecha = date('Y-m-d H:i:s');
+            $Articulo->save();
+            $historico->save();
         } else {
             Yii::$app->session->setFlash('error', 'Ha habido un error al crear el artículo.');
             return $this->redirect(['view-store', 'id' => $Tienda_id]);
@@ -264,5 +281,101 @@ public function actionCrearArticulo($Tienda_id, $DatosArticulos)
     return $this->redirect(['view-store', 'id' => $Tienda_id]);
 }
 
+public function actionModificarArticulo($Tienda_id, $Articulo_id, $DatosArticulos)
+{
+    // Busca la relación del artículo con la tienda
+    $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+    if (!$ArticuloTienda) {
+        throw new NotFoundHttpException('El artículo no existe en esta tienda.');
+    }
+    $categoria = Categorias::findOne( $DatosArticulos['categoria_id']); 
+    $etiqueta =  Etiquetas::findOne( $DatosArticulos['etiqueta_id']);
 
+    // Verifica si el artículo es común
+    $Articulo = Articulo::findOne($Articulo_id);
+    $historico = new Historico();
+    if ($Articulo->tipo_marcado == 'comun') {
+        // Solo permite la modificación del precio para artículos comunes
+        $ArticuloTienda->precio = $DatosArticulos['precio'];
+        $historico->tienda_id = $Tienda_id;
+        $historico->articulo_id = $Articulo->id;
+        $historico->precio = $ArticuloTienda->precio;
+        $historico->fecha = date('Y-m-d H:i:s');
+        $historico->save();
+
+    } else {
+        // Permite la modificación completa para artículos específicos de la tienda
+        $Articulo->nombre = $DatosArticulos['nombre'];
+        $Articulo->descripcion = $DatosArticulos['descripcion'];
+        $Articulo->categoria_id = $categoria->id;
+        $Articulo->etiqueta_id = $etiqueta->id;
+        $Articulo->imagen_ppal = $DatosArticulos['imagen_ppal'];
+
+        if (!$Articulo->save()) {
+            Yii::$app->session->setFlash('error', 'Ha habido un error al modificar el artículo.');
+            return $this->redirect(['view-store', 'id' => $Tienda_id]);
+        }
+    }
+
+    // Guarda los cambios en la relación del artículo con la tienda
+    if ($ArticuloTienda->save()) {
+        Yii::$app->session->setFlash('success', 'Artículo modificado con éxito.');
+    } else {
+        Yii::$app->session->setFlash('error', 'Ha habido un error.');
+    }
+
+    return $this->redirect(['view-store', 'id' => $Tienda_id]);
+}
+
+/**
+ * Deletes or unlinks an article from the store.
+ * If the article has price history, it will be hidden instead of deleted.
+ * @param int $Tienda_id
+ * @param int $Articulo_id
+ * @return \yii\web\Response
+ * @throws NotFoundHttpException if the model cannot be found
+ */
+public function actionEliminarArticulo($Tienda_id, $Articulo_id)
+{
+    // Busca la relación del artículo con la tienda
+    $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+    if (!$ArticuloTienda) {
+        throw new NotFoundHttpException('El artículo no existe en esta tienda.');
+    }
+
+
+    $historico = new Historico::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+
+
+
+
+    // Verifica si el artículo tiene histórico de precios
+    if ($ArticuloTienda->tieneHistoricoPrecios()) {
+        $ArticuloTienda->visible = 0; // Oculta el artículo
+        $message = 'Artículo ocultado con éxito.';
+    } else {
+        // Verifica si el artículo es común
+        $Articulo = Articulo::findOne($Articulo_id);
+        if ($Articulo->es_comun) {
+            // Desvincula el artículo común de la tienda
+            $ArticuloTienda->delete();
+            $message = 'Artículo desvinculado con éxito.';
+        } else {
+            // Elimina el artículo particular de la tienda
+            $ArticuloTienda->delete();
+            $Articulo->delete();
+            $message = 'Artículo eliminado con éxito.';
+        }
+    }
+
+    // Guarda los cambios
+    if ($ArticuloTienda->save()) {
+        Yii::$app->session->setFlash('success', $message);
+    } else {
+        Yii::$app->session->setFlash('error', 'Ha habido un error.');
+    }
+
+    return $this->redirect(['view-store', 'id' => $Tienda_id]);
+
+}
 }
