@@ -39,3 +39,7 @@ Implementados getters auxiliares en el modelo tienda y en el controlador de tien
 Cambios dia 5 (Victor Gonzalo) 30/12/2024   
 Creado el modelo y controlador de Comentario
 Implementado una vista y funcion donde el usuario puede ver sus propios comentarios en su perfil (queda posible implentacio de un enlace a laseccion de comentarios de la que provienen)
+
+Cambio dia 6 (Victor Gonzalo) 1/1/2025
+Ahora al realizar un login si se actualiza el parametro "fecha_acceso"
+Modificado la disposición el view de profile-update para incluir la posibilidad de cambiar la contraseña.
