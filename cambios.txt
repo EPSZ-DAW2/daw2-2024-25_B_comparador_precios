@@ -21,7 +21,7 @@ Añadido el modelo de seguimiento
 
 Añadida pagina donde el usuario puede consultar sus elementos en seguimeinto (no hay forma de seguir algo a traves de la página aun) 
 
-Cambios dia 3 (Marcos): 29/14/2024
+Cambios dia 3 (Marcos Díez): 29/14/2024
 Cambio en el modelo Usuario, en rules coge la fecha y hora de registro, y el estado de registro confirmado como pendiente.
 
 En el login ahora comprueba si la cuenta ha sido verificada, sino, no deja entrar.
@@ -40,6 +40,7 @@ Cambios dia 5 (Victor Gonzalo) 30/12/2024
 Creado el modelo y controlador de Comentario
 Implementado una vista y funcion donde el usuario puede ver sus propios comentarios en su perfil (queda posible implentacio de un enlace a laseccion de comentarios de la que provienen)
 
-Cambio dia 6 (Victor Gonzalo) 1/1/2025
-Ahora al realizar un login si se actualiza el parametro "fecha_acceso"
-Modificado la disposición el view de profile-update para incluir la posibilidad de cambiar la contraseña.
+Cambios día 6 (Marcos Díez): 1/01/2025
+Cambios en el controlador y vista del registro para poder introducir tu región, ahora se puede seleccionar el continente en el que estás.
+Añadido el modelo de las regiones.
+Todavía no se han implementado los países y estados así que quedan cosas por cambiar en las regiones, también habrá que hacer que se vean en el perfil cuando esté acabada esa parte, y se usarán también para las incidencias a moderadores.
