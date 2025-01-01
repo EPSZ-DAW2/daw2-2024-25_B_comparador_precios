@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Tiendas;
+use app\models\Articulo;
+use app\models\ArticulosTienda;
 use app\models\TiendasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -185,5 +187,78 @@ public function actionDarDeBaja($id)
 
     return $this->redirect(['view-profile', 'id' => $model->id]);
 }
+
+/**
+ * Activates the Tiendas profile by marking it as visible.
+ * If activation is successful, the browser will be redirected to the 'index' page.
+ * @param int $id ID
+ * @return \yii\web\Response
+ * @throws NotFoundHttpException if the model cannot be found
+ */
+public function actionDarDeAlta($id)
+{
+    $model = $this->findModel($id);
+    $model->visible = 1; // Assuming 1 means visible and 0 means hidden
+
+    if ($model->save()) {
+        Yii::$app->session->setFlash('success', 'Perfil activado.');
+    } else {
+        Yii::$app->session->setFlash('error', 'Ha habido un error.');
+    }
+
+    return $this->redirect(['view-profile', 'id' => $model->id]);
+}
+
+/**
+ * Creates a new article for the store if it doesn't exist in the common articles.
+ * If it exists, links the article with the store.
+ * @param int $Tienda_id
+ * @param array $DatosArticulos
+ * @return \yii\web\Response
+ */
+public function actionCrearArticulo($Tienda_id, $DatosArticulos)
+{
+    // Busca si el artículo ya existe en los artículos comunes
+    $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
+    if ($comun) {
+        // Si el artículo común existe, crea una relación con la tienda
+        $ArticuloTienda = new ArticulosTienda();
+        $ArticuloTienda->tienda_id = $Tienda_id;
+        $ArticuloTienda->articulo_id = $comun->id;
+        $ArticuloTienda->precio = $DatosArticulos['precio'];
+    } else {
+        // Si el artículo no existe, crea un nuevo artículo específico para la tienda
+        $Articulo = new Articulo();
+        $Articulo->nombre = $DatosArticulos['nombre'];
+        $Articulo->descripcion = $DatosArticulos['descripcion'];
+        $Articulo->categoria_id = $DatosArticulos['categoria_id'];
+        $Articulo->etiqueta_id = $DatosArticulos['etiqueta_id'];
+        $Articulo->imagen_ppal = $DatosArticulos['imagen_ppal'];
+        $Articulo->visible = 1;
+        $Articulo->cerrado = 0;
+        $Articulo->tipo_marcado = 'particular'; // Es un artículo particular de la tienda
+        $Articulo->registro_id = Yii::$app->user->id;
+
+        if ($Articulo->save()) {
+            $ArticuloTienda = new ArticulosTienda();
+            $ArticuloTienda->tienda_id = $Tienda_id;
+            $ArticuloTienda->articulo_id = $Articulo->id;
+            $ArticuloTienda->precio = $DatosArticulos['precio'];
+        } else {
+            Yii::$app->session->setFlash('error', 'Ha habido un error al crear el artículo.');
+            return $this->redirect(['view-store', 'id' => $Tienda_id]);
+        }
+    }
+
+    // Guarda la relación del artículo con la tienda
+    if ($ArticuloTienda->save()) {
+        Yii::$app->session->setFlash('success', 'Artículo creado o vinculado con éxito.');
+    } else {
+        Yii::$app->session->setFlash('error', 'Ha habido un error.');
+    }
+
+    return $this->redirect(['view-store', 'id' => $Tienda_id]);
+}
+
 
 }
