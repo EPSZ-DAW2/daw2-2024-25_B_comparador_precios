@@ -267,95 +267,141 @@ class TiendasController extends Controller
             'model' => $model,
         ]);
     }
-    public function actionMantenerarticulos($tiendaId, $articulosData)
-    {
-        $tienda = Tienda::findOne($tiendaId);
-        if (!$tienda) {
-            throw new NotFoundHttpException("La tienda no existe.");
-        }
+   
+    public function actionMantenerArticulos($tiendaId)
+{
+    $tienda = $this->findModel($tiendaId);
 
-        foreach ($articulosData as $articuloData) {
-            $articulo = Articulos::findOne(['nombre' => $articuloData['nombre']]);
-            if (!$articulo) {
-                // Crear nuevo artículo si no existe
-                $articulo = new Articulos();
-                $articulo->nombre = $articuloData['nombre'];
-                $articulo->descripcion = $articuloData['descripcion'] ?? null;
-                $articulo->imagen_principal = $articuloData['imagen_principal'] ?? null;
-                $articulo->visible = $articuloData['visible'] ?? 1;
-                $articulo->cerrado = $articuloData['cerrado'] ?? 0;
-                $articulo->comun_o_propio = 'propio'; // Artículo propio de la tienda
-                
-                // Asignar claves foráneas si están presentes
-                $articulo->categoria_id = $articuloData['categoria_id'] ?? null;
-                $articulo->etiqueta_id = $articuloData['etiqueta_id'] ?? null;
-                $articulo->registro_id = $articuloData['registro_id'] ?? null;
-                $articulo->articulo_tienda_id = $articuloData['articulo_tienda_id'] ?? null;
+    if ($this->request->isPost) {
+        $accion = $this->request->post('accion');
+        $articuloId = $this->request->post('articulo_id');
+        $articulo = Articulo::findOne($articuloId);
 
-                if (!$articulo->save()) {
-                    Yii::$app->session->setFlash('error', "Error al crear el artículo: " . implode(", ", $articulo->getFirstErrors()));
-                    continue;
-                }
-            }
-
-            // Vincular el artículo con la tienda
-            $articuloTienda = ArticulosTienda::findOne(['tienda_id' => $tiendaId, 'articulo_id' => $articulo->id]);
-            if (!$articuloTienda) {
-                $articuloTienda = new ArticulosTienda();
-                $articuloTienda->tienda_id = $tiendaId;
-                $articuloTienda->articulo_id = $articulo->id;
-                $articuloTienda->precio = $articuloData['precio'];
-                if (!$articuloTienda->save()) {
-                    Yii::$app->session->setFlash('error', "Error al vincular el artículo con la tienda: " . implode(", ", $articuloTienda->getFirstErrors()));
-                }
-            } else {
-                // Actualizar el precio si ya está vinculado
-                $articuloTienda->precio = $articuloData['precio'];
-                $articuloTienda->save();
-            }
-
-            // Modificar artículos propios de la tienda
-            if ($articulo->comun_o_propio === 'propio') {
-                $articulo->descripcion = $articuloData['descripcion'] ?? $articulo->descripcion;
-                $articulo->imagen_principal = $articuloData['imagen_principal'] ?? $articulo->imagen_principal;
-                $articulo->visible = $articuloData['visible'] ?? $articulo->visible;
-                $articulo->cerrado = $articuloData['cerrado'] ?? $articulo->cerrado;
-                $articulo->save();
-            }
-
-            // Ocultar artículos de la tienda
-            if (isset($articuloData['ocultar']) && $articuloData['ocultar']) {
-                $articulo->visible = 0;
-                $articulo->save();
-            }
-
-            // Eliminar o desvincular artículos
-            if (isset($articuloData['eliminar']) && $articuloData['eliminar']) {
-                if ($articulo->comun_o_propio === 'propio') {
-                    // Verificar si tiene histórico de precios
-                    $historicoPrecios = ArticulosTienda::find()->where(['articulo_id' => $articulo->id])->count();
-                    if ($historicoPrecios > 0) {
-                        $articulo->visible = 0; // Ocultar si tiene histórico
-                        $articulo->save();
+        switch ($accion) {
+            case 'crear':
+                if (!$articulo) {
+                    $articulo = new Articulo();
+                    $articulo->attributes = $this->request->post('Articulo');
+                    $articulo->comun_o_propio = 'propio';
+                    if ($articulo->save()) {
+                        $articuloTienda = new ArticulosTienda();
+                        $articuloTienda->tienda_id = $tiendaId;
+                        $articuloTienda->articulo_id = $articulo->id;
+                        $articuloTienda->precio = $this->request->post('precio');
+                        $articuloTienda->save();
+                        \Yii::$app->session->setFlash('success', 'Artículo creado y vinculado exitosamente.');
                     } else {
-                        $articulo->delete(); // Eliminar si no tiene histórico
+                        \Yii::$app->session->setFlash('error', 'No se pudo crear el artículo.');
                     }
                 } else {
-                    // Desvincular artículo común
-                    $articuloTienda->delete();
+                    $articuloTienda = new ArticulosTienda();
+                    $articuloTienda->tienda_id = $tiendaId;
+                    $articuloTienda->articulo_id = $articulo->id;
+                    $articuloTienda->precio = $this->request->post('precio');
+                    $articuloTienda->save();
+                    \Yii::$app->session->setFlash('success', 'Artículo vinculado exitosamente.');
                 }
-            }
+                break;
+
+            case 'modificar':
+                if ($articulo->comun_o_propio === 'propio') {
+                    $articulo->attributes = $this->request->post('Articulo');
+                    if ($articulo->save()) {
+                        \Yii::$app->session->setFlash('success', 'Artículo modificado exitosamente.');
+                    } else {
+                        \Yii::$app->session->setFlash('error', 'No se pudo modificar el artículo.');
+                    }
+                } else {
+                    $articuloTienda = ArticulosTienda::findOne(['tienda_id' => $tiendaId, 'articulo_id' => $articuloId]);
+                    $articuloTienda->precio = $this->request->post('precio');
+                    if ($articuloTienda->save()) {
+                        \Yii::$app->session->setFlash('success', 'Precio del artículo modificado exitosamente.');
+                    } else {
+                        \Yii::$app->session->setFlash('error', 'No se pudo modificar el precio del artículo.');
+                    }
+                }
+                break;
+
+            case 'eliminar':
+                $articuloTienda = ArticulosTienda::findOne(['tienda_id' => $tiendaId, 'articulo_id' => $articuloId]);
+                if ($articuloTienda->hasHistoricalPrices()) {
+                    $articuloTienda->visible = 0;
+                    $articuloTienda->save();
+                    \Yii::$app->session->setFlash('success', 'Artículo ocultado exitosamente.');
+                } else {
+                    $articuloTienda->delete();
+                    \Yii::$app->session->setFlash('success', 'Artículo desvinculado exitosamente.');
+                }
+                break;
+
+            case 'ocultar':
+                $articuloTienda = ArticulosTienda::findOne(['tienda_id' => $tiendaId, 'articulo_id' => $articuloId]);
+                $articuloTienda->visible = 0;
+                if ($articuloTienda->save()) {
+                    \Yii::$app->session->setFlash('success', 'Artículo ocultado exitosamente.');
+                } else {
+                    \Yii::$app->session->setFlash('error', 'No se pudo ocultar el artículo.');
+                }
+                break;
         }
 
-        Yii::$app->session->setFlash('success', "Artículos mantenidos correctamente.");
         return $this->redirect(['view', 'id' => $tiendaId]);
     }
+
+    return $this->render('mantener-articulos', [
+        'tienda' => $tienda,
+    ]);
+}
 
     public function actionTiendasAbiertas(){
         $tiendas = Tienda::find()->where(['cerrada' => 0, 'visible' => 1])->all();
         return $this->render('tiendas-abiertas', ['tiendas' => $tiendas]);
     }
     
+    public function actionMostrarProductosPorTienda()
+{
+    // Obtener todas las tiendas
+    $tiendas = Tienda::find()->all();
 
+    // Array para almacenar los datos de las tiendas y sus productos
+    $tiendasConProductos = [];
+
+    foreach ($tiendas as $tienda) {
+        // Obtener los artículos relacionados con la tienda a través de la tabla articulos_tienda
+        $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $tienda->id])->all();
+
+        // Array para almacenar los datos de los productos de la tienda actual
+        $productos = [];
+
+        foreach ($articulosTienda as $articuloTienda) {
+            // Obtener el artículo
+            $articulo = Articulo::findOne($articuloTienda->articulo_id);
+
+            // Agregar los datos del producto al array
+            $productos[] = [
+                'nombre' => $articulo->nombre,
+                'descripcion' => $articulo->descripcion,
+                'precio' => $articuloTienda->precio,
+                'imagen_principal' => $articulo->imagen_principal,
+                'categoria_id' => $articulo->categoria_id,
+                'etiqueta_id' => $articulo->etiqueta_id,
+                'visible' => $articulo->visible,
+                'cerrado' => $articulo->cerrado,
+                'comun_o_propio' => $articulo->comun_o_propio,
+            ];
+        }
+
+        // Agregar los datos de la tienda y sus productos al array principal
+        $tiendasConProductos[] = [
+            'tienda' => $tienda,
+            'productos' => $productos,
+        ];
+    }
+
+    // Renderizar la vista con los datos de las tiendas y sus productos
+    return $this->render('mostrar-productos-por-tienda', [
+        'tiendasConProductos' => $tiendasConProductos,
+    ]);
+}
 }
 
