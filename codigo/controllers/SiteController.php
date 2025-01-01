@@ -102,6 +102,8 @@ class SiteController extends Controller
 					if ($model->login()) {
 						// Reseteamos los intentos fallidos
 						$usuario->reiniciarIntentosFallidos();
+                        			$usuario->fecha_acceso = date('Y-m-d\TH:i:sP');
+                        			$usuario->save();
 						Yii::$app->session->setFlash('success', 'Inicio de sesión exitoso.');
 						return $this->goBack();
 					} else {
