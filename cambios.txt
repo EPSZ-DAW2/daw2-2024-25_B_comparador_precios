@@ -34,7 +34,7 @@ Cambios para que funcione el sistema de bloqueos al fallar los intentos. Al fall
 
 Cambios dia 4 (Alejandra): 29/12/2024
 Creado el modelo y controlador de TiendaArticulo.
-Implementados getters auxiliares en el modelo tienda y en el controlador de tienda las funciones para sumar una valoración, un voto, activar y desactivar la tienda, abrirla y cerrarla según las denuncias (y se guardan los datos relativos) que se obtienen por una vista nueva a través de una función y una función para el mantenimiento de artículos y su vista asociada (pendiente de revisar algunos campos) 
+Implementados getters auxiliares en el modelo tienda y en el controlador de tienda las funciones para  activar y desactivar la tiendas 
 
 Cambios dia 5 (Victor Gonzalo) 30/12/2024   
 Creado el modelo y controlador de Comentario
@@ -44,3 +44,6 @@ Cambios día 6 (Marcos Díez): 1/01/2025
 Cambios en el controlador y vista del registro para poder introducir tu región, ahora se puede seleccionar el continente en el que estás.
 Añadido el modelo de las regiones.
 Todavía no se han implementado los países y estados así que quedan cosas por cambiar en las regiones, también habrá que hacer que se vean en el perfil cuando esté acabada esa parte, y se usarán también para las incidencias a moderadores.
+
+Cambios dia 6 (Alejandra)
+Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar datos 
