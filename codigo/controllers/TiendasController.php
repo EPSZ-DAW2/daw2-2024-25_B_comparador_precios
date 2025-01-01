@@ -351,6 +351,10 @@ class TiendasController extends Controller
         return $this->redirect(['view', 'id' => $tiendaId]);
     }
 
+    public function actionTiendasAbiertas(){
+        $tiendas = Tienda::find()->where(['cerrada' => 0, 'visible' => 1])->all();
+        return $this->render('tiendas-abiertas', ['tiendas' => $tiendas]);
+    }
     
 
 }
