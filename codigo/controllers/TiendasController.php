@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Tiendas;
 use app\models\Articulo;
+use app\models\Categorias;
+use app\models\Etiquetas;
 use app\models\ArticulosTienda;
 use app\models\TiendasSearch;
 use yii\web\Controller;
@@ -218,6 +220,8 @@ public function actionDarDeAlta($id)
  */
 public function actionCrearArticulo($Tienda_id, $DatosArticulos)
 {
+    $categoria = Categorias::findOne( $DatosArticulos['categoria_id']); 
+    $etiqueta =  Etiquetas::findOne( $DatosArticulos['etiqueta_id']);
     // Busca si el artículo ya existe en los artículos comunes
     $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
     if ($comun) {
@@ -231,8 +235,8 @@ public function actionCrearArticulo($Tienda_id, $DatosArticulos)
         $Articulo = new Articulo();
         $Articulo->nombre = $DatosArticulos['nombre'];
         $Articulo->descripcion = $DatosArticulos['descripcion'];
-        $Articulo->categoria_id = $DatosArticulos['categoria_id'];
-        $Articulo->etiqueta_id = $DatosArticulos['etiqueta_id'];
+        $Articulo->categoria_id = $categoria->id;
+        $Articulo->etiqueta_id = $etiqueta->id;
         $Articulo->imagen_ppal = $DatosArticulos['imagen_ppal'];
         $Articulo->visible = 1;
         $Articulo->cerrado = 0;
