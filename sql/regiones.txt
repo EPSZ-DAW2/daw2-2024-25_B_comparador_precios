@@ -1,0 +1,11 @@
+	
+	
+	
+
+
+usuarios.region_id = 3	region_padre_id = 1			region_padre_id = 24
+Zamora				 -> Castilla y León 			-> España  			-> Europa
+region.id = 3			region.id = 4				   region.id = 1	 region.id = 24		
+
+Zamora(usuarios.region_id = 3,region.id = 3)-> Castilla y León(region_padre_id = 1,region.id = 4)-> España(region_padre_id = 24,region.id = 1)-> Europa( region.id = 24, region_padre_id = NULL)
+		
