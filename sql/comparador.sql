@@ -335,7 +335,6 @@ CREATE TABLE `tiendas` (
   `motivo_bloqueo` text DEFAULT NULL,
   `comentarios_id` int(11) DEFAULT NULL,
   `cerrado_comentar` tinyint(1) DEFAULT 0,
-  `propietario_usuario_id` int(11) DEFAULT NULL,
   `seguimiento_id` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `articulo_tienda_id` int(11) DEFAULT NULL
@@ -546,7 +545,6 @@ ALTER TABLE `tiendas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tiendas_region` (`region_id`),
   ADD KEY `fk_tiendas_clasificacion` (`clasificacion_id`),
-  ADD KEY `fk_tiendas_propietario` (`propietario_usuario_id`),
   ADD KEY `fk_tiendas_articulo_tienda` (`articulo_tienda_id`),
   ADD KEY `fk_tiendas_registro` (`registro_id`),
   ADD KEY `fk_tiendas_etiquetas` (`etiquetas_id`),
@@ -796,7 +794,6 @@ ALTER TABLE `tiendas`
   ADD CONSTRAINT `fk_tiendas_clasificacion` FOREIGN KEY (`clasificacion_id`) REFERENCES `clasificaciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tiendas_comentarios` FOREIGN KEY (`comentarios_id`) REFERENCES `comentarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tiendas_etiquetas` FOREIGN KEY (`etiquetas_id`) REFERENCES `etiquetas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiendas_propietario` FOREIGN KEY (`propietario_usuario_id`) REFERENCES `duenos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tiendas_region` FOREIGN KEY (`region_id`) REFERENCES `regiones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tiendas_registro` FOREIGN KEY (`registro_id`) REFERENCES `registro_usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tiendas_seguimiento` FOREIGN KEY (`seguimiento_id`) REFERENCES `seguimientos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

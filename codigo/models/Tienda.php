@@ -30,7 +30,6 @@ use Yii;
  * @property string|null $motivo_bloqueo
  * @property int|null $comentarios_id
  * @property int|null $cerrado_comentar
- * @property int|null $propietario_usuario_id
  * @property int $seguimiento_id
  * @property int $registro_id
  * @property int|null $articulo_tienda_id
@@ -45,8 +44,8 @@ use Yii;
  * @property Etiquetas $etiquetas
  * @property Etiquetas[] $etiquetas0
  * @property HistoricoPrecios[] $historicoPrecios
+ * @property Moderador[] $mods
  * @property Ofertas[] $ofertas
- * @property Duenos $propietarioUsuario
  * @property Regiones $region
  * @property RegistroUsuarios $registro
  * @property Seguimientos $seguimiento
@@ -54,7 +53,7 @@ use Yii;
  * @property TiendasEtiquetas[] $tiendasEtiquetas
  * @property TiendasModerador[] $tiendasModeradors
  */
-class Tienda extends \yii\db\ActiveRecord
+class Tiendas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -71,7 +70,7 @@ class Tienda extends \yii\db\ActiveRecord
     {
         return [
             [['descripcion', 'direccion', 'motivo_denuncia', 'motivo_bloqueo'], 'string'],
-            [['region_id', 'clasificacion_id', 'etiquetas_id', 'suma_valoraciones', 'suma_votos', 'visible', 'cerrada', 'denuncias', 'bloqueada', 'comentarios_id', 'cerrado_comentar', 'propietario_usuario_id', 'seguimiento_id', 'registro_id', 'articulo_tienda_id'], 'integer'],
+            [['region_id', 'clasificacion_id', 'etiquetas_id', 'suma_valoraciones', 'suma_votos', 'visible', 'cerrada', 'denuncias', 'bloqueada', 'comentarios_id', 'cerrado_comentar', 'seguimiento_id', 'registro_id', 'articulo_tienda_id'], 'integer'],
             [['fecha_primera_denuncia', 'fecha_bloqueo'], 'safe'],
             [['seguimiento_id', 'registro_id'], 'required'],
             [['nombre', 'lugar', 'url', 'imagen_principal'], 'string', 'max' => 255],
@@ -80,7 +79,6 @@ class Tienda extends \yii\db\ActiveRecord
             [['clasificacion_id'], 'exist', 'skipOnError' => true, 'targetClass' => Clasificaciones::class, 'targetAttribute' => ['clasificacion_id' => 'id']],
             [['comentarios_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentarios::class, 'targetAttribute' => ['comentarios_id' => 'id']],
             [['etiquetas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Etiquetas::class, 'targetAttribute' => ['etiquetas_id' => 'id']],
-            [['propietario_usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Duenos::class, 'targetAttribute' => ['propietario_usuario_id' => 'id']],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Regiones::class, 'targetAttribute' => ['region_id' => 'id']],
             [['registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registro_id' => 'id']],
             [['seguimiento_id'], 'exist', 'skipOnError' => true, 'targetClass' => Seguimientos::class, 'targetAttribute' => ['seguimiento_id' => 'id']],
@@ -116,7 +114,6 @@ class Tienda extends \yii\db\ActiveRecord
             'motivo_bloqueo' => 'Motivo Bloqueo',
             'comentarios_id' => 'Comentarios ID',
             'cerrado_comentar' => 'Cerrado Comentar',
-            'propietario_usuario_id' => 'Propietario Usuario ID',
             'seguimiento_id' => 'Seguimiento ID',
             'registro_id' => 'Registro ID',
             'articulo_tienda_id' => 'Articulo Tienda ID',
@@ -136,7 +133,7 @@ class Tienda extends \yii\db\ActiveRecord
     /**
      * Gets query for [[ArticulosTiendas]].
      *
-    * @return \yii\db\ActiveQuery|ArticulosQuery
+     * @return \yii\db\ActiveQuery|ArticulosTiendaQuery
      */
     public function getArticulos()
     {
@@ -225,6 +222,16 @@ class Tienda extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Mods]].
+     *
+     * @return \yii\db\ActiveQuery|ModeradorQuery
+     */
+    public function getMods()
+    {
+        return $this->hasMany(Moderador::class, ['id' => 'mod_id'])->viaTable('tiendas_moderador', ['tienda_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[Ofertas]].
      *
      * @return \yii\db\ActiveQuery|OfertasQuery
@@ -232,16 +239,6 @@ class Tienda extends \yii\db\ActiveRecord
     public function getOfertas()
     {
         return $this->hasMany(Ofertas::class, ['tienda_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[PropietarioUsuario]].
-     *
-     * @return \yii\db\ActiveQuery|DuenosQuery
-     */
-    public function getPropietarioUsuario()
-    {
-        return $this->hasOne(Duenos::class, ['id' => 'propietario_usuario_id']);
     }
 
     /**
@@ -312,10 +309,7 @@ class Tienda extends \yii\db\ActiveRecord
     {
         return new TiendasQuery(get_called_class());
     }
-    /**
-     * Gets the total number of votes.
-     * @return int
-     */
+
     public function getTotalVotos()
     {
         return $this->suma_votos;
