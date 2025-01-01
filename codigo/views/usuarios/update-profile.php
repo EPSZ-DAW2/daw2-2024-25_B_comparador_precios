@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="usuario-form">
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+       
         <?= $form->field($model, 'nick')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
@@ -23,6 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'telefono')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'fecha_nacimiento')->input('date') ?>
 
+        <br>
+
+        <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
+        <br>
         <?= Html::submitButton('Guardar Cambios', ['class' => 'btn btn-success']) ?>
 
         <?php ActiveForm::end(); ?>
