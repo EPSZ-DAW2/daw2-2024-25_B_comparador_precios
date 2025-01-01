@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var yii\web\View $this */
-/** @var app\models\Tienda[] */
+/** @var app\models\Tienda[] */ 
 
 $this->title = 'Tiendas Abiertas';
 $this->params['breadcrumbs'][] = $this->title;
