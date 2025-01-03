@@ -20,11 +20,11 @@ $this->title = 'Comentarios del Usuario';
         <?php if (!empty($comentariosTienda)): ?>
             <h2>Comentarios sobre Tiendas</h2>
             <ul>
-                <?php foreach ($comentariosTienda as $tienda): ?>
+                <?php foreach ($comentariosTienda as $comentario): ?>
                     <li>
-                        <strong>Nombre de la tienda:</strong> <?= \yii\helpers\Html::encode($tienda->nombre) ?><br>
-                        <strong>Comentario:</strong> <?= \yii\helpers\Html::encode($tienda->comentario) ?><br>
-                        <strong>Fecha:</strong> <?= Yii::$app->formatter->asDate($tienda->fecha, 'long') ?>
+                        <strong>Nombre de la tienda:</strong> <?= \yii\helpers\Html::encode($comentario->tienda->nombre) ?><br>
+                        <strong>Comentario:</strong> <?= \yii\helpers\Html::encode($comentario->texto) ?><br>
+                        
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -33,11 +33,11 @@ $this->title = 'Comentarios del Usuario';
         <?php if (!empty($comentariosArticulo)): ?>
             <h2>Comentarios sobre Artículos</h2>
             <ul>
-                <?php foreach ($comentariosArticulo as $articulo): ?>
+                <?php foreach ($comentariosArticulo as $comentario): ?>
                     <li>
-                        <strong>Nombre del artículo:</strong> <?= \yii\helpers\Html::encode($articulo->nombre) ?><br>
-                        <strong>Comentario:</strong> <?= \yii\helpers\Html::encode($articulo->comentario) ?><br>
-                        <strong>Fecha:</strong> <?= Yii::$app->formatter->asDate($articulo->fecha, 'long') ?>
+                        <strong>Nombre del artículo:</strong> <?= \yii\helpers\Html::encode($comentario->articulo->nombre) ?><br>
+                        <strong>Comentario:</strong> <?= \yii\helpers\Html::encode($comentario->texto) ?><br>
+                     
                     </li>
                 <?php endforeach; ?>
             </ul>
