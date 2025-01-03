@@ -54,3 +54,9 @@ Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar d
 
 Cambios día 7 (Javier Marinas y Marcos Méndez):
 Añadido el modelo y el CRUD de clasificaciones
+
+Cambios dia 8 (Victor Gonzalo) 3/01/2025
+Añadido el modelo de registrosUsuario
+Modificado la accion de y vista de comentariosUsuario haciendo la acción funcional
+Modificado el modelo de Articulo para que llame al modelo Comentario de manera correcta cuando lo necesita 
+Añadido la accionBaja en UsuariosController y un botón en la vista de tu perfil, que enviará un mensaje a un moderador solicitando eliminar la cuenta de un usuario (todavia no es completamente funcional)
