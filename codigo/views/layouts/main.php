@@ -45,6 +45,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'Test', 'url' => ['/test/index']],
             ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
             ['label' => 'Articulos', 'url' => ['/articulos/index']],
+			['label' => 'Clasificaciones', 'url' => ['/clasificaciones/index']],
             ['label' => 'Tu Perfil', 'url' => ['/usuarios/perfil']],
 			['label' => 'Registrar', 'url' => ['/registros/register'], 'visible' => Yii::$app->user->isGuest],
 			// Aquí solo se mostrará el enlace de registro si el usuario no está autenticado
