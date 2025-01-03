@@ -286,7 +286,7 @@ CREATE TABLE `registro_usuarios` (
   `fecha_creacion` datetime DEFAULT NULL,
   `creador_id` int(11) NOT NULL,
   `fecha_mod` datetime DEFAULT NULL,
-  `mod_id` int(11) NOT NULL,
+  `mod_id` int(11) DEFAULT NULL,
   `notas_admin` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
