@@ -47,3 +47,6 @@ Todavía no se han implementado los países y estados así que quedan cosas por 
 
 Cambios dia 6 (Alejandra)
 Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar datos, creados modelo y controlador de etiquetas, categorias e historico, en el controlador de tienda las funciones para crear un articulo y modificarlo (teniendo en cuenta casos, como en crear si el articulo ya existe o no o si es particular o comun)
+
+Cambios día 7 (Javier Marinas y Marcos Méndez):
+Añadido el modelo y el CRUD de clasificaciones
