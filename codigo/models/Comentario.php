@@ -50,7 +50,7 @@ class Comentario extends \yii\db\ActiveRecord
             [['tienda_id', 'articulo_id', 'valoracion', 'comentario_padre_id', 'cerrado', 'denuncias', 'bloqueado', 'registo_id'], 'integer'],
             [['texto', 'motivo_denuncia', 'motivo_bloqueo'], 'string'],
             [['fecha_primera_denuncia', 'fecha_bloqueo'], 'safe'],
-            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulos::class, 'targetAttribute' => ['articulo_id' => 'id']],
+            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
             [['comentario_padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_padre_id' => 'id']],
             [['registo_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registo_id' => 'id']],
             [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tiendas::class, 'targetAttribute' => ['tienda_id' => 'id']],
@@ -87,7 +87,7 @@ class Comentario extends \yii\db\ActiveRecord
      */
     public function getArticulo()
     {
-        return $this->hasOne(Articulos::class, ['id' => 'articulo_id']);
+        return $this->hasOne(Articulo::class, ['id' => 'articulo_id']);
     }
 
     /**
