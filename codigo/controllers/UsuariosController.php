@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\aviso;
+use app\models\Articulo;
+
 /**
  * UsuariosController implements the CRUD actions for Usuario model.
  */
@@ -165,6 +168,27 @@ class UsuariosController extends Controller
         return $this->render('update-profile', [
             'model' => $model,
         ]);
+    }
+
+
+    public function actionBaja()
+    {
+        $model = Yii::$app->user->identity;
+    
+        if ($model === null) {
+            throw new \yii\web\NotFoundHttpException('Usuario no encontrado.');
+        }
+
+        $aviso = new aviso();
+        if($aviso->load(Yii::$app->request->post()) && $aviso->validate()) {
+            $aviso->clase = 'mensaje';
+            $aviso->texto = 'Solicitud de baja del usuario ' . $model->id;
+            $aviso->usuario_origen_id = $model->id;
+            //$aviso->usuario_destino_id = ;  
+        
+        $aviso->save();
+        }
+
     }
 
 
