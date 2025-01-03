@@ -28,3 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <?= Html::a('Tus Comentarios', ['comentarios/comentarios-usuario'], ['class' => 'btn btn-primary']) ?>
 
+<?= \yii\helpers\Html::a('Darte de Baja', ['usuarios/baja'], [
+    'class' => 'btn btn-danger',
+    'role' => 'button',
+    'onclick' => "return confirm('¿Estas seguro de que quieres darte de baja? Perderas todos los datos de tu cuenta')",
+]) ?>
