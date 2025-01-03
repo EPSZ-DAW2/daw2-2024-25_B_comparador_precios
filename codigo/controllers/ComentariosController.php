@@ -43,10 +43,10 @@ class ComentariosController extends \yii\web\Controller
     
         foreach ($comentarios as $comentario) {
             if ($comentario->tienda_id && $comentario->tienda) {
-                $comentariosTienda[] = $comentario->tienda;
+                $comentariosTienda[] = $comentario;
             }
             if ($comentario->articulo_id && $comentario->articulo) {
-                $comentariosArticulo[] = $comentario->articulo;
+                $comentariosArticulo[] = $comentario;
             }
         }
     
