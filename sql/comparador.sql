@@ -453,7 +453,7 @@ ALTER TABLE `comentarios`
   ADD KEY `fk_comentarios_tienda` (`tienda_id`),
   ADD KEY `fk_comentarios_articulo` (`articulo_id`),
   ADD KEY `fk_comentarios_padre` (`comentario_padre_id`),
-  ADD KEY `fk_comentarios_registro` (`registo_id`);
+  ADD KEY `fk_comentarios_registro` (`registro_id`);
 
 --
 -- Indices de la tabla `configuraciones`
@@ -726,7 +726,7 @@ ALTER TABLE `categorias`
 ALTER TABLE `comentarios`
   ADD CONSTRAINT `fk_comentarios_articulo` FOREIGN KEY (`articulo_id`) REFERENCES `articulos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_comentarios_padre` FOREIGN KEY (`comentario_padre_id`) REFERENCES `comentarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_comentarios_registro` FOREIGN KEY (`registo_id`) REFERENCES `registro_usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_comentarios_registro` FOREIGN KEY (`registro_id`) REFERENCES `registro_usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_comentarios_tienda` FOREIGN KEY (`tienda_id`) REFERENCES `tiendas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
