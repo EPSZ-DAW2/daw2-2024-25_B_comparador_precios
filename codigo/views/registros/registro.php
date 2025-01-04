@@ -1,7 +1,5 @@
 <?php use yii\widgets\ActiveForm; 
 use yii\helpers\Html;
-use yii\helpers\Json;
-use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuario */
@@ -27,33 +25,23 @@ $this->title = 'Registro de Usuario';
     <?= $form->field($model, 'direccion')->textarea(['rows' => 4]) ?>
     <?= $form->field($model, 'fecha_nacimiento')->input('date') ?>
 
-    <!-- Opción para la región -->
-    <?= $form->field($model, 'region_id')->dropDownList(
-		\yii\helpers\ArrayHelper::map($regionesPadre, 'id', 'nombre'),
-		[
-			'prompt' => 'Selecciona tu continente',
-			'id' => 'region-continent'
-		]
-	)
-	 ?>
-
-    <?= $form->field($model, 'region_id')->dropDownList(
-        [],
+    <!-- Opción para el continente -->
+    <?= $form->field($model, 'region_continente')->dropDownList(
+        \yii\helpers\ArrayHelper::map($regionesPadre, 'id', 'nombre'),
         [
-            'prompt' => 'Selecciona tu país',
-            'id' => 'region-country',
-            'disabled' => true
+            'prompt' => 'Selecciona tu continente',
+            'id' => 'region-continent'
         ]
     ) ?>
 
-    <?= $form->field($model, 'region_id')->dropDownList(
-        [],
-        [
-            'prompt' => 'Selecciona tu provincia',
-            'id' => 'region-province',
-            'disabled' => true
-        ]
-    ) ?>
+    <!-- Campo para el país (ingresado manualmente) -->
+    <?= $form->field($model, 'region_pais')->textInput(['maxlength' => true]) ?>
+
+    <!-- Campo para el estado (ingresado manualmente) -->
+    <?= $form->field($model, 'region_estado')->textInput(['maxlength' => true]) ?>
+
+    <!-- Campo para la provincia (ingresado manualmente) -->
+    <?= $form->field($model, 'region_provincia')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Registrarme', ['class' => 'btn btn-primary']) ?>
@@ -61,47 +49,3 @@ $this->title = 'Registro de Usuario';
 
     <?php ActiveForm::end(); ?>
 </div>
-
-<?php
-$script = <<< JS
-    $('#region-continent').change(function() {
-        var continentId = $(this).val();
-        if (continentId) {
-            $.ajax({
-                url: '/path/to/your/controller/action', // Cambiar al endpoint correcto
-                type: 'GET',
-                data: {id: continentId},
-                success: function(data) {
-                    var countries = JSON.parse(data);
-                    $('#region-country').html('');
-                    $.each(countries, function(index, value) {
-                        $('#region-country').append('<option value="'+index+'">'+value+'</option>');
-                    });
-                    $('#region-country').prop('disabled', false);
-                }
-            });
-        }
-    });
-
-    $('#region-country').change(function() {
-        var countryId = $(this).val();
-        if (countryId) {
-            $.ajax({
-                url: '/path/to/your/controller/action', // Cambiar al endpoint correcto
-                type: 'GET',
-                data: {id: countryId},
-                success: function(data) {
-                    var provinces = JSON.parse(data);
-                    $('#region-province').html('');
-                    $.each(provinces, function(index, value) {
-                        $('#region-province').append('<option value="'+index+'">'+value+'</option>');
-                    });
-                    $('#region-province').prop('disabled', false);
-                }
-            });
-        }
-    });
-JS;
-
-$this->registerJs($script);
-?>
