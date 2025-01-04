@@ -8,6 +8,7 @@ use app\models\Categorias;
 use app\models\Etiquetas;
 use app\models\ArticulosTienda;
 use app\models\Historico;
+use app\models\RegistroUsuarios;
 use app\models\TiendasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -221,8 +222,8 @@ public function actionDarDeAlta($id)
  */
 public function actionCrearArticulo($Tienda_id, $DatosArticulos)
 {
-    $categoria = Categorias::findOne( $DatosArticulos['categoria_id']); 
-    $etiqueta =  Etiquetas::findOne( $DatosArticulos['etiqueta_id']);
+    $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
+    $etiqueta =  Etiquetas::findOne( ['id' => $DatosArticulos['etiqueta_id']]);
     // Busca si el artículo ya existe en los artículos comunes
     $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
     if ($comun) {
@@ -241,6 +242,7 @@ public function actionCrearArticulo($Tienda_id, $DatosArticulos)
     } else {
         // Si el artículo no existe, crea un nuevo artículo específico para la tienda
         $Articulo = new Articulo();
+        $registro = new RegistroUsuarios();
         $Articulo->nombre = $DatosArticulos['nombre'];
         $Articulo->descripcion = $DatosArticulos['descripcion'];
         $Articulo->categoria_id = $categoria->id;
@@ -250,6 +252,10 @@ public function actionCrearArticulo($Tienda_id, $DatosArticulos)
         $Articulo->cerrado = 0;
         $Articulo->tipo_marcado = 'particular'; // Es un artículo particular de la tienda
         $Articulo->registro_id = Yii::$app->user->id;
+        $registro->fecha_creacion = date('Y-m-d H:i:s');
+        $registro->creador_id = Yii::$app->user->id;
+        $registro->notas_admin = 'Artículo creado por el usuario';
+        $registro->save();
         
 
         if ($Articulo->save()) {
