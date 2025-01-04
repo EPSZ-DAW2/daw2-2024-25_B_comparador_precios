@@ -46,6 +46,13 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
       //Atributos para almacenar el control de cambio de la posible contraseña.
       public $password1;
       public $password2;
+	  
+	     // Propiedades temporales para el formulario (No están en la base de datos)
+		public $region_continente;
+		public $region_pais;
+		public $region_estado;
+		public $region_provincia;
+	
       //public $primer_fallo;
      // public $bloqueado_hasta; Si es un atributo vinculado con la base de datos NO hagas esto
 	  
@@ -111,6 +118,16 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 			
             [['registro_confirmado'], 'default', 'value' => self::ESTADO_REGISTRO_PENDIENTE],
             [['fecha_registro'], 'default', 'value' => date('Y-m-d H:i:s')],
+			
+			// Validación condicional de los campos de región
+			//solo son required si nos estamos registrando
+			
+            [['region_continente', 'region_pais', 'region_estado', 'region_provincia'], 'required', 'when' => function ($model) {
+                return !empty($model->region_continente) || !empty($model->region_pais) || !empty($model->region_estado) || !empty($model->region_provincia);
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#usuario-region_continente').val() !== '' || $('#usuario-region_pais').val() !== '' || $('#usuario-region_estado').val() !== '' || $('#usuario-region_provincia').val() !== '';
+            }"],
+			
 			[['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Regiones::class, 'targetAttribute' => ['region_id' => 'id']],
         ];
     }
@@ -180,6 +197,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasOne(Regiones::class, ['id' => 'region_id']);
     }
+
 
     /**
      * Gets query for [[RegistroUsuarios]].
