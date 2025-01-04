@@ -32,7 +32,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fecha_registro')->textInput() ?>
 
-    <?= $form->field($model, 'registro_confirmado')->textInput() ?>
+    
+    <?= \yii\helpers\Html::a(
+    'Verificar Registro', 
+    ['usuarios/verificar', 'modid' => $modid, 'usrid' => $model->id], 
+    [
+        'class' => 'btn btn-success', // Clase para darle estilo al botón
+        'data-method' => 'post',      // Usa POST para enviar los datos
+    ]
+    ) ?>
+
 
     <?= $form->field($model, 'fecha_acceso')->textInput() ?>
 
