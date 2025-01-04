@@ -105,7 +105,7 @@ class RegistroUsuarios extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Mod]].
      *
-     * @return \yii\db\ActiveQuery|ModeradorQuery
+     * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
      */
     public function getMod()
     {
@@ -141,4 +141,3 @@ class RegistroUsuarios extends \yii\db\ActiveRecord
         return new RegistroUsuariosQuery(get_called_class());
     }
 }
-
