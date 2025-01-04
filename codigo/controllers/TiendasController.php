@@ -2,11 +2,11 @@
 
 namespace app\controllers;
 
-use app\models\Tiendas;
+use app\models\Tienda;
 use app\models\Articulo;
 use app\models\Categorias;
-use app\models\Etiquetas;
 use app\models\ArticulosTienda;
+use app\models\Etiquetas;
 use app\models\Historico;
 use app\models\RegistroUsuarios;
 use app\models\TiendasSearch;
@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TiendasController implements the CRUD actions for Tiendas model.
+ * TiendasController implements the CRUD actions for Tienda model.
  */
 class TiendasController extends Controller
 {
@@ -38,7 +38,7 @@ class TiendasController extends Controller
     }
 
     /**
-     * Lists all Tiendas models.
+     * Lists all Tienda models.
      *
      * @return string
      */
@@ -54,7 +54,7 @@ class TiendasController extends Controller
     }
 
     /**
-     * Displays a single Tiendas model.
+     * Displays a single Tienda model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -67,13 +67,13 @@ class TiendasController extends Controller
     }
 
     /**
-     * Creates a new Tiendas model.
+     * Creates a new Tienda model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Tiendas();
+        $model = new Tienda();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -89,7 +89,7 @@ class TiendasController extends Controller
     }
 
     /**
-     * Updates an existing Tiendas model.
+     * Updates an existing Tienda model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -109,7 +109,7 @@ class TiendasController extends Controller
     }
 
     /**
-     * Deletes an existing Tiendas model.
+     * Deletes an existing Tienda model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -123,15 +123,15 @@ class TiendasController extends Controller
     }
 
     /**
-     * Finds the Tiendas model based on its primary key value.
+     * Finds the Tienda model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Tiendas the loaded model
+     * @return Tienda the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tiendas::findOne(['id' => $id])) !== null) {
+        if (($model = Tienda::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
@@ -139,19 +139,6 @@ class TiendasController extends Controller
     }
 
     /**
- * Displays the profile of the Tiendas model.
- * @param int $id ID
- * @return mixed
- * @throws NotFoundHttpException if the model cannot be found
- */
-public function actionViewProfile($id)
-{
-    return $this->render('view-profile', [
-        'model' => $this->findModel($id),
-    ]);
-}
-
-/**
  * Updates the profile of an existing Tiendas model.
  * If update is successful, the browser will be redirected to the 'view-profile' page.
  * @param int $id ID
@@ -405,3 +392,4 @@ public function actionVerHistorico($Tienda_id, $Articulo_id)
     ]);
 }
 }
+
