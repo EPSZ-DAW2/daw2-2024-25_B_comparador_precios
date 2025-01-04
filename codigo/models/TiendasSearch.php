@@ -17,7 +17,7 @@ class TiendasSearch extends Tienda
     public function rules()
     {
         return [
-            [['id', 'region_id', 'clasificacion_id', 'etiquetas_id', 'suma_valoraciones', 'suma_votos', 'visible', 'cerrada', 'denuncias', 'bloqueada', 'comentarios_id', 'cerrado_comentar', 'propietario_usuario_id', 'seguimiento_id', 'registro_id', 'articulo_tienda_id'], 'integer'],
+            [['id', 'region_id', 'clasificacion_id', 'etiquetas_id', 'suma_valoraciones', 'suma_votos', 'visible', 'cerrada', 'denuncias', 'bloqueada', 'comentarios_id', 'cerrado_comentar', 'seguimiento_id', 'registro_id', 'articulo_tienda_id'], 'integer'],
             [['nombre', 'descripcion', 'lugar', 'url', 'direccion', 'telefono', 'imagen_principal', 'fecha_primera_denuncia', 'motivo_denuncia', 'fecha_bloqueo', 'motivo_bloqueo'], 'safe'],
         ];
     }
@@ -72,7 +72,6 @@ class TiendasSearch extends Tienda
             'fecha_bloqueo' => $this->fecha_bloqueo,
             'comentarios_id' => $this->comentarios_id,
             'cerrado_comentar' => $this->cerrado_comentar,
-            'propietario_usuario_id' => $this->propietario_usuario_id,
             'seguimiento_id' => $this->seguimiento_id,
             'registro_id' => $this->registro_id,
             'articulo_tienda_id' => $this->articulo_tienda_id,
