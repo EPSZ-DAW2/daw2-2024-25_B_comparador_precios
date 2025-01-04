@@ -42,7 +42,7 @@ class RegistroUsuarios extends \yii\db\ActiveRecord
             [['creador_id', 'mod_id'], 'required'],
             [['creador_id', 'mod_id'], 'integer'],
             [['notas_admin'], 'string'],
-            [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['creador_id' => 'id']],
+            [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::class, 'targetAttribute' => ['creador_id' => 'id']],
             [['mod_id'], 'exist', 'skipOnError' => true, 'targetClass' => Moderador::class, 'targetAttribute' => ['mod_id' => 'id']],
         ];
     }
@@ -99,13 +99,13 @@ class RegistroUsuarios extends \yii\db\ActiveRecord
      */
     public function getCreador()
     {
-        return $this->hasOne(Usuarios::class, ['id' => 'creador_id']);
+        return $this->hasOne(Usuario::class, ['id' => 'creador_id']);
     }
 
     /**
      * Gets query for [[Mod]].
      *
-     * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery|ModeradorQuery
      */
     public function getMod()
     {
@@ -141,3 +141,4 @@ class RegistroUsuarios extends \yii\db\ActiveRecord
         return new RegistroUsuariosQuery(get_called_class());
     }
 }
+
