@@ -64,3 +64,4 @@ Añadido la accionBaja en UsuariosController y un botón en la vista de tu perfi
 Cambios día 8 (Javier Marinas y Marcos Méndez):
 Añadido el modelo RegistroUsuariosQuery
 Añadido el modelo y el CRUD de Ofertas
+Modificadas las vistas de clasificaciones para mostrar las tiendas asociadas
