@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var app\models\Articulo $model */
+/** @var app\models\Tienda $model */
 
-$this->title = Yii::t('app', 'Update Articulo: {name}', [
+$this->title = Yii::t('app', 'Update Tienda: {name}', [
     'name' => $model->id,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articulos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="articulo-update">
+<div class="tienda-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Articulo $model */
+/** @var app\models\Tienda $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articulos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="articulo-view">
+<div class="tienda-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,12 +32,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nombre',
             'descripcion:ntext',
-            'categoria_id',
-            'etiqueta_id',
+            'lugar',
+            'url:url',
+            'direccion:ntext',
+            'region_id',
+            'telefono',
+            'clasificacion_id',
+            'etiquetas_id',
             'imagen_principal',
+            'suma_valoraciones',
+            'suma_votos',
             'visible',
-            'cerrado',
-            'tipo_marcado',
+            'cerrada',
+            'denuncias',
+            'fecha_primera_denuncia',
+            'motivo_denuncia:ntext',
+            'bloqueada',
+            'fecha_bloqueo',
+            'motivo_bloqueo:ntext',
+            'comentarios_id',
+            'cerrado_comentar',
+            'seguimiento_id',
             'registro_id',
             'articulo_tienda_id',
         ],

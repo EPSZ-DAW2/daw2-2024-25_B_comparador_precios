@@ -1,27 +1,26 @@
 <?php
 
-use app\models\Articulo;
+use app\models\Tienda;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
+
 /** @var yii\web\View $this */
-/** @var app\models\ArticulosSearch $searchModel */
+/** @var app\models\TiendasSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', 'Articulos');
+$this->title = Yii::t('app', 'Tiendas');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="articulo-index">
+<div class="tienda-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Articulo'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Tienda'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -33,23 +32,37 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nombre',
             'descripcion:ntext',
-            'categoria_id',
-            'etiqueta_id',
+            'lugar',
+            'url:url',
+            //'direccion:ntext',
+            //'region_id',
+            //'telefono',
+            //'clasificacion_id',
+            //'etiquetas_id',
             //'imagen_principal',
+            //'suma_valoraciones',
+            //'suma_votos',
             //'visible',
-            //'cerrado',
-            //'tipo_marcado',
+            //'cerrada',
+            //'denuncias',
+            //'fecha_primera_denuncia',
+            //'motivo_denuncia:ntext',
+            //'bloqueada',
+            //'fecha_bloqueo',
+            //'motivo_bloqueo:ntext',
+            //'comentarios_id',
+            //'cerrado_comentar',
+            //'seguimiento_id',
             //'registro_id',
             //'articulo_tienda_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Articulo $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Tienda $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],
     ]); ?>
 
-    <?php Pjax::end(); ?>
 
 </div>
