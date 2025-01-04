@@ -53,7 +53,7 @@ use Yii;
  * @property TiendasEtiquetas[] $tiendasEtiquetas
  * @property TiendasModerador[] $tiendasModeradors
  */
-class Tiendas extends \yii\db\ActiveRecord
+class Tienda extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -135,10 +135,9 @@ class Tiendas extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery|ArticulosTiendaQuery
      */
-    public function getArticulos()
+    public function getArticulosTiendas()
     {
-        return $this->hasMany(Articulos::class, ['id' => 'articulo_id'])
-                    ->via('articulosTiendas');
+        return $this->hasMany(ArticulosTienda::class, ['tienda_id' => 'id']);
     }
 
     /**
@@ -224,7 +223,7 @@ class Tiendas extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Mods]].
      *
-     * @return \yii\db\ActiveQuery|ModeradorQuery
+     * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
      */
     public function getMods()
     {
@@ -244,7 +243,7 @@ class Tiendas extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Region]].
      *
-     * @return \yii\db\ActiveQuery|RegionesQuery
+     * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
      */
     public function getRegion()
     {
@@ -453,4 +452,5 @@ class Tiendas extends \yii\db\ActiveRecord
     {
         return $this->articulo_tienda_id;
     }
+
 }
