@@ -60,3 +60,7 @@ Añadido el modelo de registrosUsuario
 Modificado la accion de y vista de comentariosUsuario haciendo la acción funcional
 Modificado el modelo de Articulo para que llame al modelo Comentario de manera correcta cuando lo necesita 
 Añadido la accionBaja en UsuariosController y un botón en la vista de tu perfil, que enviará un mensaje a un moderador solicitando eliminar la cuenta de un usuario (todavia no es completamente funcional)
+
+Cambios día 8 (Javier Marinas y Marcos Méndez):
+Añadido el modelo RegistroUsuariosQuery
+Añadido el modelo y el CRUD de Ofertas
