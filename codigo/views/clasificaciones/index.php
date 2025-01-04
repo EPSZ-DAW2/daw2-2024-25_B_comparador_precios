@@ -34,13 +34,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion:ntext',
             'icono',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Clasificaciones $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {tiendas}',
+                'buttons' => [
+                    'tiendas' => function ($url, $model) {
+                        return Html::a(
+                            'Ver Tiendas',
+                            ['clasificaciones/view', 'id' => $model->id],
+                            ['class' => 'btn btn-primary btn-sm']
+                        );
+                    },
+                ],
             ],
         ],
     ]); ?>
 
-
 </div>
+

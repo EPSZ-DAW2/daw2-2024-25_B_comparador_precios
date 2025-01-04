@@ -36,4 +36,24 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+	<h3>Tiendas asociadas</h3>
+		<?php if (!empty($model->tiendas)): ?>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($model->tiendas as $tienda): ?>
+						<tr>
+							<td><?= Html::encode($tienda->nombre) ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php else: ?>
+			<p>No hay tiendas asociadas a esta clasificación.</p>
+		<?php endif; ?>
+
 </div>
