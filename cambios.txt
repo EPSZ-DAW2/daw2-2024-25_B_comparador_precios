@@ -86,4 +86,9 @@ Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
 Cambios dia 9 (Victor Gonzalo Tapia) 4/01/2025
 Añadida función donde al verificar un registro de usuario tambien crea una entrada en la tabla de RegistroUsuarios
 Modificada un parte del modelo de RegistroUsuarios para utilizar el modelo Usuario correctamente 
-Esta funcion se encuentra en la vista del crud de modificar usuarios como un botón (queda añadir un comprobación en caso de estar el usuario ya verificado)     
+Esta funcion se encuentra en la vista del crud de modificar usuarios como un botón (queda añadir un comprobación en caso de estar el usuario ya verificado)
+
+Cambios dia 9 (Rocío Rubio Morillo) 4/01/2025: 
+- Creación del diseño css y HTML de la pagina index
+- corrección del error de duplicación de pagina web
+- creación del logo de la empresa personalizado
