@@ -65,3 +65,6 @@ Cambios día 8 (Javier Marinas y Marcos Méndez):
 Añadido el modelo RegistroUsuariosQuery
 Añadido el modelo y el CRUD de Ofertas
 Modificadas las vistas de clasificaciones para mostrar las tiendas asociadas
+
+Cambios dia 9 (Victor Martin) 4/01/2025
+Añadido modelo controlador y vistas acerca de moderadores (pendiente de revision de ciertas funciones)
