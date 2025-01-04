@@ -82,3 +82,8 @@ Añadidos atributos para los datos de las regiones en el modelo Usuario.php
 Ahora salen los datos de mi región al acceder a mi perfil (modificaciones en vista usuarios/perfil.php)
 
 Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
+
+Cambios dia 9 (Victor Gonzalo Tapia) 4/01/2025
+Añadida función donde al verificar un registro de usuario tambien crea una entrada en la tabla de RegistroUsuarios
+Modificada un parte del modelo de RegistroUsuarios para utilizar el modelo Usuario correctamente 
+Esta funcion se encuentra en la vista del crud de modificar usuarios como un botón (queda añadir un comprobación en caso de estar el usuario ya verificado)     
