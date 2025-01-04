@@ -18,7 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><strong>Teléfono:</strong> <?= Html::encode($usuario->telefono) ?></p>
     <p><strong>Fecha de Nacimiento:</strong> <?= Html::encode($usuario->fecha_nacimiento) ?></p>
     <p><strong>Dirección:</strong> <?= Html::encode($usuario->direccion) ?></p>
-    <?php /*<p><strong>Región:</strong> <?= $usuario->region ? Html::encode($usuario->region->nombre) : 'Sin región asignada' ?></p>*/?>
+
+    <!-- Mostrar las regiones asociadas -->
+    <?php if ($usuario->region): ?>
+        <?php
+            // Obtenemos la jerarquía completa de la región
+            $regionHierarchy = $usuario->region->getFullRegion();
+        ?>
+        <p><strong>Región:</strong> <?= Html::encode(implode(' > ', $regionHierarchy)) ?></p>
+    <?php else: ?>
+        <p><strong>Región:</strong> Sin región asignada</p>
+    <?php endif; ?>
+
     <p><strong>Fecha de Registro:</strong> <?= Html::encode($usuario->fecha_registro) ?></p>
 </div>
 
@@ -27,9 +38,3 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::a('Seguimientos', ['seguimientos/seguimientos'], ['class' => 'btn btn-primary']) ?>
 <br>
 <?= Html::a('Tus Comentarios', ['comentarios/comentarios-usuario'], ['class' => 'btn btn-primary']) ?>
-
-<?= \yii\helpers\Html::a('Darte de Baja', ['usuarios/baja'], [
-    'class' => 'btn btn-danger',
-    'role' => 'button',
-    'onclick' => "return confirm('¿Estas seguro de que quieres darte de baja? Perderas todos los datos de tu cuenta')",
-]) ?>
