@@ -4,18 +4,30 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 
-class Regiones extends ActiveRecord
+class Regiones extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    // Relación con la región padre (continente, país, estado)
+    public function getRegionPadre()
     {
-        return 'regiones';
+        return $this->hasOne(Regiones::class, ['id' => 'region_padre_id']);
     }
 
-    public function getHijos()
+    // Método para obtener el nombre del continente, país, estado y provincia
+    public function getFullRegion()
     {
-        return $this->hasMany(Regiones::className(), ['region_padre_id' => 'id']);
-    }
+        // Iniciamos la cadena de nombres
+        $regionNames = [];
+        $region = $this;
 
-    // Otros métodos o validaciones si es necesario...
+        // Iteramos a través de la jerarquía de la región, subiendo hasta el continente
+        while ($region) {
+            $regionNames[] = $region->nombre;
+            $region = $region->regionPadre; // Ascendemos al padre
+        }
+
+        // Retornamos la jerarquía invertida, es decir, desde el continente hasta la provincia
+        return array_reverse($regionNames);
+    }
 }
+
 ?>
