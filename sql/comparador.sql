@@ -335,7 +335,7 @@ CREATE TABLE `tiendas` (
   `motivo_bloqueo` text DEFAULT NULL,
   `comentarios_id` int(11) DEFAULT NULL,
   `cerrado_comentar` tinyint(1) DEFAULT 0,
-  `seguimiento_id` int(11) NOT NULL,
+  `seguimiento_id` int(11) DEFAULT NULL,
   `registro_id` int(11) NOT NULL,
   `articulo_tienda_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
