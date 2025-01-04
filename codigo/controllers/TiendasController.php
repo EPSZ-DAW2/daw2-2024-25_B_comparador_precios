@@ -384,4 +384,24 @@ public function actionEliminarArticulo($Tienda_id, $Articulo_id)
     return $this->redirect(['view-store', 'id' => $Tienda_id]);
 
 }
+
+/**
+ * Displays the price history of a specific article in a store.
+ * @param int $Tienda_id
+ * @param int $Articulo_id
+ * @return string
+ * @throws NotFoundHttpException if the model cannot be found
+ */
+public function actionVerHistorico($Tienda_id, $Articulo_id)
+{
+    $historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
+
+    if (!$historico) {
+        throw new NotFoundHttpException('No se ha encontrado el histórico de precios para este artículo en esta tienda.');
+    }
+
+    return $this->render('ver-historico', [
+        'historico' => $historico,
+    ]);
+}
 }
