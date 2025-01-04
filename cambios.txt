@@ -68,3 +68,17 @@ Modificadas las vistas de clasificaciones para mostrar las tiendas asociadas
 
 Cambios dia 9 (Victor Martin) 4/01/2025
 Añadido modelo controlador y vistas acerca de moderadores (pendiente de revision de ciertas funciones)
+
+Cambios dia 9 (Marcos Díez) 4/01/2025
+
+Manejo de Regiones de usuarios completado:
+
+Añadidas funciones y variables para tener la provincia, estado, país y continente de un usuario dado en RegistrosController.
+
+Añadidos a la vista registro.php los campos provincia, estado y país como texto (para el formulario de registrarse)
+
+Añadidos atributos para los datos de las regiones en el modelo Usuario.php
+
+Ahora salen los datos de mi región al acceder a mi perfil (modificaciones en vista usuarios/perfil.php)
+
+Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
