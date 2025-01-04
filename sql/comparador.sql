@@ -146,7 +146,7 @@ CREATE TABLE `comentarios` (
   `bloqueado` tinyint(1) DEFAULT 0 COMMENT 'si esta bloqueado el comentario',
   `fecha_bloqueo` datetime DEFAULT NULL COMMENT 'fecha de bloqueo',
   `motivo_bloqueo` text DEFAULT NULL COMMENT 'motivo del bloqueo',
-  `registo_id` int(11) DEFAULT NULL COMMENT 'id del creador del comentario'
+  `registro_id` int(11) DEFAULT NULL COMMENT 'id del creador del comentario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
