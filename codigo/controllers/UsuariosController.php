@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Usuario;
+use app\models\Moderador;
 use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,6 +12,7 @@ use yii\filters\VerbFilter;
 
 use app\models\aviso;
 use app\models\Articulo;
+use app\models\RegistroUsuarios;
 
 /**
  * UsuariosController implements the CRUD actions for Usuario model.
@@ -96,13 +98,17 @@ class UsuariosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $mod = new Moderador();
+        $mod = Moderador::findOne(['usuario_id' => Yii::$app->user->id]);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save() && $mod) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        if($mod)
         return $this->render('update', [
             'model' => $model,
+            'modid' => $mod->id,
         ]);
     }
 
@@ -190,6 +196,30 @@ class UsuariosController extends Controller
         }
 
     }
+
+    public function actionVerificar($modid, $usrid)
+    {
+        $mod = Moderador::findOne($modid); // Encuentra el modelo del moderador
+        $usuario = Usuario::findOne($usrid); // Encuentra el modelo del usuario
+        $reg = new RegistroUsuarios();
+    
+        if ($mod && $usuario) { // Verifica que ambos modelos existan
+            $usuario->registro_confirmado = 1;
+    
+            if ($usuario->save()) {
+                $reg->fecha_creacion = date('Y-m-d\TH:i:sP');
+                $reg->creador_id = $usrid; // Asigna el ID del usuario
+                $reg->fecha_mod = date('Y-m-d\TH:i:sP');
+                $reg->mod_id = $modid; // Asigna el ID del moderador
+                $reg->save();
+            }
+        } else {
+            throw new NotFoundHttpException('Moderador o Usuario no encontrado.');
+        }
+    
+        return $this->redirect(['index']); // Redirige después de completar la acción
+    }
+    
 
 
 }
