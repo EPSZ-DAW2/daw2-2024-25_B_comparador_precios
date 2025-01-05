@@ -43,7 +43,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
             ['label' => 'Articulos', 'url' => ['/articulos/index']],
-            ['label' => 'Tiendas', 'url' => ['/tiendas/index']],
+            ['label' => 'Tiendas', 'url' => ['/tiendas/ver-tiendas-activas']],
 			['label' => 'Clasificaciones', 'url' => ['/clasificaciones/index']],
             ['label' => 'Tu Perfil', 'url' => ['/usuarios/perfil']],
 			['label' => 'Registrar', 'url' => ['/registros/register'], 'visible' => Yii::$app->user->isGuest],
