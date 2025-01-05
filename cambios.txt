@@ -92,3 +92,8 @@ Cambios dia 9 (Rocío Rubio Morillo) 4/01/2025:
 - Creación del diseño css y HTML de la pagina index
 - corrección del error de duplicación de pagina web
 - creación del logo de la empresa personalizado
+
+Cambios dia 9 (Víctor Martín) 4/01/2025:
+-Actualizada la base de datos:
+  - Campo rol en la tabla usuarios para los diferentes roles
+  - Tabla roles en la base de datos
