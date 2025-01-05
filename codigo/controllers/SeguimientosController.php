@@ -6,6 +6,7 @@ use Yii;
 use app\models\Seguimiento;
 use app\models\Articulo;
 use app\models\Tienda;
+use app\models\Oferta;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
