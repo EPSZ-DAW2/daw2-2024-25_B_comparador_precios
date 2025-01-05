@@ -53,10 +53,10 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 		public $region_estado;
 		public $region_provincia;
 	
-      //public $primer_fallo;
-     // public $bloqueado_hasta; Si es un atributo vinculado con la base de datos NO hagas esto
+        public $primer_fallo;
+        public $bloqueado_hasta; //Si es un atributo vinculado con la base de datos NO hagas esto
 	  
-	  public $password_repeat;
+	    public $password_repeat;
 
     //--->>>
     // Métodos necesarios para configurar el modelo respecto de la tabla a la que representa en la base de datos.
