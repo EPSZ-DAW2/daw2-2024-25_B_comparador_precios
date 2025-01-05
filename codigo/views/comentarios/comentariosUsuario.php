@@ -11,7 +11,7 @@ $this->title = 'Comentarios del Usuario';
 ?>
 
 <div class="comentarios-usuario">
-    <h1><?= \yii\helpers\Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if (empty($comentariosTienda) && empty($comentariosArticulo)): ?>
         <p>No tienes comentarios registrados.</p>
@@ -21,10 +21,10 @@ $this->title = 'Comentarios del Usuario';
             <h2>Comentarios sobre Tiendas</h2>
             <ul>
                 <?php foreach ($comentariosTienda as $comentario): ?>
+                    <?php $comentario::findOne($comentario->tienda_id);  ?>
                     <li>
-                        <strong>Nombre de la tienda:</strong> <?= \yii\helpers\Html::encode($comentario->tienda->nombre) ?><br>
-                        <strong>Comentario:</strong> <?= \yii\helpers\Html::encode($comentario->texto) ?><br>
-                        
+                        <strong>Nombre de la tienda:</strong> <?= Html::encode($comentario->tienda->nombre) ?><br>
+                        <strong>Comentario:</strong> <?= Html::encode($comentario->texto) ?><br>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -35,9 +35,8 @@ $this->title = 'Comentarios del Usuario';
             <ul>
                 <?php foreach ($comentariosArticulo as $comentario): ?>
                     <li>
-                        <strong>Nombre del artículo:</strong> <?= \yii\helpers\Html::encode($comentario->articulo->nombre) ?><br>
-                        <strong>Comentario:</strong> <?= \yii\helpers\Html::encode($comentario->texto) ?><br>
-                     
+                        <strong>Nombre del artículo:</strong> <?= Html::encode($comentario->articulo->nombre) ?><br>
+                        <strong>Comentario:</strong> <?= Html::encode($comentario->texto) ?><br>
                     </li>
                 <?php endforeach; ?>
             </ul>
