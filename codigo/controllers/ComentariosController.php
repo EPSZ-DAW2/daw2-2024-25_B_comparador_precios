@@ -4,13 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Comentario;
-use app\models\Articulo;
-use app\models\Tienda;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
-class ComentariosController extends \yii\web\Controller
+class ComentariosController extends Controller
 {
     public function actionIndex()
     {
@@ -20,42 +17,41 @@ class ComentariosController extends \yii\web\Controller
     public function actionComentariosUsuario()
     {
         $usuario = Yii::$app->user->identity;
-    
+
         if ($usuario === null) {
-            throw new \yii\web\NotFoundHttpException('Usuario no encontrado.');
+            throw new NotFoundHttpException('Usuario no encontrado.');
         }
-    
-        // Buscar comentarios del usuario autenticado
+
+        // Buscar comentarios del usuario autenticado con relaciones
         $comentarios = Comentario::find()
-            ->where(['registo_id' => $usuario->id])
+            ->where(['registro_id' => $usuario->id])
+            ->with(['tienda', 'articulo']) // Carga las relaciones necesarias
             ->all();
-    
+
         if (empty($comentarios)) {
             return $this->render('comentariosUsuario', [
                 'comentariosTienda' => [],
                 'comentariosArticulo' => [],
             ]);
         }
-    
+
         // Clasificar los comentarios por tipo
         $comentariosTienda = [];
         $comentariosArticulo = [];
-    
+
         foreach ($comentarios as $comentario) {
-            if ($comentario->tienda_id && $comentario->tienda) {
+            if (!empty($comentario->tienda_id) && $comentario->tienda !== null) {
                 $comentariosTienda[] = $comentario;
             }
-            if ($comentario->articulo_id && $comentario->articulo) {
+            if (!empty($comentario->articulo_id) && $comentario->articulo !== null) {
                 $comentariosArticulo[] = $comentario;
             }
         }
-    
-        // Renderizar la vista con los datos
+
+        // Renderizar la vista con los datos clasificados
         return $this->render('comentariosUsuario', [
             'comentariosTienda' => $comentariosTienda,
             'comentariosArticulo' => $comentariosArticulo,
         ]);
     }
-    
-    
 }
