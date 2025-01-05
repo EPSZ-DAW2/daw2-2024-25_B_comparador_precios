@@ -40,16 +40,21 @@ $this->title = 'Mis Seguimientos';
     <p>No tienes seguimientos de artículos.</p>
 <?php endif; ?>
 
+
 <h2>Seguimientos de Ofertas</h2>
 <?php if (!empty($seguimientosOferta)): ?>
     <ul>
         <?php foreach ($seguimientosOferta as $oferta): ?>
             <li>
-                <?= Html::encode($oferta->descripcion) ?>
-                <!-- Agrega más detalles de la oferta aquí -->
+                <h4><?= Html::encode($oferta->articulo->nombre ) ?></h4>
+                <?= Html::encode($oferta->precio_oferta ) ?>
+                <?= Html::encode($oferta->precio_og ) ?>
+                <?= Html::encode($oferta->tienda->nombre ) ?>
             </li>
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
     <p>No tienes seguimientos de ofertas.</p>
 <?php endif; ?>
+
+
