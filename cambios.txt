@@ -97,3 +97,8 @@ Cambios dia 9 (Víctor Martín) 4/01/2025:
 -Actualizada la base de datos:
   - Campo rol en la tabla usuarios para los diferentes roles
   - Tabla roles en la base de datos
+
+
+Cambios dia 10 (Alejandra) 5/1/25
+implementadas funciones para ver las tiendas activas y sus vistas, la vista muestra cada tienda disponible y un boton para acceder a ella y que se muestre su catalogo de productos y su información que cada producto tiene un boton para ver su historico de precios
+tambien he añadido vistas para el mantenimiento de los productos de la propia tienda y he creado el modelo de Historico 
