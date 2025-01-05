@@ -7,6 +7,8 @@ use app\models\Usuario;
 use app\models\Regiones;
 use yii\web\BadRequestHttpException;
 
+//use app\models\Aviso;
+
 class RegistrosController extends Controller
 {
     public function actionRegister()
@@ -64,6 +66,21 @@ class RegistrosController extends Controller
 
             // Guardamos el modelo de Usuario
             if ($model->save()) {
+                /*
+                $aviso = new Aviso();
+                $aviso->clase = 'Mensaje';
+                $aviso->texto = 'Nueva Solicitud de Registro';
+                $aviso->usuario_origen_id = yii->app->user;
+                $moderador = Moderador::find()
+                ->joinWith('RegionesModerador') /
+                ->where([
+                    'region_id' => '$model->region_id',
+                ])
+                ->one(); // Obtiene un único resultado
+
+                $aviso->usuario_destino_id = $moderador->id;  
+                $aviso->save();
+                */ 
                 Yii::$app->session->setFlash('success', 'Te has registrado correctamente. Para poder usar tu cuenta deberá activarla un moderador.');
                 return $this->redirect(['site/login']);
             }
