@@ -35,10 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'tipo_marcado')->dropDownList(['comun' => 'Común', 'particular' => 'Particular']) ?>
 
-        <?= $form->field($model, 'registro_id')->textInput() ?>
-
-        <?= $form->field($model, 'articulo_tienda_id')->textInput() ?>
-
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success']) ?>
         </div>
