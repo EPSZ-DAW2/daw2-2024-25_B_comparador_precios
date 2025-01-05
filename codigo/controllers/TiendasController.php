@@ -10,6 +10,8 @@ use app\models\Etiquetas;
 use app\models\Historico;
 use app\models\RegistroUsuarios;
 use app\models\Ofertas;
+use app\models\Dueno;
+use app\models\Usuario;
 use app\models\Comentario;
 use app\models\TiendasSearch;
 use yii\web\Controller;
@@ -441,6 +443,32 @@ class TiendasController extends Controller
         return $this->render('view-store', [
             'model' => $model,
         ]);
+    }
+
+    public function actionMiTienda(){
+        if(Yii::$app->user->isGuest){
+            Yii::$app->session->setFlash('error', 'Debes iniciar sesión para acceder a tu tienda.');
+            return $this->redirect(['site/login']);
+        }
+
+        $usuario = Usuario::findone(Yii::$app->user->id);
+        if($usuario && $usuario->rol === 'usuario tienda'){
+            $miTienda = Dueno::findone(['id_usuario' => Yii::$usuario->id]);
+            
+            if ($miTienda) {
+                return $this->render('mi-tienda', [
+                    'tienda' => $miTienda,
+                ]);
+            } else {
+                Yii::$app->session->setFlash('error', 'No se encontró una tienda asociada a tu usuario.');
+                return $this->redirect(['site/index']);
+            }
+        }else{
+                // Si el usuario no es de tipo 'tienda', redirige a otra página
+                 Yii::$app->session->setFlash('error', 'No tienes permisos para acceder a esta sección.');
+                return $this->redirect(['site/index']);
+        }
+        
     }
 }
 
