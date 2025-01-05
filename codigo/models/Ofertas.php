@@ -43,9 +43,9 @@ class Ofertas extends \yii\db\ActiveRecord
             [['fecha_inicio', 'fecha_fin'], 'safe'],
             [['precio_oferta', 'precio_og'], 'number'],
             [['notas'], 'string'],
-            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulos::class, 'targetAttribute' => ['articulo_id' => 'id']],
+            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
             [['registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registro_id' => 'id']],
-            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tiendas::class, 'targetAttribute' => ['tienda_id' => 'id']],
+            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
         ];
     }
 
@@ -74,7 +74,7 @@ class Ofertas extends \yii\db\ActiveRecord
      */
     public function getArticulo()
     {
-        return $this->hasOne(Articulos::class, ['id' => 'articulo_id']);
+        return $this->hasOne(Articulo::class, ['id' => 'articulo_id']);
     }
 
     /**
@@ -114,7 +114,7 @@ class Ofertas extends \yii\db\ActiveRecord
      */
     public function getTienda()
     {
-        return $this->hasOne(Tiendas::class, ['id' => 'tienda_id']);
+        return $this->hasOne(Tienda::class, ['id' => 'tienda_id']);
     }
 
     /**
