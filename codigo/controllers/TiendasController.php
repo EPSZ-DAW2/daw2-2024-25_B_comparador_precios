@@ -445,5 +445,105 @@ class TiendasController extends Controller
         ]);
     }
 
+    public function actionCrearOferta($Tienda_id, $Articulo_id)
+{
+    $oferta = new Ofertas();
+    $articulo = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+
+    if (!$articulo) {
+        throw new NotFoundHttpException('El artículo no está asociado a esta tienda.');
+    }
+
+    if ($oferta->load(Yii::$app->request->post())) {
+        $oferta->articulo_id = $Articulo_id;
+        $oferta->tienda_id = $Tienda_id;
+        $oferta->precio_og = $articulo->precio; // Precio original del artículo en la tienda
+        $oferta->registro_id = Yii::$app->user->id; // Usuario que creó la oferta
+
+        if ($oferta->save()) {
+            // Registrar el histórico
+            $historico = new Historico();
+            $historico->tienda_id = $Tienda_id;
+            $historico->articulo_id = $Articulo_id;
+            $historico->precio = $oferta->precio_oferta;
+            $historico->fecha = date('Y-m-d H:i:s');
+            $historico->save();
+
+            Yii::$app->session->setFlash('success', 'Oferta creada con éxito.');
+            return $this->redirect(['view-store', 'id' => $Tienda_id]);
+        } else {
+            Yii::$app->session->setFlash('error', 'Ha habido un error al crear la oferta.');
+        }
+    }
+
+    return $this->render('crear-oferta', [
+        'model' => $oferta,
+        'articulo' => $articulo,
+    ]);
+}
+
+/**
+ * Updates an existing offer for a specific article in the store.
+ * @param int $Tienda_id
+ * @param int $Articulo_id
+ * @return \yii\web\Response
+ */
+public function actionModificarOferta($Tienda_id, $Articulo_id)
+{
+    $oferta = Ofertas::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+
+    if (!$oferta) {
+        throw new NotFoundHttpException('La oferta no existe.');
+    }
+
+    if ($oferta->load(Yii::$app->request->post())) {
+        if ($oferta->save()) {
+            // Registrar el histórico si se actualizó el precio de oferta
+            if (Yii::$app->request->post('Ofertas')['precio_oferta'] !== null) {
+                $historico = new Historico();
+                $historico->tienda_id = $Tienda_id;
+                $historico->articulo_id = $Articulo_id;
+                $historico->precio = $oferta->precio_oferta;
+                $historico->fecha = date('Y-m-d H:i:s');
+                $historico->save();
+            }
+
+            Yii::$app->session->setFlash('success', 'Oferta modificada con éxito.');
+            return $this->redirect(['view-store', 'id' => $Tienda_id]);
+        } else {
+            Yii::$app->session->setFlash('error', 'Ha habido un error al modificar la oferta.');
+        }
+    }
+
+    return $this->render('modificar-oferta', [
+        'model' => $oferta,
+    ]);
+}
+
+/**
+ * Deletes an offer for a specific article in the store.
+ * @param int $Tienda_id
+ * @param int $Articulo_id
+ * @return \yii\web\Response
+ * @throws NotFoundHttpException if the offer cannot be found
+ */
+public function actionEliminarOferta($Tienda_id, $Articulo_id)
+{
+    $oferta = Ofertas::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+
+    if (!$oferta) {
+        throw new NotFoundHttpException('La oferta no existe.');
+    }
+
+    if ($oferta->delete()) {
+        Yii::$app->session->setFlash('success', 'Oferta eliminada con éxito.');
+    } else {
+        Yii::$app->session->setFlash('error', 'Ha habido un error al eliminar la oferta.');
+    }
+
+    return $this->redirect(['view-store', 'id' => $Tienda_id]);
+}
+
+    
 }
 
