@@ -39,7 +39,7 @@ class Seguimiento extends \yii\db\ActiveRecord
             [['usuario_id', 'tienda_id', 'articulo_id', 'oferta_id'], 'integer'],
             [['fecha'], 'safe'],
             [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
-            [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Oferta::class, 'targetAttribute' => ['oferta_id' => 'id']],
+            [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
             [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::class, 'targetAttribute' => ['usuario_id' => 'id']],
         ];
@@ -77,7 +77,7 @@ class Seguimiento extends \yii\db\ActiveRecord
      */
     public function getOferta()
     {
-        return $this->hasOne(Oferta::class, ['id' => 'oferta_id']);
+        return $this->hasOne(Ofertas::class, ['id' => 'oferta_id']);
     }
 
     /**
