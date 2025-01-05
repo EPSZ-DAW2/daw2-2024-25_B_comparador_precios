@@ -53,7 +53,7 @@ class Comentario extends \yii\db\ActiveRecord
             [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
             [['comentario_padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_padre_id' => 'id']],
             [['registo_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registo_id' => 'id']],
-            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tiendas::class, 'targetAttribute' => ['tienda_id' => 'id']],
+            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
         ];
     }
 
@@ -147,7 +147,7 @@ class Comentario extends \yii\db\ActiveRecord
      */
     public function getTienda()
     {
-        return $this->hasOne(Tiendas::class, ['id' => 'tienda_id']);
+        return $this->hasOne(Tienda::class, ['id' => 'tienda_id']);
     }
 
     /**
@@ -157,7 +157,7 @@ class Comentario extends \yii\db\ActiveRecord
      */
     public function getTiendas()
     {
-        return $this->hasMany(Tiendas::class, ['comentarios_id' => 'id']);
+        return $this->hasMany(Tienda::class, ['comentarios_id' => 'id']);
     }
 
     /**
