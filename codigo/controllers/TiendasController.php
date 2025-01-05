@@ -394,6 +394,14 @@ class TiendasController extends Controller
         ]);
     }
 
+    public function actionVerTiendasActivas()
+{
+    $tiendas = Tienda::find()->where(['visible' => 1])->all();
+
+    return $this->render('ver-tiendas-activas', [
+        'tiendas' => $tiendas,
+    ]);
+}
     
 }
 
