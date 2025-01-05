@@ -105,11 +105,14 @@ class UsuariosController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        if($mod)
+        if( $mod )
         return $this->render('update', [
             'model' => $model,
             'modid' => $mod->id,
         ]);
+        else 
+        return $this->redirect(['index']); // Redirige después de completar la acción
+
     }
 
     /**
@@ -204,14 +207,18 @@ class UsuariosController extends Controller
         $reg = new RegistroUsuarios();
     
         if ($mod && $usuario) { // Verifica que ambos modelos existan
-            $usuario->registro_confirmado = 1;
-    
-            if ($usuario->save()) {
-                $reg->fecha_creacion = date('Y-m-d\TH:i:sP');
-                $reg->creador_id = $usrid; // Asigna el ID del usuario
-                $reg->fecha_mod = date('Y-m-d\TH:i:sP');
-                $reg->mod_id = $modid; // Asigna el ID del moderador
-                $reg->save();
+            if($usuario->registro_confirmado == 1)
+                Yii::$app->session->setFlash('warning', 'El usuario ya está verificado');
+            
+            else{
+                $usuario->registro_confirmado = 1;            
+                if ($usuario->save()) {
+                    $reg->fecha_creacion = date('Y-m-d\TH:i:sP');
+                    $reg->creador_id = $usrid; // Asigna el ID del usuario
+                    $reg->fecha_mod = date('Y-m-d\TH:i:sP');
+                    $reg->mod_id = $modid; // Asigna el ID del moderador
+                    $reg->save();
+                }
             }
         } else {
             throw new NotFoundHttpException('Moderador o Usuario no encontrado.');
