@@ -403,5 +403,16 @@ class TiendasController extends Controller
         ]);
     }
     
+    public function actionViewStore($id)
+    {
+        $model = Tienda::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException('La tienda no existe.');
+        }
+
+        return $this->render('view-store', [
+            'model' => $model,
+        ]);
+    }
 }
 

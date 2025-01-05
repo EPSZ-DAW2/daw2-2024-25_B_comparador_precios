@@ -8,6 +8,15 @@ use yii\data\ActiveDataProvider;
 /** @var yii\web\View $this */
 /** @var app\models\Tienda $model */
 
+// Obtener el ID de la tienda desde la URL
+if (isset($_GET['id'])) {
+    $tiendaId = $_GET['id'];
+} else {
+    // Manejar el caso donde no se proporciona el ID de la tienda
+    die('ID de tienda no proporcionado');
+}
+
+
 $this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -50,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <h2>Artículos</h2>
+<h2>Artículos</h2>
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([
             'query' => $model->getArticulosTiendas(),
@@ -66,8 +75,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'suma_valoraciones',
             'suma_votos',
             'visible:boolean',
-            'cerrado:boolean',
-            ['class' => 'yii\grid\ActionColumn'],
+            // Deshabilitar las opciones de edición
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}', // Solo permitir la vista
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{ver-historico}',
+                'buttons' => [
+                    'ver-historico' => function ($url, $model, $key) use ($tiendaId) {
+                        return Html::a('Ver Histórico', ['ver-historico', 'Tienda_id' => $tiendaId, 'Articulo_id' => $model->id], [
+                            'title' => 'Ver Histórico de Precios',
+                            'class' => 'btn btn-primary',
+                        ]);
+                    },
+                ],
+            ],
         ],
     ]) ?>
 
