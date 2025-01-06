@@ -540,21 +540,32 @@ public function actionModificarOferta($Tienda_id)
  * @return \yii\web\Response
  * @throws NotFoundHttpException if the offer cannot be found
  */
-public function actionEliminarOferta($Tienda_id, $Articulo_id)
+public function actionEliminarOferta($Tienda_id)
 {
-    $oferta = Ofertas::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+    $ofertas = Ofertas::find()->where(['tienda_id' => $Tienda_id])->all();
+    $ofertasList = ArrayHelper::map($ofertas, 'id', function($model) {
+        return $model->articulo->nombre . ' - ' . $model->precio_oferta;
+    });
 
-    if (!$oferta) {
-        throw new NotFoundHttpException('La oferta no existe.');
+    if (Yii::$app->request->post('oferta_id')) {
+        $ofertaSeleccionada = Ofertas::findOne(Yii::$app->request->post('oferta_id'));
+
+        if (!$ofertaSeleccionada) {
+            throw new NotFoundHttpException('La oferta no existe.');
+        }
+
+        if ($ofertaSeleccionada->delete()) {
+            Yii::$app->session->setFlash('success', 'Oferta eliminada con éxito.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Ha habido un error al eliminar la oferta.');
+        }
+
+        return $this->redirect(['view-store', 'id' => $Tienda_id]);
     }
 
-    if ($oferta->delete()) {
-        Yii::$app->session->setFlash('success', 'Oferta eliminada con éxito.');
-    } else {
-        Yii::$app->session->setFlash('error', 'Ha habido un error al eliminar la oferta.');
-    }
-
-    return $this->redirect(['view-store', 'id' => $Tienda_id]);
+    return $this->render('eliminar-oferta', [
+        'ofertasList' => $ofertasList,
+    ]);
 }
 
     
