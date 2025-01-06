@@ -1,18 +1,19 @@
+<?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var app\models\Ofertas $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var  yii\web\View $this */
+/** @var  array $ofertasList */
+/** @var  app\models\Ofertas $ofertaSeleccionada */
 
-$this->title = Yii::t('app', 'Modificar Oferta: {name}', [
-    'name' => $model->articulo->nombre, // Se asume relación con el modelo de artículo
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->articulo->nombre, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
+$this->title = 'Modificar Oferta';
+$this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Ver Tienda', 'url' => ['view-store', 'id' => $Tienda_id]];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="oferta-update">
+
+<div class="oferta-modificar">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -20,21 +21,17 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'articulo_id')->hiddenInput(['value' => $model->articulo_id])->label(false) ?>
+        <?= $form->field($ofertaSeleccionada, 'id')->dropDownList($ofertasList, ['prompt' => 'Seleccione una oferta', 'name' => 'oferta_id']) ?>
 
-        <?= $form->field($model, 'tienda_id')->hiddenInput(['value' => $model->tienda_id])->label(false) ?>
+        <?php if ($ofertaSeleccionada): ?>
+            <?= $form->field($ofertaSeleccionada, 'precio_oferta')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($ofertaSeleccionada, 'fecha_inicio')->input('datetime-local') ?>
+            <?= $form->field($ofertaSeleccionada, 'fecha_fin')->input('datetime-local') ?>
 
-        <?= $form->field($model, 'precio_oferta')->textInput(['type' => 'number', 'step' => '0.01', 'min' => '0', 'value' => $model->precio_oferta]) ?>
-
-        <?= $form->field($model, 'fecha_inicio')->textInput(['type' => 'date', 'value' => $model->fecha_inicio]) ?>
-
-        <?= $form->field($model, 'fecha_fin')->textInput(['type' => 'date', 'value' => $model->fecha_fin]) ?>
-
-        <?= $form->field($model, 'notas')->textarea(['rows' => 4, 'value' => $model->notas]) ?>
-
-        <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success']) ?>
-        </div>
+            <div class="form-group">
+                <?= Html::submitButton('Modificar Oferta', ['class' => 'btn btn-success']) ?>
+            </div>
+        <?php endif; ?>
 
         <?php ActiveForm::end(); ?>
 

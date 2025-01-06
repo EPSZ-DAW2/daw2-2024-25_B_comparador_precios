@@ -1,12 +1,15 @@
+<?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var app\models\Ofertas $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var  yii\web\View $this */
+/** @var  app\models\Ofertas $model */
+/** @var  array $articulos */
 
-$this->title = Yii::t('app', 'Crear Oferta');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
+$this->title = 'Crear Oferta';
+$this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Ver Tienda', 'url' => ['view-store', 'id' => $model->tienda_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="oferta-create">
@@ -17,20 +20,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'articulo_id')->hiddenInput(['value' => $Articulo_id])->label(false) ?>
+        <?= $form->field($model, 'articulo_id')->dropDownList($articulos, ['prompt' => 'Seleccione un artículo']) ?>
 
-        <?= $form->field($model, 'tienda_id')->hiddenInput(['value' => $Tienda_id])->label(false) ?>
+        <?= $form->field($model, 'precio_oferta')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'precio_oferta')->textInput(['type' => 'number', 'step' => '0.01', 'min' => '0']) ?>
+        <?= $form->field($model, 'fecha_inicio')->input('datetime-local') ?>
 
-        <?= $form->field($model, 'fecha_inicio')->textInput(['type' => 'date']) ?>
-
-        <?= $form->field($model, 'fecha_fin')->textInput(['type' => 'date']) ?>
-
-        <?= $form->field($model, 'notas')->textarea(['rows' => 4]) ?>
+        <?= $form->field($model, 'fecha_fin')->input('datetime-local') ?>
 
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Crear Oferta', ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
