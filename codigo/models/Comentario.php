@@ -20,14 +20,14 @@ use Yii;
  * @property int|null $bloqueado si esta bloqueado el comentario
  * @property string|null $fecha_bloqueo fecha de bloqueo
  * @property string|null $motivo_bloqueo motivo del bloqueo
- * @property int|null $registo_id id del creador del comentario
+ * @property int|null $registro_id id del creador del comentario
  *
  * @property Articulos $articulo
  * @property ArticulosTienda[] $articulosTiendas
  * @property Avisos[] $avisos
  * @property Comentario $comentarioPadre
  * @property Comentario[] $comentarios
- * @property RegistroUsuarios $registo
+ * @property RegistroUsuarios $registro
  * @property Tiendas $tienda
  * @property Tiendas[] $tiendas
  */
@@ -47,12 +47,12 @@ class Comentario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tienda_id', 'articulo_id', 'valoracion', 'comentario_padre_id', 'cerrado', 'denuncias', 'bloqueado', 'registo_id'], 'integer'],
+            [['tienda_id', 'articulo_id', 'valoracion', 'comentario_padre_id', 'cerrado', 'denuncias', 'bloqueado', 'registro_id'], 'integer'],
             [['texto', 'motivo_denuncia', 'motivo_bloqueo'], 'string'],
             [['fecha_primera_denuncia', 'fecha_bloqueo'], 'safe'],
             [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
             [['comentario_padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_padre_id' => 'id']],
-            [['registo_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registo_id' => 'id']],
+            [['registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registro_id' => 'id']],
             [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
         ];
     }
@@ -76,7 +76,7 @@ class Comentario extends \yii\db\ActiveRecord
             'bloqueado' => Yii::t('app', 'Bloqueado'),
             'fecha_bloqueo' => Yii::t('app', 'Fecha Bloqueo'),
             'motivo_bloqueo' => Yii::t('app', 'Motivo Bloqueo'),
-            'registo_id' => Yii::t('app', 'Registo ID'),
+            'registro_id' => Yii::t('app', 'registro ID'),
         ];
     }
 
@@ -131,13 +131,13 @@ class Comentario extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Registo]].
+     * Gets query for [[registro]].
      *
      * @return \yii\db\ActiveQuery|RegistroUsuariosQuery
      */
-    public function getRegisto()
+    public function getregistro()
     {
-        return $this->hasOne(RegistroUsuarios::class, ['id' => 'registo_id']);
+        return $this->hasOne(RegistroUsuarios::class, ['id' => 'registro_id']);
     }
 
     /**
