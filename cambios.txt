@@ -124,4 +124,7 @@ Cambios dia 11 (Marcos Díez) 6/01/2025
 -Se puede enviar un aviso a otro usuario de la aplicación si existe también desde el perfil.
 -creadas acciones para marcar como aceptados los avisos enviados y marcar como leídos para los mensajes recibidos
 
+Cambios dia 11 (Alejandra) 6/1/25
+
+refactorizado en controlador de tienda las funciones de producto y de ofertas asi como sus vistas asociadas
 

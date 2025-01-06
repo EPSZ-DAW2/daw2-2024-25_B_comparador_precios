@@ -392,7 +392,6 @@ class TiendasController extends Controller
    /**
  * Displays the price history of a specific article in a store.
  * @param int $Tienda_id
- * @param int $Articulo_id
  * @return string
  * @throws NotFoundHttpException if the model cannot be found
  */
@@ -490,7 +489,6 @@ public function actionVerHistorico($Tienda_id, $Articulo_id)
 /**
  * Updates an existing offer for a specific article in the store.
  * @param int $Tienda_id
- * @param int $Articulo_id
  * @return \yii\web\Response
  */
 public function actionModificarOferta($Tienda_id)
@@ -536,7 +534,6 @@ public function actionModificarOferta($Tienda_id)
 /**
  * Deletes an offer for a specific article in the store.
  * @param int $Tienda_id
- * @param int $Articulo_id
  * @return \yii\web\Response
  * @throws NotFoundHttpException if the offer cannot be found
  */
