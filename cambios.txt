@@ -113,3 +113,6 @@ Cambiada la barra de acceso rapido superior
 Cambios dia 11 (Victor Gonzalo) 6/1/2024
 Arreglada vista de los nombres y descripcion de articulos en tiendas 
 Arreglado modelo de comentarios 
+
+Cambios dia 11 (Victor Martin) 6/01/2025
+Arreglado el tema de articulos ya funciona correctamente
