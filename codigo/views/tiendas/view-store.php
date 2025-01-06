@@ -62,13 +62,23 @@ $this->params['breadcrumbs'][] = $this->title;
 <h2>Artículos</h2>
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([
-            'query' => $model->getArticulosTiendas(),
+           'query' => $model->getArticulosTiendas()->with('articulo'),
         ]),
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'nombre',
-            'descripcion:ntext',
+            [
+                'attribute' => 'nombre',
+                'value' => function ($data) {
+                    return $data->articulo->nombre ?? 'Sin nombre'; // Accede al nombre del artículo
+                },
+            ],
+            [
+                'attribute' => 'descripcion',
+                'value' => function ($data) {
+                    return $data->articulo->descripcion ?? 'Sin descripción'; // Accede a la descripción del artículo
+                },
+            ],
             'precio_actual',
             'historico_id',
             'oferta_id',
@@ -96,3 +106,19 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<?php
+$dataProviderComentarios = new ActiveDataProvider([
+    'query' => \app\models\Comentario::find()->where(['tienda_id' => $tiendaId, 'articulo_id' => null]),
+    'pagination' => [
+        'pageSize' => 10,
+    ],
+]);
+
+$comentario = new \app\models\Comentario();
+if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
+    Yii::$app->session->setFlash('success', 'Comentario añadido correctamente.');
+    return $this->refresh();
+}
+
+?>
