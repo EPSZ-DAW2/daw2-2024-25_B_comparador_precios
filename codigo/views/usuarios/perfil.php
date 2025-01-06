@@ -33,8 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><strong>Fecha de Registro:</strong> <?= Html::encode($usuario->fecha_registro) ?></p>
 </div>
 
+<!-- Botones del usuario -->
 <?= Html::a('Editar Perfil', ['usuarios/update-profile'], ['class' => 'btn btn-primary']) ?>
 <br>
 <?= Html::a('Seguimientos', ['seguimientos/seguimientos'], ['class' => 'btn btn-primary']) ?>
 <br>
 <?= Html::a('Tus Comentarios', ['comentarios/comentarios-usuario'], ['class' => 'btn btn-primary']) ?>
+<br>
+<!-- Botón para los avisos enviados -->
+<?= Html::a('Avisos Enviados', ['avisos/enviados', 'id' => $usuario->id], ['class' => 'btn btn-primary']) ?>
+<br>
+<!-- Botón para los avisos recibidos -->
+<?= Html::a('Avisos Recibidos', ['avisos/recibidos', 'id' => $usuario->id], ['class' => 'btn btn-primary']) ?>
+
+<!-- Enviar un aviso -->
+<?= Html::a('Enviar Aviso', ['avisos/enviar'], ['class' => 'btn btn-primary']) ?>
+
