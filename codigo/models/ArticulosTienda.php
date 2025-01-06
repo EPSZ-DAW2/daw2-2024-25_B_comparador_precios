@@ -58,7 +58,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['fecha_primera_denuncia', 'fecha_bloqueo'], 'safe'],
             [['motivo_denuncia', 'motivo_bloqueo'], 'string'],
             [['id'], 'unique'],
-            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulos::class, 'targetAttribute' => ['articulo_id' => 'id']],
+            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
             [['comentario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentarios::class, 'targetAttribute' => ['comentario_id' => 'id']],
             [['historico_id'], 'exist', 'skipOnError' => true, 'targetClass' => HistoricoPrecios::class, 'targetAttribute' => ['historico_id' => 'id']],
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
@@ -102,7 +102,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
      */
     public function getArticulo()
     {
-        return $this->hasOne(Articulos::class, ['id' => 'articulo_id']);
+        return $this->hasOne(Articulo::class, ['id' => 'articulo_id']);
     }
 
     /**
@@ -112,7 +112,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
      */
     public function getArticulos()
     {
-        return $this->hasMany(Articulos::class, ['articulo_tienda_id' => 'id']);
+        return $this->hasMany(Articulo::class, ['articulo_tienda_id' => 'id']);
     }
 
     /**
