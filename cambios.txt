@@ -1,36 +1,39 @@
 Gestion del perfil de usuario (Marcos Diez y Victor Gonzalo)
 Cambios dia 1:
 
-Añadido el modelo y el CRUD de usuarios
+-Añadido el modelo y el CRUD de usuarios
 
-Añadido las funciones de identifyInterface  en el modelo Usuarios (findByUsername, getPassword...)
+-Añadido las funciones de identifyInterface  en el modelo Usuarios (findByUsername, getPassword...)
 
-Añadido las acciones de visualizar y modificar perfil en el UsuariosController (queda arreglar los parametros que te deja modificar)
+-Añadido las acciones de visualizar y modificar perfil en el UsuariosController (queda arreglar los parametros que te deja modificar)
 
-Añadidos parámetros del acceso de sesión en código\config\params.php
+-Añadidos parámetros del acceso de sesión en código\config\params.php
 
-Cambio SiteController en la acción login y añadir el modelo Usuario con use app\models\Usuario; 
+-Cambio SiteController en la acción login y añadir el modelo Usuario con use app\models\Usuario; 
 
-Añadidas funciones de inicio de sesión y bloqueo en el modelo Usuario
+-Añadidas funciones de inicio de sesión y bloqueo en el modelo Usuario
 
 Cambios dia 2: 
 
-Añadido el modelo y el crud de Tienda y Articulo
+-Añadido el modelo y el crud de Tienda y Articulo
 
-Añadido el modelo de seguimiento
+-Añadido el modelo de seguimiento
 
-Añadida pagina donde el usuario puede consultar sus elementos en seguimeinto (no hay forma de seguir algo a traves de la página aun) 
+-Añadida pagina donde el usuario puede consultar sus elementos en seguimeinto (no hay forma de seguir algo a traves de la página aun)
+
+ 
 
 Cambios dia 3 (Marcos Díez): 29/14/2024
-Cambio en el modelo Usuario, en rules coge la fecha y hora de registro, y el estado de registro confirmado como pendiente.
+-Cambio en el modelo Usuario, en rules coge la fecha y hora de registro, y el estado de registro confirmado como pendiente.
 
-En el login ahora comprueba si la cuenta ha sido verificada, sino, no deja entrar.
+-En el login ahora comprueba si la cuenta ha sido verificada, sino, no deja entrar.
 
-Un usuario sólo se puede verificar si un moderador o administrador modifica su campo "Registro Confirmado" de 0 a 1.
+-Un usuario sólo se puede verificar si un moderador o administrador modifica su campo "Registro Confirmado" de 0 a 1.
 
-Cuando se cambia a 1, el usuario puede loggear.
+-Cuando se cambia a 1, el usuario puede loggear.
 
-Cambios para que funcione el sistema de bloqueos al fallar los intentos. Al fallar 5 veces ahora se bloquea a ese usuario por 15 minutos y el sistema informa tanto de los intentos para bloquearse como del tiempo restante de bloqueo si ya estña bloqueado, también se ha añadido el motivo de bloqueo por superación de intentos máximos
+-Cambios para que funcione el sistema de bloqueos al fallar los intentos. Al fallar 5 veces ahora se bloquea a ese usuario por 15 minutos y el sistema informa tanto de los intentos para bloquearse como del tiempo restante de bloqueo si ya estña bloqueado, también se ha añadido el motivo de bloqueo por superación de intentos máximos
+
 
 Cambios dia 4 (Alejandra): 29/12/2024
 Creado el modelo y controlador de TiendaArticulo.
@@ -71,17 +74,12 @@ Añadido modelo controlador y vistas acerca de moderadores (pendiente de revisio
 
 Cambios dia 9 (Marcos Díez) 4/01/2025
 
-Manejo de Regiones de usuarios completado:
-
-Añadidas funciones y variables para tener la provincia, estado, país y continente de un usuario dado en RegistrosController.
-
-Añadidos a la vista registro.php los campos provincia, estado y país como texto (para el formulario de registrarse)
-
-Añadidos atributos para los datos de las regiones en el modelo Usuario.php
-
-Ahora salen los datos de mi región al acceder a mi perfil (modificaciones en vista usuarios/perfil.php)
-
-Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
+-Manejo de Regiones de usuarios completado:
+-Añadidas funciones y variables para tener la provincia, estado, país y continente de un usuario dado en RegistrosController.
+-Añadidos a la vista registro.php los campos provincia, estado y país como texto (para el formulario de registrarse)
+-Añadidos atributos para los datos de las regiones en el modelo Usuario.php
+-Ahora salen los datos de mi región al acceder a mi perfil (modificaciones en vista usuarios/perfil.php)
+-Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
 
 Cambios dia 9 (Victor Gonzalo Tapia) 4/01/2025
 Añadida función donde al verificar un registro de usuario tambien crea una entrada en la tabla de RegistroUsuarios
@@ -116,3 +114,14 @@ Arreglado modelo de comentarios
 
 Cambios dia 11 (Victor Martin) 6/01/2025
 Arreglado el tema de articulos ya funciona correctamente
+
+
+Cambios dia 11 (Marcos Díez) 6/01/2025
+-Añadidas las funciones de Avisos:
+-Añadidos modelo y controlador de Avisos (AvisosController) y (Aviso.php)
+-Añadidas las vistas de avisos enviados.php, recibidos.php, y enviar.php
+-Creadas las acciones en controlador y modelo de avisos para acceder a estas vistas. Desde mi perfil (perfil.php) se pueden ver los avisos recibidos y los enviados por separado.
+-Se puede enviar un aviso a otro usuario de la aplicación si existe también desde el perfil.
+-creadas acciones para marcar como aceptados los avisos enviados y marcar como leídos para los mensajes recibidos
+
+
