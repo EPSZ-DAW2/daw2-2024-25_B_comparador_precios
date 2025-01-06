@@ -109,3 +109,7 @@ Arreglado la verficacion de registro de usuario
 Semi implementacion del codigo de aviso al moerador cuando se realiza un registro (solo esta comentado pero deberia ser casi funcional) 
 Ajuste de nombres de llamada a modelos en en el modelo Ofertas (cambiado Tiendas por Tienda etc...)
 Cambiada la barra de acceso rapido superior
+
+Cambios dia 11 (Victor Gonzalo) 6/1/2024
+Arreglada vista de los nombres y descripcion de articulos en tiendas 
+Arreglado modelo de comentarios 
