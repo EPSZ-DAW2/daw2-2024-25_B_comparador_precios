@@ -12,15 +12,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Html::a('Actualizar perfil', ['actualizar-perfil', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    <?= Html::a('Solicitar dar de baja', ['request-delete-profile', 'id' => $model->id], [
+    <?= Html::a('Actualizar perfil', ['updateprofile', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Solicitar dar de baja', ['DarDeBaja', 'id' => $model->id], [
         'class' => 'btn btn-danger',
         'data' => [
             'confirm' => '¿seguro que quieres dar de baja tu perfil?',
             'method' => 'post',
         ],
     ]) ?>
-    <?= Html::a('Activar perfil', ['dar-de-alta', 'id' => $model->id], [
+    <?= Html::a('Activar perfil', ['DarDeAlta', 'id' => $model->id], [
         'class' => 'btn btn-success',
         'data' => [
             'confirm' => 'se va a activar su perfil',

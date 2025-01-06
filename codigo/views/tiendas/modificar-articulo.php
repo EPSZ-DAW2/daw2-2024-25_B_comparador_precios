@@ -6,13 +6,13 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var app\models\Articulo $model */
 /** @var yii\widgets\ActiveForm $form */
+/** @var array $articulos */
+/** @var array $categorias */
+/** @var array $etiquetas */
 
-$this->title = Yii::t('app', 'Modificar Artículo: {name}', [
-    'name' => $model->nombre,
-]);
+$this->title = Yii::t('app', 'Modificar Artículo');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articulo-update">
 
@@ -21,6 +21,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
     <div class="articulo-form">
 
         <?php $form = ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'id')->dropDownList($articulos, ['prompt' => 'Seleccione un artículo']) ?>
 
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
@@ -37,7 +39,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
         <?= $form->field($model, 'cerrado')->checkbox() ?>
 
         <?= $form->field($model, 'tipo_marcado')->dropDownList(['comun' => 'Común', 'particular' => 'Particular']) ?>
-
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success']) ?>

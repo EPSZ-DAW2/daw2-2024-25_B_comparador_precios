@@ -208,7 +208,6 @@ class TiendasController extends Controller
      * Creates a new article for the store if it doesn't exist in the common articles.
      * If it exists, links the article with the store.
      * @param int $Tienda_id
-     * @param array $DatosArticulos
      * @return \yii\web\Response
      */
     public function actionCrearArticulo($Tienda_id)
@@ -289,26 +288,32 @@ class TiendasController extends Controller
         ]);
     }
 
-    public function actionModificarArticulo($Tienda_id, $Articulo_id)
-    {
-        // Busca la relación del artículo con la tienda
+    public function actionModificarArticulo($Tienda_id)
+{
+    // Obtiene todos los artículos de la tienda
+    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
+    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', 'nombre');
+
+    $model = new Articulo();
+    $categorias = Categorias::find()->all();
+    $categorias = ArrayHelper::map($categorias, 'id', 'nombre');
+    $etiquetas = Etiquetas::find()->all();
+    $etiquetas = ArrayHelper::map($etiquetas, 'id', 'nombre');
+
+    if (Yii::$app->request->post()) {
+        $Articulo_id = Yii::$app->request->post('Articulo')['id'];
         $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
         if (!$ArticuloTienda) {
             throw new NotFoundHttpException('El artículo no existe en esta tienda.');
         }
-    
+
         $model = Articulo::findOne($Articulo_id);
-        $categorias = Categorias::find()->all();
-        $categorias = ArrayHelper::map($categorias,'id','nombre');
-        $etiquetas = Etiquetas::find()->all();
-        $etiquetas = ArrayHelper::map($etiquetas,'id','nombre');
-    
-        if ($model->load(\Yii::$app->request->post())) {
-            $DatosArticulos = \Yii::$app->request->post('Articulo');
-            $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
+        if ($model->load(Yii::$app->request->post())) {
+            $DatosArticulos = Yii::$app->request->post('Articulo');
+            $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]);
             $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
             $historico = new Historico();
-    
+
             // Verifica si el artículo es común
             if ($model->tipo_marcado == 'comun') {
                 // Solo permite la modificación del precio para artículos comunes
@@ -325,94 +330,98 @@ class TiendasController extends Controller
                 $model->categoria_id = $categoria->id;
                 $model->etiqueta_id = $etiqueta->id;
                 $model->imagen_ppal = $DatosArticulos['imagen_ppal'];
-    
+
                 if (!$model->save()) {
                     Yii::$app->session->setFlash('error', 'Ha habido un error al modificar el artículo.');
                     return $this->redirect(['view-store', 'id' => $Tienda_id]);
                 }
             }
-    
+
             // Guarda los cambios en la relación del artículo con la tienda
             if ($ArticuloTienda->save()) {
                 Yii::$app->session->setFlash('success', 'Artículo modificado con éxito.');
             } else {
                 Yii::$app->session->setFlash('error', 'Ha habido un error.');
             }
-    
+
             return $this->redirect(['view-store', 'id' => $Tienda_id]);
         }
-    
-        return $this->render('modificar-articulo', [
-            'model' => $model,
-            'categorias' => $categorias,
-            'etiquetas' => $etiquetas,
-        ]);
     }
+
+    return $this->render('modificar-articulo', [
+        'model' => $model,
+        'categorias' => $categorias,
+        'etiquetas' => $etiquetas,
+        'articulos' => $articulos,
+    ]);
+}
     /**
      * Deletes or unlinks an article from the store.
      * If the article has price history, it will be hidden instead of deleted.
      * @param int $Tienda_id
-     * @param int $Articulo_id
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionEliminarArticulo($Tienda_id, $Articulo_id)
-    {
-        // Busca la relación del artículo con la tienda
+    public function actionEliminarArticulo($Tienda_id)
+{
+    // Obtiene todos los artículos de la tienda
+    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
+    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', 'articulo.nombre');
+
+    if (Yii::$app->request->post()) {
+        $Articulo_id = Yii::$app->request->post('Articulo')['id'];
         $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
         if (!$ArticuloTienda) {
             throw new NotFoundHttpException('El artículo no existe en esta tienda.');
         }
-    
-        if (Yii::$app->request->post()) {
-            $historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
-    
-            if (!$historico) {
-                throw new NotFoundHttpException('El artículo no tiene historico de precios para esta tienda.');
-            }
-    
-            // Verifica si el artículo tiene histórico de precios
-            if ($historico) {
-                $ArticuloTienda->visible = 0; // Oculta el artículo
-                $message = 'Artículo ocultado con éxito.';
-            } else {
-                // Verifica si el artículo es común
-                $Articulo = Articulo::findOne($Articulo_id);
-                if ($Articulo->tipo_marcado == 'comun') {
-                    // Desvincula el artículo común de la tienda
-                    $ArticuloTienda->delete();
-                    $message = 'Artículo desvinculado con éxito.';
-                } else {
-                    // Elimina el artículo particular de la tienda
-                    $ArticuloTienda->delete();
-                    $Articulo->delete();
-                    $message = 'Artículo eliminado con éxito.';
-                }
-            }
-    
-            // Guarda los cambios
-            if ($ArticuloTienda->save()) {
-                Yii::$app->session->setFlash('success', $message);
-            } else {
-                Yii::$app->session->setFlash('error', 'Ha habido un error.');
-            }
-    
-            return $this->redirect(['view-store', 'id' => $Tienda_id]);
+
+        $Articulo = Articulo::findOne($Articulo_id);
+        $historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
+
+        if (!$historico) {
+            throw new NotFoundHttpException('El artículo no tiene historico de precios para esta tienda.');
         }
-    
-        return $this->render('eliminar-articulo', [
-            'model' => $ArticuloTienda,
-        ]);
+
+        // Verifica si el artículo tiene histórico de precios
+        if ($historico) {
+            $ArticuloTienda->visible = 0; // Oculta el artículo
+            $ArticuloTienda->save();
+            Yii::$app->session->setFlash('success', 'Artículo ocultado con éxito.');
+        } else {
+            // Verifica si el artículo es común
+            if ($Articulo->tipo_marcado == 'comun') {
+                // Desvincula el artículo común de la tienda
+                $ArticuloTienda->delete();
+                Yii::$app->session->setFlash('success', 'Artículo desvinculado con éxito.');
+            } else {
+                // Elimina el artículo particular de la tienda
+                $ArticuloTienda->delete();
+                $Articulo->delete();
+                Yii::$app->session->setFlash('success', 'Artículo eliminado con éxito.');
+            }
+        }
+
+        return $this->redirect(['index']);
     }
+
+    return $this->render('eliminar-articulo', [
+        'articulos' => $articulos,
+    ]);
+}
     /**
      * Displays the price history of a specific article in a store.
      * @param int $Tienda_id
-     * @param int $Articulo_id
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionVerHistorico($Tienda_id, $Articulo_id)
-    {
+    public function actionVerHistorico($Tienda_id)
+{
+    // Obtiene todos los artículos de la tienda
+    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
+    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', 'articulo.nombre');
+
+    if (Yii::$app->request->post()) {
+        $Articulo_id = Yii::$app->request->post('Articulo')['id'];
         $historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
 
         if (!$historico) {
@@ -421,8 +430,17 @@ class TiendasController extends Controller
 
         return $this->render('ver-historico', [
             'historico' => $historico,
+            'articulos' => $articulos,
+            'selectedArticulo' => $Articulo_id,
         ]);
     }
+
+    return $this->render('ver-historico', [
+        'articulos' => $articulos,
+        'historico' => [],
+        'selectedArticulo' => null,
+    ]);
+}
 
     public function actionVerTiendasActivas()
     {
