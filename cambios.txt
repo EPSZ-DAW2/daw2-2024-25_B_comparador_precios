@@ -133,4 +133,8 @@ Cambios dia 12 (Victor Gonzalo) 7/1/25
 -Añadida vista de comentarios y acción de comentar y valorar en los articulos de las tiendas (queda la funcionalidad de responder a comentarios)
 -Arreglos menores en la vista de la tienda, comparador y articulos de tienda
 
+Cambios dia 12 (Victor Martin) 07/01/2025
+-Actualizados modelo y controlador de moderadores
+-Actualizadas las vistas
+-Actualizada la tabla de moderador con un campo que indicara si ha solicitado la baja
 
