@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use yii\base\DynamicModel;
 
 /** @var yii\web\View $this */
 /** @var app\models\Tienda $model */
@@ -12,10 +14,8 @@ use yii\data\ActiveDataProvider;
 if (isset($_GET['id'])) {
     $tiendaId = $_GET['id'];
 } else {
-    // Manejar el caso donde no se proporciona el ID de la tienda
     die('ID de tienda no proporcionado');
 }
-
 
 $this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
@@ -60,65 +60,70 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 <h2>Artículos</h2>
-    <?= GridView::widget([
-        'dataProvider' => new ActiveDataProvider([
-           'query' => $model->getArticulosTiendas()->with('articulo'),
-        ]),
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            [
-                'attribute' => 'nombre',
-                'value' => function ($data) {
-                    return $data->articulo->nombre ?? 'Sin nombre'; // Accede al nombre del artículo
-                },
-            ],
-            [
-                'attribute' => 'descripcion',
-                'value' => function ($data) {
-                    return $data->articulo->descripcion ?? 'Sin descripción'; // Accede a la descripción del artículo
-                },
-            ],
-            'precio_actual',
-            'historico_id',
-            'oferta_id',
-            'suma_valoraciones',
-            'suma_votos',
-            'visible:boolean',
-            // Deshabilitar las opciones de edición
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}', // Solo permitir la vista
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{ver-historico}',
-                'buttons' => [
-                    'ver-historico' => function ($url, $model, $key) use ($tiendaId) {
-                        return Html::a('Ver Histórico', ['ver-historico', 'Tienda_id' => $tiendaId, 'Articulo_id' => $model->id], [
-                            'title' => 'Ver Histórico de Precios',
+<?= GridView::widget([
+    'dataProvider' => new ActiveDataProvider([
+        'query' => $model->getArticulosTiendas()->with('articulo'),
+    ]),
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'id',
+        [
+            'attribute' => 'nombre',
+            'value' => function ($data) {
+                return $data->articulo->nombre ?? 'Sin nombre'; // Accede al nombre del artículo
+            },
+        ],
+        [
+            'attribute' => 'descripcion',
+            'value' => function ($data) {
+                return $data->articulo->descripcion ?? 'Sin descripción'; // Accede a la descripción del artículo
+            },
+        ],
+        'precio_actual',
+        'historico_id',
+        'oferta_id',
+        'suma_valoraciones',
+        'suma_votos',
+        'visible:boolean',
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view-articulo}', // Permite solo la vista
+            
+            'buttons' => [
+                'view-articulo' => function ($url, $model) {
+                    return Html::a(
+                        'Ver Artículo',
+                        [
+                            'tiendas/view-articulo', // Acción viewArticulo
+                            'id' => $model->articulo_id, // Pasar el ID del artículo
+                        ],
+                        [
                             'class' => 'btn btn-primary',
-                        ]);
-                    },
-                ],
+                            'title' => 'Ver Artículo',
+                        ]
+                    );
+                },
             ],
         ],
-    ]) ?>
-
-</div>
-
-<?php
-$dataProviderComentarios = new ActiveDataProvider([
-    'query' => \app\models\Comentario::find()->where(['tienda_id' => $tiendaId, 'articulo_id' => null]),
-    'pagination' => [
-        'pageSize' => 10,
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{ver-historico}',
+            'buttons' => [
+                'ver-historico' => function ($url, $model, $key) use ($tiendaId) {
+                    return Html::a(
+                        'Ver Histórico',
+                        [
+                            'ver-historico',
+                            'Tienda_id' => $tiendaId, // Pasar el ID de la tienda
+                            'Articulo_id' => $model->articulo_id, // Pasar el ID del artículo correspondiente
+                        ],
+                        [
+                            'title' => 'Ver Histórico de Precios',
+                            'class' => 'btn btn-primary',
+                        ]
+                    );
+                },
+            ],
+        ],
     ],
-]);
-
-$comentario = new \app\models\Comentario();
-if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
-    Yii::$app->session->setFlash('success', 'Comentario añadido correctamente.');
-    return $this->refresh();
-}
-
-?>
+]) ?>
