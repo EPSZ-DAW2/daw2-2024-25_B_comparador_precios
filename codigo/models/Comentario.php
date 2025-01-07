@@ -110,6 +110,13 @@ class Comentario extends \yii\db\ActiveRecord
         return $this->hasMany(Avisos::class, ['comentario_id' => 'id']);
     }
 
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuario::class, ['id' => 'registro_id']);
+    }
+    
+
+
     /**
      * Gets query for [[ComentarioPadre]].
      *
