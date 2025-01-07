@@ -14,6 +14,7 @@ use app\models\Dueno;
 use app\models\Usuario;
 use app\models\Comentario;
 use app\models\TiendasSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
