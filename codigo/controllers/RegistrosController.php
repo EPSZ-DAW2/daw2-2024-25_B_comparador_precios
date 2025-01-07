@@ -7,7 +7,8 @@ use app\models\Usuario;
 use app\models\Regiones;
 use yii\web\BadRequestHttpException;
 
-//use app\models\Aviso;
+use app\models\Aviso;
+use app\models\Moderador;
 
 class RegistrosController extends Controller
 {
@@ -66,23 +67,33 @@ class RegistrosController extends Controller
 
             // Guardamos el modelo de Usuario
             if ($model->save()) {
-                /*
-                $aviso = new Aviso();
-                $aviso->clase = 'Mensaje';
+                
+                $model->region_id = $continenteRegion->id;
+                $aviso = new Aviso();  
+                $aviso->clase = 'Aviso';
                 $aviso->texto = 'Nueva Solicitud de Registro';
-                $aviso->usuario_origen_id = yii->app->user;
+                $aviso->usuario_origen_id = $model->id;
+                $aviso->tienda_id = null;
+                $aviso->articulo_id = null;
+                $aviso->comentario_id = null;
+                
                 $moderador = Moderador::find()
-                ->joinWith('RegionesModerador') /
                 ->where([
-                    'region_id' => '$model->region_id',
+                    'region_id' => $model->region_id,
                 ])
                 ->one(); // Obtiene un único resultado
+                
+                if ($moderador) {
+                    $usuarioDestino = Usuario::find()->where(['id' => $moderador->usuario_id])->one();  // Asumiendo que el moderador tiene un usuario_id asociado.
+                    $aviso->usuario_destino_id = $usuarioDestino->id;
+                    $aviso->usuario_destino_nick = $usuarioDestino->nick;
+                }
+                else
+                    Yii::error('No se encontró el usuario destino para el moderador');
 
-                $aviso->usuario_destino_id = $moderador->id;  
-                $aviso->save();
-                */ 
+                if($aviso->save()){    
                 Yii::$app->session->setFlash('success', 'Te has registrado correctamente. Para poder usar tu cuenta deberá activarla un moderador.');
-                return $this->redirect(['site/login']);
+                return $this->redirect(['site/login']);}
             }
         }
 
