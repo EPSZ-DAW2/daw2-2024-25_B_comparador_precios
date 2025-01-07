@@ -565,6 +565,31 @@ public function actionEliminarOferta($Tienda_id)
     ]);
 }
 
-    
+ public function actionAdminTienda()
+{
+    $usuarioId = Yii::$app->user->id; // Obtiene el ID del usuario logueado
+    $usuario = Usuario::findOne($usuarioId);
+
+    // Verificar si el usuario tiene rol 'Usuario Tienda'
+    if ($usuario && $usuario->rol === 'Usuario Tienda') {
+        // Buscar si el usuario es dueño de alguna tienda
+        $tiendas = Dueno::find()->where(['id_usuario' => $usuarioId])->all();
+
+        if ($tiendas) {
+            // Si es dueño de alguna tienda, generar la vista del panel
+            return $this->render('admin-tienda', [
+                'tiendas' => $tiendas,
+            ]);
+        } else {
+            // Mensaje de error si no es dueño de ninguna tienda
+            Yii::$app->session->setFlash('error', 'No eres dueño de ninguna tienda.');
+            return $this->redirect(['site/index']);
+        }
+    } else {
+        // Redirigir si no tiene el rol adecuado
+        Yii::$app->session->setFlash('error', 'No tienes permiso para acceder a esta sección.');
+        return $this->redirect(['site/index']);
+    }
+}
 }
 
