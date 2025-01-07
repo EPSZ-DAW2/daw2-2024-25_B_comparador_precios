@@ -214,82 +214,50 @@ class TiendasController extends Controller
      * @return \yii\web\Response
      */
     public function actionCrearArticulo($Tienda_id)
-    {
-        $model = new Articulo();
-        $categorias = Categorias::find()->all();
-        $etiquetas = Etiquetas::find()->all();
+{
+    $model = new Articulo();
+    $categorias = Categorias::find()->all();
+    $etiquetas = Etiquetas::find()->all();
     
-        if ($model->load(Yii::$app->request->post())) {
-            $DatosArticulos = Yii::$app->request->post('Articulo');
-            $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
-            $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
-            // Busca si el artículo ya existe en los artículos comunes
-            $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
-            if ($comun) {
-                // Si el artículo común existe, crea una relación con la tienda
-                $ArticuloTienda = new ArticulosTienda();
-                $historico = new Historico();
-                $ArticuloTienda->tienda_id = $Tienda_id;
-                $ArticuloTienda->articulo_id = $comun->id;
-                $ArticuloTienda->precio = $DatosArticulos['precio'];
-                $historico->tienda_id = $Tienda_id;
-                $historico->articulo_id = $comun->id;
-                $historico->precio = $DatosArticulos['precio'];
-                $historico->fecha = date('Y-m-d H:i:s');
-                $historico->save();
-            } else {
-                // Si el artículo no existe, crea un nuevo artículo específico para la tienda
-                $Articulo = new Articulo();
-                $registro = new RegistroUsuarios();
-                $Articulo->nombre = $DatosArticulos['nombre'];
-                $Articulo->descripcion = $DatosArticulos['descripcion'];
-                $Articulo->categoria_id = $categoria->id;
-                $Articulo->etiqueta_id = $etiqueta->id;
-                $Articulo->imagen_ppal = $DatosArticulos['imagen_ppal'];
-                $Articulo->visible = 1;
-                $Articulo->cerrado = 0;
-                $Articulo->tipo_marcado = 'particular'; // Es un artículo particular de la tienda
-                $Articulo->registro_id = Yii::$app->user->id;
-                $registro->fecha_creacion = date('Y-m-d H:i:s');
-                $registro->creador_id = Yii::$app->user->id;
-                $registro->notas_admin = 'Artículo creado por el usuario';
-                $registro->save();
+    // Convierte el array de objetos Categorias en un array de pares clave-valor
+    $categoriasList = ArrayHelper::map($categorias, 'id', 'nombre');
+    $etiquetasList = ArrayHelper::map($etiquetas, 'id', 'nombre');
     
-                if ($Articulo->save()) {
-                    $ArticuloTienda = new ArticulosTienda();
-                    $historico = new Historico();
-                    $ArticuloTienda->tienda_id = $Tienda_id;
-                    $ArticuloTienda->articulo_id = $Articulo->id;
-                    $ArticuloTienda->precio = $DatosArticulos['precio'];
-                    $Articulo->Articulo_tienda_id = $ArticuloTienda->id;
-                    $historico->tienda_id = $Tienda_id;
-                    $historico->articulo_id = $Articulo->id;
-                    $historico->precio = $DatosArticulos['precio'];
-                    $historico->fecha = date('Y-m-d H:i:s');
-                    $Articulo->save();
-                    $historico->save();
-                } else {
-                    Yii::$app->session->setFlash('error', 'Ha habido un error al crear el artículo.');
-                    return $this->redirect(['view-store', 'id' => $Tienda_id]);
-                }
-            }
-    
-            // Guarda la relación del artículo con la tienda
-            if ($ArticuloTienda->save()) {
-                Yii::$app->session->setFlash('success', 'Artículo creado o vinculado con éxito.');
-            } else {
-                Yii::$app->session->setFlash('error', 'Ha habido un error.');
-            }
-    
-            return $this->redirect(['view-store', 'id' => $Tienda_id]);
+    if ($model->load(Yii::$app->request->post())) {
+        $DatosArticulos = Yii::$app->request->post('Articulo');
+        $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
+        $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
+        // Busca si el artículo ya existe en los artículos comunes
+        $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
+        if ($comun) {
+            // Si el artículo común existe, crea una relación con la tienda
+            $ArticuloTienda = new ArticulosTienda();
+            $historico = new Historico();
+            $ArticuloTienda->tienda_id = $Tienda_id;
+            $ArticuloTienda->articulo_id = $comun->id;
+            $ArticuloTienda->precio = $DatosArticulos['precio'];
+            $historico->tienda_id = $Tienda_id;
+            $historico->articulo_id = $comun->id;
+            $historico->precio = $DatosArticulos['precio'];
+            $historico->fecha = date('Y-m-d H:i:s');
+            $historico->save();
+        } else {
+            // Si el artículo no existe, crea un nuevo artículo específico para la tienda
+            $Articulo = new Articulo();
+            $Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
+            $Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
+            $Articulo->nombre = $DatosArticulos['nombre'];
+            $Articulo->precio = $DatosArticulos['precio'];
+            $Articulo->save();
         }
-    
-        return $this->render('crear-articulo', [
-            'model' => $model,
-            'categorias' => $categorias,
-            'etiquetas' => $etiquetas,
-        ]);
     }
+
+    return $this->render('crear-articulo', [
+        'model' => $model,
+        'categoriasList' => $categoriasList,
+        'etiquetasList' => $etiquetasList,
+    ]);
+}
 
     public function actionModificarArticulo($Tienda_id)
 {

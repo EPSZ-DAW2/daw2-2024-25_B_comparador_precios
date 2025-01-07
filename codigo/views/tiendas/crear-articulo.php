@@ -3,10 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var app\models\Articulo $model */
-/** @var yii\widgets\ActiveForm $form */
-
+/** @var  yii\web\View $this */
+/** @var  app\models\Articulo $model */
+/** @var  yii\widgets\ActiveForm $form */
+/** @var  array $categoriasList */
+/** @var  array $etiquetasList */
 $this->title = Yii::t('app', 'Crear Artículo');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'descripcion')->textarea(['rows' => 6]) ?>
 
-        <?= $form->field($model, 'categoria_id')->dropDownList($categorias) ?>
+        <?= $form->field($model, 'categoria_id')->dropDownList($categoriasList) ?>
 
-        <?= $form->field($model, 'etiqueta_id')->dropDownList($etiquetas) ?>
+        <?= $form->field($model, 'etiqueta_id')->dropDownList($etiquetasList) ?>
 
         <?= $form->field($model, 'imagen_principal')->textInput(['maxlength' => true]) ?>
 
