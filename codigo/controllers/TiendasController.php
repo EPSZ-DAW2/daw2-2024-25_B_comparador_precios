@@ -213,8 +213,9 @@ class TiendasController extends Controller
      * @param int $Tienda_id
      * @return \yii\web\Response
      */
-    public function actionCrearArticulo($Tienda_id)
+public function actionCrearArticulo($Tienda_id)
 {
+    $modelArticulosTienda = new ArticulosTienda();
     $model = new Articulo();
     $categorias = Categorias::find()->all();
     $etiquetas = Etiquetas::find()->all();
@@ -223,41 +224,70 @@ class TiendasController extends Controller
     $categoriasList = ArrayHelper::map($categorias, 'id', 'nombre');
     $etiquetasList = ArrayHelper::map($etiquetas, 'id', 'nombre');
     
-    if ($model->load(Yii::$app->request->post())) {
+    if ($model->load(Yii::$app->request->post()) && $modelArticulosTienda->load(Yii::$app->request->post())) {
         $DatosArticulos = Yii::$app->request->post('Articulo');
-        $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
-        $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
-        // Busca si el artículo ya existe en los artículos comunes
-        $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
-        if ($comun) {
-            // Si el artículo común existe, crea una relación con la tienda
-            $ArticuloTienda = new ArticulosTienda();
-            $historico = new Historico();
-            $ArticuloTienda->tienda_id = $Tienda_id;
-            $ArticuloTienda->articulo_id = $comun->id;
-            $ArticuloTienda->precio = $DatosArticulos['precio'];
-            $historico->tienda_id = $Tienda_id;
-            $historico->articulo_id = $comun->id;
-            $historico->precio = $DatosArticulos['precio'];
-            $historico->fecha = date('Y-m-d H:i:s');
-            $historico->save();
-        } else {
-            // Si el artículo no existe, crea un nuevo artículo específico para la tienda
-            $Articulo = new Articulo();
-            $Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
-            $Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
-            $Articulo->nombre = $DatosArticulos['nombre'];
-            $Articulo->precio = $DatosArticulos['precio'];
-            $Articulo->save();
+        
+        if (isset($DatosArticulos['categoria_id']) && isset($DatosArticulos['etiqueta_id'])) {
+            $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
+            $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
+            
+            // Busca si el artículo ya existe en los artículos comunes
+            if (isset($DatosArticulos['id']) && !empty($DatosArticulos['id'])) {
+                $comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
+                if ($comun) {
+                    // Si el artículo común existe, crea una relación con la tienda
+                    $ArticuloTienda = new ArticulosTienda();
+                    $historico = new Historico();
+                    $ArticuloTienda->tienda_id = $Tienda_id;
+                    $ArticuloTienda->articulo_id = $comun->id;
+                    if (isset($DatosArticulos['precio_actual'])) {
+                        $ArticuloTienda->precio_actual = $DatosArticulos['precio_actual'];
+                        $historico->precio = $DatosArticulos['precio_actual'];
+                    } else {
+                        $ArticuloTienda->precio_actual = 0; // o algún valor por defecto
+                        $historico->precio = 0; // o algún valor por defecto
+                    }
+                    $historico->tienda_id = $Tienda_id;
+                    $historico->articulo_id = $comun->id;
+                    $historico->fecha = date('Y-m-d H:i:s');
+                    $historico->save();
+                    $ArticuloTienda->save();
+                }
+            } else {
+                // Si el artículo no existe, crea un nuevo artículo específico para la tienda
+                $Articulo = new Articulo();
+                $Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
+                $Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
+                $Articulo->nombre = $DatosArticulos['nombre'];
+                $Articulo->descripcion = $DatosArticulos['descripcion'];
+                $Articulo->imagen_principal = $DatosArticulos['imagen_principal'];
+                $Articulo->visible = $DatosArticulos['visible'];
+                $Articulo->cerrado = $DatosArticulos['cerrado'];
+                $Articulo->tipo_marcado = $DatosArticulos['tipo_marcado'];
+                $Articulo->save();
+
+                // Guarda el precio en ArticulosTienda
+                $ArticuloTienda = new ArticulosTienda();
+                $ArticuloTienda->tienda_id = $Tienda_id;
+                $ArticuloTienda->articulo_id = $Articulo->id;
+                if (isset($DatosArticulos['precio_actual'])) {
+                    $ArticuloTienda->precio_actual = $DatosArticulos['precio_actual'];
+                } else {
+                    $ArticuloTienda->precio_actual = 0; // o algún valor por defecto
+                }
+                $ArticuloTienda->save();
+            }
         }
     }
 
     return $this->render('crear-articulo', [
         'model' => $model,
+        'modelArticulosTienda' => $modelArticulosTienda,
         'categoriasList' => $categoriasList,
         'etiquetasList' => $etiquetasList,
     ]);
 }
+
 
     public function actionModificarArticulo($Tienda_id)
 {
