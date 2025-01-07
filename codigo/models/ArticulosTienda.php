@@ -33,8 +33,8 @@ use Yii;
  * @property HistoricoPrecios $historico
  * @property Ofertas $oferta
  * @property RegistroUsuarios $registro
- * @property Tiendas $tienda
- * @property Tiendas[] $tiendas
+ * @property Tienda $tienda
+ * @property Tienda[] $tiendas
  */
 class ArticulosTienda extends \yii\db\ActiveRecord
 {
@@ -63,7 +63,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['historico_id'], 'exist', 'skipOnError' => true, 'targetClass' => HistoricoPrecios::class, 'targetAttribute' => ['historico_id' => 'id']],
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
             [['registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registro_id' => 'id']],
-            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tiendas::class, 'targetAttribute' => ['tienda_id' => 'id']],
+            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
         ];
     }
 
