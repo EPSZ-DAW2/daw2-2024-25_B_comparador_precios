@@ -32,6 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= Html::a('Eliminar Artículo', ['eliminar-articulo', 'Tienda_id' => $tienda->id], ['class' => 'btn btn-danger']) ?>
                                 <?= Html::a('Modificar Artículo', ['modificar-articulo', 'Tienda_id' => $tienda->id], ['class' => 'btn btn-primary']) ?>
                                 <?= Html::a('Actualizar Tienda', ['update', 'id' => $tienda->id], ['class' => 'btn btn-warning']) ?>
+                                <?= Html::a('Actualizar Precios', ['actualizar-precios', 'tienda_id' => $tienda->id], ['class' => 'btn btn-warning']) ?>
+
                             </p>
                         </div>
                     </div>
