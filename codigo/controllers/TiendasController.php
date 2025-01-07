@@ -316,7 +316,15 @@ class TiendasController extends Controller
                 $DatosArticulos = Yii::$app->request->post('Articulo');
                 $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]);
                 $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
-                $historico = new Historico();
+                $model->nombre = $DatosArticulos['nombre'];
+                $model->descripcion = $DatosArticulos['descripcion'];
+                $model->categoria_id = $categoria->id;
+                $model->etiqueta_id = $etiqueta->id;
+                $model->imagen_ppal = $DatosArticulos['imagen_ppal'];
+                $model->visible = $DatosArticulos['visible'];
+                $model->cerrado = $DatosArticulos['cerrado'];
+
+                
     
                 // Aquí puedes agregar la lógica para actualizar el artículo y guardar el histórico
     

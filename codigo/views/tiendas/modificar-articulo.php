@@ -38,8 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'cerrado')->checkbox() ?>
 
-        <?= $form->field($model, 'tipo_marcado')->dropDownList(['comun' => 'Común', 'particular' => 'Particular']) ?>
-
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success']) ?>
         </div>
