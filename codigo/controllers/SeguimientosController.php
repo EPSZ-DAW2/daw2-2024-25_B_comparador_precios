@@ -11,7 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class SeguimientosController extends \yii\web\Controller
+class SeguimientosController extends Controller
 {
     public function actionIndex()
     {
