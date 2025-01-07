@@ -324,9 +324,6 @@ class TiendasController extends Controller
                 $model->visible = $DatosArticulos['visible'];
                 $model->cerrado = $DatosArticulos['cerrado'];
                 $model->tipo_marcado = $DatosArticulos['tipo_marcado'];
-
-                
-    
                 // Aquí puedes agregar la lógica para actualizar el artículo y guardar el histórico
     
                 if ($model->save()) {
@@ -636,6 +633,46 @@ public function actionViewArticulo($id)
         'model' => $model,
         'comentario' => $comentario,  // Enviar el formulario de comentario
         'comentarios' => $comentarios,  // Enviar los comentarios existentes
+    ]);
+}
+
+public function actionActualizarPrecios($tienda_id)
+{
+    // Obtener todos los artículos de la tienda
+    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $tienda_id])->all();
+    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function($model) {
+        return $model->articulo->nombre; // Asumiendo que hay una relación 'articulo' en ArticulosTienda
+    });
+
+    if (Yii::$app->request->post()) {
+        $postData = Yii::$app->request->post('ArticulosTienda');
+        foreach ($postData as $articuloTiendaData) {
+            $articuloTienda = ArticulosTienda::findOne(['tienda_id' => $tienda_id, 'articulo_id' => $articuloTiendaData['articulo_id']]);
+            if ($articuloTienda) {
+                $oldPrice = $articuloTienda->precio;
+                $newPrice = $articuloTiendaData['precio'];
+                if ($oldPrice != $newPrice) {
+                    // Actualizar el precio en ArticulosTienda
+                    $articuloTienda->precio = $newPrice;
+                    if ($articuloTienda->save()) {
+                        // Registrar el cambio en Historico
+                        $historico = new Historico();
+                        $historico->tienda_id = $tienda_id;
+                        $historico->articulo_id = $articuloTienda->articulo_id;
+                        $historico->precio = $newPrice;
+                        $historico->fecha = date('Y-m-d H:i:s');
+                        $historico->save();
+                    }
+                }
+            }
+        }
+        Yii::$app->session->setFlash('success', 'Precios actualizados con éxito.');
+        return $this->refresh();
+    }
+
+    return $this->render('actualizar-precios', [
+        'articulosTienda' => $articulosTienda,
+        'articulos' => $articulos,
     ]);
 }
 
