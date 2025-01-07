@@ -290,52 +290,76 @@ class TiendasController extends Controller
     }
 
     public function actionModificarArticulo($Tienda_id)
-    {
-        // Obtiene todos los artículos de la tienda
-        $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
-        $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function($model) {
-            return $model->articulo->nombre; // Asumiendo que hay una relación 'articulo' en ArticulosTienda
-        });
-    
-        $categorias = Categorias::find()->all();
-        $categorias = ArrayHelper::map($categorias, 'id', 'nombre');
-        $etiquetas = Etiquetas::find()->all();
-        $etiquetas = ArrayHelper::map($etiquetas, 'id', 'nombre');
-    
-        if (Yii::$app->request->post()) {
-            $Articulo_id = Yii::$app->request->post('Articulo')['id'];
-            $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
-            if (!$ArticuloTienda) {
-                throw new NotFoundHttpException('El artículo no existe en esta tienda.');
-            }
-    
-            $model = Articulo::findOne($Articulo_id);
-            if ($model->load(Yii::$app->request->post())) {
-                $DatosArticulos = Yii::$app->request->post('Articulo');
-                $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]);
-                $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
-                $historico = new Historico();
-    
-                // Aquí puedes agregar la lógica para actualizar el artículo y guardar el histórico
-    
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Artículo modificado con éxito.');
-                    return $this->redirect(['view-store', 'id' => $Tienda_id]);
-                } else {
-                    Yii::$app->session->setFlash('error', 'Ha habido un error al modificar el artículo.');
-                }
-            }
-        } else {
-            $model = new Articulo();
+{
+    // Obtiene todos los artículos de la tienda
+    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
+    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function ($model) {
+        return $model->articulo->nombre; // Asumiendo relación 'articulo' en ArticulosTienda
+    });
+
+    $categorias = Categorias::find()->all();
+    $categorias = ArrayHelper::map($categorias, 'id', 'nombre');
+    $etiquetas = Etiquetas::find()->all();
+    $etiquetas = ArrayHelper::map($etiquetas, 'id', 'nombre');
+
+    if (Yii::$app->request->post()) {
+        $Articulo_id = Yii::$app->request->post('Articulo')['id'];
+        $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+        if (!$ArticuloTienda) {
+            throw new NotFoundHttpException('El artículo no existe en esta tienda.');
         }
-    
-        return $this->render('modificar-articulo', [
-            'model' => $model,
-            'articulos' => $articulos,
-            'categorias' => $categorias,
-            'etiquetas' => $etiquetas,
-        ]);
+
+        $model = Articulo::findOne($Articulo_id);
+        if ($model->load(Yii::$app->request->post())) {
+            $DatosArticulos = Yii::$app->request->post('Articulo');
+
+            // Guardar histórico de los datos actuales del artículo antes de modificarlos
+            $historico = new Historico();
+            $historico->articulo_id = $model->id;
+            $historico->nombre = $model->nombre;
+            $historico->descripcion = $model->descripcion;
+            $historico->categoria_id = $model->categoria_id;
+            $historico->etiqueta_id = $model->etiqueta_id;
+            $historico->imagen_principal = $model->imagen_principal;
+            $historico->visible = $model->visible;
+            $historico->cerrado = $model->cerrado;
+            $historico->tipo_marcado = $model->tipo_marcado;
+            $historico->fecha_modificacion = date('Y-m-d H:i:s'); // Fecha actual
+            $historico->usuario_id = Yii::$app->user->id; // Usuario que realizó la modificación
+
+            if (!$historico->save()) {
+                Yii::$app->session->setFlash('error', 'No se pudo guardar el histórico del artículo.');
+                return $this->refresh();
+            }
+
+            // Actualizar el artículo con los nuevos datos
+            $model->nombre = $DatosArticulos['nombre'];
+            $model->descripcion = $DatosArticulos['descripcion'];
+            $model->categoria_id = $DatosArticulos['categoria_id'];
+            $model->etiqueta_id = $DatosArticulos['etiqueta_id'];
+            $model->imagen_principal = $DatosArticulos['imagen_principal'];
+            $model->visible = isset($DatosArticulos['visible']) ? 1 : 0;
+            $model->cerrado = isset($DatosArticulos['cerrado']) ? 1 : 0;
+            $model->tipo_marcado = $DatosArticulos['tipo_marcado'];
+
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Artículo modificado con éxito.');
+                return $this->redirect(['view-store', 'id' => $Tienda_id]);
+            } else {
+                Yii::$app->session->setFlash('error', 'Ha habido un error al modificar el artículo.');
+            }
+        }
+    } else {
+        $model = new Articulo();
     }
+
+    return $this->render('modificar-articulo', [
+        'model' => $model,
+        'articulos' => $articulos,
+        'categorias' => $categorias,
+        'etiquetas' => $etiquetas,
+    ]);
+}
     /**
      * Deletes or unlinks an article from the store.
      * If the article has price history, it will be hidden instead of deleted.
