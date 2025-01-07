@@ -323,6 +323,7 @@ class TiendasController extends Controller
                 $model->imagen_ppal = $DatosArticulos['imagen_ppal'];
                 $model->visible = $DatosArticulos['visible'];
                 $model->cerrado = $DatosArticulos['cerrado'];
+                $model->tipo_marcado = $DatosArticulos['tipo_marcado'];
 
                 
     
