@@ -463,7 +463,7 @@ public function actionVerHistorico($Tienda_id, $Articulo_id)
                 $oferta->fecha_fin = Yii::$app->request->post('Ofertas')['fecha_fin'];
                 $oferta->precio_og = $articulo->precio; // Precio original del artículo en la tienda
                 $oferta->registro_id = Yii::$app->user->id; // Usuario que creó la oferta
-    
+                $oferta->notas= "Oferta creada por el usuario";
                 if ($oferta->save()) {
                     // Registrar el histórico
                     $historico = new Historico();
