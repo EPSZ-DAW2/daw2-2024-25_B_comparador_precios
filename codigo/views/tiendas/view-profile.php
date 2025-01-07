@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 /**  @var yii\web\View $this */
-/** @var  app\models\Tiendas $model */
+/** @var  app\models\Tienda $model */
 
 $this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
