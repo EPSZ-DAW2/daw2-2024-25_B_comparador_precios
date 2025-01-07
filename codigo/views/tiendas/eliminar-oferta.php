@@ -20,8 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'id')->dropDownList($ofertasList, ['prompt' => 'Seleccione una oferta', 'name' => 'oferta_id']) ?>
-
+        <?= $form->field($ofertaSeleccionada, 'id')->dropDownList($ofertasList, [
+            'prompt' => 'Seleccione una oferta',
+            'name' => 'oferta_id',
+            'options' => [
+                Yii::$app->request->post('oferta_id') => ['Selected' => true]
+            ]
+        ]) ?>
         <div class="form-group">
             <?= Html::submitButton('Eliminar Oferta', ['class' => 'btn btn-danger']) ?>
         </div>

@@ -447,7 +447,7 @@ public function actionVerHistorico($Tienda_id, $Articulo_id)
         });
     
         if (Yii::$app->request->post()) {
-            $Articulo_id = Yii::$app->request->post('Ofertas')['id'];
+            $Articulo_id = Yii::$app->request->post('Ofertas')['articulo_id'];
             $articulo = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
     
             if (!$articulo) {

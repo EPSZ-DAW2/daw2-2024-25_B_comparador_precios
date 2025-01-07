@@ -21,8 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($ofertaSeleccionada, 'id')->dropDownList($ofertasList, ['prompt' => 'Seleccione una oferta', 'name' => 'oferta_id']) ?>
-
+        <?= $form->field($ofertaSeleccionada, 'id')->dropDownList($ofertasList, [
+            'prompt' => 'Seleccione una oferta',
+            'name' => 'oferta_id',
+            'options' => [
+                Yii::$app->request->post('oferta_id') => ['Selected' => true]
+            ]
+        ]) ?>
         <?php if ($ofertaSeleccionada): ?>
             <?= $form->field($ofertaSeleccionada, 'precio_oferta')->textInput(['maxlength' => true]) ?>
             <?= $form->field($ofertaSeleccionada, 'fecha_inicio')->input('datetime-local') ?>
