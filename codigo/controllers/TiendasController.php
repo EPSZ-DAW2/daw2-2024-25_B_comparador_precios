@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use Yii;
+
 use app\models\Tienda;
 use app\models\Articulo;
 use app\models\Categorias;
@@ -290,76 +292,52 @@ class TiendasController extends Controller
     }
 
     public function actionModificarArticulo($Tienda_id)
-{
-    // Obtiene todos los artículos de la tienda
-    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
-    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function ($model) {
-        return $model->articulo->nombre; // Asumiendo relación 'articulo' en ArticulosTienda
-    });
-
-    $categorias = Categorias::find()->all();
-    $categorias = ArrayHelper::map($categorias, 'id', 'nombre');
-    $etiquetas = Etiquetas::find()->all();
-    $etiquetas = ArrayHelper::map($etiquetas, 'id', 'nombre');
-
-    if (Yii::$app->request->post()) {
-        $Articulo_id = Yii::$app->request->post('Articulo')['id'];
-        $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
-        if (!$ArticuloTienda) {
-            throw new NotFoundHttpException('El artículo no existe en esta tienda.');
-        }
-
-        $model = Articulo::findOne($Articulo_id);
-        if ($model->load(Yii::$app->request->post())) {
-            $DatosArticulos = Yii::$app->request->post('Articulo');
-
-            // Guardar histórico de los datos actuales del artículo antes de modificarlos
-            $historico = new Historico();
-            $historico->articulo_id = $model->id;
-            $historico->nombre = $model->nombre;
-            $historico->descripcion = $model->descripcion;
-            $historico->categoria_id = $model->categoria_id;
-            $historico->etiqueta_id = $model->etiqueta_id;
-            $historico->imagen_principal = $model->imagen_principal;
-            $historico->visible = $model->visible;
-            $historico->cerrado = $model->cerrado;
-            $historico->tipo_marcado = $model->tipo_marcado;
-            $historico->fecha_modificacion = date('Y-m-d H:i:s'); // Fecha actual
-            $historico->usuario_id = Yii::$app->user->id; // Usuario que realizó la modificación
-
-            if (!$historico->save()) {
-                Yii::$app->session->setFlash('error', 'No se pudo guardar el histórico del artículo.');
-                return $this->refresh();
+    {
+        // Obtiene todos los artículos de la tienda
+        $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
+        $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function($model) {
+            return $model->articulo->nombre; // Asumiendo que hay una relación 'articulo' en ArticulosTienda
+        });
+    
+        $categorias = Categorias::find()->all();
+        $categorias = ArrayHelper::map($categorias, 'id', 'nombre');
+        $etiquetas = Etiquetas::find()->all();
+        $etiquetas = ArrayHelper::map($etiquetas, 'id', 'nombre');
+    
+        if (Yii::$app->request->post()) {
+            $Articulo_id = Yii::$app->request->post('Articulo')['id'];
+            $ArticuloTienda = ArticulosTienda::findOne(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id]);
+            if (!$ArticuloTienda) {
+                throw new NotFoundHttpException('El artículo no existe en esta tienda.');
             }
-
-            // Actualizar el artículo con los nuevos datos
-            $model->nombre = $DatosArticulos['nombre'];
-            $model->descripcion = $DatosArticulos['descripcion'];
-            $model->categoria_id = $DatosArticulos['categoria_id'];
-            $model->etiqueta_id = $DatosArticulos['etiqueta_id'];
-            $model->imagen_principal = $DatosArticulos['imagen_principal'];
-            $model->visible = isset($DatosArticulos['visible']) ? 1 : 0;
-            $model->cerrado = isset($DatosArticulos['cerrado']) ? 1 : 0;
-            $model->tipo_marcado = $DatosArticulos['tipo_marcado'];
-
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Artículo modificado con éxito.');
-                return $this->redirect(['view-store', 'id' => $Tienda_id]);
-            } else {
-                Yii::$app->session->setFlash('error', 'Ha habido un error al modificar el artículo.');
+    
+            $model = Articulo::findOne($Articulo_id);
+            if ($model->load(Yii::$app->request->post())) {
+                $DatosArticulos = Yii::$app->request->post('Articulo');
+                $categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]);
+                $etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
+                $historico = new Historico();
+    
+                // Aquí puedes agregar la lógica para actualizar el artículo y guardar el histórico
+    
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Artículo modificado con éxito.');
+                    return $this->redirect(['view-store', 'id' => $Tienda_id]);
+                } else {
+                    Yii::$app->session->setFlash('error', 'Ha habido un error al modificar el artículo.');
+                }
             }
+        } else {
+            $model = new Articulo();
         }
-    } else {
-        $model = new Articulo();
+    
+        return $this->render('modificar-articulo', [
+            'model' => $model,
+            'articulos' => $articulos,
+            'categorias' => $categorias,
+            'etiquetas' => $etiquetas,
+        ]);
     }
-
-    return $this->render('modificar-articulo', [
-        'model' => $model,
-        'articulos' => $articulos,
-        'categorias' => $categorias,
-        'etiquetas' => $etiquetas,
-    ]);
-}
     /**
      * Deletes or unlinks an article from the store.
      * If the article has price history, it will be hidden instead of deleted.
@@ -420,27 +398,31 @@ class TiendasController extends Controller
  * @return string
  * @throws NotFoundHttpException if the model cannot be found
  */
-public function actionVerHistorico($Tienda_id, $Articulo_id)
-{
-    // Obtiene todos los artículos de la tienda
-    $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
-    $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function($model) {
-        return $model->articulo->nombre; // Asumiendo que hay una relación 'articulo' en ArticulosTienda
-    });
 
-    // Obtiene el histórico de precios del artículo en la tienda
-    $historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
+    public function actionVerHistorico($Tienda_id, $Articulo_id = null)
+    {
+        $articulos = ArticulosTienda::find()
+            ->where(['tienda_id' => $Tienda_id])
+            ->all();
 
-    if (!$historico) {
-        throw new NotFoundHttpException('No se ha encontrado el histórico de precios para este artículo en esta tienda.');
+        $articulosList = ArrayHelper::map($articulos, 'id', 'nombre');
+
+        $historico = [];
+        if ($Articulo_id) {
+            $historico = Historico::find()
+                ->where(['articulo_id' => $Articulo_id])
+                ->orderBy(['fecha' => SORT_DESC])
+                ->asArray()
+                ->all();
+        }
+
+        return $this->render('ver-historico', [
+            'tiendaId' => $Tienda_id, // Aseguramos pasar la variable a la vista
+            'articulos' => $articulosList,
+            'historico' => $historico,
+            'selectedArticulo' => $Articulo_id,
+        ]);
     }
-
-    return $this->render('ver-historico', [
-        'historico' => $historico,
-        'articulos' => $articulos,
-        'selectedArticulo' => $Articulo_id,
-    ]);
-}
 
     public function actionVerTiendasActivas()
     {
@@ -616,5 +598,39 @@ public function actionEliminarOferta($Tienda_id)
         return $this->redirect(['site/index']);
     }
 }
+
+public function actionViewArticulo($id)
+{
+    // Encuentra el modelo de artículo por ID
+    $model = Articulo::findOne($id); 
+    if ($model === null) {
+        throw new NotFoundHttpException("El artículo solicitado no existe.");
+    }
+
+    // Crear un nuevo modelo de comentario
+    $comentario = new Comentario();
+    
+    // Obtener los comentarios asociados al artículo, si existen
+    $comentarios = Comentario::find()
+        ->where(['articulo_id' => $id])
+        ->orderBy(['fecha_primera_denuncia' => SORT_DESC]) // Ordenar comentarios por fecha
+        ->all();
+
+    // Si el formulario de comentario se envía correctamente
+    if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
+        // Redirigir a la misma vista para mostrar el nuevo comentario
+        return $this->refresh();
+    }
+
+    // Renderizar la vista con los comentarios y el artículo
+    return $this->render('view-articulo', [
+        'model' => $model,
+        'comentario' => $comentario,  // Enviar el formulario de comentario
+        'comentarios' => $comentarios,  // Enviar los comentarios existentes
+    ]);
+}
+
+
+
 }
 
