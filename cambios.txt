@@ -128,3 +128,9 @@ Cambios dia 11 (Alejandra) 6/1/25
 
 refactorizado en controlador de tienda las funciones de producto y de ofertas asi como sus vistas asociadas
 
+Cambios dia 12 (Victor Gonzalo) 7/1/25
+-Añadido aviso a un moderador del registro de un usuario
+-Añadida vista de comentarios y acción de comentar y valorar en los articulos de las tiendas (queda la funcionalidad de responder a comentarios)
+-Arreglos menores en la vista de la tienda, comparador y articulos de tienda
+
+
