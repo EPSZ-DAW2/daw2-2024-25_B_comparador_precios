@@ -23,7 +23,7 @@ class SeguimientosController extends Controller
         $usuario = Yii::$app->user->identity;
     
         if ($usuario === null) {
-            throw new \yii\web\NotFoundHttpException('Usuario no encontrado.');
+            throw new NotFoundHttpException('Usuario no encontrado.');
         }
     
         // Buscar seguimientos del usuario autenticado
