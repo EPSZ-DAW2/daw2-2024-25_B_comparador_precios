@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 
 /** @var  yii\web\View $this */
 /** @var  app\models\Articulo $model */
+/** @var  app\models\ArticulosTienda $modelArticulosTienda */
 /** @var  yii\widgets\ActiveForm $form */
 /** @var  array $categoriasList */
 /** @var  array $etiquetasList */
@@ -19,6 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="articulo-form">
 
         <?php $form = ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
+
+        <?= $form->field($modelArticulosTienda, 'precio_actual')->textInput(['maxlength' => true]) ?>
+
 
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
