@@ -132,6 +132,11 @@ Cambios dia 12 (Victor Martin) 07/01/2025
 
 Cambios dia 13 (Victor Gonzalo) 08/01/2025
 -Actualizado el perfil, añadiendo la accion para darse de baja (por el momento envia un aviso a un moderador del mismo continente)
+
+Cambios dia 13 (Víctor Martín) 08/01/2025
+- Models/Usuario (Funciones y constantes para el tema de roles)
+- ModeradoresController: modificación en los permisos de modo que solo lo pueden acceder usuarios con rol de moderador 
+
 -Actualizada la vista de las comentarios dentro del perfil de usuario
 
 Cambios día 13 (Javier Marinas y Marcos Méndez):
