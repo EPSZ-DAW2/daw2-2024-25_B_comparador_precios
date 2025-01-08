@@ -27,7 +27,7 @@ use Yii;
  * @property Comentarios[] $comentarios
  * @property Etiquetas $etiqueta
  * @property Etiquetas[] $etiquetas
- * @property HistoricoPrecios[] $historicoPrecios
+ * @property Historico[] $historicoPrecios
  * @property Ofertas[] $ofertas
  * @property RegistroUsuarios $registro
  * @property Seguimientos[] $seguimientos
@@ -161,11 +161,11 @@ class Articulo extends \yii\db\ActiveRecord
     /**
      * Gets query for [[HistoricoPrecios]].
      *
-     * @return \yii\db\ActiveQuery|HistoricoPreciosQuery
+     * @return \yii\db\ActiveQuery|HistoricoQuery
      */
     public function getHistoricoPrecios()
     {
-        return $this->hasMany(HistoricoPrecios::class, ['articulo_id' => 'id']);
+        return $this->hasMany(Historico::class, ['articulo_id' => 'id']);
     }
 
     /**
