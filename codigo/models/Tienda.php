@@ -43,7 +43,7 @@ use Yii;
  * @property Duenos[] $duenos
  * @property Etiquetas $etiquetas
  * @property Etiquetas[] $etiquetas0
- * @property HistoricoPrecios[] $historicoPrecios
+ * @property Historico[] $historicoPrecios
  * @property Moderador[] $mods
  * @property Ofertas[] $ofertas
  * @property Regiones $region
@@ -213,11 +213,11 @@ class Tienda extends \yii\db\ActiveRecord
     /**
      * Gets query for [[HistoricoPrecios]].
      *
-     * @return \yii\db\ActiveQuery|HistoricoPreciosQuery
+     * @return \yii\db\ActiveQuery|HistoricoQuery
      */
     public function getHistoricoPrecios()
     {
-        return $this->hasMany(HistoricoPrecios::class, ['tienda_id' => 'id']);
+        return $this->hasMany(Historico::class, ['tienda_id' => 'id']);
     }
 
     /**
