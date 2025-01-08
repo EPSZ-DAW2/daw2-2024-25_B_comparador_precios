@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 
 /** @var  yii\web\View $this */
 /** @var  array $ofertasList */
+/** @var  app\models\Ofertas $ofertaSeleccionada */
+/** @var int $Tienda_id */
 
 $this->title = 'Eliminar Oferta';
 $this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
