@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `articulos_tienda` (
   KEY `fk_articulos_tienda_oferta` (`oferta_id`),
   KEY `fk_articulos_tienda_registro` (`registro_id`),
   KEY `fk_articulos_tienda_comentario` (`comentario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `articulos_tienda`
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `articulo_etiquetas` (
   `etiqueta_id` int(11) NOT NULL,
   PRIMARY KEY (`articulo_id`,`etiqueta_id`),
   KEY `fk_articulo_etiquetas_etiqueta` (`etiqueta_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `articulo_etiquetas`
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `configuraciones` (
   `clave` varchar(50) NOT NULL,
   `valor` text DEFAULT NULL,
   PRIMARY KEY (`clave`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -458,7 +458,7 @@ CREATE TABLE IF NOT EXISTS `regiones_moderador` (
   PRIMARY KEY (`mod_id`,`region_id`),
   KEY `fk_regiones_moderador_mod` (`mod_id`),
   KEY `fk_regiones_moderador_region` (`region_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `regiones_moderador`
@@ -624,7 +624,7 @@ CREATE TABLE IF NOT EXISTS `tiendas_etiquetas` (
   `etiqueta_id` int(11) NOT NULL,
   PRIMARY KEY (`tienda_id`,`etiqueta_id`),
   KEY `fk_tiendas_etiquetas_etiqueta` (`etiqueta_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tiendas_etiquetas`
@@ -649,7 +649,7 @@ CREATE TABLE IF NOT EXISTS `tiendas_moderador` (
   PRIMARY KEY (`mod_id`,`tienda_id`),
   KEY `fk_tiendas_moderador_mod` (`mod_id`),
   KEY `fk_tiendas_moderador_tienda` (`tienda_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tiendas_moderador`
