@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var array $articulos */
+/** @var app\models\Articulo $model */
 
 $this->title = Yii::t('app', 'Eliminar Artículo');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
