@@ -17,7 +17,7 @@ use Yii;
  * @property int|null $registro_id
  * @property string|null $notas
  *
- * @property Articulos $articulo
+ * @property Articulo $articulo
  * @property ArticulosTienda[] $articulosTiendas
  * @property RegistroUsuarios $registro
  * @property Seguimientos[] $seguimientos
@@ -70,7 +70,7 @@ class Ofertas extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Articulo]].
      *
-     * @return \yii\db\ActiveQuery|ArticulosQuery
+     * @return \yii\db\ActiveQuery|Query
      */
     public function getArticulo()
     {
