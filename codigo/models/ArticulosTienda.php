@@ -27,8 +27,8 @@ use Yii;
  * @property int|null $registro_id id del usuario creador
  * @property int|null $comentario_id id de comentarios relacionado
  *
- * @property Articulos $articulo
- * @property Articulos[] $articulos
+ * @property Articulo $articulo
+ * @property Articulo[] $articulos
  * @property Comentarios $comentario
  * @property HistoricoPrecios $historico
  * @property Ofertas $oferta
