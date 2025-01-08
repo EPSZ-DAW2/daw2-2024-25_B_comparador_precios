@@ -366,6 +366,7 @@ public function actionCrearArticulo($Tienda_id)
     public function actionEliminarArticulo($Tienda_id)
 {
     // Obtiene todos los artículos de la tienda
+    $model = new Articulo();
     $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
     $articulos = ArrayHelper::map($articulosTienda, 'articulo_id', function($model) {
         return $model->articulo->nombre; // Asumiendo que hay una relación 'articulo' en ArticulosTienda
@@ -387,7 +388,9 @@ public function actionCrearArticulo($Tienda_id)
         // Verifica si el artículo tiene histórico de precios
         if ($historico) {
             $ArticuloTienda->visible = 0; // Oculta el artículo
+            $Articulo->visible = 0; // Oculta el artículo
             $ArticuloTienda->save();
+            $Articulo->save();  
             Yii::$app->session->setFlash('success', 'Artículo ocultado con éxito.');
         } else {
             // Verifica si el artículo es común
@@ -407,6 +410,7 @@ public function actionCrearArticulo($Tienda_id)
     }
 
     return $this->render('eliminar-articulo', [
+        'model' => $model,
         'articulos' => $articulos,
     ]);
 }
