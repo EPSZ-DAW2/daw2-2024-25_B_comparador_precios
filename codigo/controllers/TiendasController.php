@@ -572,9 +572,11 @@ public function actionModificarOferta($Tienda_id)
 public function actionEliminarOferta($Tienda_id)
 {
     $ofertas = Ofertas::find()->where(['tienda_id' => $Tienda_id])->all();
-    $ofertasList = ArrayHelper::map($ofertas, 'id', function($model) {
+    $ofertasList = ArrayHelper::map($ofertas, 'id', function ($model) {
         return $model->articulo->nombre . ' - ' . $model->precio_oferta;
     });
+
+    $ofertaSeleccionada = new Ofertas(); // Inicializamos como un modelo vacío
 
     if (Yii::$app->request->post('oferta_id')) {
         $ofertaSeleccionada = Ofertas::findOne(Yii::$app->request->post('oferta_id'));
@@ -594,6 +596,8 @@ public function actionEliminarOferta($Tienda_id)
 
     return $this->render('eliminar-oferta', [
         'ofertasList' => $ofertasList,
+        'ofertaSeleccionada' => $ofertaSeleccionada,
+        'Tienda_id' => $Tienda_id,
     ]);
 }
 
