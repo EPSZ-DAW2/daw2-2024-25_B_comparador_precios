@@ -70,7 +70,7 @@ class Ofertas extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Articulo]].
      *
-     * @return \yii\db\ActiveQuery|Query
+     * @return \yii\db\ActiveQuery|ArticulosQuery
      */
     public function getArticulo()
     {

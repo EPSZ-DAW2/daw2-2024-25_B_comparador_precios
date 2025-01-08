@@ -14,7 +14,7 @@ use Yii;
  * @property int|null $oferta_id id de la oferta del seguimiento o 0 si no es oferta
  * @property string|null $fecha
  *
- * @property Articulos $articulo
+ * @property Articulo $articulo
  * @property Ofertas $oferta
  * @property Tiendas $tienda
  * @property Tiendas[] $tiendas

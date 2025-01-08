@@ -22,7 +22,7 @@ use Yii;
  * @property string|null $motivo_bloqueo motivo del bloqueo
  * @property int|null $registro_id id del creador del comentario
  *
- * @property Articulos $articulo
+ * @property Articulo $articulo
  * @property ArticulosTienda[] $articulosTiendas
  * @property Avisos[] $avisos
  * @property Comentario $comentarioPadre
