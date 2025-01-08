@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-01-2025 a las 22:22:31
+-- Tiempo de generación: 08-01-2025 a las 14:47:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `articulos` (
   KEY `fk_articulos_etiqueta` (`etiqueta_id`),
   KEY `fk_articulos_registro` (`registro_id`),
   KEY `fk_articulos_articulo_tienda` (`articulo_tienda_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `articulos`
@@ -57,7 +57,13 @@ INSERT INTO `articulos` (`id`, `nombre`, `descripcion`, `categoria_id`, `etiquet
 (2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 2, 'televisor_4k.jpg', 1, 0, 'comun', 2, NULL),
 (3, 'Lavadora Eco', 'Lavadora de alta eficiencia energética con múltiples programas de lavado.', 2, 3, 'lavadora_eco.jpg', 1, 0, 'comun', 3, NULL),
 (4, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 3, 4, 'camiseta_deportiva.jpg', 1, 0, 'comun', 4, NULL),
-(5, 'Libro de Programación', 'Un libro completo sobre programación en Python.', 5, 5, 'libro_programacion.jpg', 1, 0, 'comun', 5, NULL);
+(5, '3342', 'rr4', 1, 1, 'algo.png', 0, 1, 'comun', 5, NULL),
+(7, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
+(8, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
+(9, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
+(10, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
+(11, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
+(12, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -66,7 +72,7 @@ INSERT INTO `articulos` (`id`, `nombre`, `descripcion`, `categoria_id`, `etiquet
 --
 
 CREATE TABLE IF NOT EXISTS `articulos_tienda` (
-  `id` int(11) NOT NULL COMMENT 'id del registro',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id del registro',
   `articulo_id` int(11) DEFAULT NULL COMMENT 'id del articulo',
   `tienda_id` int(11) DEFAULT NULL COMMENT 'id de la tienda',
   `precio_actual` decimal(10,2) DEFAULT NULL COMMENT 'precio del producto',
@@ -92,9 +98,9 @@ CREATE TABLE IF NOT EXISTS `articulos_tienda` (
   KEY `fk_articulos_tienda_oferta` (`oferta_id`),
   KEY `fk_articulos_tienda_registro` (`registro_id`),
   KEY `fk_articulos_tienda_comentario` (`comentario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---ALTER TABLE `articulos_tienda`
+--
 -- Volcado de datos para la tabla `articulos_tienda`
 --
 
@@ -103,7 +109,7 @@ INSERT INTO `articulos_tienda` (`id`, `articulo_id`, `tienda_id`, `precio_actual
 (2, 2, 2, 499.99, 2, 2, 20, 10, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 2, NULL),
 (3, 3, 3, 199.99, 3, 3, 30, 15, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 3, NULL),
 (4, 4, 4, 29.99, 4, 4, 40, 20, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 4, NULL),
-(5, 5, 5, 9.99, 5, 5, 50, 25, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 5, NULL);
+(5, 5, 5, 9.99, 5, 5, 50, 25, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -116,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `articulo_etiquetas` (
   `etiqueta_id` int(11) NOT NULL,
   PRIMARY KEY (`articulo_id`,`etiqueta_id`),
   KEY `fk_articulo_etiquetas_etiqueta` (`etiqueta_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `articulo_etiquetas`
@@ -266,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `configuraciones` (
   `clave` varchar(50) NOT NULL,
   `valor` text DEFAULT NULL,
   PRIMARY KEY (`clave`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -335,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `historico_precios` (
   PRIMARY KEY (`id`),
   KEY `fk_historico_articulo` (`articulo_id`),
   KEY `fk_historico_tienda` (`tienda_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `historico_precios`
@@ -351,7 +357,27 @@ INSERT INTO `historico_precios` (`id`, `articulo_id`, `tienda_id`, `fecha`, `pre
 (7, 4, 4, '2023-12-01 00:00:00', 39.99),
 (8, 4, 4, '2024-01-01 00:00:00', 29.99),
 (9, 5, 5, '2024-01-01 00:00:00', 19.99),
-(10, 5, 5, '2024-02-01 00:00:00', 9.99);
+(10, 5, 5, '2024-02-01 00:00:00', 9.99),
+(11, 7, 5, '2025-01-08 01:42:50', 0.00),
+(12, 7, 5, '2025-01-08 01:43:04', 0.00),
+(13, 7, 5, '2025-01-08 01:48:06', 0.00),
+(14, 7, 5, '2025-01-08 01:54:05', 0.00),
+(15, 7, 5, '2025-01-08 01:58:31', 0.00),
+(16, 5, 5, '2025-01-08 09:37:18', NULL),
+(17, 5, 5, '2025-01-08 10:00:23', 15.00),
+(18, 5, 5, '2025-01-08 10:33:12', 14.00),
+(19, 5, 5, '2025-01-08 10:34:22', 14.00),
+(20, 5, 5, '2025-01-08 10:39:05', 14.00),
+(21, 5, 5, '2025-01-08 10:39:45', 14.00),
+(22, 5, 5, '2025-01-08 10:40:10', 14.00),
+(23, 5, 5, '2025-01-08 11:04:42', 23.00),
+(24, NULL, 5, '2025-01-08 11:11:03', 23.00),
+(25, NULL, 5, '2025-01-08 11:15:23', 23.00),
+(26, NULL, 5, '2025-01-08 11:18:11', 23.00),
+(27, NULL, 5, '2025-01-08 11:19:56', 23.00),
+(28, NULL, 5, '2025-01-08 11:22:47', 222.00),
+(29, NULL, 5, '2025-01-08 11:29:59', 222.00),
+(30, NULL, 5, '2025-01-08 12:16:33', 23.00);
 
 -- --------------------------------------------------------
 
@@ -368,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `moderador` (
   `region_id` int(11) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `razon_social` varchar(255) DEFAULT NULL,
-  `baja_solicitada` tinyint(1) DEFAULT 0, -- Nueva columna
+  `baja_solicitada` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `fk_moderador_region` (`region_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -376,8 +402,6 @@ CREATE TABLE IF NOT EXISTS `moderador` (
 --
 -- Volcado de datos para la tabla `moderador`
 --
-
--- Volcado de datos para la tabla `moderador`
 
 INSERT INTO `moderador` (`id`, `usuario_id`, `nif`, `nombre`, `direccion`, `region_id`, `telefono`, `razon_social`, `baja_solicitada`) VALUES
 (6, 1, '12345678A', 'Juan Pérez', 'Calle Falsa 123', 19, '123456789', 'Moderador Juan Pérez', 0),
@@ -406,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `ofertas` (
   KEY `fk_ofertas_articulo` (`articulo_id`),
   KEY `fk_ofertas_tienda` (`tienda_id`),
   KEY `fk_ofertas_registro` (`registro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ofertas`
@@ -417,7 +441,10 @@ INSERT INTO `ofertas` (`id`, `articulo_id`, `tienda_id`, `fecha_inicio`, `fecha_
 (2, 2, 2, '2023-11-01 00:00:00', '2023-11-30 23:59:59', 499.99, 599.99, 2, 'Descuento por temporada'),
 (3, 3, 3, '2023-12-01 00:00:00', '2023-12-31 23:59:59', 199.99, 299.99, 3, 'Oferta de fin de año'),
 (4, 4, 4, '2024-01-01 00:00:00', '2024-01-31 23:59:59', 29.99, 39.99, 4, 'Descuento de año nuevo'),
-(5, 5, 5, '2024-02-01 00:00:00', '2024-02-28 23:59:59', 9.99, 19.99, 5, 'Oferta de San Valentín');
+(5, 5, 5, '2024-02-01 00:00:00', '2024-02-28 23:59:59', 9.99, 19.99, 5, 'Oferta de San Valentín'),
+(6, 5, 5, '2025-01-21 19:23:00', '2025-01-23 19:23:00', 23.00, 9.99, NULL, 'Oferta creada por el usuario'),
+(13, NULL, 5, '2013-04-21 19:34:00', '2015-05-26 19:09:00', 222.00, NULL, NULL, NULL),
+(14, NULL, 5, '2023-01-21 20:10:00', '2023-02-23 12:00:00', 23.00, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -458,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `regiones_moderador` (
   PRIMARY KEY (`mod_id`,`region_id`),
   KEY `fk_regiones_moderador_mod` (`mod_id`),
   KEY `fk_regiones_moderador_region` (`region_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `regiones_moderador`
@@ -624,7 +651,7 @@ CREATE TABLE IF NOT EXISTS `tiendas_etiquetas` (
   `etiqueta_id` int(11) NOT NULL,
   PRIMARY KEY (`tienda_id`,`etiqueta_id`),
   KEY `fk_tiendas_etiquetas_etiqueta` (`etiqueta_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tiendas_etiquetas`
@@ -649,7 +676,7 @@ CREATE TABLE IF NOT EXISTS `tiendas_moderador` (
   PRIMARY KEY (`mod_id`,`tienda_id`),
   KEY `fk_tiendas_moderador_mod` (`mod_id`),
   KEY `fk_tiendas_moderador_tienda` (`tienda_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tiendas_moderador`
@@ -664,9 +691,9 @@ INSERT INTO `tiendas_moderador` (`mod_id`, `tienda_id`) VALUES
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Estructura de tabla para la tabla `usuarios`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -686,14 +713,14 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `bloqueado` tinyint(1) DEFAULT 0,
   `fecha_bloqueo` datetime DEFAULT NULL,
   `motivo_bloqueo` text DEFAULT NULL,
-  `rol` ENUM('Invitado', 'Usuario Normal', 'Usuario Tienda', 'Moderador', 'Administrador', 'Superadministrador') NOT NULL DEFAULT 'Invitado',
+  `rol` enum('Invitado','Usuario Normal','Usuario Tienda','Moderador','Administrador','Superadministrador') NOT NULL DEFAULT 'Invitado',
   PRIMARY KEY (`id`),
   KEY `fk_usuarios_region` (`region_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 
+--
 -- Volcado de datos para la tabla `usuarios`
--- 
+--
 
 INSERT INTO `usuarios` (`id`, `email`, `password`, `nick`, `nombre`, `apellidos`, `direccion`, `region_id`, `telefono`, `fecha_nacimiento`, `fecha_registro`, `registro_confirmado`, `fecha_acceso`, `accesos_fallidos`, `bloqueado`, `fecha_bloqueo`, `motivo_bloqueo`, `rol`) VALUES
 (1, 'juan.perez@example.com', 'password123', 'juanp', 'Juan', 'Pérez', 'Calle Falsa 123', 19, '123456789', '1980-01-01', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Usuario Normal'),
