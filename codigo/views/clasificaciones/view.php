@@ -37,23 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 	<h3>Tiendas asociadas</h3>
-		<?php if (!empty($model->tiendas)): ?>
-			<table class="table table-bordered">
-				<thead>
+	<?php if (!empty($model->tiendas)): ?>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($model->tiendas as $tienda): ?>
 					<tr>
-						<th>Nombre</th>
+						<td><?= Html::encode($tienda->nombre) ?></td>
+						<td>
+							<?= Html::a('Ver más', ['tiendas/view', 'id' => $tienda->id], ['class' => 'btn btn-info btn-sm']) ?>
+						</td>
 					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($model->tiendas as $tienda): ?>
-						<tr>
-							<td><?= Html::encode($tienda->nombre) ?></td>
-						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		<?php else: ?>
-			<p>No hay tiendas asociadas a esta clasificación.</p>
-		<?php endif; ?>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	<?php else: ?>
+		<p>No hay tiendas asociadas a esta clasificación.</p>
+	<?php endif; ?>
+
 
 </div>
