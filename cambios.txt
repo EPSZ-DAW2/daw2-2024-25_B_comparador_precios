@@ -138,3 +138,7 @@ Cambios dia 12 (Victor Martin) 07/01/2025
 -Actualizadas las vistas
 -Actualizada la tabla de moderador con un campo que indicara si ha solicitado la baja
 
+Cambios dia 13 (Victor Gonzalo) 08/01/2025
+-Actualizado el perfil, añadiendo la accion para darse de baja (por el momento envia un aviso a un moderador del mismo continente)
+-Actualizada la vista de las comentarios dentro del perfil de usuario
+
