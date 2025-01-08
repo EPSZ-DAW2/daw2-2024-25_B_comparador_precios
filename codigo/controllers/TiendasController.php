@@ -289,7 +289,7 @@ public function actionCrearArticulo($Tienda_id)
 }
 
 
-    public function actionModificarArticulo($Tienda_id)
+   public function actionModificarArticulo($Tienda_id)
 {
     // Obtiene todos los artículos de la tienda
     $articulosTienda = ArticulosTienda::find()->where(['tienda_id' => $Tienda_id])->all();
@@ -301,6 +301,8 @@ public function actionCrearArticulo($Tienda_id)
     $categorias = ArrayHelper::map($categorias, 'id', 'nombre');
     $etiquetas = Etiquetas::find()->all();
     $etiquetas = ArrayHelper::map($etiquetas, 'id', 'nombre');
+    $modeltienda = ArticulosTienda::findOne($Tienda_id); // Asegúrate de que $modeltienda esté definido
+
 
     if (Yii::$app->request->post()) {
         $Articulo_id = Yii::$app->request->post('Articulo')['id'];
@@ -308,24 +310,17 @@ public function actionCrearArticulo($Tienda_id)
         if (!$ArticuloTienda) {
             throw new NotFoundHttpException('El artículo no existe en esta tienda.');
         }
-
         $model = Articulo::findOne($Articulo_id);
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $modeltienda->load(Yii::$app->request->post())) {
             $DatosArticulos = Yii::$app->request->post('Articulo');
+            $DatosArticulosTienda = Yii::$app->request->post('ArticulosTienda');
 
             // Guardar histórico de los datos actuales del artículo antes de modificarlos
             $historico = new Historico();
             $historico->articulo_id = $model->id;
-            $historico->nombre = $model->nombre;
-            $historico->descripcion = $model->descripcion;
-            $historico->categoria_id = $model->categoria_id;
-            $historico->etiqueta_id = $model->etiqueta_id;
-            $historico->imagen_principal = $model->imagen_principal;
-            $historico->visible = $model->visible;
-            $historico->cerrado = $model->cerrado;
-            $historico->tipo_marcado = $model->tipo_marcado;
-            $historico->fecha_modificacion = date('Y-m-d H:i:s'); // Fecha actual
-            $historico->usuario_id = Yii::$app->user->id; // Usuario que realizó la modificación
+            $historico->tienda_id = $Tienda_id;
+            $historico->fecha = date('Y-m-d H:i:s');
+            $historico->precio= $DatosArticulosTienda['precio_actual'];
 
             if (!$historico->save()) {
                 Yii::$app->session->setFlash('error', 'No se pudo guardar el histórico del artículo.');
@@ -355,6 +350,7 @@ public function actionCrearArticulo($Tienda_id)
 
     return $this->render('modificar-articulo', [
         'model' => $model,
+        'modeltienda' => $modeltienda,
         'articulos' => $articulos,
         'categorias' => $categorias,
         'etiquetas' => $etiquetas,
