@@ -55,7 +55,7 @@ class Clasificaciones extends \yii\db\ActiveRecord
      */
     public function getTiendas()
     {
-        return $this->hasMany(Tiendas::class, ['clasificacion_id' => 'id']);
+        return $this->hasMany(Tienda::class, ['clasificacion_id' => 'id']);
     }
 
     /**
