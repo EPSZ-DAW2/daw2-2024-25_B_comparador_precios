@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use app\models\aviso;
+use app\models\Regiones;
 use app\models\Articulo;
 use app\models\RegistroUsuarios;
 
@@ -189,16 +190,44 @@ class UsuariosController extends Controller
         }
 
         $aviso = new aviso();
-        if($aviso->load(Yii::$app->request->post()) && $aviso->validate()) {
-            $aviso->clase = 'mensaje';
-            $aviso->texto = 'Solicitud de baja del usuario ' . $model->id;
-            $aviso->usuario_origen_id = $model->id;
-            //$aviso->usuario_destino_id = ;  
         
-        $aviso->save();
+            //$model->region_id = $continenteRegion->id;
+            
+            $provincia = Regiones::find()->where(['id' => $model->region_id])->one();
+            $estado = Regiones::find()->where(['id' => $provincia->region_padre_id])->one();
+            $pais = Regiones::find()->where(['id' =>$estado->region_padre_id])->one();
+            $continente = Regiones::find()->where(['id' =>$pais->region_padre_id])->one();
+            
+
+            $aviso = new Aviso();  
+            $aviso->clase = 'Aviso';
+            $aviso->texto = 'Nueva Solicitud de Baja';
+            $aviso->usuario_origen_id = $model->id;
+            $aviso->tienda_id = null;
+            $aviso->articulo_id = null;
+            $aviso->comentario_id = null;
+            
+            $moderador = Moderador::find()
+            ->where([
+                'region_id' => $continente->id,
+            ])
+            ->one(); // Obtiene un único resultado
+            
+            if ($moderador) {
+                $usuarioDestino = Usuario::find()->where(['id' => $moderador->usuario_id])->one();  // Asumiendo que el moderador tiene un usuario_id asociado.
+                $aviso->usuario_destino_id = $usuarioDestino->id;
+                $aviso->usuario_destino_nick = $usuarioDestino->nick; }
+            
+            if($aviso->save())
+                Yii::$app->session->setFlash('success', 'Un moderador te dará de baja en breves' );
+            else 
+                Yii::$app->session->setFlash('error', 'Ha ocurrido un error' );
+
+                        
+            return $this->redirect(['usuarios/perfil']);    
         }
 
-    }
+    
 
     public function actionVerificar($modid, $usrid)
     {
