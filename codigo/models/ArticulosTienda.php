@@ -162,7 +162,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
      */
     public function getTienda()
     {
-        return $this->hasOne(Tiendas::class, ['id' => 'tienda_id']);
+        return $this->hasOne(Tienda::class, ['id' => 'tienda_id']);
     }
 
     /**
@@ -172,7 +172,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
      */
     public function getTiendas()
     {
-        return $this->hasMany(Tiendas::class, ['articulo_tienda_id' => 'id']);
+        return $this->hasMany(Tienda::class, ['articulo_tienda_id' => 'id']);
     }
 
     /**
