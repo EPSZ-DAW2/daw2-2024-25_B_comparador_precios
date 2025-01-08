@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Articulo $model */
+/** @var app\models\ArticulosTienda $modeltienda */
 /** @var yii\widgets\ActiveForm $form */
 /** @var array $articulos */
 /** @var array $categorias */
@@ -32,11 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'etiqueta_id')->dropDownList($etiquetas) ?>
 
-        <?= $form->field($model, 'imagen_ppal')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'imagen_principal')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'visible')->checkbox() ?>
 
         <?= $form->field($model, 'cerrado')->checkbox() ?>
+
+        <?= $form->field($modeltienda, 'precio_actual')->textInput(['maxlength' => true]) ?>
+
 
         <?= $form->field($model, 'tipo_marcado')->dropDownList(['comun' => 'Común', 'particular' => 'Particular']) ?>
 
