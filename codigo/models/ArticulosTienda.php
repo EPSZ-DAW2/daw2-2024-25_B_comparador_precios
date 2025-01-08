@@ -30,7 +30,7 @@ use Yii;
  * @property Articulo $articulo
  * @property Articulo[] $articulos
  * @property Comentarios $comentario
- * @property HistoricoPrecios $historico
+ * @property Historico $historico
  * @property Ofertas $oferta
  * @property RegistroUsuarios $registro
  * @property Tienda $tienda
@@ -60,7 +60,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['id'], 'unique'],
             [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
             [['comentario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentarios::class, 'targetAttribute' => ['comentario_id' => 'id']],
-            [['historico_id'], 'exist', 'skipOnError' => true, 'targetClass' => HistoricoPrecios::class, 'targetAttribute' => ['historico_id' => 'id']],
+            [['historico_id'], 'exist', 'skipOnError' => true, 'targetClass' => Historico::class, 'targetAttribute' => ['historico_id' => 'id']],
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
             [['registro_id'], 'exist', 'skipOnError' => true, 'targetClass' => RegistroUsuarios::class, 'targetAttribute' => ['registro_id' => 'id']],
             [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
@@ -128,11 +128,11 @@ class ArticulosTienda extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Historico]].
      *
-     * @return \yii\db\ActiveQuery|HistoricoPreciosQuery
+     * @return \yii\db\ActiveQuery|HistoricoQuery
      */
     public function getHistorico()
     {
-        return $this->hasOne(HistoricoPrecios::class, ['id' => 'historico_id']);
+        return $this->hasOne(Historico::class, ['id' => 'historico_id']);
     }
 
     /**
