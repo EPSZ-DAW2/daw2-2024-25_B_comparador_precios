@@ -66,7 +66,7 @@ INSERT INTO `articulos` (`id`, `nombre`, `descripcion`, `categoria_id`, `etiquet
 --
 
 CREATE TABLE IF NOT EXISTS `articulos_tienda` (
-  `id` int(11) NOT NULL COMMENT 'id del registro',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id del registro',
   `articulo_id` int(11) DEFAULT NULL COMMENT 'id del articulo',
   `tienda_id` int(11) DEFAULT NULL COMMENT 'id de la tienda',
   `precio_actual` decimal(10,2) DEFAULT NULL COMMENT 'precio del producto',
@@ -95,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `articulos_tienda` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --ALTER TABLE `articulos_tienda`
-MODIFY COLUMN `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id del registro';
 -- Volcado de datos para la tabla `articulos_tienda`
 --
 
