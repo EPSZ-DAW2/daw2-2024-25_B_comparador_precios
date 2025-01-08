@@ -49,3 +49,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- Enviar un aviso -->
 <?= Html::a('Enviar Aviso', ['avisos/enviar'], ['class' => 'btn btn-primary']) ?>
 
+<?= Html::a(
+    'Darse de baja', 
+    ['usuarios/baja'], 
+    [
+        'class' => 'btn btn-danger',
+        'data' => [
+            'confirm' => '¿Está seguro de que desea darse de baja? Tu cuenta será eliminada.',
+        ],
+    ]
+) ?>
+
