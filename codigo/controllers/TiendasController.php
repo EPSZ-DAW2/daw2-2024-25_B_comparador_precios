@@ -522,41 +522,44 @@ public function actionCrearArticulo($Tienda_id)
  */
 public function actionModificarOferta($Tienda_id)
 {
+    $ofertaSeleccionada = new Ofertas(); // Inicializar la variable
     $ofertas = Ofertas::find()->where(['tienda_id' => $Tienda_id])->all();
-    $ofertasList = ArrayHelper::map($ofertas, 'id', function($model) {
-        return $model->articulo->nombre . ' - ' . $model->precio_oferta; // Asumiendo que hay una relación 'articulo' en Ofertas
+    $ofertasList = ArrayHelper::map($ofertas, 'id', function ($model) {
+        return $model->articulo->nombre . ' - ' . $model->precio_oferta;
     });
 
-    $ofertaSeleccionada = null;
-
-    if (Yii::$app->request->post('oferta_id')) {
-        $ofertaSeleccionada = Ofertas::findOne(Yii::$app->request->post('oferta_id'));
+    if (Yii::$app->request->post()) {
+        $ofertaId = Yii::$app->request->post('oferta_id'); // Obtener ID de la oferta seleccionada
+        $ofertaSeleccionada = Ofertas::findOne($ofertaId);
 
         if (!$ofertaSeleccionada) {
-            throw new NotFoundHttpException('La oferta no existe.');
+            throw new NotFoundHttpException('La oferta seleccionada no existe.');
         }
 
-        if ($ofertaSeleccionada->load(Yii::$app->request->post()) && $ofertaSeleccionada->save()) {
-            // Registrar el histórico si se actualizó el precio de oferta
-            if (Yii::$app->request->post('Ofertas')['precio_oferta'] !== null) {
+        if ($ofertaSeleccionada->load(Yii::$app->request->post())) {
+            $articuloId = $ofertaSeleccionada->articulo_id; // Obtener el artículo asociado a la oferta
+
+            if ($ofertaSeleccionada->save()) {
+                // Guardar en el histórico
                 $historico = new Historico();
                 $historico->tienda_id = $Tienda_id;
-                $historico->articulo_id = $ofertaSeleccionada->articulo_id;
+                $historico->articulo_id = $articuloId;
                 $historico->precio = $ofertaSeleccionada->precio_oferta;
                 $historico->fecha = date('Y-m-d H:i:s');
                 $historico->save();
-            }
 
-            Yii::$app->session->setFlash('success', 'Oferta modificada con éxito.');
-            return $this->redirect(['view-store', 'id' => $Tienda_id]);
-        } else {
-            Yii::$app->session->setFlash('error', 'Ha habido un error al modificar la oferta.');
+                Yii::$app->session->setFlash('success', 'Oferta modificada con éxito.');
+                return $this->redirect(['view-store', 'id' => $Tienda_id]);
+            } else {
+                Yii::$app->session->setFlash('error', 'Error al guardar la oferta.');
+            }
         }
     }
 
     return $this->render('modificar-oferta', [
         'ofertasList' => $ofertasList,
         'ofertaSeleccionada' => $ofertaSeleccionada,
+        'Tienda_id' => $Tienda_id,
     ]);
 }
 
@@ -692,7 +695,4 @@ public function actionActualizarPrecios($tienda_id)
     ]);
 }
 
-
-
 }
-
