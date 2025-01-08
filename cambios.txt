@@ -133,3 +133,6 @@ Cambios dia 12 (Victor Martin) 07/01/2025
 Cambios dia 13 (Victor Gonzalo) 08/01/2025
 -Actualizado el perfil, añadiendo la accion para darse de baja (por el momento envia un aviso a un moderador del mismo continente)
 -Actualizada la vista de las comentarios dentro del perfil de usuario
+
+Cambios día 13 (Javier Marinas y Marcos Méndez):
+-Actualizados modelos y vistas de Clasificaciones para que muestre correctamente las tiendas asociadas a una clasificación
