@@ -13,9 +13,9 @@ use Yii;
  * @property string|null $fecha
  * @property float|null $precio
  *
- * @property Articulos $articulo
+ * @property Articulo $articulo
  * @property ArticulosTienda[] $articulosTiendas
- * @property Tiendas $tienda
+ * @property Tienda $tienda
  */
 class Historico extends \yii\db\ActiveRecord
 {
@@ -36,8 +36,8 @@ class Historico extends \yii\db\ActiveRecord
             [['articulo_id', 'tienda_id'], 'integer'],
             [['fecha'], 'safe'],
             [['precio'], 'number'],
-            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulos::class, 'targetAttribute' => ['articulo_id' => 'id']],
-            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tiendas::class, 'targetAttribute' => ['tienda_id' => 'id']],
+            [['articulo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articulo::class, 'targetAttribute' => ['articulo_id' => 'id']],
+            [['tienda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tienda::class, 'targetAttribute' => ['tienda_id' => 'id']],
         ];
     }
 
@@ -62,7 +62,7 @@ class Historico extends \yii\db\ActiveRecord
      */
     public function getArticulo()
     {
-        return $this->hasOne(Articulos::class, ['id' => 'articulo_id']);
+        return $this->hasOne(Articulo::class, ['id' => 'articulo_id']);
     }
 
     /**
@@ -82,7 +82,7 @@ class Historico extends \yii\db\ActiveRecord
      */
     public function getTienda()
     {
-        return $this->hasOne(Tiendas::class, ['id' => 'tienda_id']);
+        return $this->hasOne(Tienda::class, ['id' => 'tienda_id']);
     }
 
     /**
