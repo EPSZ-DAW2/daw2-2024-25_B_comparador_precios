@@ -17,26 +17,15 @@ $this->title = 'Comentarios del Usuario';
         <p>No tienes comentarios registrados.</p>
     <?php else: ?>
 
-        <?php if (!empty($comentariosTienda)): ?>
-            <h2>Comentarios sobre Tiendas</h2>
-            <ul>
-                <?php foreach ($comentariosTienda as $comentario): ?>
-                    <?php $comentario::findOne($comentario->tienda_id);  ?>
-                    <li>
-                        <strong>Nombre de la tienda:</strong> <?= Html::encode($comentario->tienda->nombre) ?><br>
-                        <strong>Comentario:</strong> <?= Html::encode($comentario->texto) ?><br>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-
         <?php if (!empty($comentariosArticulo)): ?>
             <h2>Comentarios sobre Artículos</h2>
             <ul>
                 <?php foreach ($comentariosArticulo as $comentario): ?>
                     <li>
-                        <strong>Nombre del artículo:</strong> <?= Html::encode($comentario->articulo->nombre) ?><br>
+                        <h4><strong>Artículo:</strong> <?= Html::encode($comentario->articulo->nombre) ?></h4>
+                        <strong>Tienda:</strong> <?= Html::encode($comentario->tienda->nombre) ?><br>
                         <strong>Comentario:</strong> <?= Html::encode($comentario->texto) ?><br>
+                        <br>
                     </li>
                 <?php endforeach; ?>
             </ul>
