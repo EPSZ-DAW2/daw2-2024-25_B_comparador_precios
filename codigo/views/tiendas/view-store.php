@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'tiendas/view-articulo', // Acción viewArticulo
                             'id' => $model->articulo_id, // Pasar el ID del artículo
+                            'tienda_id'=> $model->id, //pasar ID de la tienda
                         ],
                         [
                             'class' => 'btn btn-primary',
