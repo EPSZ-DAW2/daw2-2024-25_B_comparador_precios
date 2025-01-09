@@ -133,11 +133,21 @@ Cambios dia 12 (Victor Martin) 07/01/2025
 Cambios dia 13 (Victor Gonzalo) 08/01/2025
 -Actualizado el perfil, añadiendo la accion para darse de baja (por el momento envia un aviso a un moderador del mismo continente)
 
+Cambios día 13 (Javier Marinas y Marcos Méndez):
+-Actualizados modelos y vistas de Clasificaciones para que muestre correctamente las tiendas asociadas a una clasificación
+
 Cambios dia 13 (Víctor Martín) 08/01/2025
 - Models/Usuario (Funciones y constantes para el tema de roles)
 - ModeradoresController: modificación en los permisos de modo que solo lo pueden acceder usuarios con rol de moderador 
 
 -Actualizada la vista de las comentarios dentro del perfil de usuario
 
-Cambios día 13 (Javier Marinas y Marcos Méndez):
--Actualizados modelos y vistas de Clasificaciones para que muestre correctamente las tiendas asociadas a una clasificación
+
+Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025:
+- Añadida la búsqueda de tiendas basadas en la clasificación, categorías, etiquetas y lugar. Muestran los resultados en forma de ficha resumida.
+- Añadida opción de "Ver más" para una ficha detallada con información completa de la tienda seleccionada
+- Añadido acceso a valorar/comentar tienda, denunciar tienda, activar/desactivar seguimiento de tienda
+- Modificados los controladores: TiendasController y SeguimientosController
+- Modificados los modelos: Clasificaciones, Tienda y TiendaSearch
+- Modficadas las vistas de tiendas: _search, index y view
+- Creadas las vistas de tiendas: _tienda_card y denunciar
