@@ -11,67 +11,34 @@ use yii\widgets\ActiveForm;
 <div class="tienda-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => ['index'], // Acción donde procesas la búsqueda
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <!-- Campo para buscar por nombre de la tienda -->
+    <?= $form->field($model, 'nombre')->textInput(['placeholder' => 'Buscar por nombre de la tienda']) ?>
 
-    <?= $form->field($model, 'nombre') ?>
+    <!-- Campo para buscar por clasificación -->
+    <?= $form->field($model, 'clasificacion_id')->dropDownList(
+        \yii\helpers\ArrayHelper::map(\app\models\Clasificaciones::find()->all(), 'id', 'nombre'),
+        ['prompt' => 'Selecciona una clasificación']
+    ) ?>
 
-    <?= $form->field($model, 'descripcion') ?>
+    <!-- Campo para buscar por etiquetas -->
+    <?= $form->field($model, 'etiquetas_id')->dropDownList(
+        \yii\helpers\ArrayHelper::map(\app\models\Etiquetas::find()->all(), 'id', 'nombre'),
+        ['prompt' => 'Selecciona una etiqueta']
+    ) ?>
 
-    <?= $form->field($model, 'lugar') ?>
-
-    <?= $form->field($model, 'url') ?>
-
-    <?php // echo $form->field($model, 'direccion') ?>
-
-    <?php // echo $form->field($model, 'region_id') ?>
-
-    <?php // echo $form->field($model, 'telefono') ?>
-
-    <?php // echo $form->field($model, 'clasificacion_id') ?>
-
-    <?php // echo $form->field($model, 'etiquetas_id') ?>
-
-    <?php // echo $form->field($model, 'imagen_principal') ?>
-
-    <?php // echo $form->field($model, 'suma_valoraciones') ?>
-
-    <?php // echo $form->field($model, 'suma_votos') ?>
-
-    <?php // echo $form->field($model, 'visible') ?>
-
-    <?php // echo $form->field($model, 'cerrada') ?>
-
-    <?php // echo $form->field($model, 'denuncias') ?>
-
-    <?php // echo $form->field($model, 'fecha_primera_denuncia') ?>
-
-    <?php // echo $form->field($model, 'motivo_denuncia') ?>
-
-    <?php // echo $form->field($model, 'bloqueada') ?>
-
-    <?php // echo $form->field($model, 'fecha_bloqueo') ?>
-
-    <?php // echo $form->field($model, 'motivo_bloqueo') ?>
-
-    <?php // echo $form->field($model, 'comentarios_id') ?>
-
-    <?php // echo $form->field($model, 'cerrado_comentar') ?>
-
-    <?php // echo $form->field($model, 'seguimiento_id') ?>
-
-    <?php // echo $form->field($model, 'registro_id') ?>
-
-    <?php // echo $form->field($model, 'articulo_tienda_id') ?>
+    <!-- Campo para buscar por ubicación -->
+    <?= $form->field($model, 'lugar')->textInput(['placeholder' => 'Buscar por ubicación']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Buscar'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Resetear'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
