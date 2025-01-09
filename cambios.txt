@@ -144,7 +144,7 @@ Cambios dia 13 (Víctor Martín) 08/01/2025
 
 
 Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025:
-- Añadida la búsqueda de tiendas basadas en la clasificación, categorías, etiquetas y lugar. Muestran los resultados en forma de ficha resumida.
+- Añadida la búsqueda de tiendas basadas en la clasificación, categorías, etiquetas y lugar. Muestran los resultados en forma de ficha resumida
 - Añadida opción de "Ver más" para una ficha detallada con información completa de la tienda seleccionada
 - Añadido acceso a valorar/comentar tienda, denunciar tienda, activar/desactivar seguimiento de tienda
 - Modificados los controladores: TiendasController y SeguimientosController
