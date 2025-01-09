@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 /** @var app\models\Comentario $comentario */
 /** @var app\models\Comentario[] $comentarios */
 
-$this->title = $model->nombre; // Nombre de la tienda
+$this->title = $model->nombre; // Nombre del articulo
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tiendas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($comentario, 'tienda_id', [
             'options' => ['tag' => false], // Desactiva el contenedor <div>
         ])->hiddenInput([
-            'value' => 2,
+            'value' => $tienda_id,
             'name' => 'tieid'  // Personaliza el nombre del campo
         ])->label(false) ?>
 
