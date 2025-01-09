@@ -142,7 +142,6 @@ Cambios dia 13 (Víctor Martín) 08/01/2025
 
 -Actualizada la vista de las comentarios dentro del perfil de usuario
 
-
 Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025:
 - Añadida la búsqueda de tiendas basadas en la clasificación, categorías, etiquetas y lugar. Muestran los resultados en forma de ficha resumida
 - Añadida opción de "Ver más" para una ficha detallada con información completa de la tienda seleccionada
@@ -151,3 +150,9 @@ Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025:
 - Modificados los modelos: Tienda y TiendaSearch
 - Modficadas las vistas de tiendas: _search, index y view
 - Creadas las vistas de tiendas: _tienda_card y denunciar
+
+Cambios día 14 (Víctor Martín)
+- Actualizado el modelo y controlador de Moderadores
+- Añadidas las funciones para el mantenimiento de tiendas de su misma region
+- Añadidas las vistas pertinentes
+
