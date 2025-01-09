@@ -74,9 +74,22 @@ class TiendasController extends Controller
     $comentario = new Comentario();
     $comentario->tienda_id = $id;
 
-    if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
-        Yii::$app->session->setFlash('success', 'Tu comentario ha sido guardado.');
-        return $this->redirect(['view', 'id' => $id]);
+    if (Yii::$app->request->isPost) {
+        // Verificar si el usuario está autenticado al intentar enviar un comentario
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->session->setFlash('error', 'Debes iniciar sesión para comentar.');
+            return $this->redirect(['site/login']);
+        }
+
+        // Asociar el comentario al usuario autenticado
+        $comentario->registro_id = Yii::$app->user->identity->id;
+
+        if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
+            Yii::$app->session->setFlash('success', 'Tu comentario ha sido guardado.');
+            return $this->redirect(['view', 'id' => $id]);
+        } else {
+            Yii::$app->session->setFlash('error', 'Hubo un problema al guardar el comentario.');
+        }
     }
 
     $comentarios = $model->getComentarios()->orderBy(['id' => SORT_DESC])->all();
