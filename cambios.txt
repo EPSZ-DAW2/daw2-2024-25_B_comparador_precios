@@ -156,8 +156,11 @@ Cambios día 14 (Víctor Martín)
 - Añadidas las funciones para el mantenimiento de tiendas de su misma region
 - Añadidas las vistas pertinentes
 
-Cambios día 15 (Victor Gonzalo) 09/01/2025
+Cambios día 14 (Victor Gonzalo) 09/01/2025
 -Cambiado el index de inicio (views/site/index) para añadir una opcion de busqueda de tiendas
 -Arreglado un problema con la id de tienda en los comentarios de articulos de tienda
 -Arreglado un error con el header en el css
 -Modificado una parte de la vista de comentarios de usuario en el perfil 
+
+Cambios día 14 (Javier Marinas y Marcos Méndez)
+-Arreglado problema registro de comentarios en tiendas
