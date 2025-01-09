@@ -164,3 +164,9 @@ Cambios día 14 (Victor Gonzalo) 09/01/2025
 
 Cambios día 14 (Javier Marinas y Marcos Méndez)
 -Arreglado problema registro de comentarios en tiendas
+
+Cambios dia 14 (Victor Martín)
+- Actualizado el modelo, controladores y vistas de moderadores
+- Ya esta implementadas las funciones de mantenimiento de usuarios en la region del moderador
+- Avanzada la funcion de gestion de comentarios y articulos de una tienda aunque falta pulirlo
+- Cambio en la base de datos en la tabla comentarios para poder hacer comentarios de las tiendas
