@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 
 
-$this->title = 'Comentarios del Usuario';
+$this->title = 'Tus comentarios';
 ?>
 
 <div class="comentarios-usuario">
@@ -18,12 +18,11 @@ $this->title = 'Comentarios del Usuario';
     <?php else: ?>
 
         <?php if (!empty($comentariosArticulo)): ?>
-            <h2>Comentarios sobre Artículos</h2>
             <ul>
                 <?php foreach ($comentariosArticulo as $comentario): ?>
                     <li>
-                        <h4><strong>Artículo:</strong> <?= Html::encode($comentario->articulo->nombre) ?></h4>
-                        <strong>Tienda:</strong> <?= Html::encode($comentario->tienda->nombre) ?><br>
+                        <strong>Artículo:</strong> <?= Html::encode($comentario->articulo ? $comentario->articulo->nombre : 'Artículo no asociado') ?><br>
+                        <strong>Tienda:</strong> <?=Html::encode($comentario->tienda ? $comentario->tienda->nombre : 'Tienda no asociada')  ?><br>
                         <strong>Comentario:</strong> <?= Html::encode($comentario->texto) ?><br>
                         <br>
                     </li>
