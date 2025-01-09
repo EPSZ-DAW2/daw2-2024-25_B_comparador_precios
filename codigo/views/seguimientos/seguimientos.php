@@ -47,9 +47,9 @@ $this->title = 'Mis Seguimientos';
         <?php foreach ($seguimientosOferta as $oferta): ?>
             <li>
                 <h4><?= Html::encode($oferta->articulo->nombre ) ?></h4>
-                <?= Html::encode($oferta->precio_oferta ) ?>
-                <?= Html::encode($oferta->precio_og ) ?>
-                <?= Html::encode($oferta->tienda->nombre ) ?>
+                <strong><?= Html::encode($oferta->tienda->nombre ) ?></strong><br>
+                <strong>Oferta actual: <?= Html::encode($oferta->precio_oferta ) ?></strong><br>
+                
             </li>
         <?php endforeach; ?>
     </ul>
