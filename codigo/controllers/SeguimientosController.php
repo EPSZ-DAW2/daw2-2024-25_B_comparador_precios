@@ -63,6 +63,39 @@ class SeguimientosController extends Controller
             'seguimientosOferta' => $seguimientosOferta,
         ]);
     }
+
+    public function actionToggleSeguimiento($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
+
+        $usuarioId = Yii::$app->user->identity->id;
+
+        // Buscar seguimiento existente
+        $seguimiento = Seguimiento::find()
+            ->where(['usuario_id' => $usuarioId, 'tienda_id' => $id])
+            ->one();
+
+        if ($seguimiento) {
+            // Si existe el seguimiento, elimínalo (desactivar seguimiento)
+            $seguimiento->delete();
+            Yii::$app->session->setFlash('success', 'Has dejado de seguir esta tienda.');
+        } else {
+            // Si no existe, crea uno nuevo (activar seguimiento)
+            $seguimiento = new Seguimiento();
+            $seguimiento->usuario_id = $usuarioId;
+            $seguimiento->tienda_id = $id;
+            $seguimiento->fecha = date('Y-m-d H:i:s');
+            if ($seguimiento->save()) {
+                Yii::$app->session->setFlash('success', 'Ahora sigues esta tienda.');
+            } else {
+                Yii::$app->session->setFlash('error', 'No se pudo seguir la tienda.');
+            }
+        }
+
+        return $this->redirect(['tiendas/view', 'id' => $id]);
+    }
     
 
 }

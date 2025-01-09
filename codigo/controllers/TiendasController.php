@@ -16,6 +16,7 @@ use app\models\Dueno;
 use app\models\Usuario;
 use app\models\Comentario;
 use app\models\TiendasSearch;
+use app\models\Seguimiento;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,11 +68,26 @@ class TiendasController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+{
+    $model = $this->findModel($id);
+
+    $comentario = new Comentario();
+    $comentario->tienda_id = $id;
+
+    if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
+        Yii::$app->session->setFlash('success', 'Tu comentario ha sido guardado.');
+        return $this->redirect(['view', 'id' => $id]);
     }
+
+    $comentarios = $model->getComentarios()->orderBy(['id' => SORT_DESC])->all();
+
+    return $this->render('view', [
+        'model' => $model,
+        'comentario' => $comentario,
+        'comentarios' => $comentarios,
+    ]);
+}
+
 
     /**
      * Creates a new Tienda model.
@@ -658,5 +674,78 @@ public function actionViewArticulo($id)
         'comentarios' => $comentarios,  // Enviar los comentarios existentes
     ]);
 }
+
+public function actionDenunciar($id)
+{
+    if (Yii::$app->user->isGuest) {
+        return $this->redirect(['site/login']);
+    }
+
+    // Buscar la tienda
+    $tienda = $this->findModel($id);
+
+    if (Yii::$app->request->isPost) {
+        // Capturar el motivo desde el formulario
+        $nuevoMotivo = Yii::$app->request->post('motivo_denuncia');
+
+        // Incrementar el contador de denuncias
+        $tienda->denuncias = $tienda->denuncias + 1;
+
+        // Registrar la fecha de la primera denuncia (si no se ha registrado antes)
+        if (!$tienda->fecha_primera_denuncia) {
+            $tienda->fecha_primera_denuncia = date('Y-m-d H:i:s');
+        }
+
+        // Agregar el nuevo motivo de denuncia a la tienda
+        $tienda->agregarMotivoDenuncia($nuevoMotivo);
+
+        if ($tienda->save(false)) {
+            Yii::$app->session->setFlash('success', 'Denuncia registrada exitosamente.');
+            return $this->redirect(['view', 'id' => $id]);
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo registrar la denuncia. Por favor, inténtalo de nuevo.');
+        }
+    }
+
+    return $this->render('denunciar', [
+        'model' => $tienda,
+    ]);
+}
+
+public function actionToggleSeguimiento($id)
+{
+    if (Yii::$app->user->isGuest) {
+        return $this->redirect(['site/login']);
+    }
+
+    $usuarioId = Yii::$app->user->identity->id;
+
+    // Buscar seguimiento existente
+    $seguimiento = Seguimiento::find()
+        ->where(['usuario_id' => $usuarioId, 'tienda_id' => $id])
+        ->one();
+
+    if ($seguimiento) {
+        // Si existe el seguimiento, elimínalo (desactivar seguimiento)
+        $seguimiento->delete();
+        Yii::$app->session->setFlash('success', 'Has dejado de seguir esta tienda.');
+    } else {
+        // Si no existe, crea uno nuevo (activar seguimiento)
+        $seguimiento = new Seguimiento();
+        $seguimiento->usuario_id = $usuarioId;
+        $seguimiento->tienda_id = $id;
+		$seguimiento->articulo_id = null; // ***¡Importante que sea NULL!***
+        $seguimiento->oferta_id = null; // ***¡Importante que sea NULL!***
+        $seguimiento->fecha = date('Y-m-d H:i:s');
+        if ($seguimiento->save()) {
+            Yii::$app->session->setFlash('success', 'Ahora sigues esta tienda.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo seguir la tienda.');
+        }
+    }
+
+    return $this->redirect(['tiendas/view', 'id' => $id]);
+}
+
 
 }
