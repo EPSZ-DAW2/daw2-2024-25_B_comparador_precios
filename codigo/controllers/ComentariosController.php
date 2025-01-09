@@ -80,7 +80,7 @@ class ComentariosController extends Controller
             Yii::$app->session->setFlash('error', 'Hubo un error al publicar el comentario.');
         }
     
-        return $this->redirect(['tiendas/view-articulo', 'id' => $artid]);
+        return $this->redirect(['tiendas/view-articulo', 'id' => $artid, 'tienda_id' => $tieid]);
     }
     
 
