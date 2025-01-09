@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul class="list-group">
             <?php foreach ($comentarios as $comentario): ?>
                 <li class="list-group-item">
-                    <strong><?= Html::encode($comentario->usuario->nombre) ?>:</strong>
+                    <strong><?= Html::encode($comentario->registro->creador_id ?? 'Anónimo') ?>:</strong>
                     <?= Html::encode($comentario->texto) ?>
                     <span class="badge bg-info"><?= $comentario->valoracion ?>/5</span>
                 </li>
