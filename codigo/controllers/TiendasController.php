@@ -644,7 +644,7 @@ public function actionEliminarOferta($Tienda_id)
     }
 }
 
-public function actionViewArticulo($id)
+public function actionViewArticulo($id, $tienda_id)
 {
     // Encuentra el modelo de artículo por ID
     $model = Articulo::findOne($id); 
@@ -670,6 +670,7 @@ public function actionViewArticulo($id)
     // Renderizar la vista con los comentarios y el artículo
     return $this->render('view-articulo', [
         'model' => $model,
+        'tienda_id' => $tienda_id,
         'comentario' => $comentario,  // Enviar el formulario de comentario
         'comentarios' => $comentarios,  // Enviar los comentarios existentes
     ]);
