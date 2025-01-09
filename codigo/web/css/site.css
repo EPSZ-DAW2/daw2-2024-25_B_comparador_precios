@@ -167,3 +167,11 @@ a.desc:after {
         gap: 10px;
     }
 }
+
+body {
+    padding-top: 80px; 
+}
+
+.main > .container {
+    padding-top: 80px; 
+}
