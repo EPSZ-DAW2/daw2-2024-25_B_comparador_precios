@@ -35,7 +35,7 @@ $config = require_once dirname(__DIR__) . '/config/web.php';
 <body>
     <header class="header-principal">
     <div class="logo">
-            <img src="Logo.jpg" alt="Logo" width="150"> <!-- Asegúrate de colocar la ruta correcta a tu logo -->
+            <img src="Logo.jpg" alt="Logo" width="120"> <!-- Asegúrate de colocar la ruta correcta a tu logo -->
         </div>
         <nav class="navegacion">
             <ul class="menu">
