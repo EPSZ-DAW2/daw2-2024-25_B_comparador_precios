@@ -148,6 +148,6 @@ Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025:
 - Añadida opción de "Ver más" para una ficha detallada con información completa de la tienda seleccionada
 - Añadido acceso a valorar/comentar tienda, denunciar tienda, activar/desactivar seguimiento de tienda
 - Modificados los controladores: TiendasController y SeguimientosController
-- Modificados los modelos: Clasificaciones, Tienda y TiendaSearch
+- Modificados los modelos: Tienda y TiendaSearch
 - Modficadas las vistas de tiendas: _search, index y view
 - Creadas las vistas de tiendas: _tienda_card y denunciar
