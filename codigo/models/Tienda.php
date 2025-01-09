@@ -167,7 +167,7 @@ class Tienda extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::class, ['tienda_id' => 'id']);
+        return $this->hasMany(Comentario::class, ['tienda_id' => 'id']);
     }
 
     /**
@@ -177,7 +177,7 @@ class Tienda extends \yii\db\ActiveRecord
      */
     public function getComentarios0()
     {
-        return $this->hasOne(Comentarios::class, ['id' => 'comentarios_id']);
+        return $this->hasOne(Comentario::class, ['id' => 'comentarios_id']);
     }
 
     /**
@@ -323,6 +323,22 @@ class Tienda extends \yii\db\ActiveRecord
         return $this->suma_valoraciones;
     }
     /**
+	 * Obtiene la valoración media de la tienda basada en los comentarios.
+	 * @return string
+	 */
+	public function getValoracionMedia()
+	{
+		$totalValoraciones = $this->getComentarios()->sum('valoracion');
+		$totalComentarios = $this->getComentarios()->count();
+
+		if ($totalComentarios > 0) {
+			return round($totalValoraciones / $totalComentarios, 1) . ' / 5';
+		}
+
+		return 'Sin valoraciones aún.';
+	}
+	
+	/**
      * Gets the ID of the store.
      * @return int
      */
@@ -452,5 +468,37 @@ class Tienda extends \yii\db\ActiveRecord
     {
         return $this->articulo_tienda_id;
     }
+
+	/**
+	 * Agrega un nuevo motivo de denuncia al campo `motivo_denuncia`.
+	 *
+	 * @param string $nuevoMotivo El motivo de la nueva denuncia.
+	 */
+	public function agregarMotivoDenuncia($nuevoMotivo)
+	{
+		// Obtener los motivos existentes
+		$motivosExistentes = $this->motivo_denuncia;
+
+		// Calcular el número de la nueva denuncia
+		$contador = 1;
+		if (!empty($motivosExistentes)) {
+			$lineas = explode("\n", $motivosExistentes);
+			$contador = count($lineas) + 1;
+		}
+
+		// Concatenar el nuevo motivo con un formato numerado
+		$nuevoMotivoFormateado = $contador . ': ' . $nuevoMotivo;
+		$this->motivo_denuncia = empty($motivosExistentes)
+			? $nuevoMotivoFormateado
+			: $motivosExistentes . "\n" . $nuevoMotivoFormateado;
+
+		// Incrementar el contador de denuncias
+		$this->denuncias = $this->denuncias + 1;
+
+		// Registrar la fecha de la primera denuncia si no existe
+		if (!$this->fecha_primera_denuncia) {
+			$this->fecha_primera_denuncia = date('Y-m-d H:i:s');
+		}
+	}
 
 }

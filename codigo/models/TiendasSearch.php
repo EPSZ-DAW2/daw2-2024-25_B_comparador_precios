@@ -17,8 +17,8 @@ class TiendasSearch extends Tienda
     public function rules()
     {
         return [
-            [['id', 'region_id', 'clasificacion_id', 'etiquetas_id', 'suma_valoraciones', 'suma_votos', 'visible', 'cerrada', 'denuncias', 'bloqueada', 'comentarios_id', 'cerrado_comentar', 'seguimiento_id', 'registro_id', 'articulo_tienda_id'], 'integer'],
-            [['nombre', 'descripcion', 'lugar', 'url', 'direccion', 'telefono', 'imagen_principal', 'fecha_primera_denuncia', 'motivo_denuncia', 'fecha_bloqueo', 'motivo_bloqueo'], 'safe'],
+            [['nombre', 'lugar'], 'string'],
+            [['clasificacion_id', 'etiquetas_id'], 'integer'],
         ];
     }
 
@@ -46,6 +46,9 @@ class TiendasSearch extends Tienda
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params);
@@ -58,35 +61,23 @@ class TiendasSearch extends Tienda
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'region_id' => $this->region_id,
             'clasificacion_id' => $this->clasificacion_id,
             'etiquetas_id' => $this->etiquetas_id,
-            'suma_valoraciones' => $this->suma_valoraciones,
-            'suma_votos' => $this->suma_votos,
-            'visible' => $this->visible,
-            'cerrada' => $this->cerrada,
-            'denuncias' => $this->denuncias,
-            'fecha_primera_denuncia' => $this->fecha_primera_denuncia,
-            'bloqueada' => $this->bloqueada,
-            'fecha_bloqueo' => $this->fecha_bloqueo,
-            'comentarios_id' => $this->comentarios_id,
-            'cerrado_comentar' => $this->cerrado_comentar,
-            'seguimiento_id' => $this->seguimiento_id,
-            'registro_id' => $this->registro_id,
-            'articulo_tienda_id' => $this->articulo_tienda_id,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'lugar', $this->lugar])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'direccion', $this->direccion])
-            ->andFilterWhere(['like', 'telefono', $this->telefono])
-            ->andFilterWhere(['like', 'imagen_principal', $this->imagen_principal])
-            ->andFilterWhere(['like', 'motivo_denuncia', $this->motivo_denuncia])
-            ->andFilterWhere(['like', 'motivo_bloqueo', $this->motivo_bloqueo]);
+              ->andFilterWhere(['like', 'lugar', $this->lugar]);
 
         return $dataProvider;
     }
+	
+	public function attributeLabels()
+{
+    return [
+        'clasificacion_id' => 'Clasificación',
+        'etiquetas_id' => 'Etiqueta',
+    ];
+}
+
+	
 }
