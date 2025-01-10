@@ -176,3 +176,8 @@ Cambios día 15 (Javier Marinas y Marcos Méndez) 10/01/2025
 -Añadida la funcionalidad del botón Resetear en el formulario de búsqueda de tiendas
 -Modificados los formularios de comentario para que aparezcan sin contenido de serie
 -Modificados los botones Enviar Comentario, Denunciar Tienda y Seguir/Dejar de Seguir para que redireccionen correctamente al login si no se ha iniciado sesión
+
+Cambios día 15 (Victor Martín Campos) 10/01/2025
+- Actualizado de nuevo el modelo, controladores y vista de moderadores
+- Añadida de nuevo la funcionalidad de editar articulos de la tienda que modera el usuario
+- modificado tambien el models/ArticulosTienda, simplemente añadida una funcion para los comentarios que necesitaba
