@@ -77,7 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3>Añadir un Comentario</h3>
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($comentario, 'texto')->textarea(['rows' => 4]) ?>
+        <?= $form->field($comentario, 'texto')->textarea([
+        'rows' => 4,
+        'value' => '',
+		]) ?>
 
         <?= $form->field($comentario, 'valoracion')->dropDownList([
             5 => '5 - Excelente',
@@ -85,39 +88,40 @@ $this->params['breadcrumbs'][] = $this->title;
             3 => '3 - Bueno',
             2 => '2 - Regular',
             1 => '1 - Malo',
-        ], ['prompt' => 'Seleccionar Valoración']) ?>
+        ], ['prompt' => 'Seleccionar Valoración',
+			'value' => null,
+		]) ?>
 
         <?= Html::submitButton('Enviar Comentario', ['class' => 'btn btn-primary']) ?>
 		
 	<p>
 		<?= Html::a('Denunciar Tienda', ['denunciar', 'id' => $model->id], [
 			'class' => 'btn btn-warning',
-]) ?>
+		]) ?>
 
 	</p>
 
-	<?php if (!Yii::$app->user->isGuest): ?>
 		<?php
-		$usuarioId = Yii::$app->user->identity->id;
-		$seguimiento = app\models\Seguimiento::find()
-			->where(['usuario_id' => $usuarioId, 'tienda_id' => $model->id])
-			->one();
+		$seguimiento = !Yii::$app->user->isGuest
+			? app\models\Seguimiento::find()
+				->where(['usuario_id' => Yii::$app->user->identity->id, 'tienda_id' => $model->id])
+				->one()
+			: null;
 		?>
 		<div class="seguimiento">
 			<?= Html::a(
 				$seguimiento ? 'Dejar de Seguir' : 'Seguir Tienda',
-				['tiendas/toggle-seguimiento', 'id' => $model->id],
+				['tiendas/seguimiento', 'id' => $model->id],
 				[
 					'class' => $seguimiento ? 'btn btn-danger' : 'btn btn-success',
-					'data' => [
+					'data' => !Yii::$app->user->isGuest ? [
 						'confirm' => $seguimiento
 							? '¿Estás seguro de que quieres dejar de seguir esta tienda?'
 							: '¿Quieres seguir esta tienda?',
-					],
+					] : [],
 				]
 			) ?>
 		</div>
-	<?php endif; ?>
 
 	
     <?php ActiveForm::end(); ?>
