@@ -3,8 +3,7 @@
 
 // Comentar las siguientes dos líneas cuando se despliegue en producción
 defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'prod');  // Asegúrate de estar en el entorno 'prod' en producción
-
+defined('YII_ENV') or define('YII_ENV', 'prod');  
 $base = dirname(dirname(__DIR__)) . '/librerias';
 $requires = [
     [$base, 'vendor', 'autoload.php'],
@@ -35,7 +34,7 @@ $config = require_once dirname(__DIR__) . '/config/web.php';
 <body>
     <header class="header-principal">
     <div class="logo">
-            <img src="Logo.jpg" alt="Logo" width="120"> <!-- Asegúrate de colocar la ruta correcta a tu logo -->
+            <img src="Logo.jpg" alt="Logo" width="120"> 
         </div>
         <nav class="navegacion">
             <ul class="menu">
