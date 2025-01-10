@@ -170,3 +170,9 @@ Cambios dia 14 (Victor Martín)
 - Ya esta implementadas las funciones de mantenimiento de usuarios en la region del moderador
 - Avanzada la funcion de gestion de comentarios y articulos de una tienda aunque falta pulirlo
 - Cambio en la base de datos en la tabla comentarios para poder hacer comentarios de las tiendas
+
+
+Cambios día 15 (Javier Marinas y Marcos Méndez) 10/01/2025
+-Añadida la funcionalidad del botón Resetear en el formulario de búsqueda de tiendas
+-Modificados los formularios de comentario para que aparezcan sin contenido de serie
+-Modificados los botones Enviar Comentario, Denunciar Tienda y Seguir/Dejar de Seguir para que redireccionen correctamente al login si no se ha iniciado sesión
