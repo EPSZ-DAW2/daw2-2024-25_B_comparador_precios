@@ -61,7 +61,7 @@ Cambios día 8 (Javier Marinas y Marcos Méndez):
 -Modificadas las vistas de clasificaciones para mostrar las tiendas asociadas
 
 
-Cambios dia 9 (Victor Martin) 4/01/2025
+Cambios dia 9 (Victor Martin y Rocío Rubio) 4/01/2025
 -Añadido modelo controlador y vistas acerca de moderadores (pendiente de revision de ciertas funciones)
 
 Cambios dia 9 (Marcos Díez) 4/01/2025
@@ -124,7 +124,7 @@ Cambios dia 12 (Victor Gonzalo) 7/1/25
 -Añadida vista de comentarios y acción de comentar y valorar en los articulos de las tiendas (queda la funcionalidad de responder a comentarios)
 -Arreglos menores en la vista de la tienda, comparador y articulos de tienda
 
-Cambios dia 12 (Victor Martin) 07/01/2025
+Cambios dia 12 (Victor Martin y Rocío Rubio) 07/01/2025
 -Actualizados modelo y controlador de moderadores
 -Actualizadas las vistas
 -Actualizada la tabla de moderador con un campo que indicara si ha solicitado la baja
@@ -165,7 +165,7 @@ Cambios día 14 (Victor Gonzalo) 09/01/2025
 Cambios día 14 (Javier Marinas y Marcos Méndez)
 -Arreglado problema registro de comentarios en tiendas
 
-Cambios dia 14 (Victor Martín)
+Cambios dia 14 (Victor Martín y Rocío Rubio)
 - Actualizado el modelo, controladores y vistas de moderadores
 - Ya esta implementadas las funciones de mantenimiento de usuarios en la region del moderador
 - Avanzada la funcion de gestion de comentarios y articulos de una tienda aunque falta pulirlo
@@ -181,3 +181,11 @@ Cambios día 15 (Victor Martín Campos) 10/01/2025
 - Actualizado de nuevo el modelo, controladores y vista de moderadores
 - Añadida de nuevo la funcionalidad de editar articulos de la tienda que modera el usuario
 - modificado tambien el models/ArticulosTienda, simplemente añadida una funcion para los comentarios que necesitaba
+
+Cambios dia 15 (Rocío Rubio ) 10/01/2025
+-cambios en el diseño de la web para que se vea mejor visualmente:
+   * barra no fija en el footer
+   * modificacion del tamaño de los margenes
+   * relleno de la pagina inicial (valoraciones, eslogan...)
+   * modificacion de las fuentes de letras de la web para hacerla mas atractiv
+
