@@ -189,3 +189,7 @@ Cambios dia 15 (Rocío Rubio ) 10/01/2025
    * relleno de la pagina inicial (valoraciones, eslogan...)
    * modificacion de las fuentes de letras de la web para hacerla mas atractiv
 
+Cambios dia 15 (Víctor Martín) 10/01/2025
+- añadida funcion en el modelo Aviso necesaria para moderadores
+- actualizados modelo controladores y vistas
+- Ya terminado a falta de revisar detalles
