@@ -64,7 +64,7 @@ class SeguimientosController extends Controller
         ]);
     }
 
-    public function actionToggleSeguimiento($id)
+    /*public function actionSeguimiento($id)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
@@ -95,7 +95,7 @@ class SeguimientosController extends Controller
         }
 
         return $this->redirect(['tiendas/view', 'id' => $id]);
-    }
+    }*/
     
 
 }
