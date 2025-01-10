@@ -89,9 +89,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <!-- Botón para enviar el formulario -->
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Comentar'), [
-                'class' => 'btn btn-primary',
-            ]) ?>
+            <?php if (!Yii::$app->user->isGuest): ?>
+                <?= Html::submitButton(Yii::t('app', 'Comentar'), [
+                    'class' => 'btn btn-primary',
+                ]) ?>
+                
+            <?php else: ?>
+                <p><?= Yii::t('app', 'Por favor, inicie sesión para comentar.') ?></p>
+            <?php endif; ?>
         </div>
 
     <?php ActiveForm::end(); ?>
