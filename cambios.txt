@@ -193,3 +193,9 @@ Cambios dia 15 (Víctor Martín) 10/01/2025
 - añadida funcion en el modelo Aviso necesaria para moderadores
 - actualizados modelo controladores y vistas
 - Ya terminado a falta de revisar detalles
+
+Cambios dia 16 (Víctor Martín Campos) 11/01/2025
+- añadido modelo controlador y vista de registros logs, funciona correctamente
+- modificado el controlador de registro para que haga un registro log de modo que cuando alguien se regitre lo ponga (faltaria hacerlo en mas)
+- modificado el modelo y controlador de usuarios ya funcionan bien (con los roles)
+- Modificado el sql con la tabla para el registro logs
