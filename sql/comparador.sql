@@ -564,9 +564,9 @@ INSERT INTO `registro_usuarios` (`id`, `fecha_creacion`, `creador_id`, `fecha_mo
 CREATE TABLE IF NOT EXISTS `seguimientos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) DEFAULT NULL COMMENT 'id del usuario del seguimiento',
-  `tienda_id` int(11) DEFAULT 0 COMMENT 'id del usuario de la tienda o 0 si no es tienda',
-  `articulo_id` int(11) DEFAULT 0 COMMENT 'id del usuario del articulo o 0 si no es articulo',
-  `oferta_id` int(11) DEFAULT 0 COMMENT 'id de la oferta del seguimiento o 0 si no es oferta',
+  `tienda_id` int(11) DEFAULT NULL COMMENT 'id del usuario de la tienda o 0 si no es tienda',
+  `articulo_id` int(11) DEFAULT NULL COMMENT 'id del usuario del articulo o 0 si no es articulo',
+  `oferta_id` int(11) DEFAULT NULL COMMENT 'id de la oferta del seguimiento o 0 si no es oferta',
   `fecha` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_seguimientos_usuario` (`usuario_id`),
