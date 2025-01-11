@@ -408,10 +408,10 @@ class TiendasController extends Controller
 			}
 
 			$Articulo = Articulo::findOne($Articulo_id);
-			$historico = Historico::find()->where(['tienda_id' => $Tienda_id, 'articulo_id' => $Articulo_id])->all();
+			$historico = Historico::find()->where([ 'articulo_id' => $Articulo_id])->all();
 
 			if (!$historico) {
-				throw new NotFoundHttpException('El artículo no tiene historico de precios para esta tienda.');
+				throw new NotFoundHttpException('El artículo no tiene historico de precios para ninguna tienda.');
 			}
 
 			// Verifica si el artículo tiene histórico de precios
