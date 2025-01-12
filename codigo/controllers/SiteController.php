@@ -122,6 +122,7 @@ class SiteController extends Controller
                     if ($usuario->accesos_fallidos >= Yii::$app->params['loginAttemptLimit']) {
                         $usuario->bloquearUsuario();
                         $usuario->motivo_bloqueo = 'Intentos máximos de logueo sobrepasados';
+						$usuario->fecha_bloqueo = date('Y-m-d\TH:i:sP');
                         $usuario->save();
                         Yii::$app->session->setFlash('error', 'Demasiados intentos fallidos. Tu cuenta está bloqueada temporalmente.');
                     } else {
