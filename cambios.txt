@@ -199,3 +199,10 @@ Cambios dia 16 (Víctor Martín Campos) 11/01/2025
 - modificado el controlador de registro para que haga un registro log de modo que cuando alguien se regitre lo ponga (faltaria hacerlo en mas)
 - modificado el modelo y controlador de usuarios ya funcionan bien (con los roles)
 - Modificado el sql con la tabla para el registro logs
+
+Cambios dia 17 (Víctor Martín Campos) 12/01/2025
+- añadido el mantenimiento de moderadores y tiendas (mvc ModeradoresAdmin y TiendasAdmin)
+- modificado models de Tienda y Seguimiento arreglando errores 
+- añadido Moderadores Search
+- Modificados controladores de registro y login para que hagan registrologs y se guarden correctamente
+- tambien implementado tema de roles en estos controladores
