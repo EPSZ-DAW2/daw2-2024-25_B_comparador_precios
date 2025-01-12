@@ -206,3 +206,6 @@ Cambios dia 17 (Víctor Martín Campos) 12/01/2025
 - añadido Moderadores Search
 - Modificados controladores de registro y login para que hagan registrologs y se guarden correctamente
 - tambien implementado tema de roles en estos controladores
+
+Cambios dia 17 (Marcos Díez Álvarez) 12/01/2025
+-Añadida la fecha de bloqueo en el momento en el que se bloquea la cuenta por acceder mal 5 veces
