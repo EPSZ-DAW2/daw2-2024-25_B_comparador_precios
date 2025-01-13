@@ -171,6 +171,9 @@ Cambios dia 14 (Victor Martín y Rocío Rubio)
 - Avanzada la funcion de gestion de comentarios y articulos de una tienda aunque falta pulirlo
 - Cambio en la base de datos en la tabla comentarios para poder hacer comentarios de las tiendas
 
+Cambios dia 14 (Alejandra y Diego)
+-Arregladas funciones en controlador de tienda relacionadas con articulos y ofertas (falta arreglar crear articulo)
+
 
 Cambios día 15 (Javier Marinas y Marcos Méndez) 10/01/2025
 -Añadida la funcionalidad del botón Resetear en el formulario de búsqueda de tiendas
@@ -209,6 +212,9 @@ Cambios dia 17 (Víctor Martín Campos) 12/01/2025
 
 Cambios dia 17 (Marcos Díez Álvarez) 12/01/2025
 -Añadida la fecha de bloqueo en el momento en el que se bloquea la cuenta por acceder mal 5 veces
+
+Cambios dia 17 (Alejandra) 
+Cambiada consulta al historico en funciones de ofertas en controlador tienda 
 
 Cambios dia 18 (Víctor Martín Campos) 13/01/2025
 - modificados controladores y vistas de moderadores. Añadidas las funciones del moderador en cuanto a comentarios
