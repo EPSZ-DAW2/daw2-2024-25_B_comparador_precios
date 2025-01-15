@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'ver-tiendas' => function ($url, $model) {
 						return Html::a(
                             'Ver Tiendas',
-                            ['clasificaciones/view', 'id' => $model->id],
+                            ['clasificaciones/view-clasificaciones', 'id' => $model->id],
                             ['class' => 'btn btn-primary btn-sm']
 						);
                     },
