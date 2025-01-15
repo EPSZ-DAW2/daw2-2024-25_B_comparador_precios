@@ -223,4 +223,6 @@ Cambios dia 18 (Víctor Martín Campos) 13/01/2025
 
 Cambios dia 19 (15/01/2025)
 - añadidos el modelo, vista y controlador de las copias de seguridad (backup)
+- creada la carpeta backups que es donde se guardan las copias de seguridad
+- actualizada la base de datos, tabla backups 
 - actualizados el controlador y vistas de moderadores, pendiente revisar cosas y el solicitar baja
