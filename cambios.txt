@@ -220,3 +220,7 @@ Cambios dia 18 (Víctor Martín Campos) 13/01/2025
 - modificados controladores y vistas de moderadores. Añadidas las funciones del moderador en cuanto a comentarios
 - modificado el models/ArticulosTienda 
 - faltaria revisar una funcion de crear, la solicitud de baja y un detalle en los comentarios
+
+Cambios dia 19 (15/01/2025)
+- añadidos el modelo, vista y controlador de las copias de seguridad (backup)
+- actualizados el controlador y vistas de moderadores, pendiente revisar cosas y el solicitar baja
