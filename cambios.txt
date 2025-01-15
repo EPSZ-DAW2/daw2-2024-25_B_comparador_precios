@@ -226,3 +226,6 @@ Cambios dia 19 (Víctor Martín Campos) 15/01/2025
 - creada la carpeta backups que es donde se guardan las copias de seguridad
 - actualizada la base de datos, tabla backups 
 - actualizados el controlador y vistas de moderadores, pendiente revisar cosas y el solicitar baja
+
+Cambios día 19 (Javier Marinas y Marcos Méndez)
+- nuevas vistas de clasificaciones en la que los usuarios no tengan acceso a las funciones crud y dejar las anteriores vistas para el mantenimineto de clasificaciones
