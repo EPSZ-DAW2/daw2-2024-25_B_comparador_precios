@@ -142,5 +142,14 @@ class ClasificacionesController extends Controller
 			'dataProvider' => $dataProvider,
 		]);
 	}
+	
+	public function actionViewClasificaciones($id)
+	{
+		$model = $this->findModel($id);
+
+		return $this->render('view-clasificaciones', [
+			'model' => $model,
+		]);
+	}
 
 }
