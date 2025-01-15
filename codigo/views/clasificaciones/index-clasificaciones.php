@@ -26,8 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{ver-tiendas}',
                 'buttons' => [
-                    'ver-tiendas' => function ($url, $model, $key) {
-                        return Html::a('Ver Tiendas', ['tiendas/index', 'clasificacion_id' => $model->id], ['class' => 'btn btn-primary']);
+                    'ver-tiendas' => function ($url, $model) {
+						return Html::a(
+                            'Ver Tiendas',
+                            ['clasificaciones/view', 'id' => $model->id],
+                            ['class' => 'btn btn-primary btn-sm']
+						);
                     },
                 ],
             ],
