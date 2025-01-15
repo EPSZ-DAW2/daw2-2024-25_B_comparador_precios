@@ -131,4 +131,16 @@ class ClasificacionesController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+	
+	public function actionIndexClasificaciones()
+	{
+		$searchModel = new ClasificacionesSearch();
+		$dataProvider = $searchModel->search($this->request->queryParams);
+
+		return $this->render('index-clasificaciones', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
+	}
+
 }
