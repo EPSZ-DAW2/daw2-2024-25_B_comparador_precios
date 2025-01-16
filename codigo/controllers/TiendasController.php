@@ -248,18 +248,19 @@ class TiendasController extends Controller
 		$model = new Articulo();
 		$categorias = Categorias::find()->all();
 		$etiquetas = Etiquetas::find()->all();
-		
+
 		// Convierte el array de objetos Categorias en un array de pares clave-valor
 		$categoriasList = ArrayHelper::map($categorias, 'id', 'nombre');
 		$etiquetasList = ArrayHelper::map($etiquetas, 'id', 'nombre');
-		
+
 		if ($model->load(Yii::$app->request->post()) && $modelArticulosTienda->load(Yii::$app->request->post())) {
 			$DatosArticulos = Yii::$app->request->post('Articulo');
-			
+			$datosArticuloTienda = Yii::$app->request->post('ArticulosTienda');
+
 			if (isset($DatosArticulos['categoria_id']) && isset($DatosArticulos['etiqueta_id'])) {
 				$categoria = Categorias::findOne(['id' => $DatosArticulos['categoria_id']]); 
 				$etiqueta = Etiquetas::findOne(['id' => $DatosArticulos['etiqueta_id']]);
-				
+
 				// Busca si el artículo ya existe en los artículos comunes
 				if (isset($DatosArticulos['id']) && !empty($DatosArticulos['id'])) {
 					$comun = Articulo::findOne(['id' => $DatosArticulos['id'], 'tipo_marcado' => 'comun']);
@@ -269,9 +270,11 @@ class TiendasController extends Controller
 						$historico = new Historico();
 						$ArticuloTienda->tienda_id = $Tienda_id;
 						$ArticuloTienda->articulo_id = $comun->id;
-						if (isset($DatosArticulos['precio_actual'])) {
-							$ArticuloTienda->precio_actual = $DatosArticulos['precio_actual'];
-							$historico->precio = $DatosArticulos['precio_actual'];
+						$ArticuloTienda->historico_id = $historico->id;
+                        $ArticuloTienda->registro_id = Yii::$app->user->id;
+						if (isset($datosArticuloTienda['precio_actual'])) {
+							$ArticuloTienda->precio_actual = $datosArticuloTienda['precio_actual'];
+							$historico->precio = $datosArticuloTienda['precio_actual'];
 						} else {
 							$ArticuloTienda->precio_actual = 0; // o algún valor por defecto
 							$historico->precio = 0; // o algún valor por defecto
@@ -284,27 +287,42 @@ class TiendasController extends Controller
 					}
 				} else {
 					// Si el artículo no existe, crea un nuevo artículo específico para la tienda
-					$Articulo = new Articulo();
-					$Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
-					$Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
-					$Articulo->nombre = $DatosArticulos['nombre'];
-					$Articulo->descripcion = $DatosArticulos['descripcion'];
-					$Articulo->imagen_principal = $DatosArticulos['imagen_principal'];
-					$Articulo->visible = $DatosArticulos['visible'];
-					$Articulo->cerrado = $DatosArticulos['cerrado'];
-					$Articulo->tipo_marcado = $DatosArticulos['tipo_marcado'];
-					$Articulo->save();
+						$Articulo = new Articulo();
+						$historico = new Historico();
+						$Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
+						$Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
+						$Articulo->nombre = $DatosArticulos['nombre'];
+						$Articulo->descripcion = $DatosArticulos['descripcion'];
+						$Articulo->imagen_principal = $DatosArticulos['imagen_principal'];
+						$Articulo->visible = $DatosArticulos['visible'];
+						$Articulo->cerrado = $DatosArticulos['cerrado'];
+						$Articulo->tipo_marcado = $DatosArticulos['tipo_marcado'];
+						$Articulo->save();
 
 					// Guarda el precio en ArticulosTienda
-					$ArticuloTienda = new ArticulosTienda();
-					$ArticuloTienda->tienda_id = $Tienda_id;
-					$ArticuloTienda->articulo_id = $Articulo->id;
-					if (isset($DatosArticulos['precio_actual'])) {
-						$ArticuloTienda->precio_actual = $DatosArticulos['precio_actual'];
+                        $ArticuloTienda = new ArticulosTienda();
+                        $ArticuloTienda->tienda_id = $Tienda_id;
+                        $historico->tienda_id = $Tienda_id;
+                        $historico->articulo_id = $Articulo->id;
+                        if(isset($datosArticuloTienda['precio_actual'])){
+                            $ArticuloTienda->precio_actual = $datosArticuloTienda['precio_actual'];
+                            $historico->precio= $datosArticuloTienda['precio_actual'];
+                        }else{
+                            $ArticuloTienda->precio_actual = 0;
+                            $historico->precio= 0;
+                        }
+                        $historico->precio = $datosArticuloTienda['precio_actual'];
+						$ArticuloTienda->articulo_id = $$Articulo->id;
+                        $ArticuloTienda->historico_id = $historico->id;
+                        $ArticuloTienda->registro_id = Yii::$app->user->id;
+                        
+					if (isset($datosArticuloTienda['precio_actual'])) {
+						$ArticuloTienda->precio_actual = $datosArticuloTienda['precio_actual'];
 					} else {
 						$ArticuloTienda->precio_actual = 0; // o algún valor por defecto
 					}
 					$ArticuloTienda->save();
+                    $historico->save();
 				}
 			}
 		}
