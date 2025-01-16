@@ -271,6 +271,7 @@ class TiendasController extends Controller
 						$ArticuloTienda->tienda_id = $Tienda_id;
 						$ArticuloTienda->articulo_id = $comun->id;
 						$ArticuloTienda->historico_id = $historico->id;
+                        $ArticuloTienda->registro_id = Yii::$app->user->id;
 						if (isset($datosArticuloTienda['precio_actual'])) {
 							$ArticuloTienda->precio_actual = $datosArticuloTienda['precio_actual'];
 							$historico->precio = $datosArticuloTienda['precio_actual'];
@@ -287,6 +288,7 @@ class TiendasController extends Controller
 				} else {
 					// Si el artículo no existe, crea un nuevo artículo específico para la tienda
 					$Articulo = new Articulo();
+                    $historico = new Historico();
 					$Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
 					$Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
 					$Articulo->nombre = $DatosArticulos['nombre'];
@@ -298,15 +300,29 @@ class TiendasController extends Controller
 					$Articulo->save();
 
 					// Guarda el precio en ArticulosTienda
-					$ArticuloTienda = new ArticulosTienda();
-					$ArticuloTienda->tienda_id = $Tienda_id;
-					$ArticuloTienda->articulo_id = $Articulo->id;
+                        $ArticuloTienda = new ArticulosTienda();
+                        $ArticuloTienda->tienda_id = $Tienda_id;
+                        $historico->tienda_id = $Tienda_id;
+                        $historico->articulo_id = $Articulo->id;
+                        if(isset($datosArticuloTienda['precio_actual'])){
+                            $ArticuloTienda->precio_actual = $datosArticuloTienda['precio_actual'];
+                            $historico->precio= $datosArticuloTienda['precio_actual'];
+                        }else{
+                            $ArticuloTienda->precio_actual = 0;
+                            $historico->precio= 0;
+                        }
+                        $historico->precio = $datosArticuloTienda['precio_actual'];
+						$ArticuloTienda->articulo_id = $$Articulo->id;
+                        $ArticuloTienda->historico_id = $historico->id;
+                        $ArticuloTienda->registro_id = Yii::$app->user->id;
+                        
 					if (isset($datosArticuloTienda['precio_actual'])) {
 						$ArticuloTienda->precio_actual = $datosArticuloTienda['precio_actual'];
 					} else {
 						$ArticuloTienda->precio_actual = 0; // o algún valor por defecto
 					}
 					$ArticuloTienda->save();
+                    $historico->save();
 				}
 			}
 		}
