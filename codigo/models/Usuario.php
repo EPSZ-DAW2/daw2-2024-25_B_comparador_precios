@@ -50,6 +50,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	  const ESTADO_REGISTRO_CONFIRMADO = 1;
 	  
 	  const SCENARIO_REGISTER = 'register';
+      const SCENARIO_UPDATE_PROFILE = 'update_profile';
 	  
       //Atributos para almacenar el control de cambio de la posible contraseña.
       public $password1;
@@ -122,6 +123,9 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
             ['password_repeat', 'required', 'on' => self::SCENARIO_REGISTER],
             ['password_repeat', 'compare', 'compareAttribute' => 'password_hash', 'on' => self::SCENARIO_REGISTER],
+
+            ['password_repeat', 'required', 'on' => self::SCENARIO_UPDATE_PROFILE],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'on' => self::SCENARIO_UPDATE_PROFILE],
 
             [['registro_confirmado'], 'default', 'value' => self::ESTADO_REGISTRO_PENDIENTE],
             [['fecha_registro'], 'default', 'value' => date('Y-m-d H:i:s')],
