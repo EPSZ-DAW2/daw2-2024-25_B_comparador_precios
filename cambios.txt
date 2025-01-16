@@ -251,3 +251,11 @@ Cambios día 20 (Javier Marinas y Marcos Méndez)
 - Modificado el modelo de Categorias.
 - Modificadas las vistas para las categorías que se gestionan por los administradores.
 - Añadidas las vistas para el buscador de categorías que se muestra al usuario.
+
+Cambios dia 20 (Víctor Martín Campos)
+- Añadida funcionalidad de solicitud de baja
+- añadida funcionalidad de administrador para dar de baja
+- añadida funcionalidad para mostrar avisos al administrador
+- modificadas vistas de site, moderadores, moderadores-admin y avisos
+- modificados tambien sus modelos y controladores
+- Tambien añadido para limpiar mensajes de aviso
