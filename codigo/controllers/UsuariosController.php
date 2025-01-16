@@ -166,6 +166,8 @@ class UsuariosController extends Controller
         if ($model === null) {
             throw new \yii\web\NotFoundHttpException('Usuario no encontrado.');
         }
+
+        $model->setScenario(Usuario::SCENARIO_UPDATE_PROFILE);
     
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             // Registrar el log después de actualizar el perfil
