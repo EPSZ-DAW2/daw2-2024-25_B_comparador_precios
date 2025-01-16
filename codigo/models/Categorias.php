@@ -57,11 +57,11 @@ class Categorias extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Articulos]].
      *
-     * @return \yii\db\ActiveQuery|ArticulosQuery
+     * @return \yii\db\ActiveQuery|ArticuloQuery
      */
-    public function getArticulos()
+    public function getArticulo()
     {
-        return $this->hasMany(Articulos::class, ['categoria_id' => 'id']);
+        return $this->hasMany(Articulo::class, ['categoria_id' => 'id']);
     }
 
     /**
