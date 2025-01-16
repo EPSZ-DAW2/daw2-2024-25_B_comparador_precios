@@ -260,3 +260,4 @@ Cambios día 20 (Javier Marinas y Marcos Méndez)
 - Añadidas las vistas para ver las categorías (para usuarios).
 - Modificados los archivos de la vista categorías "_form" y "_search".
 - Añadidas las imágenes asociadas a cada tienda modificando archivos "_tienda_card" y "index" de tiendas.
+- Redirección del Ver más dentro de categorías modificada a "public-articulos/view".
