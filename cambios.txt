@@ -261,3 +261,6 @@ Cambios día 20 (Javier Marinas y Marcos Méndez)
 - Modificados los archivos de la vista categorías "_form" y "_search".
 - Añadidas las imágenes asociadas a cada tienda modificando archivos "_tienda_card" y "index" de tiendas.
 - Redirección del Ver más dentro de categorías modificada a "public-articulos/view".
+
+Cambios día 20 (Alejandra y Diego)
+- en la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla tiendaArticulos 
