@@ -259,4 +259,4 @@ Cambios dia 20 (Víctor Martín Campos)
 - modificadas vistas de site, moderadores, moderadores-admin y avisos
 - modificados tambien sus modelos y controladores
 - Tambien añadido para limpiar mensajes de aviso
-- Actualizada base de datos un campo a NULL en vez de 0 para que funcione
+- Actualizada base de datos
