@@ -250,7 +250,8 @@ Cambios día 20 (Javier Marinas y Marcos Méndez)
 - Modificado el controlador de Categorias para adaptarlo a su funcionalidad.
 - Modificado el modelo de Categorias.
 - Modificadas las vistas para las categorías que se gestionan por los administradores.
-- Añadidas las vistas para el buscador de categorías que se muestra al usuario.
+- Añadidas las vistas para ver las categorías (para usuarios).
+- Modificados los archivos de la vista categorías "_form" y "_search".
 
 Cambios dia 20 (Víctor Martín Campos)
 - Añadida funcionalidad de solicitud de baja
