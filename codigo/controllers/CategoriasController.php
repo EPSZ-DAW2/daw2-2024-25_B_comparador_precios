@@ -55,8 +55,9 @@ class CategoriasController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -130,5 +131,46 @@ class CategoriasController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    /**
+     * Lists all Categorias models with specific view.
+     *
+     * @return string
+     */
+    public function actionIndexCategorias()
+    {
+        $searchModel = new CategoriasSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index-categorias', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Categorias model with specific view.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewCategorias($id)
+    {
+        return $this->render('view-categorias', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+
+    public function actionViewArticulo($id)
+    {
+        $categorias = Categorias::findOne($id);
+        $articulos = $categorias->articulo; // Obtiene los artículos relacionados con la categoría.
+
+        return $this->render('view-articulos', [
+            'articulo' => $articulo,
+            'categoria' => $categorias,
+        ]);
     }
 }
