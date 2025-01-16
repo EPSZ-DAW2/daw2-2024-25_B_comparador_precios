@@ -27,7 +27,7 @@ $this->registerCssFile('@web/css/home.css');
             <div class="feature-container">
                 <!-- Búsqueda Rápida -->
                 <div class="feature">
-                    <img src="<?= Yii::getAlias('@web') ?>/img/busqueda.jpg" alt="Búsqueda de productos" class="feature-image">
+                    <img src="<?= Yii::getAlias('@web') ?>/img/busquedas.jpg" alt="Búsqueda de productos" class="feature-image">
                     <div>
                         <h3>Búsqueda Rápida</h3>
                         <p>Encuentra productos de manera sencilla con nuestra poderosa herramienta de búsqueda.</p>
@@ -36,7 +36,7 @@ $this->registerCssFile('@web/css/home.css');
                 
                 <!-- Comparación Inteligente -->
                 <div class="feature">
-                    <img src="<?= Yii::getAlias('@web') ?>/img/comparacion.jpg" alt="Comparación de precios" class="feature-image">
+                    <img src="<?= Yii::getAlias('@web') ?>/img/comparar.jpg" alt="Comparación de precios" class="feature-image">
                     <div>
                         <h3>Comparación Inteligente</h3>
                         <p>Compara precios entre múltiples tiendas para elegir la mejor opción.</p>
