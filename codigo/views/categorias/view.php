@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <tr>
                         <td><?= Html::encode($articulo->nombre) ?></td>
                         <td>
-                            <?= Html::a('Ver más', ['articulos/view', 'id' => $articulo->id], ['class' => 'btn btn-info btn-sm']) ?>
+                            <?= Html::a('Ver más', ['public-articulos/view', 'id' => $articulo->id], ['class' => 'btn btn-info btn-sm']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
