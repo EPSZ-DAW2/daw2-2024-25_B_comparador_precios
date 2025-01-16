@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var app\models\Tienda $model */
@@ -44,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'imagen_principal',
                 'format' => 'raw',
-                'value' => Html::img($model->imagen_principal ? $model->imagen_principal : '/path/to/default-image.jpg', [
+                'value' => Html::img(Url::to('@web/img/' . $model->imagen_principal), [
                     'alt' => Html::encode($model->nombre),
                     'style' => 'max-width: 200px;',
                 ]),

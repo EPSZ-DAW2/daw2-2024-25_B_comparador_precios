@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var app\models\Tienda $model */
 ?>
@@ -8,7 +9,7 @@ use yii\helpers\Html;
     <div class="row g-0">
         <div class="col-md-4">
             <!-- Muestra una imagen si existe, o un marcador de posición si no -->
-            <?= Html::img($model->imagen_principal ? $model->imagen_principal : '/path/to/default-image.jpg', [
+            <?= Html::img(Url::to('@web/img/' . $model->imagen_principal), [
                 'class' => 'img-fluid rounded-start',
                 'alt' => Html::encode($model->nombre),
             ]) ?>
