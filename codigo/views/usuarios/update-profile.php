@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="usuario-form">
         <?php $form = ActiveForm::begin(); ?>
 
-       
         <?= $form->field($model, 'nick')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
@@ -26,7 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>
 
         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'password')->passwordInput() ?>
+
+        <!-- Si el usuario quiere cambiar la contraseña, puede hacerlo -->
+        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
+
         <br>
         <?= Html::submitButton('Guardar Cambios', ['class' => 'btn btn-success']) ?>
 
