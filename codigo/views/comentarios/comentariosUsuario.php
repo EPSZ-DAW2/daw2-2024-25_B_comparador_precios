@@ -17,13 +17,13 @@ $this->title = 'Tus comentarios';
         <p>No tienes comentarios registrados.</p>
     <?php else: ?>
 
-        <?php if (!empty($comentariosArticulo)): ?>
+        <?php if (!empty($comentariosTienda)): ?>
             <ul>
-                <?php foreach ($comentariosArticulo as $comentario): ?>
+                <?php foreach ($comentariosTienda as $comentario): ?>
                     <li>
                         <strong>Artículo:</strong> <?= Html::encode($comentario->articulo ? $comentario->articulo->nombre : 'Artículo no asociado') ?><br>
                         <strong>Tienda:</strong> <?=Html::encode($comentario->tienda ? $comentario->tienda->nombre : 'Tienda no asociada')  ?><br>
-                        <strong>Comentario:</strong> <?= Html::encode($comentario->texto) ?><br>
+                        <strong>Comentario:</strong> <?= Html::a(Html::encode($comentario->texto), ['tiendas/view', 'id' => $comentario->tienda->id ]) ?><br>
                         <br>
                     </li>
                 <?php endforeach; ?>
