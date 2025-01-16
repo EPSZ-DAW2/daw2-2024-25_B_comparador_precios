@@ -33,30 +33,44 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><strong>Fecha de Registro:</strong> <?= Html::encode($usuario->fecha_registro) ?></p>
 </div>
 
-<!-- Botones del usuario -->
-<?= Html::a('Editar Perfil', ['usuarios/update-profile'], ['class' => 'btn btn-primary']) ?>
-<br>
-<?= Html::a('Seguimientos', ['seguimientos/seguimientos'], ['class' => 'btn btn-primary']) ?>
-<br>
-<?= Html::a('Tus Comentarios', ['comentarios/comentarios-usuario'], ['class' => 'btn btn-primary']) ?>
-<br>
-<!-- Botón para los avisos enviados -->
-<?= Html::a('Avisos Enviados', ['avisos/enviados', 'id' => $usuario->id], ['class' => 'btn btn-primary']) ?>
-<br>
-<!-- Botón para los avisos recibidos -->
-<?= Html::a('Avisos Recibidos', ['avisos/recibidos', 'id' => $usuario->id], ['class' => 'btn btn-primary']) ?>
+<div class="row">
+    <!-- Botones de usuario -->
+    <div class="col-12 mb-2">
+        <?= Html::a('Editar Perfil', ['usuarios/update-profile'], ['class' => 'btn btn-primary w-100']) ?>
+    </div>
+    <div class="col-12 mb-2">
+        <?= Html::a('Seguimientos', ['seguimientos/seguimientos'], ['class' => 'btn btn-primary w-100']) ?>
+    </div>
+    <div class="col-12 mb-2">
+        <?= Html::a('Tus Comentarios', ['comentarios/comentarios-usuario'], ['class' => 'btn btn-primary w-100']) ?>
+    </div>
+</div>
 
-<!-- Enviar un aviso -->
-<?= Html::a('Enviar Aviso', ['avisos/enviar'], ['class' => 'btn btn-primary']) ?>
+<div class="row justify-content-end">
+    <!-- Botones de avisos -->
+    <div class="col-12 col-md-4 mb-2">
+        <?= Html::a('Avisos Enviados', ['avisos/enviados', 'id' => $usuario->id], ['class' => 'btn btn-warning w-100']) ?>
+    </div>
+    <div class="col-12 col-md-4 mb-2">
+        <?= Html::a('Avisos Recibidos', ['avisos/recibidos', 'id' => $usuario->id], ['class' => 'btn btn-warning w-100']) ?>
+    </div>
+    <div class="col-12 col-md-4 mb-2">
+        <?= Html::a('Enviar Aviso', ['avisos/enviar'], ['class' => 'btn btn-warning w-100']) ?>
+    </div>
+</div>
 
-<?= Html::a(
-    'Darse de baja', 
-    ['usuarios/baja'], 
-    [
-        'class' => 'btn btn-danger',
-        'data' => [
-            'confirm' => '¿Está seguro de que desea darse de baja? Tu cuenta será eliminada.',
-        ],
-    ]
-) ?>
-
+<div class="row">
+    <!-- Botón para darse de baja -->
+    <div class="col-12 mb-2">
+        <?= Html::a(
+            'Darse de baja', 
+            ['usuarios/baja'], 
+            [
+                'class' => 'btn btn-danger w-100',
+                'data' => [
+                    'confirm' => '¿Está seguro de que desea darse de baja? Tu cuenta será eliminada.',
+                ],
+            ]
+        ) ?>
+    </div>
+</div>
