@@ -135,7 +135,7 @@ class Articulo extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::class, ['articulo_id' => 'id']);
+        return $this->hasMany(Comentario::class, ['articulo_id' => 'id']);
     }
 
     /**
@@ -206,4 +206,16 @@ class Articulo extends \yii\db\ActiveRecord
     {
         return new ArticulosQuery(get_called_class());
     }
+	
+	public function getTienda()
+	{
+		return $this->hasOne(Tienda::class, ['id' => 'articulo_tienda_id']);
+	}
+	
+	public function getClasificacion()
+	{
+		return $this->hasOne(Clasificacion::class, ['id' => 'clasificacion_id']);
+	}
+
+
 }

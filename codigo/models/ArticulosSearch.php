@@ -11,14 +11,16 @@ use app\models\Articulo;
  */
 class ArticulosSearch extends Articulo
 {
+    public $clasificacion_tienda; // Clasificación de la tienda asociada
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'categoria_id', 'etiqueta_id', 'visible', 'cerrado', 'registro_id', 'articulo_tienda_id'], 'integer'],
-            [['nombre', 'descripcion', 'imagen_principal', 'tipo_marcado'], 'safe'],
+            [['nombre', 'descripcion'], 'string'],
+            [['categoria_id', 'etiqueta_id', 'clasificacion_tienda'], 'integer'],
         ];
     }
 
@@ -39,39 +41,53 @@ class ArticulosSearch extends Articulo
      * @return ActiveDataProvider
      */
     public function search($params)
+	{
+		$query = Articulo::find()
+			->alias('a') // Alias para la tabla artículos
+			->joinWith(['tienda t']); // Alias para la tabla tiendas
+
+		// Crear el DataProvider
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => [
+				'pageSize' => 10,
+			],
+		]);
+
+		$this->load($params);
+
+		if (!$this->validate()) {
+			// Si la validación falla, no retorna resultados
+			$query->where('0=1');
+			return $dataProvider;
+		}
+
+		// Filtros para las columnas de la tabla "articulos"
+		$query->andFilterWhere([
+			'a.categoria_id' => $this->categoria_id,
+			'a.etiqueta_id' => $this->etiqueta_id,
+		]);
+
+		// Filtros para las columnas de la tabla "tiendas" (usando alias "t")
+		$query->andFilterWhere(['t.clasificacion_id' => $this->clasificacion_tienda]);
+
+		// Filtros para las columnas con búsqueda de texto
+		$query->andFilterWhere(['like', 'a.nombre', $this->nombre])
+			  ->andFilterWhere(['like', 'a.descripcion', $this->descripcion]);
+
+		return $dataProvider;
+	}
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
     {
-        $query = Articulo::find();
-
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'categoria_id' => $this->categoria_id,
-            'etiqueta_id' => $this->etiqueta_id,
-            'visible' => $this->visible,
-            'cerrado' => $this->cerrado,
-            'registro_id' => $this->registro_id,
-            'articulo_tienda_id' => $this->articulo_tienda_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'imagen_principal', $this->imagen_principal])
-            ->andFilterWhere(['like', 'tipo_marcado', $this->tipo_marcado]);
-
-        return $dataProvider;
+        return [
+            'categoria_id' => 'Categoría',
+            'etiqueta_id' => 'Etiqueta',
+            'clasificacion_tienda' => 'Clasificación de la Tienda',
+        ];
     }
 }
