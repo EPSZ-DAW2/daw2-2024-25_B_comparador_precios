@@ -139,10 +139,10 @@ Cambios día 13 (Javier Marinas y Marcos Méndez):
 Cambios dia 13 (Víctor Martín) 08/01/2025
 - Models/Usuario (Funciones y constantes para el tema de roles)
 - ModeradoresController: modificación en los permisos de modo que solo lo pueden acceder usuarios con rol de moderador 
-
 -Actualizada la vista de las comentarios dentro del perfil de usuario
 
-Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025:
+
+Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025
 - Añadida la búsqueda de tiendas basadas en la clasificación, categorías, etiquetas y lugar. Muestran los resultados en forma de ficha resumida
 - Añadida opción de "Ver más" para una ficha detallada con información completa de la tienda seleccionada
 - Añadido acceso a valorar/comentar tienda, denunciar tienda, activar/desactivar seguimiento de tienda
@@ -156,7 +156,7 @@ Cambios día 14 (Víctor Martín)
 - Añadidas las funciones para el mantenimiento de tiendas de su misma region
 - Añadidas las vistas pertinentes
 
-Cambios día 14 (Victor Gonzalo) 09/01/2025
+Cambios día 14 (Victor Gonzalo)
 -Cambiado el index de inicio (views/site/index) para añadir una opcion de busqueda de tiendas
 -Arreglado un problema con la id de tienda en los comentarios de articulos de tienda
 -Arreglado un error con el header en el css
@@ -180,28 +180,30 @@ Cambios día 15 (Javier Marinas y Marcos Méndez) 10/01/2025
 -Modificados los formularios de comentario para que aparezcan sin contenido de serie
 -Modificados los botones Enviar Comentario, Denunciar Tienda y Seguir/Dejar de Seguir para que redireccionen correctamente al login si no se ha iniciado sesión
 
-Cambios día 15 (Victor Martín Campos) 10/01/2025
+Cambios día 15 (Victor Martín Campos)
 - Actualizado de nuevo el modelo, controladores y vista de moderadores
 - Añadida de nuevo la funcionalidad de editar articulos de la tienda que modera el usuario
 - modificado tambien el models/ArticulosTienda, simplemente añadida una funcion para los comentarios que necesitaba
 
-Cambios dia 15 (Rocío Rubio ) 10/01/2025
+Cambios dia 15 (Rocío Rubio )
 -cambios en el diseño de la web para que se vea mejor visualmente:
    * barra no fija en el footer
    * modificacion del tamaño de los margenes
    * relleno de la pagina inicial (valoraciones, eslogan...)
    * modificacion de las fuentes de letras de la web para hacerla mas atractiv
 
-Cambios dia 15 (Víctor Martín) 10/01/2025
+Cambios dia 15 (Víctor Martín)
 - añadida funcion en el modelo Aviso necesaria para moderadores
 - actualizados modelo controladores y vistas
 - Ya terminado a falta de revisar detalles
+
 
 Cambios dia 16 (Víctor Martín Campos) 11/01/2025
 - añadido modelo controlador y vista de registros logs, funciona correctamente
 - modificado el controlador de registro para que haga un registro log de modo que cuando alguien se regitre lo ponga (faltaria hacerlo en mas)
 - modificado el modelo y controlador de usuarios ya funcionan bien (con los roles)
 - Modificado el sql con la tabla para el registro logs
+
 
 Cambios dia 17 (Víctor Martín Campos) 12/01/2025
 - añadido el mantenimiento de moderadores y tiendas (mvc ModeradoresAdmin y TiendasAdmin)
@@ -210,16 +212,18 @@ Cambios dia 17 (Víctor Martín Campos) 12/01/2025
 - Modificados controladores de registro y login para que hagan registrologs y se guarden correctamente
 - tambien implementado tema de roles en estos controladores
 
-Cambios dia 17 (Marcos Díez Álvarez) 12/01/2025
+Cambios dia 17 (Marcos Díez Álvarez)
 -Añadida la fecha de bloqueo en el momento en el que se bloquea la cuenta por acceder mal 5 veces
 
 Cambios dia 17 (Alejandra) 
 Cambiada consulta al historico en funciones de ofertas en controlador tienda 
 
+
 Cambios dia 18 (Víctor Martín Campos) 13/01/2025
 - modificados controladores y vistas de moderadores. Añadidas las funciones del moderador en cuanto a comentarios
 - modificado el models/ArticulosTienda 
 - faltaria revisar una funcion de crear, la solicitud de baja y un detalle en los comentarios
+
 
 Cambios dia 19 (Víctor Martín Campos) 15/01/2025
 - añadidos el modelo, vista y controlador de las copias de seguridad (backup)
@@ -230,13 +234,20 @@ Cambios dia 19 (Víctor Martín Campos) 15/01/2025
 Cambios día 19 (Javier Marinas y Marcos Méndez)
 - nuevas vistas de clasificaciones en la que los usuarios no tengan acceso a las funciones crud y dejar las anteriores vistas para el mantenimineto de clasificaciones
 
+
 Cambios día 20 (Víctor Martín Campos) 16/01/2025
 - Implementado parte del diseño, modificando la carptea css y con la carptea img
 - modificados los layouts haciendo un header y footer
 - integradas vistas en sites 
 - modificacion del SiteController y UsuariosController corrigiendo errores
 
-Cambios día 20 (Victor Gonzalo) 16/01/2025
+Cambios día 20 (Victor Gonzalo)
 - Modificada vista de la página de consulta de perfiles
 - Modificada la página actualizacion de datos de usuario para que la contraseña requiera dos pasos 
-- Modificada la vista de comentarios para que contengan un enlace que te lleve a la página de la tienda de donde proviene el comentario. 
+- Modificada la vista de comentarios para que contengan un enlace que te lleve a la página de la tienda de donde proviene el comentario.
+
+Cambios día 20 (Javier Marinas y Marcos Méndez)
+- Modificado el controlador de Categorias para adaptarlo a su funcionalidad.
+- Modificado el modelo de Categorias.
+- Modificadas las vistas para las categorías que se gestionan por los administradores.
+- Añadidas las vistas para el buscador de categorías que se muestra al usuario.
