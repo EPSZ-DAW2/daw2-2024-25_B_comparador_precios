@@ -229,3 +229,9 @@ Cambios dia 19 (Víctor Martín Campos) 15/01/2025
 
 Cambios día 19 (Javier Marinas y Marcos Méndez)
 - nuevas vistas de clasificaciones en la que los usuarios no tengan acceso a las funciones crud y dejar las anteriores vistas para el mantenimineto de clasificaciones
+
+Cambios día 20 (Víctor Martín Campos) 16/01/2025
+- Implementado parte del diseño, modificando la carptea css y con la carptea img
+- modificados los layouts haciendo un header y footer
+- integradas vistas en sites 
+- modificacion del SiteController y UsuariosController corrigiendo errores
