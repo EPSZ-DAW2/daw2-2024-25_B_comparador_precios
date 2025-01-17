@@ -272,8 +272,8 @@ Cambios día 21 (Víctor Martín) 17/01/2025
 - Modificacion del Moderadores controler arreglando el crear comentarios de tiendas
 - Modificadas las vistas de usuarios, tiendas, moderadores y registros
 - modificadas las vistas de site
-- añadidos roles de administradores, moderadores y superadministrador en la configuracion de la pagina
-- corregido tema de limpieza de copias de seguridad
+- Añadidos roles de administradores, moderadores y superadministrador en la configuracion de la pagina
+- Corregido tema de limpieza de copias de seguridad
 
 Cambios día 21 (Alejandra) 17/01/2025
 - En la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla historico
@@ -284,3 +284,4 @@ Cambios día 21 (Javier Marinas y Marcos Méndez) 17/01/2025
 - Incluidas imágenes específicas para cada artículo
 - Modificados los archivos "_articulo_card" y "view" de la carpeta public-articulos para que muestre las imágenes
 - Modificados los archivos "view" de tiendas y "view" de public-articulos para que no muestre los ids.
+- Corregida la base de datos en aspectos relacionados con tiendas, clasificacion, etiquetas, etc.
