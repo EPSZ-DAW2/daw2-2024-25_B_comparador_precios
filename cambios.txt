@@ -281,6 +281,8 @@ Cambios día 21 (Alejandra) 17/01/2025
 - Modificadas vistas de view-store y view-articulo
 
 Cambios día 21 (Javier Marinas y Marcos Méndez) 17/01/2025
+- Añadidas las búsquedas de artículos, resultados en ficha resumida con opción de ver más para acceder a una ficha más detallada
+- Añadido dentro de la ficha más detallada acceso si se ha iniciado sesión acceso a las funciones de comentar, denunciar y seguir/dejar de seguir
 - Incluidas imágenes específicas para cada artículo
 - Modificados los archivos "_articulo_card" y "view" de la carpeta public-articulos para que muestre las imágenes
 - Modificados los archivos "view" de tiendas y "view" de public-articulos para que no muestre los ids.
