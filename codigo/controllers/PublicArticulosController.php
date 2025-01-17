@@ -5,7 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\ArticulosSearch;
 use app\models\Articulo;
+use app\models\ArticulosTienda;
 use app\models\Comentario;
+use app\models\Seguimiento;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -24,63 +26,81 @@ class PublicArticulosController extends Controller
     }
 	
 	public function actionView($id)
-    {
-        $model = Articulo::findOne($id);
-        if ($model === null) {
-            throw new NotFoundHttpException('El artículo solicitado no existe.');
-        }
+	{
+		$model = $this->findModel($id);
 
-        // Cargar comentarios existentes
-        $comentarios = Comentario::find()
-            ->where(['articulo_id' => $id])
-            ->orderBy(['id' => SORT_DESC])
-            ->all();
+		$comentario = new Comentario();
+		$comentario->articulo_id = $id;
 
-        // Crear modelo para agregar un nuevo comentario
-        $comentario = new Comentario();
-        $comentario->articulo_id = $id;
+		if (Yii::$app->request->isPost) {
+			// Verificar si el usuario está autenticado al intentar enviar un comentario
+			if (Yii::$app->user->isGuest) {
+				Yii::$app->session->setFlash('error', 'Debes iniciar sesión para comentar.');
+				return $this->redirect(['site/login']);
+			}
 
-        // Guardar comentario si el formulario se envía
-        if (Yii::$app->request->isPost) {
-            if (Yii::$app->user->isGuest) {
-                Yii::$app->session->setFlash('error', 'Debes iniciar sesión para comentar.');
-                return $this->redirect(['site/login']);
-            }
-            $comentario->usuario_id = Yii::$app->user->identity->id; // Usuario autenticado
-            if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
-                Yii::$app->session->setFlash('success', 'Comentario añadido con éxito.');
-                return $this->redirect(['view', 'id' => $id]);
-            }
-        }
+			// Asociar el comentario al usuario autenticado
+			$comentario->registro_id = Yii::$app->user->identity->id;
 
-        return $this->render('view', [
-            'model' => $model,
-            'comentarios' => $comentarios,
-            'comentario' => $comentario,
-        ]);
-    }
+			if ($comentario->load(Yii::$app->request->post()) && $comentario->save()) {
+				Yii::$app->session->setFlash('success', 'Tu comentario ha sido guardado.');
+				return $this->redirect(['view', 'id' => $id]);
+			} else {
+				Yii::$app->session->setFlash('error', 'Hubo un problema al guardar el comentario.');
+			}
+		}
+
+		$comentarios = $model->getComentarios()->orderBy(['id' => SORT_DESC])->all();
+
+		return $this->render('view', [
+			'model' => $model,
+			'comentario' => $comentario,
+			'comentarios' => $comentarios,
+		]);
+	}
+
+	protected function findModel($id)
+	{
+		if (($model = Articulo::findOne($id)) !== null) {
+			return $model;
+		}
+
+		throw new NotFoundHttpException('El artículo solicitado no existe.');
+	}
 
     public function actionDenunciar($id)
-    {
-        if (Yii::$app->user->isGuest) {
-            Yii::$app->session->setFlash('error', 'Debes iniciar sesión para denunciar.');
-            return $this->redirect(['site/login']);
-        }
+	{
+		if (Yii::$app->user->isGuest) {
+			Yii::$app->session->setFlash('error', 'Debes iniciar sesión para denunciar un artículo.');
+			return $this->redirect(['site/login']);
+		}
 
-        $model = Articulo::findOne($id);
-        if ($model === null) {
-            throw new NotFoundHttpException('El artículo solicitado no existe.');
-        }
+		// Buscar el registro en articulos_tienda
+		$articuloTienda = ArticulosTienda::findOne($id);
 
-        $model->denuncias += 1;
-        if ($model->save()) {
-            Yii::$app->session->setFlash('success', 'Denuncia registrada con éxito.');
-        } else {
-            Yii::$app->session->setFlash('error', 'No se pudo registrar la denuncia.');
-        }
+		if (!$articuloTienda) {
+			throw new NotFoundHttpException('El artículo no se encontró en esta tienda.');
+		}
 
-        return $this->redirect(['view', 'id' => $id]);
-    }
+		if (Yii::$app->request->isPost) {
+			// Capturar el motivo desde el formulario
+			$nuevoMotivo = Yii::$app->request->post('motivo_denuncia');
+
+			// Agregar el nuevo motivo de denuncia al artículo
+			$articuloTienda->agregarMotivoDenuncia($nuevoMotivo);
+
+			if ($articuloTienda->save(false)) {
+				Yii::$app->session->setFlash('success', 'Denuncia registrada exitosamente.');
+				return $this->redirect(['view', 'id' => $id]);
+			} else {
+				Yii::$app->session->setFlash('error', 'No se pudo registrar la denuncia. Por favor, inténtalo de nuevo.');
+			}
+		}
+
+		return $this->render('denunciar', [
+			'model' => $articuloTienda,
+		]);
+	}
 
     public function actionSeguimiento($id)
     {
@@ -91,12 +111,16 @@ class PublicArticulosController extends Controller
 
         $usuarioId = Yii::$app->user->identity->id;
 
-        $seguimiento = Seguimiento::findOne(['usuario_id' => $usuarioId, 'articulo_id' => $id]);
+        // Buscar seguimiento existente
+		$seguimiento = Seguimiento::find()
+			->where(['usuario_id' => $usuarioId, 'articulo_id' => $id])
+			->one();
 
         if ($seguimiento) {
-            $seguimiento->delete();
-            Yii::$app->session->setFlash('success', 'Has dejado de seguir este artículo.');
-        } else {
+			// Si existe el seguimiento, elimínalo (desactivar seguimiento)
+			$seguimiento->delete();
+			Yii::$app->session->setFlash('success', 'Has dejado de seguir esta tienda.');
+		} else {
             $seguimiento = new Seguimiento();
             $seguimiento->usuario_id = $usuarioId;
             $seguimiento->articulo_id = $id;
@@ -111,4 +135,3 @@ class PublicArticulosController extends Controller
         return $this->redirect(['view', 'id' => $id]);
     }
 }
-
