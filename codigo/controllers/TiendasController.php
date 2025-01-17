@@ -289,6 +289,7 @@ class TiendasController extends Controller
 					// Si el artículo no existe, crea un nuevo artículo específico para la tienda
 						$Articulo = new Articulo();
 						$historico = new Historico();
+						$ArticuloTienda = new ArticulosTienda();
 						$Articulo->categoria_id = $categoria->id; // Asegúrate de usar una propiedad del objeto
 						$Articulo->etiqueta_id = $etiqueta->id; // Asegúrate de usar una propiedad del objeto
 						$Articulo->nombre = $DatosArticulos['nombre'];
@@ -300,7 +301,7 @@ class TiendasController extends Controller
 						$Articulo->save();
 
 					// Guarda el precio en ArticulosTienda
-                        $ArticuloTienda = new ArticulosTienda();
+                        
                         $ArticuloTienda->tienda_id = $Tienda_id;
                         $historico->tienda_id = $Tienda_id;
                         $historico->articulo_id = $Articulo->id;
@@ -312,7 +313,8 @@ class TiendasController extends Controller
                             $historico->precio= 0;
                         }
                         $historico->precio = $datosArticuloTienda['precio_actual'];
-						$ArticuloTienda->articulo_id = $$Articulo->id;
+						$historico->fecha= date('Y-m-d H:i:s');
+						$ArticuloTienda->articulo_id = $Articulo->id;
                         $ArticuloTienda->historico_id = $historico->id;
                         $ArticuloTienda->registro_id = Yii::$app->user->id;
                         
