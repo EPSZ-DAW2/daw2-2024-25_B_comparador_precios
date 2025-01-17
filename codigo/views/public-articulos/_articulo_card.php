@@ -8,6 +8,13 @@ use yii\helpers\Html;
 
 <div class="articulo-card">
     <div class="card">
+        <div class="col-md-4">
+            <!-- Muestra una imagen si existe, o un marcador de posición si no -->
+            <?= Html::img(Url::to('@web/img/' . $model->imagen_principal), [
+                'class' => 'img-fluid rounded-start',
+                'alt' => Html::encode($model->nombre),
+            ]) ?>
+        </div>
         <div class="card-body">
             <h3 class="card-title"><?= Html::encode($model->nombre) ?></h3>
             <p class="card-text"><?= Html::encode($model->descripcion) ?></p>
