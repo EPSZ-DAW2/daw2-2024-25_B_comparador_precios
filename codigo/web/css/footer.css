@@ -82,4 +82,19 @@
     #footer .d-flex {
         justify-content: center;
     }
+
+    #footer .col-md-6.text-center.text-md-end {
+        text-align: center; /* Centra los elementos en pantallas pequeñas */
+    }
+}
+
+/* Estilo para la imagen del patrocinador USAL */
+.usal-logo {
+    width: 100px; /* Ajusta el ancho de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-width: 100%; /* Asegura que la imagen no exceda el tamaño del contenedor */
+}
+
+#footer .col-md-6.text-center.text-md-end {
+    text-align: right; /* Mantener elementos alineados a la derecha */
 }
