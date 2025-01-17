@@ -1,0 +1,110 @@
+/* Contenedor principal del formulario */
+.usuario-form, .usuario-register {
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+.usuario-form h1, .usuario-register h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Campos de formulario */
+.usuario-form .form-group,
+.usuario-register .form-group {
+    margin-bottom: 15px;
+}
+
+.usuario-form .form-control,
+.usuario-register .form-control {
+    font-size: 1rem;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.usuario-form .form-control:focus,
+.usuario-register .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Etiquetas de los campos */
+.usuario-form label,
+.usuario-register label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Botones */
+.usuario-form .btn,
+.usuario-register .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Colores específicos para botones */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #b02a37;
+}
+
+/* Espaciado entre botones */
+.usuario-form .form-group .btn,
+.usuario-register .form-group .btn {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+/* Respuesta móvil */
+@media (max-width: 768px) {
+    .usuario-form, .usuario-register {
+        padding: 15px;
+    }
+
+    .usuario-form .btn, .usuario-register .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
