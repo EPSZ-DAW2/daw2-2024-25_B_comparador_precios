@@ -1,145 +1,146 @@
-Gestion del perfil de usuario (Marcos Diez y Victor Gonzalo)
-Cambios dia 1:
--Añadido el modelo y el CRUD de usuarios
--Añadido las funciones de identifyInterface  en el modelo Usuarios (findByUsername, getPassword...)
--Añadido las acciones de visualizar y modificar perfil en el UsuariosController (queda arreglar los parametros que te deja modificar)
--Añadidos parámetros del acceso de sesión en código\config\params.php
--Cambio SiteController en la acción login y añadir el modelo Usuario con use app\models\Usuario; 
--Añadidas funciones de inicio de sesión y bloqueo en el modelo Usuario
+ARCHIVO RESUMEN DE LOS CAMBIOS REALIZADOS A LO LARGO DEL TRABAJO
+
+Cambios dia 1 (Marcos Díez y Víctor Gonzalo) 27/12/2024
+- Añadido el modelo y el CRUD de usuarios
+- Añadido las funciones de identifyInterface  en el modelo Usuarios (findByUsername, getPassword...)
+- Añadido las acciones de visualizar y modificar perfil en el UsuariosController (queda arreglar los parametros que te deja modificar)
+- Añadidos parámetros del acceso de sesión en código\config\params.php
+- Cambio SiteController en la acción login y añadir el modelo Usuario con use app\models\Usuario; 
+- Añadidas funciones de inicio de sesión y bloqueo en el modelo Usuario
 
 
-Cambios dia 2: 
--Añadido el modelo y el crud de Tienda y Articulo
--Añadido el modelo de seguimiento
--Añadida pagina donde el usuario puede consultar sus elementos en seguimeinto (no hay forma de seguir algo a traves de la página aun)
+Cambios dia 2 (Marcos Díez y Víctor Gonzalo) 28/12/2024 
+- Añadido el modelo y el crud de Tienda y Articulo
+- Añadido el modelo de seguimiento
+- Añadida pagina donde el usuario puede consultar sus elementos en seguimeinto (no hay forma de seguir algo a traves de la página aun)
 
  
-Cambios dia 3 (Marcos Díez): 29/14/2024
--Cambio en el modelo Usuario, en rules coge la fecha y hora de registro, y el estado de registro confirmado como pendiente
--En el login ahora comprueba si la cuenta ha sido verificada, sino, no deja entrar.
--Un usuario sólo se puede verificar si un moderador o administrador modifica su campo "Registro Confirmado" de 0 a 1.
--Cuando se cambia a 1, el usuario puede loggear.
--Cambios para que funcione el sistema de bloqueos al fallar los intentos. Al fallar 5 veces ahora se bloquea a ese usuario por 15 minutos y el sistema informa tanto de los intentos para bloquearse como del tiempo restante de bloqueo si ya estña bloqueado, también se ha añadido el motivo de bloqueo por superación de intentos máximos
+Cambios dia 3 (Marcos Díez) 29/12/2024
+- Cambio en el modelo Usuario, en rules coge la fecha y hora de registro, y el estado de registro confirmado como pendiente
+- En el login ahora comprueba si la cuenta ha sido verificada, sino, no deja entrar.
+- Un usuario sólo se puede verificar si un moderador o administrador modifica su campo "Registro Confirmado" de 0 a 1.
+- Cuando se cambia a 1, el usuario puede loggear.
+- Cambios para que funcione el sistema de bloqueos al fallar los intentos. Al fallar 5 veces ahora se bloquea a ese usuario por 15 minutos y el sistema informa tanto de los intentos para bloquearse como del tiempo restante de bloqueo si ya estña bloqueado, también se ha añadido el motivo de bloqueo por superación de intentos máximos
+
+Cambios dia 3 (Alejandra) 29/12/2024
+- Creado el modelo y controlador de TiendaArticulo.
+- Implementados getters auxiliares en el modelo tienda y en el controlador de tienda las funciones para  activar y desactivar la tiendas 
 
 
-Cambios dia 4 (Alejandra): 29/12/2024
--Creado el modelo y controlador de TiendaArticulo.
--Implementados getters auxiliares en el modelo tienda y en el controlador de tienda las funciones para  activar y desactivar la tiendas 
+Cambios dia 4 (Victor Gonzalo) 30/12/2024   
+- Creado el modelo y controlador de Comentario
+- Implementado una vista y funcion donde el usuario puede ver sus propios comentarios en su perfil (queda posible implentacio de un enlace a laseccion de comentarios de la que provienen)
 
 
-Cambios dia 5 (Victor Gonzalo) 30/12/2024   
--Creado el modelo y controlador de Comentario
--Implementado una vista y funcion donde el usuario puede ver sus propios comentarios en su perfil (queda posible implentacio de un enlace a laseccion de comentarios de la que provienen)
+Cambio dia 5 (Victor Gonzalo) 01/01/2025
+- Ahora al realizar un login si se actualiza el parametro "fecha_acceso"
+- Modificado la disposición el view de profile-update para incluir la posibilidad de cambiar la contraseña
+
+Cambios día 5 (Marcos Díez): 01/01/2025
+- Cambios en el controlador y vista del registro para poder introducir tu región, ahora se puede seleccionar el continente en el que estás.
+- Añadido el modelo de las regiones.
+- Todavía no se han implementado los países y estados así que quedan cosas por cambiar en las regiones, también habrá que hacer que se vean en el perfil cuando esté acabada esa parte, y se usarán también para las incidencias a moderadores.
 
 
-Cambio dia 6 (Victor Gonzalo) 1/01/2025
--Ahora al realizar un login si se actualiza el parametro "fecha_acceso"
--Modificado la disposición el view de profile-update para incluir la posibilidad de cambiar la contraseña
-
-Cambios día 6 (Marcos Díez): 1/01/2025
--Cambios en el controlador y vista del registro para poder introducir tu región, ahora se puede seleccionar el continente en el que estás.
--Añadido el modelo de las regiones.
--Todavía no se han implementado los países y estados así que quedan cosas por cambiar en las regiones, también habrá que hacer que se vean en el perfil cuando esté acabada esa parte, y se usarán también para las incidencias a moderadores.
-
-Cambios dia 6 (Alejandra)
--Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar datos, creados modelo y controlador de etiquetas, categorias e historico, en el controlador de tienda las funciones para crear un articulo y modificarlo (teniendo en cuenta casos, como en crear si el articulo ya existe o no o si es particular o comun)
+Cambios dia 6 (Alejandra) 02/01/2025
+- Arreglados errores de tiendaArticulos derivados de un error en SQL al insertar datos, creados modelo y controlador de etiquetas, categorias e historico, en el controlador de tienda las funciones para crear un articulo y modificarlo (teniendo en cuenta casos, como en crear si el articulo ya existe o no o si es particular o comun)
 
 
-Cambios día 7 (Javier Marinas y Marcos Méndez):
--Añadido el modelo y el CRUD de clasificaciones
+Cambios día 7 (Javier Marinas y Marcos Méndez) 03/01/2025
+- Añadido el modelo y el CRUD de clasificaciones
+
+Cambios dia 7 (Victor Gonzalo) 02/01/2025
+- Añadido el modelo de registrosUsuario
+- Modificado la accion de y vista de comentariosUsuario haciendo la acción funcional
+- Modificado el modelo de Articulo para que llame al modelo Comentario de manera correcta cuando lo necesita 
+- Añadido la accionBaja en UsuariosController y un botón en la vista de tu perfil, que enviará un mensaje a un moderador solicitando eliminar la cuenta de un usuario (todavia no es completamente funcional)
 
 
-Cambios dia 8 (Victor Gonzalo) 3/01/2025
--Añadido el modelo de registrosUsuario
--Modificado la accion de y vista de comentariosUsuario haciendo la acción funcional
--Modificado el modelo de Articulo para que llame al modelo Comentario de manera correcta cuando lo necesita 
--Añadido la accionBaja en UsuariosController y un botón en la vista de tu perfil, que enviará un mensaje a un moderador solicitando eliminar la cuenta de un usuario (todavia no es completamente funcional)
-
-Cambios día 8 (Javier Marinas y Marcos Méndez):
--Añadido el modelo RegistroUsuariosQuery
--Añadido el modelo y el CRUD de Ofertas
--Modificadas las vistas de clasificaciones para mostrar las tiendas asociadas
+Cambios día 8 (Javier Marinas y Marcos Méndez) 03/01/2025
+- Añadido el modelo RegistroUsuariosQuery
+- Añadido el modelo y el CRUD de Ofertas
+- Modificadas las vistas de clasificaciones para mostrar las tiendas asociadas
 
 
-Cambios dia 9 (Victor Martin y Rocío Rubio) 4/01/2025
--Añadido modelo controlador y vistas acerca de moderadores (pendiente de revision de ciertas funciones)
+Cambios dia 9 (Victor Martin y Rocío Rubio) 04/01/2025
+- Añadido modelo controlador y vistas acerca de moderadores (pendiente de revision de ciertas funciones)
 
-Cambios dia 9 (Marcos Díez) 4/01/2025
--Manejo de Regiones de usuarios completado:
--Añadidas funciones y variables para tener la provincia, estado, país y continente de un usuario dado en RegistrosController.
--Añadidos a la vista registro.php los campos provincia, estado y país como texto (para el formulario de registrarse)
--Añadidos atributos para los datos de las regiones en el modelo Usuario.php
--Ahora salen los datos de mi región al acceder a mi perfil (modificaciones en vista usuarios/perfil.php)
--Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
+Cambios dia 9 (Marcos Díez) 04/01/2025
+- Manejo de Regiones de usuarios completado:
+- Añadidas funciones y variables para tener la provincia, estado, país y continente de un usuario dado en RegistrosController.
+- Añadidos a la vista registro.php los campos provincia, estado y país como texto (para el formulario de registrarse)
+- Añadidos atributos para los datos de las regiones en el modelo Usuario.php
+- Ahora salen los datos de mi región al acceder a mi perfil (modificaciones en vista usuarios/perfil.php)
+- Añadidas funciones relevantes a las regiones padre en el modelo Regiones.php
 
-Cambios dia 9 (Victor Gonzalo Tapia) 4/01/2025
--Añadida función donde al verificar un registro de usuario tambien crea una entrada en la tabla de RegistroUsuarios
--Modificada un parte del modelo de RegistroUsuarios para utilizar el modelo Usuario correctamente 
--Esta funcion se encuentra en la vista del crud de modificar usuarios como un botón (queda añadir un comprobación en caso de estar el usuario ya verificado)
+Cambios dia 9 (Victor Gonzalo Tapia) 04/01/2025
+- Añadida función donde al verificar un registro de usuario tambien crea una entrada en la tabla de RegistroUsuarios
+- Modificada un parte del modelo de RegistroUsuarios para utilizar el modelo Usuario correctamente 
+- Esta funcion se encuentra en la vista del crud de modificar usuarios como un botón (queda añadir un comprobación en caso de estar el usuario ya verificado)
 
-Cambios dia 9 (Rocío Rubio Morillo) 4/01/2025: 
+Cambios dia 9 (Rocío Rubio Morillo) 04/01/2025
 - Creación del diseño css y HTML de la pagina index
-- corrección del error de duplicación de pagina web
-- creación del logo de la empresa personalizado
+- Corrección del error de duplicación de pagina web
+- Creación del logo de la empresa personalizado
 
-Cambios dia 9 (Víctor Martín) 4/01/2025:
+Cambios dia 9 (Víctor Martín) 04/01/2025
 -Actualizada la base de datos:
   - Campo rol en la tabla usuarios para los diferentes roles
   - Tabla roles en la base de datos
 
 
-Cambios dia 10 (Alejandra) 5/1/25
--implementadas funciones para ver las tiendas activas y sus vistas, la vista muestra cada tienda disponible y un boton para acceder a ella y que se muestre su catalogo de productos y su información que cada producto tiene un boton para ver su historico de precios
--tambien he añadido vistas para el mantenimiento de los productos de la propia tienda y he creado el modelo de Historico 
+Cambios dia 10 (Alejandra) 05/01/2025
+- Implementadas funciones para ver las tiendas activas y sus vistas, la vista muestra cada tienda disponible y un boton para acceder a ella y que se muestre su catalogo de productos y su información que cada producto tiene un boton para ver su historico de precios
+- Tambien he añadido vistas para el mantenimiento de los productos de la propia tienda y he creado el modelo de Historico 
 
-Cambios dia 10 (Victor Gonzalo) 5/1/2025
--Ajustada la opcion para ver las tiendas que sigues en tu perfil
--Arreglado la verficacion de registro de usuario
--Semi implementacion del codigo de aviso al moerador cuando se realiza un registro (solo esta comentado pero deberia ser casi funcional) 
--Ajuste de nombres de llamada a modelos en en el modelo Ofertas (cambiado Tiendas por Tienda etc...)
--Cambiada la barra de acceso rapido superior
-
-
-Cambios dia 11 (Victor Gonzalo) 6/1/2024
--Arreglada vista de los nombres y descripcion de articulos en tiendas 
--Arreglado modelo de comentarios 
-
-Cambios dia 11 (Victor Martin) 6/01/2025
--Arreglado el tema de articulos ya funciona correctamente
-
-Cambios dia 11 (Marcos Díez) 6/01/2025
--Añadidas las funciones de Avisos:
--Añadidos modelo y controlador de Avisos (AvisosController) y (Aviso.php)
--Añadidas las vistas de avisos enviados.php, recibidos.php, y enviar.php
--Creadas las acciones en controlador y modelo de avisos para acceder a estas vistas. Desde mi perfil (perfil.php) se pueden ver los avisos recibidos y los enviados por separado.
--Se puede enviar un aviso a otro usuario de la aplicación si existe también desde el perfil.
--creadas acciones para marcar como aceptados los avisos enviados y marcar como leídos para los mensajes recibidos
-
-Cambios dia 11 (Alejandra) 6/1/25
--refactorizado en controlador de tienda las funciones de producto y de ofertas asi como sus vistas asociadas
+Cambios dia 10 (Victor Gonzalo) 05/01/2025
+- Ajustada la opcion para ver las tiendas que sigues en tu perfil
+- Arreglado la verficacion de registro de usuario
+- Semi implementacion del codigo de aviso al moerador cuando se realiza un registro (solo esta comentado pero deberia ser casi funcional) 
+- Ajuste de nombres de llamada a modelos en en el modelo Ofertas (cambiado Tiendas por Tienda etc...)
+- Cambiada la barra de acceso rapido superior
 
 
-Cambios dia 12 (Victor Gonzalo) 7/1/25
--Añadido aviso a un moderador del registro de un usuario
--Añadida vista de comentarios y acción de comentar y valorar en los articulos de las tiendas (queda la funcionalidad de responder a comentarios)
--Arreglos menores en la vista de la tienda, comparador y articulos de tienda
+Cambios dia 11 (Victor Gonzalo) 06/01/2025
+- Arreglada vista de los nombres y descripcion de articulos en tiendas 
+- Arreglado modelo de comentarios 
+
+Cambios dia 11 (Victor Martin) 06/01/2025
+- Arreglado el tema de articulos ya funciona correctamente
+
+Cambios dia 11 (Marcos Díez) 06/01/2025
+- Añadidas las funciones de Avisos:
+- Añadidos modelo y controlador de Avisos (AvisosController) y (Aviso.php)
+- Añadidas las vistas de avisos enviados.php, recibidos.php, y enviar.php
+- Creadas las acciones en controlador y modelo de avisos para acceder a estas vistas. Desde mi perfil (perfil.php) se pueden ver los avisos recibidos y los enviados por separado.
+- Se puede enviar un aviso a otro usuario de la aplicación si existe también desde el perfil.
+- Creadas acciones para marcar como aceptados los avisos enviados y marcar como leídos para los mensajes recibidos
+
+Cambios dia 11 (Alejandra) 06/01/2025
+- Refactorizado en controlador de tienda las funciones de producto y de ofertas asi como sus vistas asociadas
+
+
+Cambios dia 12 (Victor Gonzalo) 07/01/2025
+- Añadido aviso a un moderador del registro de un usuario
+- Añadida vista de comentarios y acción de comentar y valorar en los articulos de las tiendas (queda la funcionalidad de responder a comentarios)
+- Arreglos menores en la vista de la tienda, comparador y articulos de tienda
 
 Cambios dia 12 (Victor Martin y Rocío Rubio) 07/01/2025
--Actualizados modelo y controlador de moderadores
--Actualizadas las vistas
--Actualizada la tabla de moderador con un campo que indicara si ha solicitado la baja
+- Actualizados modelo y controlador de moderadores
+- Actualizadas las vistas
+- Actualizada la tabla de moderador con un campo que indicara si ha solicitado la baja
 
 
 Cambios dia 13 (Victor Gonzalo) 08/01/2025
--Actualizado el perfil, añadiendo la accion para darse de baja (por el momento envia un aviso a un moderador del mismo continente)
+- Actualizado el perfil, añadiendo la accion para darse de baja (por el momento envia un aviso a un moderador del mismo continente)
 
-Cambios día 13 (Javier Marinas y Marcos Méndez):
--Actualizados modelos y vistas de Clasificaciones para que muestre correctamente las tiendas asociadas a una clasificación
+Cambios día 13 (Javier Marinas y Marcos Méndez) 08/01/2025
+- Actualizados modelos y vistas de Clasificaciones para que muestre correctamente las tiendas asociadas a una clasificación
 
 Cambios dia 13 (Víctor Martín) 08/01/2025
 - Models/Usuario (Funciones y constantes para el tema de roles)
 - ModeradoresController: modificación en los permisos de modo que solo lo pueden acceder usuarios con rol de moderador 
--Actualizada la vista de las comentarios dentro del perfil de usuario
+- Actualizada la vista de las comentarios dentro del perfil de usuario
 
 
 Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025
@@ -151,109 +152,109 @@ Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025
 - Modficadas las vistas de tiendas: _search, index y view
 - Creadas las vistas de tiendas: _tienda_card y denunciar
 
-Cambios día 14 (Víctor Martín)
+Cambios día 14 (Víctor Martín) 09/01/2025
 - Actualizado el modelo y controlador de Moderadores
 - Añadidas las funciones para el mantenimiento de tiendas de su misma region
 - Añadidas las vistas pertinentes
 
-Cambios día 14 (Victor Gonzalo)
--Cambiado el index de inicio (views/site/index) para añadir una opcion de busqueda de tiendas
--Arreglado un problema con la id de tienda en los comentarios de articulos de tienda
--Arreglado un error con el header en el css
--Modificado una parte de la vista de comentarios de usuario en el perfil 
+Cambios día 14 (Victor Gonzalo) 09/01/2025
+- Cambiado el index de inicio (views/site/index) para añadir una opcion de busqueda de tiendas
+- Arreglado un problema con la id de tienda en los comentarios de articulos de tienda
+- Arreglado un error con el header en el css
+- Modificado una parte de la vista de comentarios de usuario en el perfil 
 
-Cambios día 14 (Javier Marinas y Marcos Méndez)
--Arreglado problema registro de comentarios en tiendas
+Cambios día 14 (Javier Marinas y Marcos Méndez) 09/01/2025
+- Arreglado problema registro de comentarios en tiendas
 
-Cambios dia 14 (Victor Martín y Rocío Rubio)
+Cambios dia 14 (Victor Martín y Rocío Rubio) 09/01/2025
 - Actualizado el modelo, controladores y vistas de moderadores
 - Ya esta implementadas las funciones de mantenimiento de usuarios en la region del moderador
 - Avanzada la funcion de gestion de comentarios y articulos de una tienda aunque falta pulirlo
 - Cambio en la base de datos en la tabla comentarios para poder hacer comentarios de las tiendas
 
-Cambios dia 14 (Alejandra y Diego)
--Arregladas funciones en controlador de tienda relacionadas con articulos y ofertas (falta arreglar crear articulo)
+Cambios dia 14 (Alejandra y Diego) 09/01/2025
+- Arregladas funciones en controlador de tienda relacionadas con articulos y ofertas (falta arreglar crear articulo)
 
 
 Cambios día 15 (Javier Marinas y Marcos Méndez) 10/01/2025
--Añadida la funcionalidad del botón Resetear en el formulario de búsqueda de tiendas
--Modificados los formularios de comentario para que aparezcan sin contenido de serie
--Modificados los botones Enviar Comentario, Denunciar Tienda y Seguir/Dejar de Seguir para que redireccionen correctamente al login si no se ha iniciado sesión
+- Añadida la funcionalidad del botón Resetear en el formulario de búsqueda de tiendas
+- Modificados los formularios de comentario para que aparezcan sin contenido de serie
+- Modificados los botones Enviar Comentario, Denunciar Tienda y Seguir/Dejar de Seguir para que redireccionen correctamente al login si no se ha iniciado sesión
 
-Cambios día 15 (Victor Martín Campos)
+Cambios día 15 (Victor Martín Campos) 10/01/2025
 - Actualizado de nuevo el modelo, controladores y vista de moderadores
 - Añadida de nuevo la funcionalidad de editar articulos de la tienda que modera el usuario
-- modificado tambien el models/ArticulosTienda, simplemente añadida una funcion para los comentarios que necesitaba
+- Modificado tambien el models/ArticulosTienda, simplemente añadida una funcion para los comentarios que necesitaba
 
-Cambios dia 15 (Rocío Rubio )
--cambios en el diseño de la web para que se vea mejor visualmente:
-   * barra no fija en el footer
-   * modificacion del tamaño de los margenes
-   * relleno de la pagina inicial (valoraciones, eslogan...)
-   * modificacion de las fuentes de letras de la web para hacerla mas atractiv
+Cambios dia 15 (Rocío Rubio) 10/01/2025
+- Cambios en el diseño de la web para que se vea mejor visualmente:
+   - Barra no fija en el footer
+   - Modificacion del tamaño de los margenes
+   - Relleno de la pagina inicial (valoraciones, eslogan...)
+   - Modificacion de las fuentes de letras de la web para hacerla mas atractiv
 
-Cambios dia 15 (Víctor Martín)
-- añadida funcion en el modelo Aviso necesaria para moderadores
-- actualizados modelo controladores y vistas
+Cambios dia 15 (Víctor Martín) 10/01/2025
+- Añadida funcion en el modelo Aviso necesaria para moderadores
+- Actualizados modelo controladores y vistas
 - Ya terminado a falta de revisar detalles
 
 
 Cambios dia 16 (Víctor Martín Campos) 11/01/2025
-- añadido modelo controlador y vista de registros logs, funciona correctamente
-- modificado el controlador de registro para que haga un registro log de modo que cuando alguien se regitre lo ponga (faltaria hacerlo en mas)
-- modificado el modelo y controlador de usuarios ya funcionan bien (con los roles)
+- Añadido modelo controlador y vista de registros logs, funciona correctamente
+- Modificado el controlador de registro para que haga un registro log de modo que cuando alguien se regitre lo ponga (faltaria hacerlo en mas)
+- Modificado el modelo y controlador de usuarios ya funcionan bien (con los roles)
 - Modificado el sql con la tabla para el registro logs
 
 
 Cambios dia 17 (Víctor Martín Campos) 12/01/2025
-- añadido el mantenimiento de moderadores y tiendas (mvc ModeradoresAdmin y TiendasAdmin)
-- modificado models de Tienda y Seguimiento arreglando errores 
-- añadido Moderadores Search
+- Añadido el mantenimiento de moderadores y tiendas (mvc ModeradoresAdmin y TiendasAdmin)
+- Modificado models de Tienda y Seguimiento arreglando errores 
+- Añadido Moderadores Search
 - Modificados controladores de registro y login para que hagan registrologs y se guarden correctamente
-- tambien implementado tema de roles en estos controladores
+- También implementado tema de roles en estos controladores
 
-Cambios dia 17 (Marcos Díez Álvarez)
--Añadida la fecha de bloqueo en el momento en el que se bloquea la cuenta por acceder mal 5 veces
+Cambios dia 17 (Marcos Díez Álvarez) 12/01/2025
+- Añadida la fecha de bloqueo en el momento en el que se bloquea la cuenta por acceder mal 5 veces
 
-Cambios dia 17 (Alejandra) 
-Cambiada consulta al historico en funciones de ofertas en controlador tienda 
+Cambios dia 17 (Alejandra) 12/01/2025
+- Cambiada consulta al historico en funciones de ofertas en controlador tienda 
 
 
 Cambios dia 18 (Víctor Martín Campos) 13/01/2025
-- modificados controladores y vistas de moderadores. Añadidas las funciones del moderador en cuanto a comentarios
-- modificado el models/ArticulosTienda 
-- faltaria revisar una funcion de crear, la solicitud de baja y un detalle en los comentarios
+- Modificados controladores y vistas de moderadores. Añadidas las funciones del moderador en cuanto a comentarios
+- Modificado el models/ArticulosTienda 
+- Faltaria revisar una funcion de crear, la solicitud de baja y un detalle en los comentarios
 
 
 Cambios dia 19 (Víctor Martín Campos) 15/01/2025
-- añadidos el modelo, vista y controlador de las copias de seguridad (backup)
-- creada la carpeta backups que es donde se guardan las copias de seguridad
-- actualizada la base de datos, tabla backups 
-- actualizados el controlador y vistas de moderadores, pendiente revisar cosas y el solicitar baja
+- Añadidos el modelo, vista y controlador de las copias de seguridad (backup)
+- Creada la carpeta backups que es donde se guardan las copias de seguridad
+- Actualizada la base de datos, tabla backups 
+- Actualizados el controlador y vistas de moderadores, pendiente revisar cosas y el solicitar baja
 
-Cambios día 19 (Javier Marinas y Marcos Méndez)
-- nuevas vistas de clasificaciones en la que los usuarios no tengan acceso a las funciones crud y dejar las anteriores vistas para el mantenimineto de clasificaciones
+Cambios día 19 (Javier Marinas y Marcos Méndez) 15/01/2025
+- Nuevas vistas de clasificaciones en la que los usuarios no tengan acceso a las funciones crud y dejar las anteriores vistas para el mantenimineto de clasificaciones
 
 
 Cambios día 20 (Víctor Martín Campos) 16/01/2025
 - Implementado parte del diseño, modificando la carptea css y con la carptea img
-- modificados los layouts haciendo un header y footer
-- integradas vistas en sites 
-- modificacion del SiteController y UsuariosController corrigiendo errores
+- Modificados los layouts haciendo un header y footer
+- Integradas vistas en sites 
+- Modificacion del SiteController y UsuariosController corrigiendo errores
 - Añadida funcionalidad de solicitud de baja
-- añadida funcionalidad de administrador para dar de baja
-- añadida funcionalidad para mostrar avisos al administrador
-- modificadas vistas de site, moderadores, moderadores-admin y avisos
-- modificados tambien sus modelos y controladores
+- Añadida funcionalidad de administrador para dar de baja
+- Añadida funcionalidad para mostrar avisos al administrador
+- Modificadas vistas de site, moderadores, moderadores-admin y avisos
+- Modificados tambien sus modelos y controladores
 - Tambien añadido para limpiar mensajes de aviso
 - Actualizada base de datos
 
-Cambios día 20 (Victor Gonzalo)
+Cambios día 20 (Victor Gonzalo) 16/01/2025
 - Modificada vista de la página de consulta de perfiles
 - Modificada la página actualizacion de datos de usuario para que la contraseña requiera dos pasos 
 - Modificada la vista de comentarios para que contengan un enlace que te lleve a la página de la tienda de donde proviene el comentario.
 
-Cambios día 20 (Javier Marinas y Marcos Méndez)
+Cambios día 20 (Javier Marinas y Marcos Méndez) 16/0172025
 - Modificado el controlador de Categorias para adaptarlo a su funcionalidad.
 - Modificado el modelo de Categorias.
 - Modificadas las vistas para las categorías que se gestionan por los administradores.
@@ -262,15 +263,14 @@ Cambios día 20 (Javier Marinas y Marcos Méndez)
 - Añadidas las imágenes asociadas a cada tienda modificando archivos "_tienda_card" y "index" de tiendas.
 - Redirección del Ver más dentro de categorías modificada a "public-articulos/view".
 
-Cambios día 20 (Alejandra y Diego)
-- en la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla tiendaArticulos 
-
-Cambios día 21 (Víctor Martín) 17/01/25
-- mejora el diseño, añadidos css y modificado los layouts 
-- modificacion del Moderadores controler arreglando el crear comentarios de tiendas
-- modificadas las vistas de usuarios, tiendas, moderadores y registros
-
-Cambios día 21 (Alejandra)
-- en la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla historico
+Cambios día 20 (Alejandra y Diego) 16/01/2025
+- En la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla tiendaArticulos 
 
 
+Cambios día 21 (Víctor Martín) 17/01/2025
+- Mejora el diseño, añadidos css y modificado los layouts 
+- Modificacion del Moderadores controler arreglando el crear comentarios de tiendas
+- Modificadas las vistas de usuarios, tiendas, moderadores y registros
+
+Cambios día 21 (Alejandra) 17/01/2025
+- En la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla historico
