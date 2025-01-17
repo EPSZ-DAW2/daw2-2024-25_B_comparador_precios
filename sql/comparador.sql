@@ -53,12 +53,12 @@ CREATE TABLE IF NOT EXISTS `articulos` (
 --
 
 INSERT INTO `articulos` (`id`, `nombre`, `descripcion`, `categoria_id`, `etiqueta_id`, `imagen_principal`, `visible`, `cerrado`, `tipo_marcado`, `registro_id`, `articulo_tienda_id`) VALUES
-(1, 'Smartphone XYZ', 'Un smartphone de última generación con todas las características que necesitas.', 1, 1, 'smartphone_xyz.jpg', 1, 0, 'comun', 1, NULL),
-(2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 1, 'televisor_4k.jpg', 1, 0, 'comun', 2, NULL),
-(3, 'Lavadora Eco', 'Lavadora de alta eficiencia energética con múltiples programas de lavado.', 2, 2, 'lavadora_eco.jpg', 1, 0, 'comun', 3, NULL),
-(4, 'Pantalón Vaquero', 'Pantalón vaquero de moda para hombre.', 3, 3, 'vaquero.png', 1, 0, 'comun', 4, NULL),
-(5, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 4, 4, 'camiseta_deportiva.jpg', 1, 0, 'comun', 5, NULL),
-(6, 'El Quijote', 'Novela mítica de la literatura española, todo un clásico.', 5, 5, 'quijote.jpg', 1, 0, 'comun', 5, NULL);
+(1, 'Smartphone XYZ', 'Un smartphone de última generación con todas las características que necesitas.', 1, 1, 'smartphone_xyz.jpg', 1, 0, 'comun', 1, 1),
+(2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 1, 'televisor_4k.jpg', 1, 0, 'comun', 2, 2),
+(3, 'Lavadora Eco', 'Lavadora de alta eficiencia energética con múltiples programas de lavado.', 2, 2, 'lavadora_eco.jpg', 1, 0, 'comun', 3, 3),
+(4, 'Pantalón Vaquero', 'Pantalón vaquero de moda para hombre.', 5, 5, 'vaquero.png', 1, 0, 'comun', 4, 4),
+(5, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 3, 3, 'camiseta_deportiva.jpg', 1, 0, 'comun', 5, 5),
+(6, 'El Quijote', 'Novela mítica de la literatura española, todo un clásico.', 4, 4, 'quijote.jpg', 1, 0, 'comun', 5, 6);
 
 -- --------------------------------------------------------
 
@@ -126,11 +126,11 @@ CREATE TABLE IF NOT EXISTS `articulo_etiquetas` (
 
 INSERT INTO `articulo_etiquetas` (`articulo_id`, `etiqueta_id`) VALUES
 (1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 5);
+(2, 1),
+(3, 2),
+(4, 5),
+(5, 3),
+(6, 4);
 
 -- --------------------------------------------------------
 
@@ -191,9 +191,9 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `icono`, `categoria_padre_id`) VALUES
 (1, 'Electrónica', 'Productos electrónicos y gadgets', NULL, NULL),
 (2, 'Hogar', 'Artículos para el hogar y decoración', NULL, NULL),
-(3, 'Ropa', 'Prendas de vestir y accesorios', NULL, NULL),
-(4, 'Deportes', 'Equipamiento y ropa deportiva', NULL, NULL),
-(5, 'Libros', 'Libros y material de lectura', NULL, NULL);
+(3, 'Deportes', 'Equipamiento y ropa deportiva', NULL, NULL),
+(4, 'Libros', 'Libros y material de lectura', NULL, NULL),
+(5, 'Ropa', 'Prendas de vestir y accesorios', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -216,9 +216,9 @@ CREATE TABLE IF NOT EXISTS `clasificaciones` (
 INSERT INTO `clasificaciones` (`id`, `nombre`, `descripcion`, `icono`) VALUES
 (1, 'Electrónica', 'Productos electrónicos y gadgets', 'icono_electronica.png'),
 (2, 'Hogar', 'Artículos para el hogar y decoración', 'icono_hogar.png'),
-(3, 'Ropa', 'Prendas de vestir y accesorios', 'icono_ropa.png'),
-(4, 'Deportes', 'Equipamiento y ropa deportiva', 'icono_deportes.png'),
-(5, 'Libros', 'Libros y material de lectura', 'icono_libros.png');
+(3, 'Deportes', 'Equipamiento y ropa deportiva', 'icono_deportes.png'),
+(4, 'Libros', 'Libros y material de lectura', 'icono_libros.png'),
+(5, 'Ropa', 'Prendas de vestir y accesorios', 'icono_ropa.png');
 
 -- --------------------------------------------------------
 
@@ -319,9 +319,9 @@ CREATE TABLE IF NOT EXISTS `etiquetas` (
 INSERT INTO `etiquetas` (`id`, `nombre`, `descripcion`) VALUES
 (1, 'Electrónica', 'Productos relacionados con dispositivos electrónicos'),
 (2, 'Hogar', 'Artículos para el hogar y decoración'),
-(3, 'Ropa', 'Prendas de vestir y accesorios'),
-(4, 'Deportes', 'Equipamiento y ropa deportiva'),
-(5, 'Libros', 'Libros y material de lectura');
+(3, 'Deportes', 'Equipamiento y ropa deportiva'),
+(4, 'Libros', 'Libros y material de lectura'),
+(5, 'Ropa', 'Prendas de vestir y accesorios');
 
 -- --------------------------------------------------------
 
