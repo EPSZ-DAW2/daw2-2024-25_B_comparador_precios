@@ -216,6 +216,22 @@ class Articulo extends \yii\db\ActiveRecord
 	{
 		return $this->hasOne(Clasificacion::class, ['id' => 'clasificacion_id']);
 	}
+	
+	/**
+	 * Obtiene la valoración media del artículo basada en los comentarios.
+	 * @return string
+	 */
+	public function getValoracionMedia()
+	{
+		$totalValoraciones = $this->getComentarios()->sum('valoracion');
+		$totalComentarios = $this->getComentarios()->count();
+
+		if ($totalComentarios > 0) {
+			return round($totalValoraciones / $totalComentarios, 1) . ' / 5';
+		}
+
+		return 'Sin valoraciones aún.';
+	}
 
 
 }
