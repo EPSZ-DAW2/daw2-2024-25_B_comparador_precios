@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 
@@ -38,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'imagen_principal',
                 'format' => 'raw',
-                'value' => Html::img(Url::to('@web/img/' . $model->imagen_principal), [
+                'value' => Html::img($model->imagen_principal ?? '/path/to/default-image.jpg', [
                     'alt' => Html::encode($model->nombre),
                     'style' => 'max-width: 200px;',
                 ]),
@@ -66,14 +64,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3>Añadir un Comentario</h3>
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($comentario, 'texto')->textarea(['rows' => 4]) ?>
+        <?= $form->field($comentario, 'texto')->textarea([
+        'rows' => 4,
+        'value' => '',
+		]) ?>
+		
         <?= $form->field($comentario, 'valoracion')->dropDownList([
             5 => '5 - Excelente',
             4 => '4 - Muy Bueno',
             3 => '3 - Bueno',
             2 => '2 - Regular',
             1 => '1 - Malo',
-        ], ['prompt' => 'Seleccionar Valoración']) ?>
+        ], ['prompt' => 'Seleccionar Valoración',
+			'value' => null,
+		]) ?>
 
         <?= Html::submitButton('Enviar Comentario', ['class' => 'btn btn-primary']) ?>
 
@@ -81,8 +85,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Botones de Acciones -->
     <p>
-        <?= Html::a('Denunciar Artículo', ['denunciar', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Cambios de Precios', ['historico', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('Denunciar Artículo', ['denunciar', 'id' => $model->id], [
+			'class' => 'btn btn-warning',
+		]) ?>
+		
+		<?= Html::a('Cambios de Precios', ['historico', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
 
         <?php
         $seguimiento = !Yii::$app->user->isGuest 
