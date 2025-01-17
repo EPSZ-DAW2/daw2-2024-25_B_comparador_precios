@@ -278,7 +278,7 @@ Cambios día 21 (Víctor Martín) 17/01/2025
 - Mejora el diseño, añadidos css y modificado los layouts 
 - Modificacion del Moderadores controler arreglando el crear comentarios de tiendas
 - Modificadas las vistas de usuarios, tiendas, moderadores y registros
-- modificadas las vistas de site
+- Modificadas las vistas de site
 - Añadidos roles de administradores, moderadores y superadministrador en la configuracion de la pagina
 - Corregido tema de limpieza de copias de seguridad
 
