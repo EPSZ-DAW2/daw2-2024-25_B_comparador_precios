@@ -163,14 +163,6 @@ class PublicArticulosController extends Controller
 			// Capturar el motivo desde el formulario
 			$nuevoMotivo = Yii::$app->request->post('motivo_denuncia');
 
-			// Incrementar el contador de denuncias
-			//$articuloTienda->denuncias += 1;
-
-			// Registrar la fecha de la primera denuncia (si no se ha registrado antes)
-			/*if (!$articuloTienda->fecha_primera_denuncia) {
-				$articuloTienda->fecha_primera_denuncia = date('Y-m-d H:i:s');
-			}*/
-
 			// Agregar el nuevo motivo de denuncia al artículo
 			$articuloTienda->agregarMotivoDenuncia($nuevoMotivo);
 
