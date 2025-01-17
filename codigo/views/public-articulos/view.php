@@ -41,6 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'style' => 'max-width: 200px;',
                 ]),
             ],
+			[
+				'label' => 'Valoración Media',
+				'value' => $model->valoracionMedia,
+			],
         ],
     ]) ?>
 
