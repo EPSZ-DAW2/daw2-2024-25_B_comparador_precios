@@ -723,14 +723,6 @@ class TiendasController extends Controller
 			// Capturar el motivo desde el formulario
 			$nuevoMotivo = Yii::$app->request->post('motivo_denuncia');
 
-			// Incrementar el contador de denuncias
-			$tienda->denuncias = $tienda->denuncias + 1;
-
-			// Registrar la fecha de la primera denuncia (si no se ha registrado antes)
-			if (!$tienda->fecha_primera_denuncia) {
-				$tienda->fecha_primera_denuncia = date('Y-m-d H:i:s');
-			}
-
 			// Agregar el nuevo motivo de denuncia a la tienda
 			$tienda->agregarMotivoDenuncia($nuevoMotivo);
 
