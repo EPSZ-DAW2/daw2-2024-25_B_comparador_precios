@@ -198,13 +198,11 @@ Cambios dia 15 (Víctor Martín) 10/01/2025
 - Actualizados modelo controladores y vistas
 - Ya terminado a falta de revisar detalles
 
-
 Cambios dia 16 (Víctor Martín Campos) 11/01/2025
 - Añadido modelo controlador y vista de registros logs, funciona correctamente
 - Modificado el controlador de registro para que haga un registro log de modo que cuando alguien se regitre lo ponga (faltaria hacerlo en mas)
 - Modificado el modelo y controlador de usuarios ya funcionan bien (con los roles)
 - Modificado el sql con la tabla para el registro logs
-
 
 Cambios dia 17 (Víctor Martín Campos) 12/01/2025
 - Añadido el mantenimiento de moderadores y tiendas (mvc ModeradoresAdmin y TiendasAdmin)
@@ -219,12 +217,18 @@ Cambios dia 17 (Marcos Díez Álvarez) 12/01/2025
 Cambios dia 17 (Alejandra) 12/01/2025
 - Cambiada consulta al historico en funciones de ofertas en controlador tienda 
 
+Cambios día 17 (Rocio)
+- Arreglo de errores en UsuariosController 
+- modificaciones de modelos Usuario, Site y Moderador
 
 Cambios dia 18 (Víctor Martín Campos) 13/01/2025
 - Modificados controladores y vistas de moderadores. Añadidas las funciones del moderador en cuanto a comentarios
 - Modificado el models/ArticulosTienda 
 - Faltaria revisar una funcion de crear, la solicitud de baja y un detalle en los comentarios
 
+Cambios dia 19 (Rocio Rubio) 13/01/2025
+- Modificados controladores y vistas de site arreglando errores
+- Modificadas las vistas de Clasificaciones, categorias y etiquetas para mejor uso
 
 Cambios dia 19 (Víctor Martín Campos) 15/01/2025
 - Añadidos el modelo, vista y controlador de las copias de seguridad (backup)
@@ -234,7 +238,6 @@ Cambios dia 19 (Víctor Martín Campos) 15/01/2025
 
 Cambios día 19 (Javier Marinas y Marcos Méndez) 15/01/2025
 - Nuevas vistas de clasificaciones en la que los usuarios no tengan acceso a las funciones crud y dejar las anteriores vistas para el mantenimineto de clasificaciones
-
 
 Cambios día 20 (Víctor Martín Campos) 16/01/2025
 - Implementado parte del diseño, modificando la carptea css y con la carptea img
@@ -266,6 +269,10 @@ Cambios día 20 (Javier Marinas y Marcos Méndez) 16/0172025
 Cambios día 20 (Alejandra y Diego) 16/01/2025
 - En la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla tiendaArticulos 
 
+Cambios día 20 (Rocío Rubio)
+- Modificaciones en la base de datos en ciertos campos de tiendas
+- Mejora en el diseño con nuevas vistas y estilos
+- añadidos vistas en site para las diferentes funciones al acceder a la página
 
 Cambios día 21 (Víctor Martín) 17/01/2025
 - Mejora el diseño, añadidos css y modificado los layouts 
