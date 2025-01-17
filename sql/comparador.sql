@@ -54,16 +54,11 @@ CREATE TABLE IF NOT EXISTS `articulos` (
 
 INSERT INTO `articulos` (`id`, `nombre`, `descripcion`, `categoria_id`, `etiqueta_id`, `imagen_principal`, `visible`, `cerrado`, `tipo_marcado`, `registro_id`, `articulo_tienda_id`) VALUES
 (1, 'Smartphone XYZ', 'Un smartphone de última generación con todas las características que necesitas.', 1, 1, 'smartphone_xyz.jpg', 1, 0, 'comun', 1, NULL),
-(2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 2, 'televisor_4k.jpg', 1, 0, 'comun', 2, NULL),
-(3, 'Lavadora Eco', 'Lavadora de alta eficiencia energética con múltiples programas de lavado.', 2, 3, 'lavadora_eco.jpg', 1, 0, 'comun', 3, NULL),
-(4, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 3, 4, 'camiseta_deportiva.jpg', 1, 0, 'comun', 4, NULL),
-(5, '3342', 'rr4', 1, 1, 'algo.png', 0, 1, 'comun', 5, NULL),
-(7, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
-(8, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
-(9, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
-(10, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
-(11, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL),
-(12, 'aa', 'sss', 1, 1, 'algo.png', 1, 0, 'comun', NULL, NULL);
+(2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 1, 'televisor_4k.jpg', 1, 0, 'comun', 2, NULL),
+(3, 'Lavadora Eco', 'Lavadora de alta eficiencia energética con múltiples programas de lavado.', 2, 2, 'lavadora_eco.jpg', 1, 0, 'comun', 3, NULL),
+(4, 'Pantalón Vaquero', 'Pantalón vaquero de moda para hombre.', 3, 3, 'vaquero.png', 1, 0, 'comun', 4, NULL),
+(5, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 4, 4, 'camiseta_deportiva.jpg', 1, 0, 'comun', 5, NULL),
+(6, 'El Quijote', 'Novela mítica de la literatura española, todo un clásico.', 5, 5, 'quijote.jpg', 1, 0, 'comun', 5, NULL);
 
 -- --------------------------------------------------------
 
