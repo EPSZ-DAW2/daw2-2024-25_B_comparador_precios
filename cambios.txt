@@ -274,3 +274,5 @@ Cambios día 21 (Víctor Martín) 17/01/2025
 
 Cambios día 21 (Alejandra) 17/01/2025
 - En la funcion crear articulo del controlador de tienda arreglado el linkado del producto creado con la tabla historico
+- agregados nuevos articulos de prueba
+- modificadas vistas de view-store y view-articulo

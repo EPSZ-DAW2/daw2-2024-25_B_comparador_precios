@@ -80,8 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
             },
         ],
         'precio_actual',
-        'historico_id',
-        'oferta_id',
         'suma_valoraciones',
         'suma_votos',
         'visible:boolean',
