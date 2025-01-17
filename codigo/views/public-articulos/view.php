@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 
@@ -36,15 +38,19 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'imagen_principal',
                 'format' => 'raw',
-                'value' => Html::img($model->imagen_principal ?? '/path/to/default-image.jpg', [
-                    'alt' => Html::encode($model->nombre),
-                    'style' => 'max-width: 200px;',
-                ]),
+                'value' => Html::img(
+                    Url::to('@web/img/' . ($model->imagen_principal ?: 'placeholder.jpg')),
+                    [
+                        'alt' => Html::encode($model->nombre),
+                        'style' => 'max-width: 200px;',
+                        'onerror' => "this.onerror=null;this.src='".Url::to('@web/img/placeholder.jpg')."';"
+                    ]
+                ),
             ],
-			[
-				'label' => 'Valoración Media',
-				'value' => $model->valoracionMedia,
-			],
+            [
+                'label' => 'Valoración Media',
+                'value' => $model->valoracionMedia,
+            ],
         ],
     ]) ?>
 
