@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Crear Tienda'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <!-- Renderiza el formulario de búsqueda -->
     <?= $this->render('_search', ['model' => $searchModel]) ?>
 
