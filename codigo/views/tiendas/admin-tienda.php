@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<?= $tienda->id ?>">
-                                <?= Html::encode($tienda->nombre) ?>
+                                <?= Html::encode($tienda->razon_social) ?>
                             </a>
                         </h4>
                     </div>
