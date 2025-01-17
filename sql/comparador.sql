@@ -101,10 +101,11 @@ CREATE TABLE IF NOT EXISTS `articulos_tienda` (
 
 INSERT INTO `articulos_tienda` (`id`, `articulo_id`, `tienda_id`, `precio_actual`, `historico_id`, `oferta_id`, `suma_valoraciones`, `suma_votos`, `visible`, `cerrado`, `denuncias`, `fecha_primera_denuncia`, `motivo_denuncia`, `bloqueado`, `fecha_bloqueo`, `motivo_bloqueo`, `cerrado_comentar`, `registro_id`, `comentario_id`) VALUES
 (1, 1, 1, 299.99, 1, 1, 10, 5, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 1, NULL),
-(2, 2, 2, 499.99, 2, 2, 20, 10, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 2, NULL),
-(3, 3, 3, 199.99, 3, 3, 30, 15, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 3, NULL),
-(4, 4, 4, 29.99, 4, 4, 40, 20, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 4, NULL),
-(5, 5, 5, 9.99, 5, 5, 50, 25, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 5, NULL);
+(2, 2, 1, 499.99, 2, 2, 20, 10, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 2, NULL),
+(3, 3, 2, 199.99, 3, 3, 30, 15, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 3, NULL),
+(4, 4, 5, 29.99, 4, 4, 40, 20, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 4, NULL),
+(5, 5, 3, 24.99, 5, 5, 50, 25, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 5, NULL),
+(6, 6, 4, 19.99, 6, 6, 30, 15, 1, 0, 0, NULL, NULL, 0, NULL, NULL, 0, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,8 @@ INSERT INTO `articulo_etiquetas` (`articulo_id`, `etiqueta_id`) VALUES
 (2, 2),
 (3, 3),
 (4, 4),
-(5, 5);
+(5, 5),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -255,8 +257,8 @@ INSERT INTO `comentarios` (`id`, `tienda_id`, `articulo_id`, `valoracion`, `text
 (2, 2, 2, 4, 'Buen producto, pero podría mejorar.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 2),
 (3, 3, 3, 3, 'Producto regular, cumple con lo básico.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 3),
 (4, 4, 4, 2, 'No me gustó el producto, tiene varios defectos.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 4),
-(5, 5, 5, 1, 'Muy mal producto, no lo recomiendo.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 5);
-
+(5, 5, 5, 1, 'Muy mal producto, no lo recomiendo.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 5),
+(6, 4, 6, 4, 'Lo esperado.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 5);
 -- --------------------------------------------------------
 
 --
@@ -353,26 +355,13 @@ INSERT INTO `historico_precios` (`id`, `articulo_id`, `tienda_id`, `fecha`, `pre
 (8, 4, 4, '2024-01-01 00:00:00', 29.99),
 (9, 5, 5, '2024-01-01 00:00:00', 19.99),
 (10, 5, 5, '2024-02-01 00:00:00', 9.99),
-(11, 7, 5, '2025-01-08 01:42:50', 0.00),
-(12, 7, 5, '2025-01-08 01:43:04', 0.00),
-(13, 7, 5, '2025-01-08 01:48:06', 0.00),
-(14, 7, 5, '2025-01-08 01:54:05', 0.00),
-(15, 7, 5, '2025-01-08 01:58:31', 0.00),
-(16, 5, 5, '2025-01-08 09:37:18', NULL),
 (17, 5, 5, '2025-01-08 10:00:23', 15.00),
 (18, 5, 5, '2025-01-08 10:33:12', 14.00),
 (19, 5, 5, '2025-01-08 10:34:22', 14.00),
 (20, 5, 5, '2025-01-08 10:39:05', 14.00),
 (21, 5, 5, '2025-01-08 10:39:45', 14.00),
 (22, 5, 5, '2025-01-08 10:40:10', 14.00),
-(23, 5, 5, '2025-01-08 11:04:42', 23.00),
-(24, NULL, 5, '2025-01-08 11:11:03', 23.00),
-(25, NULL, 5, '2025-01-08 11:15:23', 23.00),
-(26, NULL, 5, '2025-01-08 11:18:11', 23.00),
-(27, NULL, 5, '2025-01-08 11:19:56', 23.00),
-(28, NULL, 5, '2025-01-08 11:22:47', 222.00),
-(29, NULL, 5, '2025-01-08 11:29:59', 222.00),
-(30, NULL, 5, '2025-01-08 12:16:33', 23.00);
+(23, 5, 5, '2025-01-08 11:04:42', 23.00);
 
 -- --------------------------------------------------------
 
