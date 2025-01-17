@@ -25,6 +25,7 @@ $this->registerCssFile('@web/css/tiendas.css', ['depends' => [\yii\web\YiiAsset:
 $this->registerCssFile('@web/css/perfil.css', ['depends' => [\yii\web\YiiAsset::class]]);
 $this->registerCssFile('@web/css/formulario.css', ['depends' => [\yii\web\YiiAsset::class]]);
 $this->registerCssFile('@web/css/tablas.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/politicasavisos.css', ['depends' => [\yii\web\YiiAsset::class]]);
 $this->registerCssFile('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css');
 
 

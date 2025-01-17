@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 ?>
 
-<div id="footer" class="container-fluid"> <!-- Cambié el contenedor a container-fluid y agregué el ID "footer" -->
+<div id="footer" class="container-fluid"> 
     <div class="container">
         <div class="row text-light">
             <!-- Seguimiento de la web -->
@@ -47,15 +47,19 @@ use yii\helpers\Html;
                     <li class="me-3">
                         <?= Html::a('<i class="bi bi-instagram"></i> Instagram', 'https://instagram.com', ['class' => 'text-light', 'target' => '_blank']) ?>
                     </li>
+                    <li class="me-3">
+                        <?= Html::a('<i class="bi bi-x"></i> X', 'https://x.com', ['class' => 'text-light', 'target' => '_blank']) ?>
+                    </li>
+                    <li class="me-3">
+                        <?= Html::a('<i class="bi bi-tiktok"></i> TikTok', 'https://tiktok.com', ['class' => 'text-light', 'target' => '_blank']) ?>
+                    </li>
                 </ul>
             </div>
 
             <!-- Patrocinadores -->
             <div class="col-md-6 text-center text-md-end">
-                <h5 class="text-white">Patrocinadores</h5>
-                <p class="text-light">
-                    <?= Html::a('Patrocinador', ['/site/patrocinador'], ['class' => 'text-light']) ?>
-                </p>
+                <h5 class="text-white">Patrocinado por:</h5>
+                <?= Html::a(Html::img('@web/img/usal.jpg', ['alt' => 'USAL', 'class' => 'usal-logo']), 'https://politecnicazamora.usal.es', ['target' => '_blank']) ?>
             </div>
         </div>
 
@@ -70,3 +74,4 @@ use yii\helpers\Html;
         </div>
     </div>
 </div>
+
