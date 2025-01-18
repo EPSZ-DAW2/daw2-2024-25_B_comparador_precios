@@ -548,7 +548,4 @@ public function aumentarIntentosFallidos()
             return $this->rol === $rol;
         }
 
-
-
-
 }//class Usuario
