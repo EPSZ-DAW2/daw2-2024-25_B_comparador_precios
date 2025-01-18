@@ -181,12 +181,23 @@ class EtiquetasController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionViewEtiquetas($id)
+    public function actionViewEtiquetasTiendas($id)
     {
         $model = $this->findModel($id);
-        $articulos = $model->articulos; // Obtiene los artículos relacionados con la etiqueta.
-
-        return $this->render('view-etiquetas', [
+        $tiendas = $model->tiendas0; // Obtiene las tiendas asociadas a la etiqueta
+    
+        return $this->render('view-etiquetas-tiendas', [
+            'model' => $model,
+            'tiendas' => $tiendas, // Pasa las tiendas a la vista
+        ]);
+    }
+    
+    public function actionViewEtiquetasArticulos($id)
+    {
+        $model = $this->findModel($id);
+        $articulos = $model->articulos0; // Obtiene los artículos asociados a la etiqueta
+    
+        return $this->render('view-etiquetas-articulos', [
             'model' => $model,
             'articulos' => $articulos, // Pasa los artículos a la vista
         ]);
