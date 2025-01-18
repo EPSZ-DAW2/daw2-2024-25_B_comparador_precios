@@ -16,8 +16,7 @@ $this->title = 'Mis Seguimientos';
     <ul>
         <?php foreach ($seguimientosTienda as $tienda): ?>
             <li>
-                <?= Html::encode($tienda->nombre) ?>
-                <!-- Agrega más detalles de la tienda aquí -->
+                <h4><?= Html::a(Html::encode($tienda->nombre), ['tiendas/view','id' => $tienda->id]) ?></h4>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -30,9 +29,8 @@ $this->title = 'Mis Seguimientos';
     <ul>
         <?php foreach ($seguimientosArticulo as $articulo): ?>
             <li>
-                <h4><?= Html::encode($articulo->nombre) ?></h4>
+                <h4><?= Html::a(Html::encode($articulo->nombre), ['public-articulos/view','id' => $articulo->id]) ?></h4>
                     <?= Html::encode($articulo->descripcion) ?>
-                    <!-- Agrega más detalles del artículo aquí -->
             </li>
         <?php endforeach; ?>
     </ul>
@@ -46,7 +44,7 @@ $this->title = 'Mis Seguimientos';
     <ul>
         <?php foreach ($seguimientosOferta as $oferta): ?>
             <li>
-                <h4><?= Html::encode($oferta->articulo->nombre ) ?></h4>
+                <h4><?=Html::a(Html::encode($oferta->articulo->nombre), ['public-articulos/view','id' => $oferta->articulo->id]) ?></h4>
                 <strong><?= Html::encode($oferta->tienda->nombre ) ?></strong><br>
                 <strong>Oferta actual: <?= Html::encode($oferta->precio_oferta ) ?></strong><br>
                 
