@@ -68,7 +68,7 @@ class Etiquetas extends \yii\db\ActiveRecord
      */
     public function getArticulos()
     {
-        return $this->hasMany(Articulos::class, ['etiqueta_id' => 'id']);
+        return $this->hasMany(Articulo::class, ['etiqueta_id' => 'id']);
     }
 
     /**
@@ -78,7 +78,7 @@ class Etiquetas extends \yii\db\ActiveRecord
      */
     public function getArticulos0()
     {
-        return $this->hasMany(Articulos::class, ['id' => 'articulo_id'])->viaTable('articulo_etiquetas', ['etiqueta_id' => 'id']);
+        return $this->hasMany(Articulo::class, ['id' => 'articulo_id'])->viaTable('articulo_etiquetas', ['etiqueta_id' => 'id']);
     }
 
     /**
@@ -118,5 +118,25 @@ class Etiquetas extends \yii\db\ActiveRecord
     public static function find()
     {
         return new EtiquetasQuery(get_called_class());
+    }
+
+    /**
+     * Gets URL for viewing tiendas associated with this etiqueta.
+     *
+     * @return string
+     */
+    public function getViewTiendasUrl()
+    {
+        return Yii::$app->urlManager->createUrl(['tiendas/view', 'id' => $this->id]);
+    }
+
+    /**
+     * Gets URL for viewing articulos associated with this etiqueta.
+     *
+     * @return string
+     */
+    public function getViewArticulosUrl()
+    {
+        return Yii::$app->urlManager->createUrl(['public-articulos/view', 'id' => $this->id]);
     }
 }
