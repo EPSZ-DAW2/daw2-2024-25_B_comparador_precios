@@ -20,11 +20,21 @@ use yii\helpers\Url;
                 <p class="card-text"><?= Html::encode($model->descripcion) ?></p>
                 <p class="card-text">
                     <small class="text-muted">
-                        Clasificación: <?= $model->clasificacion ? Html::encode($model->clasificacion->nombre) : 'No definida' ?>
+                        <strong>Clasificación:</strong> <?= $model->clasificacion ? Html::encode($model->clasificacion->nombre) : 'No definida' ?>
                     </small>
                 </p>
                 <p class="card-text">
-                    <small class="text-muted">Ubicación: <?= Html::encode($model->lugar) ?></small>
+					<small class="text-muted">
+						<strong>Etiqueta:</strong> 
+                        <?= !empty($model->etiquetas0) 
+                            ? implode(', ', array_map(fn($etiqueta) => Html::encode($etiqueta->nombre), $model->etiquetas0))
+                            : 'Sin etiquetas' ?>
+					</small>
+                </p>				
+                <p class="card-text">
+                    <small class="text-muted">
+						<strong>Ubicación:</strong> <?= Html::encode($model->lugar) ?>
+					</small>
                 </p>
                 <?= Html::a('Ver más', ['view', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
             </div>
