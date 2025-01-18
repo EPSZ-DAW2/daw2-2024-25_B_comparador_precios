@@ -88,7 +88,7 @@ class Etiquetas extends \yii\db\ActiveRecord
      */
     public function getTiendas()
     {
-        return $this->hasMany(Tiendas::class, ['etiquetas_id' => 'id']);
+        return $this->hasMany(Tienda::class, ['etiquetas_id' => 'id']);
     }
 
     /**
@@ -98,7 +98,7 @@ class Etiquetas extends \yii\db\ActiveRecord
      */
     public function getTiendas0()
     {
-        return $this->hasMany(Tiendas::class, ['id' => 'tienda_id'])->viaTable('tiendas_etiquetas', ['etiqueta_id' => 'id']);
+        return $this->hasMany(Tienda::class, ['id' => 'tienda_id'])->viaTable('tiendas_etiquetas', ['etiqueta_id' => 'id']);
     }
 
     /**
