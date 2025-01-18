@@ -64,13 +64,5 @@ $this->registerCssFile('@web/css/home.css');
                 <?= Html::a('Regístrate', ['registros/register'], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
-        
-        <!-- Botón de búsqueda -->
-        <div class="text-center">
-            <?= Html::a('Buscar por tiendas', ['tiendas/index'], [
-                'class' => 'btn btn-primary btn-lg',
-                'role' => 'button',
-            ]) ?>
-        </div>
     </div>
 </div>
