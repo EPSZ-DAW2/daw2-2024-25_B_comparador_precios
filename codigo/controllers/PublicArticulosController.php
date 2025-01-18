@@ -59,14 +59,24 @@ class PublicArticulosController extends Controller
 		]);
 	}
 
-	protected function findModel($id)
+	/*protected function findModel($id)
 	{
 		if (($model = Articulo::findOne($id)) !== null) {
 			return $model;
 		}
 
 		throw new NotFoundHttpException('El artículo solicitado no existe.');
+	}*/
+	
+	protected function findModel($id)
+	{
+		if (($model = Articulo::find()->with('articuloTienda')->where(['id' => $id])->one()) !== null) {
+			return $model;
+		}
+
+		throw new NotFoundHttpException('El artículo solicitado no existe.');
 	}
+
 
     public function actionDenunciar($id)
 	{
@@ -134,4 +144,32 @@ class PublicArticulosController extends Controller
 
         return $this->redirect(['view', 'id' => $id]);
     }
+	
+	public function actionVerHistorico($id)
+	{
+		// Obtener todos los registros relacionados con el artículo en ArticulosTienda
+		$articulosTienda = ArticulosTienda::find()
+			->where(['articulo_id' => $id])
+			->all();
+
+		$articulosList = ArrayHelper::map($articulosTienda, 'id', function ($model) {
+			return $model->articulo->nombre ?? 'Sin nombre'; // Usamos la relación con el modelo Articulo
+		});
+
+		$historico = [];
+		if (!empty($articulosTienda)) {
+			$historico = HistoricoPrecios::find()
+				->where(['articulo_id' => $id])
+				->orderBy(['fecha' => SORT_DESC])
+				->asArray()
+				->all();
+		}
+
+		return $this->render('//tiendas/ver-historico', [
+			'articulos' => $articulosList,
+			'historico' => $historico,
+			'selectedArticulo' => $id,
+		]);
+	}
+
 }
