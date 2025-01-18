@@ -297,4 +297,6 @@ Cambios día 21 (Javier Marinas y Marcos Méndez) 17/01/2025
 
 
 Cambios día 22 (Javier Marinas y Marcos Méndez) 18/01/2025
-- Añadidos en el header nuestros apartados "Ver clasificaciones", "Ver categorías" y "Ver Etiquetas"
+- Añadidos en el header nuestros apartados "Ver clasificaciones", "Ver categorías", "Ver Etiquetas" y "Buscador"
+- Se ha añadido una vista "buscador" en site para poder explorar los buscadores de tiendas, artículos y ofertas
+- Se han modificado para ello los archivos SiteController
