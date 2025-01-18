@@ -158,4 +158,37 @@ class EtiquetasController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+    
+    /**
+     * Lists all Categorias models with specific view.
+     *
+     * @return string
+     */
+    public function actionIndexEtiquetas()
+    {
+        $searchModel = new EtiquetasSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index-etiquetas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Categorias model with specific view.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewEtiquetas($id)
+    {
+        $model = $this->findModel($id);
+        $articulos = $model->articulos; // Obtiene los artículos relacionados con la etiqueta.
+
+        return $this->render('view-etiquetas', [
+            'model' => $model,
+            'articulos' => $articulos, // Pasa los artículos a la vista
+        ]);
+    }
 }
