@@ -30,14 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'ver-tiendas' => function ($url, $model) {
                         return Html::a(
                             'Ver Tiendas',
-                            ['tiendas/view', 'id' => $model->id],
+                            ['etiquetas/view-etiquetas-tiendas', 'id' => $model->id],
                             ['class' => 'btn btn-success btn-sm']
                         );
                     },
                     'ver-articulo' => function ($url, $model) {
                         return Html::a(
                             'Ver Artículos',
-                            ['etiquetas/view-etiquetas', 'id' => $model->id],
+                            ['etiquetas/view-etiquetas-articulos', 'id' => $model->id],
                             ['class' => 'btn btn-primary btn-sm']
                         );
                     },
