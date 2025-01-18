@@ -54,11 +54,11 @@ CREATE TABLE IF NOT EXISTS `articulos` (
 
 INSERT INTO `articulos` (`id`, `nombre`, `descripcion`, `categoria_id`, `etiqueta_id`, `imagen_principal`, `visible`, `cerrado`, `tipo_marcado`, `registro_id`, `articulo_tienda_id`) VALUES
 (1, 'Smartphone XYZ', 'Un smartphone de última generación con todas las características que necesitas.', 1, 1, 'smartphone_xyz.jpg', 1, 0, 'comun', 1, 1),
-(2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 1, 'televisor_4k.jpg', 1, 0, 'comun', 2, 2),
-(3, 'Lavadora Eco', 'Lavadora de alta eficiencia energética con múltiples programas de lavado.', 2, 2, 'lavadora_eco.jpg', 1, 0, 'comun', 3, 3),
-(4, 'Pantalón Vaquero', 'Pantalón vaquero de moda para hombre.', 5, 5, 'vaquero.png', 1, 0, 'comun', 4, 4),
-(5, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 3, 3, 'camiseta_deportiva.jpg', 1, 0, 'comun', 5, 5),
-(6, 'El Quijote', 'Novela mítica de la literatura española, todo un clásico.', 4, 4, 'quijote.jpg', 1, 0, 'comun', 5, 6);
+(2, 'Televisor 4K Ultra HD', 'Televisor con resolución 4K Ultra HD y tecnología HDR.', 1, 1, 'televisor_4k.jpg', 1, 0, 'comun', 2, 1),
+(3, 'Sofá de Salón', 'Sofá alargado de salón con tapicería de lino, diseño moderlo e ideal para salones amplios.', 2, 2, 'sofa_alargado.jpg', 1, 0, 'comun', 3, 2),
+(4, 'Pantalón Vaquero', 'Pantalón vaquero de moda para hombre.', 5, 5, 'vaquero.png', 1, 0, 'comun', 4, 5),
+(5, 'Camiseta Deportiva', 'Camiseta deportiva de alta calidad, ideal para cualquier actividad física.', 3, 3, 'camiseta_deportiva.jpg', 1, 0, 'comun', 5, 3),
+(6, 'El Quijote', 'Novela mítica de la literatura española, todo un clásico.', 4, 4, 'quijote.jpg', 1, 0, 'comun', 5, 4);
 
 -- --------------------------------------------------------
 
@@ -204,11 +204,11 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `icono`, `categoria_padre_id`) VALUES
-(1, 'Electrónica', 'Productos electrónicos y gadgets', NULL, NULL),
-(2, 'Hogar', 'Artículos para el hogar y decoración', NULL, NULL),
-(3, 'Deportes', 'Equipamiento y ropa deportiva', NULL, NULL),
-(4, 'Libros', 'Libros y material de lectura', NULL, NULL),
-(5, 'Ropa', 'Prendas de vestir y accesorios', NULL, NULL);
+(1, 'Electrónica de Consumo', 'Productos electrónicos y gadgets para el hogar.', NULL, NULL),
+(2, 'Artículos para el Hogar', 'Todo lo necesario para la decoración y el hogar.', NULL, NULL),
+(3, 'Equipamiento Deportivo', 'Artículos y ropa para actividades deportivas.', NULL, NULL),
+(4, 'Literatura y Libros', 'Una amplia variedad de libros y material de lectura.', NULL, NULL),
+(5, 'Moda y Accesorios', 'Prendas de vestir y complementos de moda.', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,11 +229,11 @@ CREATE TABLE IF NOT EXISTS `clasificaciones` (
 --
 
 INSERT INTO `clasificaciones` (`id`, `nombre`, `descripcion`, `icono`) VALUES
-(1, 'Electrónica', 'Productos electrónicos y gadgets', 'icono_electronica.png'),
-(2, 'Hogar', 'Artículos para el hogar y decoración', 'icono_hogar.png'),
-(3, 'Deportes', 'Equipamiento y ropa deportiva', 'icono_deportes.png'),
-(4, 'Libros', 'Libros y material de lectura', 'icono_libros.png'),
-(5, 'Ropa', 'Prendas de vestir y accesorios', 'icono_ropa.png');
+(1, 'Tecnología Avanzada', 'Productos de última tecnología y gadgets innovadores.', 'icono_tecnologia.png'),
+(2, 'Decoración y Estilo', 'Artículos de decoración y estilo para el hogar.', 'icono_decoracion.png'),
+(3, 'Fitness y Bienestar', 'Equipamiento y ropa para un estilo de vida activo.', 'icono_fitness.png'),
+(4, 'Lectura y Conocimiento', 'Libros y materiales educativos para todos.', 'icono_lectura.png'),
+(5, 'Ropa y Estilo Personal', 'Prendas de vestir y accesorios de moda.', 'icono_ropa_personal.png');
 
 -- --------------------------------------------------------
 
@@ -335,11 +335,11 @@ CREATE TABLE IF NOT EXISTS `etiquetas` (
 --
 
 INSERT INTO `etiquetas` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Electrónica', 'Productos relacionados con dispositivos electrónicos'),
-(2, 'Hogar', 'Artículos para el hogar y decoración'),
-(3, 'Deportes', 'Equipamiento y ropa deportiva'),
-(4, 'Libros', 'Libros y material de lectura'),
-(5, 'Ropa', 'Prendas de vestir y accesorios');
+(1, 'Gadgets Electrónicos', 'Dispositivos electrónicos innovadores y útiles.'),
+(2, 'Decoración Moderna', 'Artículos de decoración con un estilo contemporáneo.'),
+(3, 'Ropa Deportiva', 'Prendas diseñadas para actividades deportivas.'),
+(4, 'Novelas Clásicas', 'Libros que son considerados clásicos de la literatura.'),
+(5, 'Accesorios de Moda', 'Complementos que realzan el estilo personal.');
 
 -- --------------------------------------------------------
 
