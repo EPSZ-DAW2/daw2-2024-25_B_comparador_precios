@@ -1,0 +1,156 @@
+/* Estilos generales para las áreas de usuarios */
+.container {
+    margin-top: 10px;
+}
+
+/* Área de Administración */
+.area-administracion h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.area-administracion h3 {
+    font-size: 1.8em;
+    color: #16a085;
+    margin-top: 30px;
+}
+
+.area-administracion p {
+    font-size: 1.1em;
+    color: #333333;
+}
+
+.area-administracion .btn {
+    margin-right: 10px;
+    margin-top: 15px;
+    font-size: 1.1em;
+    padding: 12px 20px;
+}
+
+/* Estilo para los botones de la gestión de elementos principales */
+.area-administracion .btn-success {
+    background-color: #2ecc71;
+}
+
+.area-administracion .btn-success:hover {
+    background-color: #27ae60;
+}
+
+/* Estilo para los botones de otras opciones */
+.area-administracion .btn-warning {
+    background-color: #f39c12;
+}
+
+.area-administracion .btn-warning:hover {
+    background-color: #e67e22;
+}
+
+/* Estilo para los botones de seguridad y registros */
+.area-administracion .btn-info {
+    background-color: #3498db;
+}
+
+.area-administracion .btn-info:hover {
+    background-color: #2980b9;
+}
+
+/* Área de Moderador */
+.area-moderador h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.area-moderador h3 {
+    font-size: 1.8em;
+    color: #1abc9c;
+    margin-top: 30px;
+}
+
+.area-moderador p {
+    font-size: 1.1em;
+    color: #333333;
+}
+
+.area-moderador .btn-primary {
+    background-color: #3498db;
+    margin-right: 10px;
+    font-size: 1.1em;
+    padding: 12px 20px;
+}
+
+.area-moderador .btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* Área de Superadministrador */
+.site-area-superadministrador h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+}
+
+.site-area-superadministrador p {
+    font-size: 1.2em;
+    color: #333333;
+    margin-bottom: 30px;
+}
+
+.site-area-superadministrador .row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.site-area-superadministrador .col-md-4 .btn {
+    width: 100%;
+    font-size: 1.1em;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.site-area-superadministrador .btn-primary {
+    background-color: #3498db;
+}
+
+.site-area-superadministrador .btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.site-area-superadministrador .btn-warning {
+    background-color: #f39c12;
+}
+
+.site-area-superadministrador .btn-warning:hover {
+    background-color: #e67e22;
+}
+
+.site-area-superadministrador .btn-success {
+    background-color: #2ecc71;
+}
+
+.site-area-superadministrador .btn-success:hover {
+    background-color: #27ae60;
+}
+
+/* Área de Usuario Tienda */
+.site-area-usuario-tienda h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.site-area-usuario-tienda p {
+    font-size: 1.2em;
+    color: #333333;
+}
+
+.site-area-usuario-tienda .btn-primary {
+    background-color: #3498db;
+    font-size: 1.1em;
+    padding: 12px 20px;
+}
+
+.site-area-usuario-tienda .btn-primary:hover {
+    background-color: #2980b9;
+}
