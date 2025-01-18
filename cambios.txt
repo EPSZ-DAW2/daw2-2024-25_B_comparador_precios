@@ -294,3 +294,7 @@ Cambios día 21 (Javier Marinas y Marcos Méndez) 17/01/2025
 - Modificados los archivos "_articulo_card" y "view" de la carpeta public-articulos para que muestre las imágenes
 - Modificados los archivos "view" de tiendas y "view" de public-articulos para que no muestre los ids.
 - Corregida la base de datos en aspectos relacionados con tiendas, clasificacion, etiquetas, etc.
+
+
+Cambios día 22 (Javier Marinas y Marcos Méndez) 18/01/2025
+- Añadidos en el header nuestros apartados "Ver clasificaciones", "Ver categorías" y "Ver Etiquetas"
