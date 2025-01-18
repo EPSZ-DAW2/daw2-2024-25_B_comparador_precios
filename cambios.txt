@@ -303,6 +303,7 @@ Cambios día 22 (Javier Marinas y Marcos Méndez) 18/01/2025
 - Se han modificado para ello el archivo SiteController
 - Modificados el controlador y el modelo de Etiquetas para que muestre las tiendas y los arctículos relacionados con una etiqueta
 - Añadidos los archivos "index-etiquetas", "view-etiquetas-tiendas" y "view-etiquetas-articulos" para implementar la vista para los usuarios
+- Modificada la base de datos cambiando los inserts de clasificaciones, categorías y etiquetas 
 
 Cambios día 22 (Victor Gonzalo) 18/01/2025
 - Finalizadas vistas de cometarios y seguimientos con enlace a los articulos y tiendas referidos 
