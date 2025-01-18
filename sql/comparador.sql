@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-01-2025 a las 14:47:37
+-- Tiempo de generación: 18-01-2025 a las 17:30:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `avisos` (
   KEY `fk_avisos_tienda` (`tienda_id`),
   KEY `fk_avisos_articulo` (`articulo_id`),
   KEY `fk_avisos_comentario` (`comentario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `avisos`
@@ -167,6 +167,21 @@ INSERT INTO `avisos` (`id`, `clase`, `texto`, `usuario_origen_id`, `usuario_dest
 (3, 'Consulta', 'Este es una consulta de prueba.', 3, 4, 3, 3, 3, NULL, NULL),
 (4, 'Mensaje Generico', 'Este es un mensaje genérico de prueba.', 4, 5, 4, 4, 4, NULL, NULL),
 (5, 'Bloqueo', 'Este es un bloqueo de prueba.', 5, 1, 5, 5, 5, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `backup`
+--
+
+CREATE TABLE IF NOT EXISTS `backup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_archivo` varchar(255) NOT NULL,
+  `ruta_archivo` varchar(500) NOT NULL,
+  `fecha_creacion` datetime NOT NULL,
+  `tamaño` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -246,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   KEY `fk_comentarios_articulo` (`articulo_id`),
   KEY `fk_comentarios_padre` (`comentario_padre_id`),
   KEY `fk_comentarios_registro` (`registro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `comentarios`
@@ -258,7 +273,10 @@ INSERT INTO `comentarios` (`id`, `tienda_id`, `articulo_id`, `valoracion`, `text
 (3, 3, 3, 3, 'Producto regular, cumple con lo básico.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 3),
 (4, 4, 4, 2, 'No me gustó el producto, tiene varios defectos.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 4),
 (5, 5, 5, 1, 'Muy mal producto, no lo recomiendo.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 5),
-(6, 4, 6, 4, 'Lo esperado.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 5);
+(6, 4, 6, 4, 'Lo esperado.', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 5),
+(7, NULL, 4, NULL, 'No me gusta nada', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 1),
+(8, 4, NULL, NULL, 'Tienda\r\n', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -443,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `regiones` (
   `region_padre_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_regiones_padre` (`region_padre_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `regiones`
@@ -513,6 +531,34 @@ INSERT INTO `registros` (`id`, `fecha_registro`, `clase_log_id`, `modulo`, `text
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `registro_logs`
+--
+
+CREATE TABLE IF NOT EXISTS `registro_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha_log` datetime NOT NULL,
+  `mensaje` varchar(500) NOT NULL,
+  `nivel` enum('INFO','WARNING','ERROR','DEBUG') NOT NULL,
+  `usuario` varchar(500) NOT NULL,
+  `accion` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `registro_logs`
+--
+
+INSERT INTO `registro_logs` (`id`, `fecha_log`, `mensaje`, `nivel`, `usuario`, `accion`) VALUES
+(1, '2025-01-18 16:59:30', 'El usuario juanp ha cerrado sesión.', 'INFO', 'juanp', 'Logout'),
+(2, '2025-01-18 16:59:43', 'El usuario juanp ha iniciado sesión correctamente.', 'INFO', 'juanp', 'Login'),
+(3, '2025-01-18 17:18:51', 'El usuario juanp actualizó su perfil.', 'INFO', 'juanp', 'Perfil'),
+(4, '2025-01-18 17:18:57', 'El usuario juanp actualizó su perfil.', 'INFO', 'juanp', 'Perfil'),
+(5, '2025-01-18 17:19:25', 'El usuario juanp ha cerrado sesión.', 'INFO', 'juanp', 'Logout'),
+(6, '2025-01-18 17:20:25', 'El usuario se registró exitosamente', 'INFO', 'Invitado', 'Registro de Usuario');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `registro_usuarios`
 --
 
@@ -534,10 +580,10 @@ CREATE TABLE IF NOT EXISTS `registro_usuarios` (
 
 INSERT INTO `registro_usuarios` (`id`, `fecha_creacion`, `creador_id`, `fecha_mod`, `mod_id`, `notas_admin`) VALUES
 (1, '2025-01-04 21:54:45', 1, '2025-01-04 21:54:45', 6, 'Usuario registrado por el admin'),
-(2, '2025-01-04 21:54:45', 1, '2025-01-04 21:54:45', 7, 'Usuario registrado por el admin'),
-(3, '2025-01-04 21:54:45', 1, '2025-01-04 21:54:45', 8, 'Usuario registrado por el admin'),
-(4, '2025-01-04 21:54:45', 1, '2025-01-04 21:54:45', 10, 'Usuario registrado por el admin'),
-(5, '2025-01-04 21:54:45', 1, '2025-01-04 21:54:45', 9, 'Usuario registrado por el admin');
+(2, '2025-01-04 21:54:45', 2, '2025-01-04 21:54:45', 7, 'Usuario registrado por el admin'),
+(3, '2025-01-04 21:54:45', 3, '2025-01-04 21:54:45', 8, 'Usuario registrado por el admin'),
+(4, '2025-01-04 21:54:45', 4, '2025-01-04 21:54:45', 10, 'Usuario registrado por el admin'),
+(5, '2025-01-04 21:54:45', 5, '2025-01-04 21:54:45', 9, 'Usuario registrado por el admin');
 
 -- --------------------------------------------------------
 
@@ -557,7 +603,7 @@ CREATE TABLE IF NOT EXISTS `seguimientos` (
   KEY `fk_seguimientos_tienda` (`tienda_id`),
   KEY `fk_seguimientos_articulo` (`articulo_id`),
   KEY `fk_seguimientos_oferta` (`oferta_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `seguimientos`
@@ -568,7 +614,9 @@ INSERT INTO `seguimientos` (`id`, `usuario_id`, `tienda_id`, `articulo_id`, `ofe
 (2, 2, 2, 2, 2, '2025-01-04 22:15:19'),
 (3, 3, 3, 3, 3, '2025-01-04 22:15:19'),
 (4, 4, 4, 4, 4, '2025-01-04 22:15:19'),
-(5, 5, 5, 5, 5, '2025-01-04 22:15:19');
+(5, 5, 5, 5, 5, '2025-01-04 22:15:19'),
+(6, 1, NULL, 4, NULL, '2025-01-18 17:00:46'),
+(7, 1, 4, NULL, NULL, '2025-01-18 17:02:25');
 
 -- --------------------------------------------------------
 
@@ -700,48 +748,18 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `rol` enum('Invitado','Usuario Normal','Usuario Tienda','Moderador','Administrador','Superadministrador') NOT NULL DEFAULT 'Invitado',
   PRIMARY KEY (`id`),
   KEY `fk_usuarios_region` (`region_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `password`, `nick`, `nombre`, `apellidos`, `direccion`, `region_id`, `telefono`, `fecha_nacimiento`, `fecha_registro`, `registro_confirmado`, `fecha_acceso`, `accesos_fallidos`, `bloqueado`, `fecha_bloqueo`, `motivo_bloqueo`, `rol`) VALUES
-(1, 'juan.perez@example.com', 'password123', 'juanp', 'Juan', 'Pérez', 'Calle Falsa 123', 19, '123456789', '1980-01-01', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Usuario Normal'),
+(1, 'juan.perez@example.com', 'password123', 'juanp', 'Juan', 'Pérez', 'Calle Falsa 123', 19, '123456789', '1980-01-01', '2025-01-04 21:44:56', 1, '2025-01-18 16:59:43', 0, 0, NULL, NULL, 'Usuario Normal'),
 (2, 'maria.garcia@example.com', 'password456', 'mariag', 'María', 'García', 'Avenida Siempre Viva 456', 21, '987654321', '1990-02-02', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Moderador'),
 (3, 'carlos.lopez@example.com', 'password789', 'carlosl', 'Carlos', 'López', 'Boulevard de los Sueños 789', 20, '456123789', '1985-03-03', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Administrador'),
 (4, 'ana.martinez@example.com', 'password101', 'anam', 'Ana', 'Martínez', 'Plaza Mayor 101', 24, '321654987', '1995-04-04', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Superadministrador'),
-(5, 'luis.fernandez@example.com', 'password202', 'luisf', 'Luis', 'Fernández', 'Calle del Sol 202', 23, '789321456', '1975-05-05', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Usuario Normal');
-
-
-
--- 
--- Tabla para el registros-logs 
--- 
-
-CREATE TABLE `registro_logs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT, -- Identificador único del log
-  `fecha_log` datetime NOT NULL, -- Fecha y hora del log
-  `mensaje` varchar(500) NOT NULL, -- Detalles del log
-  `nivel` ENUM('INFO', 'WARNING', 'ERROR', 'DEBUG') NOT NULL, -- Nivel de severidad (usando ENUM)
-  `usuario` varchar(500) NOT NULL, -- Usuario que realizó la acción
-  `accion` varchar(255) NOT NULL, -- Acción específica registrada, por ejemplo, 'Registro de Usuario'
-   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- 
--- Tabla para los registros de backup 
--- 
-
-CREATE TABLE `backup` (
-  `id` int(11) NOT NULL AUTO_INCREMENT, -- Identificador único del backup
-  `nombre_archivo` varchar(255) NOT NULL, -- Nombre del archivo de backup
-  `ruta_archivo` varchar(500) NOT NULL, -- Ruta donde se almacena el archivo
-  `fecha_creacion` datetime NOT NULL, -- Fecha y hora de creación del backup
-  `tamaño` int(11) NOT NULL, -- Tamaño del archivo de backup en bytes
-   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+(5, 'luis.fernandez@example.com', 'password202', 'luisf', 'Luis', 'Fernández', 'Calle del Sol 202', 23, '789321456', '1975-05-05', '2025-01-04 21:44:56', 1, '2025-01-04 21:44:56', 0, 0, NULL, NULL, 'Usuario Tienda');
 
 --
 -- Restricciones para tablas volcadas
