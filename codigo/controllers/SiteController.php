@@ -252,5 +252,8 @@ class SiteController extends Controller
         return $this->render('politica-cookies');
     }
 
+    public function actionBuscador()
+    {
+        return $this->render('buscador');
+    }
 }
-    
