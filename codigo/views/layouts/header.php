@@ -20,6 +20,9 @@ use app\models\Usuario;
         'options' => ['class' => 'navbar-nav me-auto'], // me-auto para alinear a la izquierda
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Ver Clasificaciones', 'url' => ['/clasificaciones/index-clasificaciones']],
+            ['label' => 'Ver Categorías', 'url' => ['/categorias/index-categorias']],
+            ['label' => 'Ver Etiquetas', 'url' => ['/clasificaciones/index-etiquetas']],
             ['label' => 'Sobre Nosotros', 'url' => ['/site/about']],
         ]
     ]);
