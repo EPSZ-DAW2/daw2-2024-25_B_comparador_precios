@@ -23,7 +23,7 @@ use app\models\Usuario;
             ['label' => 'Sobre Nosotros', 'url' => ['/site/about']],
             ['label' => 'Ver Clasificaciones', 'url' => ['/clasificaciones/index-clasificaciones']],
             ['label' => 'Ver Categorías', 'url' => ['/categorias/index-categorias']],
-            ['label' => 'Ver Etiquetas', 'url' => ['/clasificaciones/index-etiquetas']],
+            ['label' => 'Ver Etiquetas', 'url' => ['/etiquetas/index-etiquetas']],
             ['label' => 'Buscador', 'url' => ['/site/buscador']],
         ]
     ]);
