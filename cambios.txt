@@ -319,6 +319,7 @@ Cambios día 22 (Víctor Martín) 18/01/2025
 - Mejora del footer para mas interactivo
 - Incorporacion de los roles de usuario tienda en Tienda Controller
 - Cambios en vistas de tiendas, public articulos, login y avisos por tema de estilos
+- Arreglado el RegistroLogsController
 
 Cambios día 23 (Javier Marinas y Marcos Méndez) 19/01/2025
 - Modificada la base de datos cambiando los inserts de los datos de prueba de ofertas para aportar lógica
