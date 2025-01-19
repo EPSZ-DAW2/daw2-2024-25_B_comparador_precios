@@ -33,24 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'denuncias',
                 'label' => 'Denuncias',
                 'value' => function ($model) {
-                    // Mostrar el número de denuncias del artículo desde la relación `articuloTienda`
                     return $model->articuloTienda->denuncias ?? 0;
                 },
             ],
-			[
-				'class' => ActionColumn::className(),
-				'template' => '{view} {update} {delete} {denuncias}', // Asegúrate de incluir {denuncias} en el template
-				'buttons' => [
-					'denuncias' => function ($url, $model) {
-						// Mostrar el botón Gestionar Denuncias para todos los artículos
-						return Html::a(
-							'<i class="fa fa-warning"></i> Gestionar denuncias',
-							['articulos/gestion-denuncias', 'id' => $model->id],
-							['class' => 'btn btn-warning btn-sm']
-						);
-					},
-				],
-			],
+			
 
         ],
     ]); ?>
