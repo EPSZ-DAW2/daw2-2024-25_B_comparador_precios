@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {gestion-denuncias}',
                 'buttons' => [
                     'gestion-denuncias' => function ($url, $model) {
-                        return Html::a('Gestionar Denuncias', ['gestion-denuncias', 'id' => $model->id], [
+                        return Html::a('Denuncias', ['gestion-denuncias', 'id' => $model->id], [
                             'class' => 'btn btn-warning btn-sm',
                         ]);
                     },
