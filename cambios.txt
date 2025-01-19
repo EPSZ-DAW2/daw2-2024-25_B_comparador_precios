@@ -290,7 +290,7 @@ Cambios día 21 (Alejandra) 17/01/2025
 
 Cambios día 21 (Javier Marinas y Marcos Méndez) 17/01/2025
 - Añadidas las búsquedas de artículos, resultados en ficha resumida con opción de ver más para acceder a una ficha más detallada
-- Añadido dentro de la ficha más detallada acceso si se ha iniciado sesión acceso a las funciones de comentar, denunciar y seguir/dejar de seguir
+- Añadido dentro de la ficha más detallada acceso si se ha iniciado sesión acceso a las funciones de comentar, ver histórico, denunciar y seguir/dejar de seguir
 - Incluidas imágenes específicas para cada artículo
 - Modificados los archivos "_articulo_card" y "view" de la carpeta public-articulos para que muestre las imágenes
 - Modificados los archivos "view" de tiendas y "view" de public-articulos para que no muestre los ids.
@@ -310,3 +310,8 @@ Cambios día 22 (Victor Gonzalo) 18/01/2025
 - Finalizadas vistas de cometarios y seguimientos con enlace a los articulos y tiendas referidos 
 - Arreglado problema con la tabla registros_usuario en la base de datos
 - Modificado al usuario de ejemplo Luis como usuario tienda 
+
+
+Cambios día 23 (Javier Marinas y Marcos Méndez) 19/01/2025
+- Modificada la base de datos cambiando los inserts de los datos de prueba de ofertas para aportar lógica
+- Añadia la vista detallada del ver más de ofertas, con acceso si se ha iniciado sesión acceso a las funciones de comentar, denunciar y seguir/dejar de seguir
