@@ -20,6 +20,7 @@
         <?= Html::a('Administrar Moderadores', ['moderadores-admin/index'], ['class' => 'btn btn-success', 'style' => 'margin-right: 10px;']) ?>
         <?= Html::a('Gestionar Tiendas', ['tiendas-admin/index'], ['class' => 'btn btn-success', 'style' => 'margin-right: 10px;']) ?>
         <?= Html::a('Gestionar Artículos', ['articulos/index'], ['class' => 'btn btn-success', 'style' => 'margin-right: 10px;']) ?>
+        <?= Html::a('Gestionar Comentarios', ['comentarios/index'], ['class' => 'btn btn-success', 'style' => 'margin-right: 10px;']) ?>
     </p>
 
     <h3>Otras Opciones de Mantenimiento</h3>
