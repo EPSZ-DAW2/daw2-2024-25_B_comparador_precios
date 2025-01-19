@@ -151,6 +151,54 @@ class Ofertas extends \yii\db\ActiveRecord
 		return $this->hasMany(Etiquetas::class, ['id' => 'etiqueta_id'])
 			->viaTable('articulo_etiquetas', ['articulo_id' => 'id']);
 	}
+	
+	public function getComentarios()
+	{
+		return $this->hasMany(Comentario::class, ['articulo_id' => 'articulo_id']);
+	}
+	
+		public function getValoracionMedia()
+	{
+		// Sumar todas las valoraciones de los comentarios relacionados con la oferta
+		$totalValoraciones = $this->getComentarios()->sum('valoracion');
+		
+		// Contar el total de comentarios relacionados con la oferta
+		$totalComentarios = $this->getComentarios()->count();
+
+		// Si hay comentarios, calcular la media, de lo contrario devolver un mensaje
+		if ($totalComentarios > 0) {
+			return round($totalValoraciones / $totalComentarios, 1) . ' / 5';
+		}
+
+		return 'Sin valoraciones aún.';
+	}
+
+	public function agregarMotivoDenuncia($nuevoMotivo)
+	{
+		// Obtener los motivos existentes
+		$motivosExistentes = $this->motivo_denuncia;
+
+		// Calcular el número de la nueva denuncia
+		$contador = 1;
+		if (!empty($motivosExistentes)) {
+			$lineas = explode("\n", $motivosExistentes);
+			$contador = count($lineas) + 1;
+		}
+
+		// Concatenar el nuevo motivo con un formato numerado
+		$nuevoMotivoFormateado = $contador . ': ' . $nuevoMotivo;
+		$this->motivo_denuncia = empty($motivosExistentes)
+			? $nuevoMotivoFormateado
+			: $motivosExistentes . "\n" . $nuevoMotivoFormateado;
+
+		// Incrementar el contador de denuncias
+		$this->denuncias = ($this->denuncias ?? 0) + 1;
+
+		// Registrar la fecha de la primera denuncia si no existe
+		if (!$this->fecha_primera_denuncia) {
+			$this->fecha_primera_denuncia = date('Y-m-d H:i:s');
+		}
+	}
 
 
 }
