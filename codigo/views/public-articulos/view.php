@@ -87,29 +87,40 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Botones de Acciones -->
     <div class="action-buttons">
-        <?= Html::a('Denunciar Tienda', ['denunciar', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <!-- Botón para denunciar el artículo -->
+        <?= Html::a('Denunciar Artículo', ['denunciar', 'id' => $model->id], [
+            'class' => 'btn btn-warning',
+        ]) ?>
 
-        <?= Html::a('Ir a la Tienda', ['tiendas/view-store', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <!-- Botón para ver el histórico de precios -->
+        <?php if ($model->articuloTienda): ?>
+            <?= Html::a('Cambios de Precios', [
+                'tiendas/ver-historico',
+                'Tienda_id' => $model->articuloTienda->tienda_id,
+                'Articulo_id' => $model->id
+            ], ['class' => 'btn btn-info']) ?>
+        <?php else: ?>
+            <p><em>No se puede ver el histórico de precios de este artículo.</em></p>
+        <?php endif; ?>
 
+        <!-- Botón de seguimiento del artículo -->
         <?php
-        $seguimiento = !Yii::$app->user->isGuest ? app\models\Seguimiento::findOne([
-            'usuario_id' => Yii::$app->user->identity->id,
-            'tienda_id' => $model->id
-        ]) : null;
+        $seguimiento = !Yii::$app->user->isGuest 
+            ? app\models\Seguimiento::findOne(['usuario_id' => Yii::$app->user->id, 'articulo_id' => $model->id])
+            : null;
         ?>
         <?= Html::a(
-            $seguimiento ? 'Dejar de Seguir' : 'Seguir Tienda',
-            ['tiendas/seguimiento', 'id' => $model->id],
+            $seguimiento ? 'Dejar de Seguir' : 'Seguir Artículo',
+            ['seguimiento', 'id' => $model->id],
             [
                 'class' => $seguimiento ? 'btn btn-danger' : 'btn btn-success',
-                'data' => !Yii::$app->user->isGuest ? [
+                'data' => [
                     'confirm' => $seguimiento
-                        ? '¿Estás seguro de que quieres dejar de seguir esta tienda?'
-                        : '¿Quieres seguir esta tienda?',
-                ] : [],
+                        ? '¿Estás seguro de que quieres dejar de seguir este artículo?'
+                        : '¿Quieres seguir este artículo?',
+                ],
             ]
         ) ?>
     </div>
-
 
 </div>
