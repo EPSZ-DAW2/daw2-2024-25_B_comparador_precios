@@ -95,10 +95,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- Botón para ver el histórico de precios -->
         <?php if ($model->articuloTienda): ?>
             <?= Html::a('Cambios de Precios', [
-                'tiendas/ver-historico',
-                'Tienda_id' => $model->articuloTienda->tienda_id,
-                'Articulo_id' => $model->id
-            ], ['class' => 'btn btn-info']) ?>
+				'public-articulos/ver-historico',
+				'articulo_id' => $model->id
+			], ['class' => 'btn btn-info']) ?>
         <?php else: ?>
             <p><em>No se puede ver el histórico de precios de este artículo.</em></p>
         <?php endif; ?>
