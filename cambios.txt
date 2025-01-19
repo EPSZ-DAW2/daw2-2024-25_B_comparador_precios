@@ -328,3 +328,7 @@ Cambios día 23 (Javier Marinas y Marcos Méndez) 19/01/2025
 
 Cambios dia 23 (Víctor Martín) 19/01/2025:
 - Actualizados el modelo vistas y controlador de historicos, incluyendo roles para la limpieza de historicos
+- Actualizado el tiendasController para que no haya problemas con la consulta de precios/ver historico
+- Añadidos mas css para mejorar estilos de bastantes vistas
+- modificadas las vistas de los buscadores de tiendas articulos y ofertas para que funcionen bien y tengan estilos, tambien seguimientos y comentariosUsuario
+- modificados los layouts para incluir css
