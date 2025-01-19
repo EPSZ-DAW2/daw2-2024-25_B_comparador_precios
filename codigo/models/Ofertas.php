@@ -125,4 +125,32 @@ class Ofertas extends \yii\db\ActiveRecord
     {
         return new OfertasQuery(get_called_class());
     }
+	
+	public function getCategoria()
+	{
+		return $this->hasOne(Categorias::class, ['id' => 'categoria_id'])->via('articulo');
+	}
+
+	public function getClasificacion()
+	{
+		return $this->hasOne(Clasificaciones::class, ['id' => 'clasificacion_id'])->via('tienda');
+	}
+
+	public function getRegion()
+	{
+		return $this->hasOne(Regiones::class, ['id' => 'region_id'])->via('tienda');
+	}
+
+	/*public function getEtiquetas()
+	{
+		return $this->hasMany(Etiquetas::class, ['id' => 'etiqueta_id'])->via('articulo');
+	}*/
+	
+	public function getEtiquetas()
+	{
+		return $this->hasMany(Etiquetas::class, ['id' => 'etiqueta_id'])
+			->viaTable('articulo_etiquetas', ['articulo_id' => 'id']);
+	}
+
+
 }
