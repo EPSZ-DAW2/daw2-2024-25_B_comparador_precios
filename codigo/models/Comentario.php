@@ -175,4 +175,29 @@ class Comentario extends \yii\db\ActiveRecord
     {
         return new ComentariosQuery(get_called_class());
     }
+	
+	/**
+	 * Bloquea el comentario.
+	 *
+	 * @param string $motivo El motivo del bloqueo.
+	 */
+	public function bloquear($motivo)
+	{
+		$this->bloqueado = 1;
+		$this->fecha_bloqueo = date('Y-m-d H:i:s');
+		$this->motivo_bloqueo = $motivo;
+		$this->save(false); // Guardar sin validar nuevamente los datos
+	}
+
+	/**
+	 * Desbloquea el comentario.
+	 */
+	public function desbloquear()
+	{
+		$this->bloqueado = 0;
+		$this->fecha_bloqueo = null;
+		$this->motivo_bloqueo = null;
+		$this->save(false); // Guardar sin validar nuevamente los datos
+	}
+
 }
