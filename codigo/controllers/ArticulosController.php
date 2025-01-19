@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Articulo;
 use app\models\ArticulosSearch;
+use app\models\ArticulosTienda;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -152,4 +153,47 @@ class ArticulosController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+	
+	public function actionGestionDenuncias($id)
+	{
+		$articuloTienda = ArticulosTienda::findOne($id);
+
+		if (!$articuloTienda) {
+			throw new NotFoundHttpException('El artículo no fue encontrado.');
+		}
+
+		if (Yii::$app->request->isPost) {
+			$accion = Yii::$app->request->post('accion');
+
+			// Bloquear el artículo
+			if ($accion === 'bloquear') {
+				$motivoBloqueo = Yii::$app->request->post('motivo_bloqueo');
+				$articuloTienda->bloquear($motivoBloqueo);
+
+				if ($articuloTienda->save(false)) {
+					Yii::$app->session->setFlash('success', 'El artículo ha sido bloqueado.');
+				} else {
+					Yii::$app->session->setFlash('error', 'No se pudo bloquear el artículo.');
+				}
+			}
+
+			// Desbloquear el artículo
+			if ($accion === 'desbloquear') {
+				$articuloTienda->desbloquear();
+
+				if ($articuloTienda->save(false)) {
+					Yii::$app->session->setFlash('success', 'El artículo ha sido desbloqueado.');
+				} else {
+					Yii::$app->session->setFlash('error', 'No se pudo desbloquear el artículo.');
+				}
+			}
+
+			return $this->redirect(['gestion-denuncias', 'id' => $id]);
+		}
+
+		return $this->render('gestion-denuncias', [
+			'model' => $articuloTienda,
+		]);
+	}
+
 }
