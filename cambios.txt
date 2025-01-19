@@ -333,3 +333,5 @@ Cambios dia 23 (Víctor Martín) 19/01/2025
 - Añadidos mas css para mejorar estilos de bastantes vistas
 - Modificadas las vistas de los buscadores de tiendas articulos y ofertas para que funcionen bien y tengan estilos, tambien seguimientos y comentariosUsuario
 - Modificados los layouts para incluir css
+- Arreglado un detalle de ModeradoresController
+- Detalles del diseño home y de tiendas
