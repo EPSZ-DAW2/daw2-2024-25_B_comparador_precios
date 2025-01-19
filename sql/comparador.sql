@@ -425,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `ofertas` (
   `fecha_inicio` datetime DEFAULT NULL,
   `fecha_fin` datetime DEFAULT NULL,
   `precio_oferta` decimal(10,2) DEFAULT NULL,
-  `precio_og` decimal(10,2) DEFAULT NULL,
+  `precio_original` decimal(10,2) DEFAULT NULL,
   `registro_id` int(11) DEFAULT NULL,
   `notas` text DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -438,13 +438,13 @@ CREATE TABLE IF NOT EXISTS `ofertas` (
 -- Volcado de datos para la tabla `ofertas`
 --
 
-INSERT INTO `ofertas` (`id`, `articulo_id`, `tienda_id`, `fecha_inicio`, `fecha_fin`, `precio_oferta`, `precio_og`, `registro_id`, `notas`) VALUES
+INSERT INTO `ofertas` (`id`, `articulo_id`, `tienda_id`, `fecha_inicio`, `fecha_fin`, `precio_oferta`, `precio_original`, `registro_id`, `notas`) VALUES
 (1, 1, 1, '2023-10-01 00:00:00', '2023-10-31 23:59:59', 299.99, 399.99, 1, 'Oferta especial de lanzamiento'),
 (2, 2, 1, '2023-11-01 00:00:00', '2023-11-30 23:59:59', 499.99, 599.99, 2, 'Descuento por temporada'),
 (3, 3, 2, '2023-12-01 00:00:00', '2023-12-31 23:59:59', 199.99, 299.99, 3, 'Oferta de fin de año'),
 (4, 4, 5, '2024-01-01 00:00:00', '2024-01-31 23:59:59', 29.99, 39.99, 4, 'Descuento de año nuevo'),
 (5, 5, 3, '2024-02-01 00:00:00', '2024-02-28 23:59:59', 9.99, 19.99, 5, 'Oferta de San Valentín'),
-(6, 5, 3, '2025-01-21 19:23:00', '2025-01-23 19:23:00', 23.00, 9.99, 5, 'Oferta creada por el usuario');
+(6, 5, 3, '2025-01-21 19:23:00', '2025-01-23 19:23:00', 8.99, 19.99, 5, 'Oferta creada por el usuario');
 
 -- --------------------------------------------------------
 
