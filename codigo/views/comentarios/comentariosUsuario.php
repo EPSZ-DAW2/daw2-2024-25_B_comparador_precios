@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Tus comentarios';
 ?>
 
-<div class="comentarios-usuario">
+<div class="seguimientos-comentarios-container">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if (empty($comentarios)): ?>
