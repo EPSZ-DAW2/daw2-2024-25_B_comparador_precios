@@ -27,7 +27,7 @@ use yii\helpers\Url;
                 </p>
                 <p class="card-text">
                     <small class="text-muted">
-                        <strong>Precio Original:</strong> <?= Yii::$app->formatter->asCurrency($model->precio_og) ?>
+                        <strong>Precio Original:</strong> <?= Yii::$app->formatter->asCurrency($model->precio_original) ?>
                     </small>
                 </p>
                 <p class="card-text">

@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->articulo->descripcion ?? 'Sin descripción',
             ],
             'precio_oferta:currency',
-            'precio_og:currency',
+            'precio_original:currency',
             [
                 'label' => 'Tienda',
                 'value' => $model->tienda->nombre ?? 'Sin tienda asociada',
@@ -61,6 +61,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Valoración Media',
                 'value' => $model->getValoracionMedia(),
+            ],
+            [
+                'label' => 'Fecha de Inicio',
+                'value' => Yii::$app->formatter->asDate($model->fecha_inicio, 'long'),
+            ],
+            [
+                'label' => 'Fecha de Fin',
+                'value' => Yii::$app->formatter->asDate($model->fecha_fin, 'long'),
             ],
         ],
     ]) ?>
