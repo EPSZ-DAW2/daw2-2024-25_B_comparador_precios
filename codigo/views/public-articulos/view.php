@@ -19,40 +19,46 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <!-- Detalles del Artículo -->
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'nombre',
-            'descripcion:ntext',
-            [
-                'attribute' => 'categoria_id',
-                'label' => 'Categoría',
-                'value' => $model->categoria->nombre ?? 'Sin categoría',
-            ],
-            [
-                'attribute' => 'etiqueta_id',
-                'label' => 'Etiqueta',
-                'value' => $model->etiqueta->nombre ?? 'Sin etiqueta',
-            ],
-            [
-                'attribute' => 'imagen_principal',
-                'format' => 'raw',
-                'value' => Html::img(
-                    Url::to('@web/img/' . ($model->imagen_principal ?: 'placeholder.jpg')),
-                    [
-                        'alt' => Html::encode($model->nombre),
-                        'style' => 'max-width: 200px;',
-                        'onerror' => "this.onerror=null;this.src='".Url::to('@web/img/placeholder.jpg')."';"
-                    ]
-                ),
-            ],
-            [
-                'label' => 'Valoración Media',
-                'value' => $model->valoracionMedia,
-            ],
+<!-- Detalles del Artículo -->
+<?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+        'nombre',
+        'descripcion:ntext',
+        [
+            'attribute' => 'categoria_id',
+            'label' => 'Categoría',
+            'value' => $model->categoria->nombre ?? 'Sin categoría',
         ],
-    ]) ?>
+        [
+            'attribute' => 'etiqueta_id',
+            'label' => 'Etiqueta',
+            'value' => $model->etiqueta->nombre ?? 'Sin etiqueta',
+        ],
+        [
+            'attribute' => 'tienda_id',
+            'label' => 'Tienda',
+            'value' => $model->tienda->nombre ?? 'Sin tienda',
+        ],
+        [
+            'attribute' => 'imagen_principal',
+            'format' => 'raw',
+            'value' => Html::img(
+                Url::to('@web/img/' . ($model->imagen_principal ?: 'placeholder.jpg')),
+                [
+                    'alt' => Html::encode($model->nombre),
+                    'style' => 'max-width: 200px;',
+                    'onerror' => "this.onerror=null;this.src='".Url::to('@web/img/placeholder.jpg')."';"
+                ]
+            ),
+        ],
+        [
+            'label' => 'Valoración Media',
+            'value' => $model->valoracionMedia,
+        ],
+    ],
+]) ?>
+
 
     <!-- Comentarios -->
     <h3>Comentarios</h3>
