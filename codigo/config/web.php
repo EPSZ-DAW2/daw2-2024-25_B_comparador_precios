@@ -42,6 +42,12 @@ $config = [
                 ],
             ],
         ],
+		'formatter' => [
+        'class' => 'yii\i18n\Formatter',
+        'currencyCode' => 'EUR', // Código de moneda
+		],
+		
+		
         'db' => $db,
         /*
         'urlManager' => [
