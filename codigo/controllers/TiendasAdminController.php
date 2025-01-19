@@ -117,4 +117,37 @@ class TiendasAdminController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+	
+	public function actionGestionDenuncias($id)
+	{
+		$tienda = Tienda::findOne($id);
+
+		if (!$tienda) {
+			throw new NotFoundHttpException('La tienda no fue encontrada.');
+		}
+
+		if (Yii::$app->request->isPost) {
+			$accion = Yii::$app->request->post('accion');
+			$motivo = Yii::$app->request->post('motivo');
+
+			if ($accion === 'bloquear') {
+				$tienda->bloquear($motivo);
+			} elseif ($accion === 'desbloquear') {
+				$tienda->desbloquear();
+			}
+
+			if ($tienda->save(false)) {
+				Yii::$app->session->setFlash('success', 'La acción se realizó correctamente.');
+			} else {
+				Yii::$app->session->setFlash('error', 'No se pudo realizar la acción.');
+			}
+
+			return $this->redirect(['index']);
+		}
+
+		return $this->render('gestion-denuncias', [
+			'model' => $tienda,
+		]);
+	}
+
 }
