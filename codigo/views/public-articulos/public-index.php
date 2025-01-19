@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_articulo_card', // Vista parcial para cada ficha
-        'layout' => "{items}\n{pager}", // Estructura de la lista
+        'layout' => "<div class='tienda-list'>{items}</div>\n{pager}", // Estructura de la lista
         'emptyText' => '<p>No se encontraron artículos.</p>',
     ]) ?>
 
