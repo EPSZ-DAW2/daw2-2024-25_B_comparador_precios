@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'buttons' => [
 					'denuncias' => function ($url, $model) {
 						return Html::a(
-							'<i class="fa fa-warning"></i> Gestionar denuncias',
+							'<i class="fa fa-warning"></i> Denuncias',
 							['articulos/gestion-denuncias', 'id' => $model->id],
 							['class' => 'btn btn-warning btn-sm']
 						);
