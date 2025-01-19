@@ -142,7 +142,7 @@ class TiendasAdminController extends Controller
 				Yii::$app->session->setFlash('error', 'No se pudo realizar la acción.');
 			}
 
-			return $this->redirect(['index']);
+			return $this->redirect(['gestion-denuncias', 'id' => $id]);
 		}
 
 		return $this->render('gestion-denuncias', [
