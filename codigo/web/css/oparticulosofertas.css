@@ -1,0 +1,164 @@
+/* Limitamos el alcance solo a las vistas relacionadas con artículos y ofertas */
+.articulo-create, .oferta-create, .articulo-update, .oferta-modificar,
+.articulo-delete, .oferta-eliminar {
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    margin: 50px auto; /* Margen superior aumentado */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+/* Encabezados dentro de estas vistas */
+.articulo-create h1, .oferta-create h1, .articulo-update h1, .oferta-modificar h1,
+.articulo-delete h1, .oferta-eliminar h1 {
+    color: #4a90e2;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 10px;
+    margin-top: 0; /* Reseteamos márgenes superiores del título */
+}
+
+/* Formularios */
+.articulo-create .articulo-form, .oferta-create .oferta-form,
+.articulo-update .articulo-form, .oferta-modificar .oferta-form,
+.articulo-delete .articulo-form, .oferta-eliminar .oferta-form {
+    margin-top: 10px;
+}
+
+/* Labels */
+.articulo-create label, .oferta-create label, .articulo-update label, .oferta-modificar label,
+.articulo-delete label, .oferta-eliminar label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Inputs, selects y textareas */
+.articulo-create input[type="text"], .oferta-create input[type="text"],
+.articulo-update input[type="text"], .oferta-modificar input[type="text"],
+.articulo-delete input[type="text"], .oferta-eliminar input[type="text"],
+.articulo-create textarea, .oferta-create textarea,
+.articulo-update textarea, .oferta-modificar textarea,
+.articulo-delete textarea, .oferta-eliminar textarea,
+.articulo-create select, .oferta-create select,
+.articulo-update select, .oferta-modificar select,
+.articulo-delete select, .oferta-eliminar select,
+.articulo-create input[type="datetime-local"], .oferta-create input[type="datetime-local"],
+.articulo-update input[type="datetime-local"], .oferta-modificar input[type="datetime-local"],
+.articulo-delete input[type="datetime-local"], .oferta-eliminar input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.articulo-create input:focus, .oferta-create input:focus,
+.articulo-update input:focus, .oferta-modificar input:focus,
+.articulo-delete input:focus, .oferta-eliminar input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Botones */
+.articulo-create .btn-success, .oferta-create .btn-success,
+.articulo-update .btn-success, .oferta-modificar .btn-success,
+.articulo-delete .btn-danger, .oferta-eliminar .btn-danger {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.articulo-create .btn-success:hover, .oferta-create .btn-success:hover,
+.articulo-update .btn-success:hover, .oferta-modificar .btn-success:hover,
+.articulo-delete .btn-danger:hover, .oferta-eliminar .btn-danger:hover {
+    background-color: #357abd;
+}
+
+.articulo-delete .btn-danger, .oferta-eliminar .btn-danger {
+    background-color: #e74c3c;
+}
+
+.articulo-delete .btn-danger:hover, .oferta-eliminar .btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Separación adicional para los botones respecto al formulario */
+.articulo-create .form-group, .oferta-create .form-group,
+.articulo-update .form-group, .oferta-modificar .form-group,
+.articulo-delete .form-group, .oferta-eliminar .form-group {
+    margin-top: 20px; /* Aumenta la separación del botón respecto al formulario */
+}
+
+.articulo-create .form-group .btn, .oferta-create .form-group .btn,
+.articulo-update .form-group .btn, .oferta-modificar .form-group .btn,
+.articulo-delete .form-group .btn, .oferta-eliminar .form-group .btn {
+    margin-top: 10px; /* Ajusta la separación superior específica del botón */
+}
+
+/* Breadcrumbs */
+.articulo-create .breadcrumbs, .oferta-create .breadcrumbs,
+.articulo-update .breadcrumbs, .oferta-modificar .breadcrumbs,
+.articulo-delete .breadcrumbs, .oferta-eliminar .breadcrumbs {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.articulo-create .breadcrumbs a, .oferta-create .breadcrumbs a,
+.articulo-update .breadcrumbs a, .oferta-modificar .breadcrumbs a,
+.articulo-delete .breadcrumbs a, .oferta-eliminar .breadcrumbs a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.articulo-create .breadcrumbs a:hover, .oferta-create .breadcrumbs a:hover,
+.articulo-update .breadcrumbs a:hover, .oferta-modificar .breadcrumbs a:hover,
+.articulo-delete .breadcrumbs a:hover, .oferta-eliminar .breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+/* Errores y mensajes */
+.articulo-create .help-block, .oferta-create .help-block,
+.articulo-update .help-block, .oferta-modificar .help-block,
+.articulo-delete .help-block, .oferta-eliminar .help-block {
+    color: #e74c3c;
+    font-size: 12px;
+}
+
+.articulo-create .has-error input, .oferta-create .has-error input,
+.articulo-update .has-error input, .oferta-modificar .has-error input,
+.articulo-delete .has-error input, .oferta-eliminar .has-error input {
+    border-color: #e74c3c;
+}
+
+.articulo-create .has-error label, .oferta-create .has-error label,
+.articulo-update .has-error label, .oferta-modificar .has-error label,
+.articulo-delete .has-error label, .oferta-eliminar .has-error label {
+    color: #e74c3c;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .articulo-create, .oferta-create, .articulo-update, .oferta-modificar,
+    .articulo-delete, .oferta-eliminar {
+        padding: 15px;
+    }
+
+    .articulo-create h1, .oferta-create h1, .articulo-update h1, .oferta-modificar h1,
+    .articulo-delete h1, .oferta-eliminar h1 {
+        font-size: 20px;
+    }
+}
