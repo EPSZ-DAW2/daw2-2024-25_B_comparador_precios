@@ -7,13 +7,23 @@ use app\models\Comentario;
 use app\models\RegistroUsuarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\data\ActiveDataProvider;
 
 class ComentariosController extends Controller
 {
     public function actionIndex()
-    {
-        return $this->render('index');
-    }
+	{
+		$dataProvider = new ActiveDataProvider([
+			'query' => Comentario::find()->with(['tienda', 'articulo']),
+			'pagination' => [
+				'pageSize' => 10,
+			],
+		]);
+
+		return $this->render('index', [
+			'dataProvider' => $dataProvider,
+		]);
+	}
 
     public function actionComentariosUsuario()
     {
@@ -75,6 +85,47 @@ class ComentariosController extends Controller
     
         return $this->redirect(['tiendas/view-articulo', 'id' => $artid, 'tienda_id' => $tieid]);
     }
+	
+	public function actionGestionDenuncias($id)
+	{
+		$model = Comentario::findOne($id);
+
+		if (!$model) {
+			throw new NotFoundHttpException('Comentario no encontrado.');
+		}
+
+		if (Yii::$app->request->isPost) {
+			$accion = Yii::$app->request->post('accion');
+			$motivoBloqueo = Yii::$app->request->post('motivo_bloqueo', null);
+
+			if ($accion === 'bloquear') {
+				if (!empty($motivoBloqueo)) {
+					$model->bloquear($motivoBloqueo);
+					if ($model->save()) {
+						Yii::$app->session->setFlash('success', 'El comentario ha sido bloqueado correctamente.');
+					} else {
+						Yii::$app->session->setFlash('error', 'Hubo un error al bloquear el comentario.');
+					}
+				} else {
+					Yii::$app->session->setFlash('error', 'Debe proporcionar un motivo para bloquear el comentario.');
+				}
+			} elseif ($accion === 'desbloquear') {
+				$model->desbloquear();
+				if ($model->save()) {
+					Yii::$app->session->setFlash('success', 'El comentario ha sido desbloqueado correctamente.');
+				} else {
+					Yii::$app->session->setFlash('error', 'Hubo un error al desbloquear el comentario.');
+				}
+			}
+
+			return $this->redirect(['gestion-denuncias', 'id' => $id]);
+		}
+
+		return $this->render('gestion-denuncias', [
+			'model' => $model,
+		]);
+	}
+
     
 
 
