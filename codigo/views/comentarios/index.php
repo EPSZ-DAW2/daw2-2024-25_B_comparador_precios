@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {gestion-denuncias}',
+                'template' => '{view} {update} {delete} {gestion-denuncias}',
                 'buttons' => [
                     'gestion-denuncias' => function ($url, $model) {
                         return Html::a('Denuncias', ['gestion-denuncias', 'id' => $model->id], [
