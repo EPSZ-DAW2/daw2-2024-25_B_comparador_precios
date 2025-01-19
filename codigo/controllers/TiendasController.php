@@ -602,7 +602,7 @@ class TiendasController extends Controller
                 $oferta->precio_oferta = Yii::$app->request->post('Ofertas')['precio_oferta'];
                 $oferta->fecha_inicio = Yii::$app->request->post('Ofertas')['fecha_inicio'];
                 $oferta->fecha_fin = Yii::$app->request->post('Ofertas')['fecha_fin'];
-                $oferta->precio_og = $articulo->precio_actual; // Precio original del artículo en la tienda
+                $oferta->precio_original = $articulo->precio_actual; // Precio original del artículo en la tienda
                 $oferta->registro_id = Yii::$app->user->id; // Usuario que creó la oferta
                 $oferta->notas= "Oferta creada por el usuario";
                 if ($oferta->save()) {
