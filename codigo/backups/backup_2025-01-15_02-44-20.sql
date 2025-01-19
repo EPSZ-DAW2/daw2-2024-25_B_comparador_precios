@@ -460,7 +460,7 @@ CREATE TABLE `ofertas` (
   `fecha_inicio` datetime DEFAULT NULL,
   `fecha_fin` datetime DEFAULT NULL,
   `precio_oferta` decimal(10,2) DEFAULT NULL,
-  `precio_og` decimal(10,2) DEFAULT NULL,
+  `precio_original` decimal(10,2) DEFAULT NULL,
   `registro_id` int(11) DEFAULT NULL,
   `notas` text DEFAULT NULL,
   PRIMARY KEY (`id`),
