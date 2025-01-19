@@ -38,13 +38,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'cerrada:boolean',
             'suma_valoraciones',
             'suma_votos',
+			[
+                'attribute' => 'denuncias',
+                'label' => 'Denuncias',
+                'value' => function ($model) {
+                    return $model->denuncias ?: 0;
+                },
+            ],
             [
 				'class' => 'yii\grid\ActionColumn',
 				'template' => '{view} {update} {delete} {denuncias}',
 				'buttons' => [
 					'denuncias' => function ($url, $model) {
 						return Html::a(
-							'<i class="fa fa-warning"></i> Gestionar Denuncias',
+							'<i class="fa fa-warning"></i> Denuncias',
 							['tiendas-admin/gestion-denuncias', 'id' => $model->id],
 							['class' => 'btn btn-warning btn-sm']
 						);
