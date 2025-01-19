@@ -1,0 +1,148 @@
+/* avisosperfil.css */
+
+/* Estilos generales para todas las vistas de avisos */
+.avisos-recibidos, .avisos-enviados, .aviso-enviar {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos de las páginas */
+.avisos-recibidos h1, 
+.avisos-enviados h1, 
+.aviso-enviar h1 {
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Listas de avisos */
+.avisos-recibidos .list-group,
+.avisos-enviados .list-group {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Elementos individuales de la lista */
+.avisos-recibidos .list-group-item,
+.avisos-enviados .list-group-item {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.avisos-recibidos .list-group-item strong,
+.avisos-enviados .list-group-item strong {
+    color: #34495e;
+}
+
+/* Botones de acción */
+.avisos-recibidos .btn, 
+.avisos-enviados .btn, 
+.aviso-enviar .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.avisos-recibidos .btn:hover, 
+.avisos-enviados .btn:hover, 
+.aviso-enviar .btn:hover {
+    background-color: #2980b9;
+}
+
+/* Formulario de envío de aviso */
+.aviso-enviar form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Campos del formulario */
+.aviso-enviar .form-group {
+    margin-bottom: 15px;
+}
+
+.aviso-enviar .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.aviso-enviar .form-group input, 
+.aviso-enviar .form-group textarea, 
+.aviso-enviar .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 1em;
+}
+
+.aviso-enviar .form-group input:focus, 
+.aviso-enviar .form-group textarea:focus, 
+.aviso-enviar .form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Flash messages */
+.aviso-enviar .alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.aviso-enviar .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.aviso-enviar .alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .avisos-recibidos, .avisos-enviados, .aviso-enviar {
+        padding: 15px;
+    }
+
+    .avisos-recibidos h1, 
+    .avisos-enviados h1, 
+    .aviso-enviar h1 {
+        font-size: 1.8em;
+    }
+
+    .aviso-enviar form {
+        padding: 15px;
+    }
+}
