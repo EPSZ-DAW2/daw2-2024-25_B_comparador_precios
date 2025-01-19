@@ -36,7 +36,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->articuloTienda->denuncias ?? 0;
                 },
             ],
-			
+			[
+				'class' => ActionColumn::className(),
+				'template' => '{view} {update} {delete} {denuncias}',
+				'buttons' => [
+					'denuncias' => function ($url, $model) {
+						return Html::a(
+							'<i class="fa fa-warning"></i> Gestionar denuncias',
+							['articulos/gestion-denuncias', 'id' => $model->id],
+							['class' => 'btn btn-warning btn-sm']
+						);
+					},
+				],
+			],
 
         ],
     ]); ?>
