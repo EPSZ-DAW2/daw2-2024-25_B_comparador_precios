@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'precio_oferta')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'precio_og')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'precio_original')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'registro_id')->textInput() ?>
 
