@@ -126,7 +126,44 @@ class ComentariosController extends Controller
 		]);
 	}
 
-    
+    public function actionView($id)
+    {
+        $model = Comentario::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Comentario no encontrado.');
+        }
 
-
+        return $this->render('view', ['model' => $model]);
     }
+
+    public function actionUpdate($id)
+    {
+        $model = Comentario::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Comentario no encontrado.');
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Comentario actualizado correctamente.');
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', ['model' => $model]);
+    }
+
+    public function actionDelete($id)
+    {
+        $model = Comentario::findOne($id);
+        if ($model) {
+            if ($model->delete()) {
+                Yii::$app->session->setFlash('success', 'Comentario eliminado correctamente.');
+            } else {
+                Yii::$app->session->setFlash('error', 'No se pudo eliminar el comentario.');
+            }
+        } else {
+            Yii::$app->session->setFlash('error', 'Comentario no encontrado.');
+        }
+
+        return $this->redirect(['index']);
+    }
+}
