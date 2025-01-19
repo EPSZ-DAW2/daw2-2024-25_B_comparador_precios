@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Ofertas;
 use app\models\OfertasSearch;
 use yii\web\Controller;
+use app\models\Seguimiento;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -54,11 +56,40 @@ class OfertasController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+	{
+		$model = $this->findModel($id);
+
+		// Crear un nuevo modelo para los comentarios
+		$comentario = new \app\models\Comentario();
+		$comentario->articulo_id = $model->articulo_id;
+
+		if (\Yii::$app->request->isPost) {
+			// Verificar si el usuario está autenticado al intentar enviar un comentario
+			if (\Yii::$app->user->isGuest) {
+				\Yii::$app->session->setFlash('error', 'Debes iniciar sesión para comentar.');
+				return $this->redirect(['site/login']);
+			}
+
+			// Asociar el comentario al usuario autenticado
+			$comentario->registro_id = \Yii::$app->user->identity->id;
+
+			if ($comentario->load(\Yii::$app->request->post()) && $comentario->save()) {
+				\Yii::$app->session->setFlash('success', 'Tu comentario ha sido guardado.');
+				return $this->redirect(['view', 'id' => $id]);
+			} else {
+				\Yii::$app->session->setFlash('error', 'Hubo un problema al guardar el comentario.');
+			}
+		}
+
+		// Cargar todos los comentarios relacionados con la oferta
+		$comentarios = $model->getComentarios()->orderBy(['id' => SORT_DESC])->all();
+
+		return $this->render('view', [
+			'model' => $model,
+			'comentario' => $comentario,
+			'comentarios' => $comentarios,
+		]);
+	}
 
     /**
      * Creates a new Ofertas model.
@@ -131,4 +162,73 @@ class OfertasController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+	
+	public function actionDenunciar($id)
+	{
+		if (Yii::$app->user->isGuest) {
+			Yii::$app->session->setFlash('error', 'Debes iniciar sesión para denunciar una oferta.');
+			return $this->redirect(['site/login']);
+		}
+
+		// Buscar la oferta y obtener la relación con ArticulosTienda
+		$oferta = Ofertas::findOne($id);
+		if (!$oferta || !$oferta->articulo || !$oferta->articulo->articuloTienda) {
+			throw new NotFoundHttpException('No se encontró la oferta o la relación con el artículo.');
+		}
+
+		$articuloTienda = $oferta->articulo->articuloTienda;
+
+		if (Yii::$app->request->isPost) {
+			// Capturar el motivo desde el formulario
+			$nuevoMotivo = Yii::$app->request->post('motivo_denuncia');
+
+			// Agregar el nuevo motivo de denuncia
+			$articuloTienda->agregarMotivoDenuncia($nuevoMotivo);
+
+			if ($articuloTienda->save(false)) {
+				Yii::$app->session->setFlash('success', 'Denuncia registrada exitosamente.');
+				return $this->redirect(['view', 'id' => $id]);
+			} else {
+				Yii::$app->session->setFlash('error', 'No se pudo registrar la denuncia. Por favor, inténtalo de nuevo.');
+			}
+		}
+
+		return $this->render('denunciar', [
+			'model' => $oferta,
+		]);
+	}
+
+	public function actionSeguimiento($id)
+	{
+		if (Yii::$app->user->isGuest) {
+			Yii::$app->session->setFlash('error', 'Debes iniciar sesión para seguir una oferta.');
+			return $this->redirect(['site/login']);
+		}
+
+		$usuarioId = Yii::$app->user->identity->id;
+
+		// Buscar seguimiento existente
+		$seguimiento = Seguimiento::find()
+			->where(['usuario_id' => $usuarioId, 'oferta_id' => $id])
+			->one();
+
+		if ($seguimiento) {
+			// Si existe el seguimiento, elimínalo (desactivar seguimiento)
+			$seguimiento->delete();
+			Yii::$app->session->setFlash('success', 'Has dejado de seguir esta oferta.');
+		} else {
+			$seguimiento = new Seguimiento();
+			$seguimiento->usuario_id = $usuarioId;
+			$seguimiento->oferta_id = $id;
+			$seguimiento->fecha = date('Y-m-d H:i:s');
+			if ($seguimiento->save()) {
+				Yii::$app->session->setFlash('success', 'Ahora sigues esta oferta.');
+			} else {
+				Yii::$app->session->setFlash('error', 'No se pudo seguir esta oferta.');
+			}
+		}
+
+		return $this->redirect(['view', 'id' => $id]);
+	}
+
 }
