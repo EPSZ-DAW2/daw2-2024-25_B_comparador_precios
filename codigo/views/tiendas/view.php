@@ -62,14 +62,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h3 class="section-title">Añadir un Comentario</h3>
     <?php $form = ActiveForm::begin(); ?>
-        <?= $form->field($comentario, 'texto')->textarea(['rows' => 4]) ?>
+        <?= $form->field($comentario, 'texto')->textarea(['rows' => 4, 'value' => '']) ?>
         <?= $form->field($comentario, 'valoracion')->dropDownList([
             5 => '5 - Excelente',
             4 => '4 - Muy Bueno',
             3 => '3 - Bueno',
             2 => '2 - Regular',
             1 => '1 - Malo',
-        ], ['prompt' => 'Seleccionar Valoración']) ?>
+        ], ['prompt' => 'Seleccionar Valoración', 'value' => null]) ?>
         <?= Html::submitButton('Enviar Comentario', ['class' => 'btn btn-primary']) ?>
     <?php ActiveForm::end(); ?>
 
