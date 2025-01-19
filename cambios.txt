@@ -311,6 +311,14 @@ Cambios día 22 (Victor Gonzalo) 18/01/2025
 - Arreglado problema con la tabla registros_usuario en la base de datos
 - Modificado al usuario de ejemplo Luis como usuario tienda 
 
+Cambios día 22 (Víctor Martín) 18/01/2025
+- Actualizadas vistas y controlador de Site arreglando un error
+- Añadidas mas vistas en site para el diseño y estilos
+- Añadidos muchos css para mejorar el estilo de multiples paginas
+- Cambio del header para que cumpla con el diseño responsive
+- Mejora del footer para mas interactivo
+- Incorporacion de los roles de usuario tienda en Tienda Controller
+- Cambios en vistas de tiendas, public articulos, login y avisos por tema de estilos
 
 Cambios día 23 (Javier Marinas y Marcos Méndez) 19/01/2025
 - Modificada la base de datos cambiando los inserts de los datos de prueba de ofertas para aportar lógica
