@@ -500,5 +500,19 @@ class Tienda extends \yii\db\ActiveRecord
 			$this->fecha_primera_denuncia = date('Y-m-d H:i:s');
 		}
 	}
+	
+	public function bloquear($motivo)
+	{
+		$this->bloqueada = 1;
+		$this->fecha_bloqueo = date('Y-m-d H:i:s');
+		$this->motivo_bloqueo = $motivo;
+	}
+
+	public function desbloquear()
+	{
+		$this->bloqueada = 0;
+		$this->fecha_bloqueo = null;
+		$this->motivo_bloqueo = null;
+	}
 
 }
