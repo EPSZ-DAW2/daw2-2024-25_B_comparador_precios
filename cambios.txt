@@ -326,6 +326,7 @@ Cambios día 23 (Javier Marinas y Marcos Méndez) 19/01/2025
 - Añadida la vista detallada del ver más de ofertas, con acceso si se ha iniciado sesión acceso a las funciones de comentar, denunciar y seguir/dejar de seguir
 - Cambiado un campo de la vista detallada de ofertas (precio_og por precio_original) y añadidos los campos de fecha_inicio y fecha_fin
 - Añadido el control de denuncias y la opción de bloquear (poner un 1 en el campo bloqueo) en el panel de admininistración de los articulos, las tiendas y los comentarios.
+- Añadida correctamente la opción de ver el histórico de cambios de precios de un artículo por un usuario en la vista detallada del artículo
 
 Cambios dia 23 (Víctor Martín) 19/01/2025
 - Actualizados el modelo vistas y controlador de historicos, incluyendo roles para la limpieza de historicos
