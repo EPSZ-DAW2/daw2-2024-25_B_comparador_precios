@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
 /** @var app\models\OfertasSearch $model */
@@ -15,29 +16,40 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'nombre_articulo')->textInput(['placeholder' => 'Buscar por nombre del artículo']) ?>
+    <?= $form->field($model, 'descripcion_articulo')->textInput(['placeholder' => 'Buscar por descripción del artículo']) ?>
 
-    <?= $form->field($model, 'articulo_id') ?>
+    <?= $form->field($model, 'categoria_id')->dropDownList(
+        ArrayHelper::map(\app\models\Categorias::find()->all(), 'id', 'nombre'),
+        ['prompt' => 'Selecciona una categoría']
+    ) ?>
 
-    <?= $form->field($model, 'tienda_id') ?>
+    <?= $form->field($model, 'etiqueta_id')->dropDownList(
+        ArrayHelper::map(\app\models\Etiquetas::find()->all(), 'id', 'nombre'),
+        ['prompt' => 'Selecciona una etiqueta']
+    ) ?>
 
-    <?= $form->field($model, 'fecha_inicio') ?>
+    <?= $form->field($model, 'clasificacion_tienda')->dropDownList(
+        ArrayHelper::map(\app\models\Clasificaciones::find()->all(), 'id', 'nombre'),
+        ['prompt' => 'Selecciona una clasificación']
+    ) ?>
 
-    <?= $form->field($model, 'fecha_fin') ?>
+    <?= $form->field($model, 'region_id')->dropDownList(
+        ArrayHelper::map(\app\models\Regiones::find()->all(), 'id', 'nombre'),
+        ['prompt' => 'Selecciona una región']
+    ) ?>
 
-    <?php // echo $form->field($model, 'precio_oferta') ?>
-
-    <?php // echo $form->field($model, 'precio_og') ?>
-
-    <?php // echo $form->field($model, 'registro_id') ?>
-
-    <?php // echo $form->field($model, 'notas') ?>
+    <?= $form->field($model, 'fecha_inicio')->input('date') ?>
+    <?= $form->field($model, 'fecha_fin')->input('date') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Resetear'), ['index'], ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+

@@ -1,10 +1,7 @@
 <?php
 
-use app\models\Ofertas;
+use yii\widgets\ListView;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
 
 /** @var yii\web\View $this */
 /** @var app\models\OfertasSearch $searchModel */
@@ -17,35 +14,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Ofertas'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <!-- Renderiza el formulario de búsqueda -->
+    <?= $this->render('_search', ['model' => $searchModel]) ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
+    <!-- ListView para mostrar los resultados como fichas -->
+    <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'articulo_id',
-            'tienda_id',
-            'fecha_inicio',
-            'fecha_fin',
-            //'precio_oferta',
-            //'precio_og',
-            //'registro_id',
-            //'notas:ntext',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Ofertas $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
+        'itemView' => '_oferta_card', // Vista parcial para cada ficha
+		'layout' => "<div class='tienda-list'>{items}</div>\n{pager}", // Estructura de la lista
+        'emptyText' => '<p>No se encontraron ofertas.</p>',
+    ]) ?>
 
 </div>
