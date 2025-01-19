@@ -39,11 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'suma_valoraciones',
             'suma_votos',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Tienda $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                }
-            ],
+				'class' => 'yii\grid\ActionColumn',
+				'template' => '{view} {update} {delete} {denuncias}',
+				'buttons' => [
+					'denuncias' => function ($url, $model) {
+						return Html::a(
+							'<i class="fa fa-warning"></i> Gestionar Denuncias',
+							['tiendas-admin/gestion-denuncias', 'id' => $model->id],
+							['class' => 'btn btn-warning btn-sm']
+						);
+					},
+				],
+			],
         ],
     ]); ?>
 
