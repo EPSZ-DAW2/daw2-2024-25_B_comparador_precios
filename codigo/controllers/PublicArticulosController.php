@@ -58,15 +58,6 @@ class PublicArticulosController extends Controller
 			'comentarios' => $comentarios,
 		]);
 	}
-
-	/*protected function findModel($id)
-	{
-		if (($model = Articulo::findOne($id)) !== null) {
-			return $model;
-		}
-
-		throw new NotFoundHttpException('El artículo solicitado no existe.');
-	}*/
 	
 	protected function findModel($id)
 	{
@@ -145,31 +136,25 @@ class PublicArticulosController extends Controller
         return $this->redirect(['view', 'id' => $id]);
     }
 	
-	public function actionVerHistorico($id)
+	public function actionVerHistorico($articulo_id)
 	{
-		// Obtener todos los registros relacionados con el artículo en ArticulosTienda
-		$articulosTienda = ArticulosTienda::find()
-			->where(['articulo_id' => $id])
-			->all();
+		$articulo = \app\models\Articulo::findOne($articulo_id);
 
-		$articulosList = ArrayHelper::map($articulosTienda, 'id', function ($model) {
-			return $model->articulo->nombre ?? 'Sin nombre'; // Usamos la relación con el modelo Articulo
-		});
-
-		$historico = [];
-		if (!empty($articulosTienda)) {
-			$historico = HistoricoPrecios::find()
-				->where(['articulo_id' => $id])
-				->orderBy(['fecha' => SORT_DESC])
-				->asArray()
-				->all();
+		if (!$articulo) {
+			throw new \yii\web\NotFoundHttpException('El artículo no existe.');
 		}
 
-		return $this->render('//tiendas/ver-historico', [
-			'articulos' => $articulosList,
+		$historico = \app\models\Historico::find()
+			->where(['articulo_id' => $articulo_id])
+			->orderBy(['fecha' => SORT_DESC])
+			->asArray()
+			->all();
+
+		return $this->render('ver-historico', [
+			'articulo' => $articulo,
 			'historico' => $historico,
-			'selectedArticulo' => $id,
 		]);
 	}
+
 
 }

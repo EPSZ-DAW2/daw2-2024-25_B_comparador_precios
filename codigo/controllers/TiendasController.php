@@ -525,12 +525,11 @@ class TiendasController extends Controller
 	public function actionVerHistorico($Tienda_id, $Articulo_id = null)
     {
         // Verificar si el usuario tiene el rol de USUARIO_TIENDA o SUPERADMINISTRADOR
-		/*if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_USUARIO_TIENDA) &&
+		if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_USUARIO_TIENDA) &&
 		!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) 
 		{
 		throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
 		}
-		*/
 		
 		$articulos = ArticulosTienda::find()
             ->where(['tienda_id' => $Tienda_id])
@@ -855,4 +854,5 @@ class TiendasController extends Controller
 
 		return $this->redirect(['tiendas/view', 'id' => $id]);
 	}
+
 }
