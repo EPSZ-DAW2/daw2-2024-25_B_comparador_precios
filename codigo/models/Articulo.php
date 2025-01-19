@@ -93,10 +93,16 @@ class Articulo extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery|ArticulosTiendaQuery
      */
-    public function getArticuloTienda()
+    /*public function getArticuloTienda()
     {
         return $this->hasOne(ArticulosTienda::class, ['id' => 'articulo_tienda_id']);
-    }
+    }*/
+	
+	public function getArticuloTienda()
+{
+    return $this->hasOne(ArticulosTienda::class, ['articulo_id' => 'id']);
+}
+
 
     /**
      * Gets query for [[ArticulosTiendas]].

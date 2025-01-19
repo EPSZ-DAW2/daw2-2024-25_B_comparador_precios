@@ -221,6 +221,20 @@ class ArticulosTienda extends \yii\db\ActiveRecord
 			$this->fecha_primera_denuncia = date('Y-m-d H:i:s');
 		}
 	}
+	
+	public function bloquear($motivoBloqueo)
+	{
+		$this->bloqueado = 1;
+		$this->motivo_bloqueo = $motivoBloqueo;
+		$this->fecha_bloqueo = date('Y-m-d H:i:s');
+	}
+
+	public function desbloquear()
+	{
+		$this->bloqueado = 0;
+		$this->motivo_bloqueo = null;
+		$this->fecha_bloqueo = null;
+	}
 
 	
 }
