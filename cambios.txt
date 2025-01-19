@@ -335,3 +335,4 @@ Cambios dia 23 (Víctor Martín) 19/01/2025
 - Modificados los layouts para incluir css
 - Arreglado un detalle de ModeradoresController
 - Detalles del diseño home y de tiendas
+- Cambios en todas las vistas de administracion para que sigan el mismo estilo de formulario 
