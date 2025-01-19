@@ -19,43 +19,54 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <!-- Detalles de la Tienda -->
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'nombre',
-            'descripcion:ntext',
-            'lugar',
-            [
-                'attribute' => 'url',
-                'format' => 'url',
-                'value' => $model->url,
-            ],
-            [
-                'attribute' => 'clasificacion_id',
+	<!-- Detalles de la Tienda -->
+	<?= DetailView::widget([
+		'model' => $model,
+		'attributes' => [
+			'nombre',
+			'descripcion:ntext',
+			'lugar',
+			[
+				'attribute' => 'url',
+				'format' => 'url',
+				'value' => $model->url,
+			],
+			[
+				'attribute' => 'clasificacion_id',
 				'label' => 'Clasificación',
-                'value' => $model->clasificacion ? $model->clasificacion->nombre : 'No definida',
-            ],
-            [
-                'attribute' => 'etiquetas_id',
+				'value' => $model->clasificacion ? $model->clasificacion->nombre : 'No definida',
+			],
+			[
+				'attribute' => 'etiquetas_id',
 				'label' => 'Etiquetas',
-                'value' => $model->etiquetas ? $model->etiquetas->nombre : 'No definida',
-            ],
-            [
-                'attribute' => 'imagen_principal',
-                'format' => 'raw',
-                'value' => Html::img(Url::to('@web/img/' . $model->imagen_principal), [
-                    'alt' => Html::encode($model->nombre),
-                    'style' => 'max-width: 200px;',
-                ]),
-            ],
-            'telefono',
-            [
+				'value' => $model->etiquetas ? $model->etiquetas->nombre : 'No definida',
+			],
+			[
+				'attribute' => 'direccion',
+				'label' => 'Dirección',
+				'value' => $model->direccion ?? 'No definida',
+			],
+			[
+				'attribute' => 'region_id',
+				'label' => 'Región',
+				'value' => $model->region ? $model->region->nombre : 'No definida',
+			],
+			[
+				'attribute' => 'imagen_principal',
+				'format' => 'raw',
+				'value' => Html::img(Url::to('@web/img/' . $model->imagen_principal), [
+					'alt' => Html::encode($model->nombre),
+					'style' => 'max-width: 200px;',
+				]),
+			],
+			'telefono',
+			[
 				'label' => 'Valoración Media',
 				'value' => $model->valoracionMedia,
 			],
-        ],
-    ]) ?>
+		],
+	]) ?>
+
 
     <!-- Comentarios -->
     <h3>Comentarios</h3>
