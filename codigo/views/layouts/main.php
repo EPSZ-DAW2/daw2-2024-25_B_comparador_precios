@@ -25,6 +25,11 @@ $this->registerCssFile('@web/css/menuver.css', ['depends' => [\yii\web\YiiAsset:
 $this->registerCssFile('@web/css/seguimientoscomentarios.css', ['depends' => [\yii\web\YiiAsset::class]]);
 $this->registerCssFile('@web/css/avisosperfil.css', ['depends' => [\yii\web\YiiAsset::class]]);
 $this->registerCssFile('@web/css/filtrobuscador.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/oparticulosofertas.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/tiendasactivas.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/view-articulo.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/denunciar.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/historico.css', ['depends' => [\yii\web\YiiAsset::class]]);
 $this->registerCssFile('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css');
 
 $this->registerCsrfMetaTags();
