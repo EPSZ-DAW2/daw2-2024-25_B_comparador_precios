@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
             3 => '3 - Bueno',
             2 => '2 - Regular',
             1 => '1 - Malo',
-        ], ['prompt' => 'Seleccionar Valoración', 'class' => 'form-control']) ?>
+        ], ['prompt' => 'Seleccionar Valoración', 'value' => null, 'class' => 'form-control']) ?>
         <?= Html::submitButton('Enviar Comentario', ['class' => 'btn btn-primary']) ?>
 
     <?php ActiveForm::end(); ?>
