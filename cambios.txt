@@ -343,4 +343,4 @@ Cambios día 24 (Víctor Martín Campos)
 - Arreglado error al editar avisos de usuarios en las funciones de moderadores
 - modificados models/Aviso, ModeradoresController y sus vistas
 - Arreglados las vistas de la parte de moderadores en el diseño
-- actualizadas las vistas de tiendas para que se correspondan con la pagina
+- actualizadas las vistas de tiendas para que se correspondan con la pagina y de gestion de denuncias
