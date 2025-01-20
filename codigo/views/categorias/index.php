@@ -34,16 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion:ntext',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {articulo}', // Cambiado 'tiendas' a 'articulos'
-                'buttons' => [
-                    'articulo' => function ($url, $model) {
-                        return Html::a(
-                            'Ver Artículos',
-                            ['categorias/view', 'id' => $model->id],
-                            ['class' => 'btn btn-primary btn-sm']
-                        );
-                    },
-                ],
+                'template' => '{view} {update} {delete}', // Eliminado el botón 'articulo'
             ],
         ],
     ]); ?>
