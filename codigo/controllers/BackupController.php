@@ -7,7 +7,8 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\models\Backup;
-use app\models\Usuario; // Asegúrate de que el modelo Usuario esté correctamente importado
+use app\models\BackupSearch;
+use app\models\Usuario; 
 
 class BackupController extends Controller
 {
@@ -48,8 +49,13 @@ class BackupController extends Controller
      */
     public function actionIndex()
     {
-        $backups = Backup::find()->orderBy(['fecha_creacion' => SORT_DESC])->all();
-        return $this->render('index', ['backups' => $backups]);
+        $searchModel = new BackupSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
