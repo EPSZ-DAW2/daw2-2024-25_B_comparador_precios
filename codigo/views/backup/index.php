@@ -1,43 +1,61 @@
 <?php
 
+use app\models\Backup;
 use yii\helpers\Html;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+
+/** @var yii\web\View $this */
+/** @var app\models\BackupSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Gestión de Backups';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="backup-index">
 
-<h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-<?= Html::a('Crear Backup', ['create'], ['class' => 'btn btn-success']) ?>
-<?= Html::a('Limpiar Backups', ['clean'], ['class' => 'btn btn-danger', 'data-confirm' => '¿Estás seguro de limpiar backups antiguos?']) ?>
+    <p>
+        <?= Html::a('Crear Backup', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Limpiar Backups', ['clean'], ['class' => 'btn btn-danger', 'data-confirm' => '¿Estás seguro de limpiar backups antiguos?']) ?>
+    </p>
 
-<h2>Backups Disponibles</h2>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            'nombre_archivo',
+            'ruta_archivo',
+            [
+                'attribute' => 'fecha_creacion',
+                'format' => ['date', 'php:Y-m-d H:i:s'],
+            ],
+            [
+                'attribute' => 'tamaño',
+                'value' => function ($model) {
+                    return Yii::$app->formatter->asShortSize($model->tamaño);
+                },
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'template' => '{download} {delete}',
+                'buttons' => [
+                    'download' => function ($url, $model) {
+                        return Html::a('Descargar', ['download', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']);
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a('Eliminar', ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger btn-sm',
+                            'data-confirm' => '¿Estás seguro de eliminar este backup?',
+                            'data-method' => 'post',
+                        ]);
+                    },
+                ],
+            ],
+        ],
+    ]); ?>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre del Archivo</th>
-            <th>Fecha de Creación</th>
-            <th>Tamaño</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($backups as $backup): ?>
-            <tr>
-                <td><?= $backup->id ?></td>
-                <td><?= Html::encode($backup->nombre_archivo) ?></td>
-                <td><?= $backup->fecha_creacion ?></td>
-                <td><?= Yii::$app->formatter->asShortSize($backup->tamaño) ?></td>
-                <td>
-                    <?= Html::a('Descargar', ['download', 'id' => $backup->id], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('Eliminar', ['delete', 'id' => $backup->id], [
-                        'class' => 'btn btn-danger',
-                        'data-confirm' => '¿Estás seguro de eliminar este backup?',
-                        'data-method' => 'post',
-                    ]) ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+</div>
