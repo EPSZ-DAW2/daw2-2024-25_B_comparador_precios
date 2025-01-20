@@ -35,19 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'icono',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {tiendas}',
-                'buttons' => [
-                    'tiendas' => function ($url, $model) {
-                        return Html::a(
-                            'Ver Tiendas',
-                            ['clasificaciones/view', 'id' => $model->id],
-                            ['class' => 'btn btn-primary btn-sm']
-                        );
-                    },
-                ],
+                'template' => '{view} {update} {delete}', 
             ],
         ],
     ]); ?>
 
 </div>
-
