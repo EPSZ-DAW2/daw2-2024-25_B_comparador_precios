@@ -321,6 +321,7 @@ Cambios día 22 (Víctor Martín) 18/01/2025
 - Cambios en vistas de tiendas, public articulos, login y avisos por tema de estilos
 - Arreglado el RegistroLogsController
 
+
 Cambios día 23 (Javier Marinas y Marcos Méndez) 19/01/2025
 - Modificada la base de datos cambiando los inserts de los datos de prueba de ofertas para aportar lógica
 - Añadida la vista detallada del ver más de ofertas, con acceso si se ha iniciado sesión acceso a las funciones de comentar, denunciar y seguir/dejar de seguir
@@ -339,9 +340,13 @@ Cambios dia 23 (Víctor Martín) 19/01/2025
 - Detalles del diseño home y de tiendas
 - Cambios en todas las vistas de administracion para que sigan el mismo estilo de formulario 
 
-Cambios día 24 (Víctor Martín Campos)
+
+Cambios día 24 (Víctor Martín Campos) 20/01/2025
 - Arreglado error al editar avisos de usuarios en las funciones de moderadores
-- modificados models/Aviso, ModeradoresController y sus vistas
+- Modificados models/Aviso, ModeradoresController y sus vistas
 - Arreglados las vistas de la parte de moderadores en el diseño
-- actualizadas las vistas de tiendas para que se correspondan con la pagina y de gestion de denuncias
+- Actualizadas las vistas de tiendas para que se correspondan con la pagina y de gestion de denuncias
 - Modificados ArticulosController y ComentariosController para los roles qu eno los pusieron
+
+Cambios día 24 (Javier Marinas y Marcos Méndez) 20/01/2025
+- Añadido el modelo ComentariosSearch para integrar el buscador al index de comentarios para administrador
