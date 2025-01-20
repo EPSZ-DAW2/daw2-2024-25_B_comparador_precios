@@ -1,0 +1,54 @@
+/* Asegúrate de que los estilos solo afecten a la clase "tienda-admin" */
+.tienda-admin .panel-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Espaciado entre paneles */
+    justify-content: space-between;
+    padding: 20px; /* Espaciado adicional alrededor de todos los paneles */
+}
+
+.tienda-admin .panel {
+    width: calc(33.333% - 40px); /* Tres paneles por fila con separación */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.tienda-admin .panel-heading {
+    background-color: #f8f9fa;
+    padding: 15px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.tienda-admin .panel-body {
+    padding: 20px; /* Más espaciado dentro de cada panel */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaciado entre botones */
+    justify-content: center;
+}
+
+.tienda-admin .btn {
+    flex: 0 1 calc(50% - 20px); /* Dos botones por fila con separación adicional */
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado adicional entre botones y el borde del panel */
+.tienda-admin .panel-body .btn {
+    margin-bottom: 15px;
+}
+
+/* Fondo general de la sección */
+.tienda-admin {
+    padding: 40px; /* Espaciado alrededor de todo el contenido */
+    background-color: #f1f3f5; /* Fondo más claro para diferenciar la sección */
+    border-radius: 8px;
+}
