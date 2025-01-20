@@ -11,6 +11,8 @@ use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\Usuario;
+use app\models\ComentariosSearch;
+
 
 class ComentariosController extends Controller
 {
@@ -47,14 +49,11 @@ class ComentariosController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comentario::find()->with(['tienda', 'articulo']),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
+        $searchModel = new ComentariosSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
