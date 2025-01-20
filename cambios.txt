@@ -338,3 +338,8 @@ Cambios dia 23 (Víctor Martín) 19/01/2025
 - Arreglado un detalle de ModeradoresController
 - Detalles del diseño home y de tiendas
 - Cambios en todas las vistas de administracion para que sigan el mismo estilo de formulario 
+
+Cambios día 24 (Víctor Martín Campos)
+- Arreglado error al editar avisos de usuarios en las funciones de moderadores
+- modificados models/Aviso, ModeradoresController y sus vistas
+- Arreglados las vistas de la parte de moderadores en el diseño
