@@ -26,30 +26,34 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
+            
+            'id', 
+
             'nombre',
             'descripcion:ntext',
+
             [
                 'attribute' => 'denuncias',
                 'label' => 'Denuncias',
                 'value' => function ($model) {
-                    return $model->articuloTienda->denuncias ?? 0;
+                    return $model->articuloTienda->denuncias ?? 0; 
                 },
+                'filter' => Html::activeTextInput($searchModel, 'denuncias', ['class' => 'form-control']), 
             ],
-			[
-				'class' => ActionColumn::className(),
-				'template' => '{view} {update} {delete} {denuncias}',
-				'buttons' => [
-					'denuncias' => function ($url, $model) {
-						return Html::a(
-							'<i class="fa fa-warning"></i> Denuncias',
-							['articulos/gestion-denuncias', 'id' => $model->id],
-							['class' => 'btn btn-warning btn-sm']
-						);
-					},
-				],
-			],
 
+            [
+                'class' => ActionColumn::className(),
+                'template' => '{view} {update} {delete} {denuncias}', 
+                'buttons' => [
+                    'denuncias' => function ($url, $model) {
+                        return Html::a(
+                            '<i class="fa fa-warning"></i> Denuncias', 
+                            ['articulos/gestion-denuncias', 'id' => $model->id],
+                            ['class' => 'btn btn-warning btn-sm'] 
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
 
