@@ -6,10 +6,11 @@ use yii\helpers\Html;
 
 $this->title = 'Panel de Administración de Tiendas';
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerCssFile('@web/css/admintienda.css', ['depends' => [\yii\web\YiiAsset::className()]]);
 ?>
 <div class="tienda-admin">
     <h1><?= Html::encode($this->title) ?></h1>
-    <h2>Número de tiendas disponibles: <?= count($tiendas) ?></h2>
     <?php if (!empty($tiendas)): ?>
         <div class="panel-group">
             <?php foreach ($tiendas as $tienda): ?>
