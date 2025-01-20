@@ -344,3 +344,4 @@ Cambios día 24 (Víctor Martín Campos)
 - modificados models/Aviso, ModeradoresController y sus vistas
 - Arreglados las vistas de la parte de moderadores en el diseño
 - actualizadas las vistas de tiendas para que se correspondan con la pagina y de gestion de denuncias
+- Modificados ArticulosController y ComentariosController para los roles qu eno los pusieron
