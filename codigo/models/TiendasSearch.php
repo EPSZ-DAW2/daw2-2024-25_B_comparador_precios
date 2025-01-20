@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\models\Tienda;
 
 /**
- * TiendasSearch represents the model behind the search form of `app\models\Tienda`.
+ * TiendasSearch represents the model behind the search form of app\models\Tienda.
  */
 class TiendasSearch extends Tienda
 {
@@ -17,8 +17,8 @@ class TiendasSearch extends Tienda
     public function rules()
     {
         return [
-            [['nombre', 'lugar'], 'string'],
-            [['clasificacion_id', 'etiquetas_id'], 'integer'],
+            [['id', 'nombre', 'lugar', 'descripcion', 'url', 'direccion', 'telefono', 'motivo_denuncia', 'motivo_bloqueo'], 'safe'], 
+            [['clasificacion_id', 'etiquetas_id', 'suma_valoraciones', 'suma_votos', 'denuncias', 'visible', 'cerrada'], 'integer'],
         ];
     }
 
@@ -27,7 +27,7 @@ class TiendasSearch extends Tienda
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
+        // Saltamos la implementación de escenarios del modelo base
         return Model::scenarios();
     }
 
@@ -42,42 +42,68 @@ class TiendasSearch extends Tienda
     {
         $query = Tienda::find();
 
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-
+        // Cargamos los parámetros de búsqueda
         $this->load($params);
 
+        // Si no se valida, devolvemos todos los resultados
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+            return new ActiveDataProvider([
+                'query' => $query,
+            ]);
         }
 
-        // grid filtering conditions
+        // Si se proporcionó un `id` y es numérico, realizamos una búsqueda exacta
+        if ($this->id) {
+            $query->andFilterWhere(['id' => $this->id]);
+        }
+
+        // Configuración de las condiciones para otros filtros
         $query->andFilterWhere([
             'clasificacion_id' => $this->clasificacion_id,
             'etiquetas_id' => $this->etiquetas_id,
+            'suma_valoraciones' => $this->suma_valoraciones,
+            'suma_votos' => $this->suma_votos,
+            'denuncias' => $this->denuncias,
+            'visible' => $this->visible,
+            'cerrada' => $this->cerrada,
         ]);
 
+        // Filtros de texto para otros campos
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-              ->andFilterWhere(['like', 'lugar', $this->lugar]);
+            ->andFilterWhere(['like', 'lugar', $this->lugar])
+            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'direccion', $this->direccion])
+            ->andFilterWhere(['like', 'telefono', $this->telefono])
+            ->andFilterWhere(['like', 'motivo_denuncia', $this->motivo_denuncia])
+            ->andFilterWhere(['like', 'motivo_bloqueo', $this->motivo_bloqueo]);
 
-        return $dataProvider;
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
     }
-	
-	public function attributeLabels()
-{
-    return [
-        'clasificacion_id' => 'Clasificación',
-        'etiquetas_id' => 'Etiqueta',
-    ];
-}
 
-	
+    /**
+     * Definimos etiquetas personalizadas para los campos
+     */
+    public function attributeLabels()
+    {
+        return [
+            'clasificacion_id' => 'Clasificación',
+            'etiquetas_id' => 'Etiqueta',
+            'nombre' => 'Nombre',
+            'lugar' => 'Lugar',
+            'descripcion' => 'Descripción',
+            'url' => 'URL',
+            'direccion' => 'Dirección',
+            'telefono' => 'Teléfono',
+            'suma_valoraciones' => 'Suma de Valoraciones',
+            'suma_votos' => 'Suma de Votos',
+            'denuncias' => 'Denuncias',
+            'visible' => 'Visible',
+            'cerrada' => 'Cerrada',
+            'motivo_denuncia' => 'Motivo de Denuncia',
+            'motivo_bloqueo' => 'Motivo de Bloqueo',
+        ];
+    }
 }
