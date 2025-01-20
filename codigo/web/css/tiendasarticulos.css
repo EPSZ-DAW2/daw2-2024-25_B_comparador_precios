@@ -1,0 +1,83 @@
+/* General: Espaciado entre secciones */
+.tiendaarticulo-view h1,
+.tiendaarticulo-view h3 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Contenedores principales */
+.tiendaarticulo-view .tienda-info,
+.tiendaarticulo-view .comentarios,
+.tiendaarticulo-view .formulario-comentario {
+    margin-bottom: 50px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* Espaciado dentro de los comentarios */
+.tiendaarticulo-view .list-group-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Alternancia de colores para comentarios */
+.tiendaarticulo-view .list-group-item:nth-child(odd) {
+    background-color: #f3f4f7;
+}
+
+.tiendaarticulo-view .list-group-item:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Botones */
+.tiendaarticulo-view .btn {
+    margin: 15px 5px;
+    padding: 12px 25px;
+    font-size: 14px;
+}
+
+/* Estilo para separar los botones en el contenedor .action-buttons */
+.tiendaarticulo-view .action-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se acomoden en varias líneas si es necesario */
+    gap: 15px; /* Espaciado uniforme entre los botones */
+    justify-content: space-between; /* Distribuir los botones en una línea con espacio entre ellos */
+    margin-top: 40px; /* Espacio superior adicional para separar del formulario de comentario */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Botones individuales dentro de .action-buttons */
+.tiendaarticulo-view .action-buttons .btn {
+    padding: 10px 20px; /* Ajusta el tamaño del botón */
+    font-size: 14px; /* Tamaño del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    flex: 1; /* Permite que los botones tengan un ancho uniforme */
+    max-width: 200px; /* Define un ancho máximo para evitar que se estiren demasiado */
+    text-align: center; /* Asegura que el texto esté centrado en el botón */
+}
+
+/* Espaciado general para otras áreas de la vista */
+.tiendaarticulo-view .btn {
+    margin: 5px 0; /* Espaciado vertical entre otros botones */
+}
+
+/* Formulario: Espaciado entre campos */
+.tiendaarticulo-view .form-group {
+    margin-bottom: 25px;
+}
+
+/* Imagen del artículo o tienda */
+.detail-image {
+    max-width: 400px;
+    max-height: 400px;
+    margin: 10px auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
