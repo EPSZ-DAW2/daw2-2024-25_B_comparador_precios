@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion:ntext',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}', // Eliminado el botón 'articulo'
+                'template' => '{view} {update} {delete}', 
             ],
         ],
     ]); ?>
