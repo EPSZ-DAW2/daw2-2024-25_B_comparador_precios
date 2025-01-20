@@ -1,0 +1,89 @@
+/* Estilos comunes para las vistas de denuncia de tienda y denuncia de artículo */
+
+/* Contenedor principal para la vista de denuncia */
+.denunciar-view {
+    background-color: #f8f9fa; /* Fondo claro para la vista */
+    padding: 40px; /* Espaciado alrededor del contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar el contenido */
+}
+
+/* Título de la página (común para ambas vistas) */
+.denunciar-view h1 {
+    font-size: 2.5em;
+    color: #c0392b; /* Título en rojo oscuro */
+    text-align: center; /* Centrado del título */
+    margin-bottom: 20px; /* Espaciado debajo del título */
+}
+
+/* Descripción o instrucciones */
+.denunciar-view p {
+    font-size: 1.2em;
+    color: #333; /* Color oscuro para el texto */
+    margin-bottom: 30px; /* Separación con los campos del formulario */
+    text-align: center; /* Centrado del texto */
+}
+
+/* Estilo del formulario */
+.denunciar-view .form-group {
+    margin-bottom: 20px; /* Separación entre los campos del formulario */
+}
+
+.denunciar-view .form-group label {
+    font-size: 1.1em;
+    font-weight: bold; /* Etiquetas con un peso de fuente más fuerte */
+    color: #333; /* Color para las etiquetas */
+}
+
+/* Estilo para el campo de texto del motivo de la denuncia */
+.denunciar-view textarea {
+    width: 100%; /* El textarea ocupa todo el ancho disponible */
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    resize: vertical; /* Solo permite cambiar el tamaño vertical */
+}
+
+/* Botón de eliminar denuncia */
+.denunciar-view .btn-danger {
+    background-color: #e74c3c; /* Fondo rojo para el botón */
+    color: #fff; /* Texto blanco */
+    padding: 12px 30px; /* Espaciado más amplio para un botón más cómodo */
+    font-size: 1.1em; /* Aumentar el tamaño del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    border: none; /* Sin borde */
+    transition: background-color 0.3s ease; /* Efecto de transición suave */
+    margin-top: 30px; /* Espaciado arriba del botón */
+    margin-bottom: 40px; /* Espaciado adicional abajo del botón */
+}
+
+/* Hover para el botón */
+.denunciar-view .btn-danger:hover {
+    background-color: #c0392b; /* Cambio de color a un rojo más oscuro */
+}
+
+/* Responsivo: Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .denunciar-view {
+        padding: 20px; /* Reducir el espaciado en pantallas pequeñas */
+    }
+
+    .denunciar-view h1 {
+        font-size: 2em; /* Reducir el tamaño del título */
+    }
+
+    .denunciar-view p {
+        font-size: 1em; /* Reducir tamaño del texto de instrucciones */
+    }
+
+    .denunciar-view textarea {
+        font-size: 0.9em; /* Reducir el tamaño de la fuente en el textarea */
+    }
+
+    .denunciar-view .btn-danger {
+        font-size: 1em; /* Reducir el tamaño de la fuente del botón */
+        padding: 10px 25px; /* Ajustar el tamaño del botón */
+    }
+}

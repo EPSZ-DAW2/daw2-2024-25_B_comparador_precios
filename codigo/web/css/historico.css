@@ -1,0 +1,81 @@
+/* Estilos específicos para la vista de ver histórico de precios (tiendas/ver-historico) */
+.historico-view {
+    background-color: #f9f9f9; /* Fondo claro para la vista */
+    padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+/* Título principal de la vista */
+.historico-view h1 {
+    font-size: 2.5em;
+    color: #2c3e50; /* Color gris oscuro para el título */
+    text-align: center;
+    margin-bottom: 30px; /* Separación con el contenido posterior */
+}
+
+/* Subtítulo de la sección de histórico */
+.historico-view h2 {
+    font-size: 2em;
+    color: #16a085; /* Color verde azulado para el subtítulo */
+    margin-bottom: 20px; /* Separación con la tabla */
+}
+
+/* Tabla de histórico */
+.historico-view table {
+    width: 100%;
+    border-collapse: collapse; /* Eliminar espacios entre celdas */
+    margin-bottom: 40px; /* Separación con el siguiente contenido */
+}
+
+.historico-view th, .historico-view td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd; /* Borde sutil para las celdas */
+}
+
+.historico-view th {
+    background-color: #34495e; /* Fondo oscuro para los encabezados */
+    color: #ffffff; /* Texto blanco en los encabezados */
+}
+
+.historico-view tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fila alterna con fondo claro */
+}
+
+.historico-view tr:hover {
+    background-color: #ecf0f1; /* Fondo más claro al pasar el mouse */
+}
+
+.historico-view td {
+    font-size: 1.1em; /* Aumentar ligeramente el tamaño de la fuente */
+}
+
+/* Estilo para la tabla vacía, mostrando un mensaje */
+.historico-view p {
+    font-size: 1.2em;
+    color: #e74c3c; /* Rojo claro para destacar el mensaje */
+    text-align: center; /* Centrado del texto */
+}
+
+/* Responsividad: Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .historico-view {
+        padding: 20px; /* Reducir el espaciado en pantallas más pequeñas */
+    }
+
+    .historico-view h1 {
+        font-size: 2em; /* Reducir el tamaño del título */
+    }
+
+    .historico-view h2 {
+        font-size: 1.5em; /* Reducir el tamaño del subtítulo */
+    }
+
+    .historico-view table {
+        font-size: 0.9em; /* Reducir el tamaño de la fuente en la tabla */
+    }
+
+    .historico-view th, .historico-view td {
+        padding: 8px; /* Reducir el espaciado en las celdas */
+    }
+}
+
