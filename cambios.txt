@@ -351,3 +351,6 @@ Cambios día 24 (Víctor Martín Campos) 20/01/2025
 
 Cambios día 24 (Javier Marinas y Marcos Méndez) 20/01/2025
 - Añadido el modelo ComentariosSearch para integrar el buscador al index de comentarios para administrador
+
+Cambios dia 24 (Alejandra)
+-Arreglada vista admin_tienda para que muestre las opciones disponibles
