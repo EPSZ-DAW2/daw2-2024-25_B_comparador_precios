@@ -347,6 +347,7 @@ Cambios día 24 (Víctor Martín Campos) 20/01/2025
 - Arreglados las vistas de la parte de moderadores en el diseño
 - Actualizadas las vistas de tiendas para que se correspondan con la pagina y de gestion de denuncias
 - Modificados ArticulosController y ComentariosController para los roles qu eno los pusieron
+- Añadido del models/BackupSearch y cambiados el controlador y la vista para el diseño
 
 Cambios día 24 (Javier Marinas y Marcos Méndez) 20/01/2025
 - Añadido el modelo ComentariosSearch para integrar el buscador al index de comentarios para administrador
