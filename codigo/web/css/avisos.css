@@ -1,0 +1,86 @@
+/* General: Títulos */
+.avisos-administrador .avisos-titulo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Botones */
+.avisos-administrador .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none; /* Sin subrayado */
+    margin-top: 10px;
+    margin-right: 10px; /* Separación entre botones */
+    display: inline-block;
+    text-transform: none; /* Sin texto en mayúsculas */
+}
+
+/* Botón eliminar aviso */
+.avisos-administrador .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.avisos-administrador .btn-danger:hover {
+    background-color: #c82333;
+    color: #fff;
+}
+
+/* Botón limpiar todos los mensajes */
+.avisos-administrador .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+}
+
+.avisos-administrador .btn-warning:hover {
+    background-color: #e0a800;
+    color: #212529;
+}
+
+/* Listado de avisos */
+.avisos-administrador .avisos-lista {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.avisos-administrador .avisos-item {
+    display: flex; /* Elementos en una línea */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: space-between; /* Espaciado entre texto y botón */
+    border-bottom: 1px solid #e0e0e0; /* Línea divisoria entre avisos */
+    padding: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Texto del aviso */
+.avisos-administrador .avisos-clase {
+    font-weight: bold;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+.avisos-administrador .avisos-texto {
+    color: #666;
+}
+
+.avisos-administrador .avisos-usuario {
+    font-style: italic;
+    margin-left: 10px;
+    color: #888;
+}
+
+/* Mensaje cuando no hay avisos */
+.avisos-administrador .avisos-sin-mensajes {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    margin-top: 20px;
+}

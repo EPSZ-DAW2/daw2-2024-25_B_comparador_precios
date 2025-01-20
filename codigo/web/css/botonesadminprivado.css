@@ -1,0 +1,36 @@
+/* Estilos solo para los botones en registros-logs/index, backup/index y historico/index */
+.registro-logs-index .btn,
+.backup-index .btn,
+.historico-index .btn {
+    display: inline-block;  /* Asegura que los botones se comporten como bloques en línea */
+    width: 200px;  /* Tamaño fijo para todos los botones */
+    margin-right: 15px;  /* Espaciado entre botones */
+    margin-bottom: 10px;  /* Espaciado debajo de los botones */
+    text-align: center;  /* Centra el texto dentro del botón */
+    padding: 10px;  /* Espaciado interno para aumentar la altura */
+    box-sizing: border-box;  /* Asegura que el padding no altere el tamaño del botón */
+}
+
+/* Elimina el margen derecho del último botón */
+.registro-logs-index .btn:last-child,
+.backup-index .btn:last-child,
+.historico-index .btn:last-child {
+    margin-right: 0;
+}
+
+/* Estilos adicionales para los botones si se necesita */
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}

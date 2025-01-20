@@ -1,0 +1,104 @@
+/* Estilo del header */
+#header {
+    background-color: #004080; /* Azul oscuro para el fondo */
+    color: #ffffff; /* Texto blanco */
+    position: fixed; /* Fijo en la parte superior */
+    top: 0;
+    width: 100%;
+    z-index: 1030; /* Asegura que esté sobre otros elementos */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Barra de navegación */
+.navbar {
+    padding: 10px 20px; /* Espaciado interno */
+}
+
+.navbar-brand {
+    font-size: 1.5rem; /* Tamaño del texto del logo/marca */
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover {
+    color: #ffeb3b; /* Amarillo en hover */
+}
+
+/* Links de navegación */
+.navbar-nav .nav-link {
+    font-size: 1rem; /* Tamaño de fuente de los enlaces */
+    font-weight: 500; /* Un poco más de grosor */
+    color: #ffffff; /* Blanco por defecto */
+    padding: 8px 15px; /* Espaciado interno */
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffeb3b; /* Amarillo en hover */
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco translúcido en hover */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Botón de logout */
+.navbar-nav .logout {
+    font-size: 0.9rem;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.navbar-nav .logout:hover {
+    color: #ffeb3b; /* Amarillo en hover */
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+    border-radius: 5px;
+}
+
+/* Navbar responsivo */
+.navbar-toggler {
+    border-color: #ffffff; /* Color del borde del botón */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%281, 1, 1, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-collapse {
+    background-color: #004080; /* Fondo azul oscuro para el menú desplegable */
+}
+
+/* Breadcrumbs (si los hay) */
+.breadcrumb {
+    background-color: transparent; /* Fondo transparente */
+    padding: 5px 0; /* Espaciado menor */
+    margin: 15px 0; /* Espaciado superior e inferior */
+}
+
+.breadcrumb-item a {
+    color: #ffeb3b; /* Amarillo para enlaces */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-item a:hover {
+    color: #ffffff; /* Blanco en hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        font-size: 0.9rem; /* Reducir tamaño en pantallas pequeñas */
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem; /* Reducir tamaño del logo en pantallas pequeñas */
+    }
+
+    .navbar-collapse {
+        padding: 10px; /* Espaciado interno del menú desplegable */
+    }
+}

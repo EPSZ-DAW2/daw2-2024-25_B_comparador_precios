@@ -1,0 +1,91 @@
+/* General */
+body.articulos-gestion-denuncias, body.comentarios-gestion-denuncias, body.tiendas-gestion-denuncias {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Encabezados */
+body.articulos-gestion-denuncias h1, body.comentarios-gestion-denuncias h1, body.tiendas-gestion-denuncias h1 {
+    color: #004085;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+body.articulos-gestion-denuncias h3, body.comentarios-gestion-denuncias h3, body.tiendas-gestion-denuncias h3 {
+    color: #343a40;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+/* Contenedores */
+.articulos-gestion-denuncias, .comentarios-gestion-denuncias, .tiendas-gestion-denuncias {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Párrafos */
+.articulos-gestion-denuncias p, .comentarios-gestion-denuncias p, .tiendas-gestion-denuncias p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Preformateado */
+.articulos-gestion-denuncias pre, .comentarios-gestion-denuncias pre, .tiendas-gestion-denuncias pre {
+    background-color: #f1f1f1;
+    border-left: 3px solid #d6d8db;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #495057;
+    white-space: pre-wrap;
+}
+
+/* Botones */
+.articulos-gestion-denuncias .btn-danger, .comentarios-gestion-denuncias .btn-danger, .tiendas-gestion-denuncias .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px; /* Espaciado entre el formulario y el botón */
+}
+
+.articulos-gestion-denuncias .btn-danger:hover, .comentarios-gestion-denuncias .btn-danger:hover, .tiendas-gestion-denuncias .btn-danger:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+.articulos-gestion-denuncias .btn-success, .comentarios-gestion-denuncias .btn-success, .tiendas-gestion-denuncias .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px; /* Espaciado entre el formulario y el botón */
+}
+
+.articulos-gestion-denuncias .btn-success:hover, .comentarios-gestion-denuncias .btn-success:hover, .tiendas-gestion-denuncias .btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+}
+
+/* Formulario */
+.articulos-gestion-denuncias textarea, .comentarios-gestion-denuncias textarea, .tiendas-gestion-denuncias textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.articulos-gestion-denuncias textarea:focus, .comentarios-gestion-denuncias textarea:focus, .tiendas-gestion-denuncias textarea:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
