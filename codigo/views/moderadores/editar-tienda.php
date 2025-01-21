@@ -33,10 +33,14 @@ $this->params['breadcrumbs'][] = 'Editar';
         <?= $form->field($model, 'visible')->dropDownList([1 => 'Sí', 0 => 'No']) ?>
         <?= $form->field($model, 'cerrada')->dropDownList([1 => 'Sí', 0 => 'No']) ?>
         <?= $form->field($model, 'imagen_principal')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'seguimiento_id')->dropDownList(
-            \yii\helpers\ArrayHelper::map(\app\models\Seguimiento::find()->all(), 'id', 'nombre'),
-            ['prompt' => 'Seleccione un Seguimiento']
-        ) ?>
+
+        <!-- Cambiar seguimiento_id a un campo de texto numérico -->
+        <?= $form->field($model, 'seguimiento_id')->textInput(['type' => 'number', 'min' => 1, 'placeholder' => 'Ingrese un valor entero para Seguimiento']) ?>
+        <?php if ($model->hasErrors('seguimiento_id')): ?>
+            <div class="invalid-feedback">
+                <?= implode(', ', $model->getErrors('seguimiento_id')) ?>
+            </div>
+        <?php endif; ?>
 
         <div class="form-group">
             <?= Html::submitButton('Guardar Cambios', ['class' => 'btn btn-success']) ?>
