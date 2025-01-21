@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Crear Nuevo Log'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Eliminar Todos los Logs'), ['delete-all'], [
+        <?= Html::a(Yii::t('app', 'Limpiar los Logs'), ['delete-all'], [
             'class' => 'btn btn-danger',
             'data-confirm' => '¿Está seguro de que desea eliminar todos los registros?',
             'data-method' => 'post',
