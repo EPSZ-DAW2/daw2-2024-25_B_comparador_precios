@@ -322,6 +322,11 @@ class UsuariosController extends Controller
 
     public function actionVolverAOriginal()
     {
+        // Verifica si el usuario actual es Superadministrador
+        if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) {
+            throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+        }
+        
         $usuario_original_id = Yii::$app->session->get('usuario_original');
         if ($usuario_original_id) {
             // Restaura el contexto original
