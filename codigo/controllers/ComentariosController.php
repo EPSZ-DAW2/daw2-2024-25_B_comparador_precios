@@ -21,34 +21,28 @@ class ComentariosController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) ||
-                            Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR);
-                        },
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
                     ],
                 ],
-                'denyCallback' => function ($rule, $action) {
-                    throw new \yii\web\ForbiddenHttpException('No tienes permiso para acceder a esta página.');
-                },
-            ],
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+            ]
+        );
     }
 
     public function actionIndex()
     {
+        // Verificar si el usuario tiene el rol de ADMINISTRADOR o SUPERADMINISTRADOR
+		if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+		!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) 
+		{
+		throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+		}
+        
         $searchModel = new ComentariosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -104,6 +98,12 @@ class ComentariosController extends Controller
 
     public function actionGestionDenuncias($id)
     {
+        // Verificar si el usuario tiene el rol de ADMINISTRADOR o SUPERADMINISTRADOR
+		if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+		!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) 
+		{
+		throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+		}
         $model = Comentario::findOne($id);
 
         if (!$model) {
@@ -144,6 +144,12 @@ class ComentariosController extends Controller
 
     public function actionView($id)
     {
+        // Verificar si el usuario tiene el rol de ADMINISTRADOR o SUPERADMINISTRADOR
+		if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+		!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) 
+		{
+		throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+		}
         $model = Comentario::findOne($id);
         if (!$model) {
             throw new NotFoundHttpException('Comentario no encontrado.');
@@ -154,6 +160,12 @@ class ComentariosController extends Controller
 
     public function actionUpdate($id)
     {
+        // Verificar si el usuario tiene el rol de ADMINISTRADOR o SUPERADMINISTRADOR
+		if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+		!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) 
+		{
+		throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+		}   
         $model = Comentario::findOne($id);
         if (!$model) {
             throw new NotFoundHttpException('Comentario no encontrado.');
@@ -169,6 +181,13 @@ class ComentariosController extends Controller
 
     public function actionDelete($id)
     {
+        // Verificar si el usuario tiene el rol de ADMINISTRADOR o SUPERADMINISTRADOR
+		if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+		!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) 
+		{
+		throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+		}
+
         $model = Comentario::findOne($id);
         if ($model) {
             if ($model->delete()) {
