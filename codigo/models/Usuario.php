@@ -129,6 +129,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
             [['registro_confirmado'], 'default', 'value' => self::ESTADO_REGISTRO_PENDIENTE],
             [['fecha_registro'], 'default', 'value' => date('Y-m-d H:i:s')],
+            [['fecha_registro'], 'safe'],
 
             // Validación condicional de los campos de región
             [['region_continente', 'region_pais', 'region_estado', 'region_provincia'], 'required', 
@@ -546,6 +547,17 @@ public function aumentarIntentosFallidos()
         public function hasRole($rol)
         {
             return $this->rol === $rol;
+        }
+
+        public function beforeSave($insert)
+        {
+            if ($insert) { // Solo al crear un registro nuevo
+                if (empty($this->fecha_registro)) {
+                    $this->fecha_registro = date('Y-m-d H:i:s'); // Formato correcto para MySQL
+                }
+            }
+
+            return parent::beforeSave($insert);
         }
 
 }//class Usuario
