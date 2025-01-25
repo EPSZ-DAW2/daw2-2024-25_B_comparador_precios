@@ -15,7 +15,9 @@ use app\models\Aviso;
 use app\models\Regiones;
 use app\models\Articulo;
 use app\models\RegistroUsuarios;
-use app\models\RegistroLogs; // Importamos el modelo para los logs
+use app\models\RegistroLogs;
+use yii\web\ForbiddenHttpException;
+
 
 /**
  * UsuariosController implements the CRUD actions for Usuario model.
@@ -47,6 +49,12 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
+        // Verifica si el usuario actual es Superadministrador o administrador
+        if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+            !Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) {
+            throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+        }
+
         $searchModel = new UsuariosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -64,6 +72,12 @@ class UsuariosController extends Controller
      */
     public function actionView($id)
     {
+        // Verifica si el usuario actual es Superadministrador o administrador
+        if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+            !Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) {
+            throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -76,6 +90,11 @@ class UsuariosController extends Controller
      */
     public function actionCreate()
     {
+        // Verifica si el usuario actual es Superadministrador o administrador
+        if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+            !Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) {
+            throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+        }
         $model = new Usuario();
 
         // Cargar las regiones desde la base de datos
@@ -112,6 +131,12 @@ class UsuariosController extends Controller
      */
     public function actionUpdate($id)
     {
+        // Verifica si el usuario actual es Superadministrador o administrador
+        if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+            !Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) {
+            throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+        }
+    
         $model = $this->findModel($id);
         $mod = Moderador::findOne(['usuario_id' => Yii::$app->user->id]);
 
@@ -149,6 +174,12 @@ class UsuariosController extends Controller
      */
     public function actionDelete($id)
     {
+        // Verifica si el usuario actual es Superadministrador o administrador
+        if (!Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_ADMINISTRADOR) &&
+            !Usuario::tieneRol(Yii::$app->user->id, Usuario::ROL_SUPERADMINISTRADOR)) {
+            throw new ForbiddenHttpException('No tienes permiso para realizar esta acción.');
+        }
+
         $model = $this->findModel($id);
         $model->delete();
 
@@ -335,6 +366,24 @@ class UsuariosController extends Controller
         }
 
         throw new ForbiddenHttpException('No tienes un usuario original para volver.');
+    }
+
+    public function actionVerificar($id)
+    {
+        $model = Usuario::findOne($id); // Busca el usuario por su ID
+
+        if ($model === null) {
+            throw new \yii\web\NotFoundHttpException('El usuario no existe.');
+        }
+
+        $model->registro_confirmado = 1; // Cambia el campo a 1
+        if ($model->save(false)) { // Guardar sin validar (opcional)
+            Yii::$app->session->setFlash('success', 'El registro del usuario ha sido confirmado.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo confirmar el registro.');
+        }
+
+        return $this->redirect(['view', 'id' => $model->id]); // Redirige a la vista del usuario
     }
 
 }
