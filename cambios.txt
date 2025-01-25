@@ -355,3 +355,8 @@ Cambios día 24 (Javier Marinas y Marcos Méndez) 20/01/2025
 
 Cambios dia 24 (Alejandra)
 -Arreglada vista admin_tienda para que muestre las opciones disponibles
+
+Cambios día 25 (Víctor Martín Campos) 25/01/2025
+- Actualizados modelos vistas y controladores de usuarios arreglando la funcionalidad de la fecha de registro
+y el verificar el registro de un usuario
+
