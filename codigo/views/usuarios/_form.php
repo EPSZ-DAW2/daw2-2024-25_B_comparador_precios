@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var app\models\Usuario $model */
 /** @var yii\widgets\ActiveForm $form */
+/** @var mixed $modid */
 ?>
 
 <div class="usuario-form">
@@ -30,16 +31,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fecha_nacimiento')->textInput() ?>
 
-    <?= $form->field($model, 'fecha_registro')->textInput() ?>
 
-    
     <?= \yii\helpers\Html::a(
-    'Verificar Registro', 
-    ['usuarios/verificar', 'modid' => $modid, 'usrid' => $model->id], 
-    [
-        'class' => 'btn btn-success', // Clase para darle estilo al botón
-        'data-method' => 'post',      // Usa POST para enviar los datos
-    ]
+        'Verificar Registro', 
+        ['usuarios/verificar', 'id' => $model->id], // Cambia 'modid' por 'id'
+        [
+            'class' => 'btn btn-success',
+            'data-method' => 'post', // Usa POST para mayor seguridad
+            'data-confirm' => '¿Estás seguro de que deseas verificar este registro?', // Mensaje de confirmación
+        ]
     ) ?>
 
 
